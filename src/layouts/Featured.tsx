@@ -9,12 +9,15 @@ export function Featured({ children }: { children: ReactNode[] }) {
       {children.map((child, index) => (
         <div key={index} className="flex mt-4 w-full h-auto ">
           {child}
-          {(index == 0) && <FeaturedDisplay />}
+          {(index == 0) && <div className="!sm:hidden"><FeaturedDisplay /></div>}
           {(index == 1) && <FeaturedList>{items.map(() => <div>bullshit</div>)}</FeaturedList>}
-          {(index == 2) && <div className="bg-slate-500 hidden lg:block flex-[0.33] ">Additional Information</div>}
+          {(index == 2) && <AdditionalInfo />}
           {(index > 2) && <div className="bg-transparent hidden md:block flex-[0.33] "></div>}
         </div>
       ))}
+      <div className="md:hidden">
+        <FeaturedDisplay />
+      </div>
     </div>
   );
 }
@@ -45,7 +48,7 @@ function Image({ src, alt }: { src: string; alt: string }) {
 
 function FeaturedDisplay() {
   return (
-    <div className="flex flex-col flex-[0.3]">
+    <div className="flex flex-col md:max-w-md w-11/12">
       <div className="mb-4">
         <Image src="https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017" alt="Big Image" />
       </div>
@@ -67,7 +70,7 @@ function FeaturedDisplay() {
 
 function FeaturedList({ children }: { children: ReactNode[] }) {
   return (
-    <div className="flex flex-col">
+    <div className="md:flex hidden flex-col flex-[0.3]">
       <div className="text-sky-700 font-bold text-xl md:text-3xl">Featured List</div>
       <div className="flex gap-2">
         <button>Main List</button>
@@ -79,6 +82,28 @@ function FeaturedList({ children }: { children: ReactNode[] }) {
           {child}
         </div>
       ))}
+    </div>
+  )
+}
+
+function AdditionalInfo() {
+  return (
+    <div className="md:flex hidden flex-col flex-[0.3]">
+      <div className="text-sky-700 font-bold text-xl md:text-3xl">Douban EN</div>
+      <div className="text-gray-500">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, doloremque est.
+          Maxime repudiandae odit ad, ratione aliquid doloribus sint quas similique
+          natus laudantium adipisci recusandae eum consequatur ullam unde repellat.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, doloremque est.
+          Maxime repudiandae odit ad, ratione aliquid doloribus sint quas similique
+          natus laudantium adipisci recusandae eum consequatur ullam unde repellat.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, doloremque est.
+          Maxime repudiandae odit ad, ratione aliquid doloribus sint quas similique
+          natus laudantium adipisci recusandae eum consequatur ullam unde repellat.</p>
+      </div>
+      <div className="bg-sky-700">
+        <button>Know More</button>
+      </div>
     </div>
   )
 }
