@@ -1,5 +1,5 @@
 import { Menu, Search, X } from "lucide-react"
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function PageHeader() {
     return (
@@ -28,7 +28,7 @@ function HeaderLogoSection() {
 
 
 function HeaderNavBarSection({ forMedium: forMedium }: { forMedium: boolean }) {
-    const height: string = forMedium ? "h-10" : "h-5";
+    const height: string = forMedium ? "h-10" : "h-7";
     const style: string = `flex max-w-[60px] items-center transition-colors hover:bg-gray-100 
     rounded-full flex-grow justify-center p-1 md:p-2 font-bold text-sky-600 ${height}`;
     return (
@@ -50,8 +50,12 @@ function HeaderNavBarSection({ forMedium: forMedium }: { forMedium: boolean }) {
     )
 }
 
+type SearchOption = 'Music' | 'Movie' | 'Book';
+
 function HeaderSearchBarSection() {
+    const [selectedOption, setSelectedOption] = useState<SearchOption>('Music');
     const [isDropdownVisible, setDropdownVisibility] = useState(false);
+    const searchBarRef = useRef<HTMLDivElement | null>(null);
 
     const handleInputClick = () => {
         setDropdownVisibility(true);
@@ -61,8 +65,26 @@ function HeaderSearchBarSection() {
         setDropdownVisibility(false);
     };
 
+    const handleOptionClick = (option: SearchOption) => {
+        setSelectedOption(option);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (searchBarRef.current && event.target instanceof Node && !searchBarRef.current.contains(event.target)) {
+                setDropdownVisibility(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [searchBarRef]);
+
     return (
-        <div className="relative flex flex-grow max-w-[800px]">
+        <div className="relative flex flex-grow max-w-[800px]" ref={searchBarRef}>
             <button className="h-10 absolute inset-y-0 left-0 flex items-center pt-1 pl-2 md:pl-3">
                 <Search size="20" color="#4E5464" />
             </button>
@@ -72,49 +94,49 @@ function HeaderSearchBarSection() {
                 className="rounded-full border shadow-inner my-1 py-1 pl-10 pr-10 text-lg w-full outline-none"
                 onClick={handleInputClick}
             />
-            {isDropdownVisible && <>
-                <button className="h-10 absolute inset-y-0 right-0 flex items-center pt-1 pr-3" onClick={handleXButtonClick}>
-                    <X size="16" color="#4E5464" />
-                </button>
-            </>}
+            {isDropdownVisible && (
+                <>
+                    <button className="h-10 absolute inset-y-0 right-0 flex items-center pt-1 pr-3" onClick={handleXButtonClick}>
+                        <X size="16" color="#4E5464" />
+                    </button>
+                </>
+            )}
 
-            {isDropdownVisible && <DropDownSearchOption />}
+            {isDropdownVisible && <DropDownSearchOption selectedOption={selectedOption} onOptionClick={handleOptionClick} />}
         </div>
     );
 }
 
+interface DropDownSearchOptionProps {
+    selectedOption: SearchOption;
+    onOptionClick: (option: SearchOption) => void;
+}
 
-function DropDownSearchOption() {
-    type SearchOption = 'Music' | 'Movie' | 'Book';
-    const [selectedOption, setSelectedOption] = useState<SearchOption>('Music');
-
-    const handleOptionClick = (option: SearchOption) => {
-        setSelectedOption(option);
-    };
+function DropDownSearchOption({ selectedOption, onOptionClick }: DropDownSearchOptionProps) {
 
     const musicColor: string = "text-sky-700 border-b-2 font-bold border-sky-700";
     const movieColor: string = "text-orange-800 border-b-2 font-bold border-orange-800";
     const bookColor: string = "text-green-700 border-b-2 font-bold border-green-700";
 
     return (
-        <div className="flex items-center justify-right transition-colors  bg-white w-screen md:w-80 h-10  text-gray-500
+        <div className="flex items-center justify-right transition-colors  bg-white w-screen md:w-96 h-10  text-gray-500
          border-gray-300 border-b-[0.5px] md:border absolute left-[-150px] md:left-3  right-0 top-[41px] md:top-[52px] md:shadow-sm shadow-gray-700">
             <span className="block mx-3">Search for: </span>
             <button
                 className={`px-0.5 mx-1.5 md:py-1 hover:text-sky-700 ${selectedOption === 'Music' ? musicColor : ''}`}
-                onClick={() => handleOptionClick('Music')}
+                onClick={() => onOptionClick('Music')}
             >
                 Music
             </button>
             <button
                 className={`px-0.5 mx-1.5 md:py-1 hover:text-orange-800 ${selectedOption === 'Movie' ? movieColor : ''}`}
-                onClick={() => handleOptionClick('Movie')}
+                onClick={() => onOptionClick('Movie')}
             >
                 Movie
             </button>
             <button
                 className={`px-0.5 mx-1.5 md:py-1 hover:text-green-700 ${selectedOption === 'Book' ? bookColor : ''}`}
-                onClick={() => handleOptionClick('Book')}
+                onClick={() => onOptionClick('Book')}
             >
                 Book
             </button>
