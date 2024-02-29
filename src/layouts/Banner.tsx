@@ -3,14 +3,14 @@ export function Banner() {
         <div className="flex flex-col">
             <div className="flex items-center justify-center max-w-screen md:mt-16 mt-12">
                 <div className="px-1.5 md:px-3 flex-shrink-0">            <a href="/">
-                    <img src="https://e.snmc.io/3.0/img/logo/sonemic-512.png" title="Logo" className="md:h-28 h-14" />
+                    <img src="https://e.snmc.io/3.0/img/logo/sonemic-512.png" title="Logo" className="sm:h-20 md:h-28 lg:h-36 h-14" />
                 </a></div>
                 <div className="flex flex-col max-w-[800px] mr-2">
-                    <div className="md:text-2xl text-3xl flex !sm:flex-col font-bold text-gray-600">
+                    <div className="lg:text-4xl text-3xl flex !sm:flex-col font-bold text-gray-600">
                         <h1>Welcome to &nbsp;</h1>
                         <span className="bg-gradient-to-r from-blue-900  to-sky-400 inline-block text-transparent bg-clip-text"> Douban EN</span>
                     </div>
-                    <div className="mt-2"><p>Douban EN is one of the largest music databases and communities online, which you can use in endless ways to discover new music. <a href="/" className=" text-sky-800">Learn about some of the ways you can use Douban EN for music discovery.</a></p></div>
+                    <div className="mt-2 md:text-xl"><p>Douban EN is one of the largest music databases and communities online, which you can use in endless ways to discover new music. <a href="/" className=" text-sky-800">Learn about some of the ways you can use Douban EN for music discovery.</a></p></div>
                 </div>
             </div>
             <SiteStatus />

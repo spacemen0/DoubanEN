@@ -4,23 +4,29 @@ export function Featured({ children }: { children: ReactNode[] }) {
   return (
     <div className="flex flex-col mt-8 md:mt-12 ml-3 md:ml-6 lg:ml-12 items-start mb-4">
       <FeaturedBanner />
+      <FeaturedHeadLine />
       {children.map((child, index) => (
         <div key={index} className="flex mt-4 w-full h-72 ">
           {child}
-          {(index == 0) && <div className="bg-slate-500 hidden md:block flex-[0.33] ">Featured Pics</div>}
-          {(index == 1) && <div className="bg-slate-500 hidden md:block flex-[0.33] ">Lists</div>}
-          {(index == 2) && <div className="bg-slate-500 hidden md:block flex-[0.33] ">Additional Information</div>}
+          {(index == 0) && <div className="bg-slate-500 hidden lg:block flex-[0.33] ">Featured Pics</div>}
+          {(index == 1) && <div className="bg-slate-500 hidden lg:block flex-[0.33] ">Lists</div>}
+          {(index == 2) && <div className="bg-slate-500 hidden lg:block flex-[0.33] ">Additional Information</div>}
           {(index > 2) && <div className="bg-transparent hidden md:block flex-[0.33] "></div>}
         </div>
       ))}
     </div>
   );
 }
+function FeaturedHeadLine() {
+  return (
+    <div className="text-sky-700 font-bold text-xl mt-4 md:mt-8 md:text-3xl">Featured Reviews</div>
+  )
+}
 
 function FeaturedBanner() {
   return (
     <a href="#">
-      <div className="flex md:hidden w-full hover:bg-gray-100 transition-colors justify-start items-center">
+      <div className="flex lg:hidden hover:bg-gray-100 transition-colors justify-start items-center">
         <div className="flex-1 w-32 h-32 sm:h-48 sm:w-48">
           <img src="https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017" alt="Best of 2023" />
         </div>
@@ -30,5 +36,4 @@ function FeaturedBanner() {
       </div>
     </a>
   )
-
 }
