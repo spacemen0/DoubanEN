@@ -4,7 +4,7 @@ import { useState } from "react";
 export function PageHeader() {
     return (
         <div className="flex flex-col bg-white shadow-md">
-            <div className=" flex gap-1 lg:gap-2 justify-center items-center  h-12 md:h-20">
+            <div className=" flex gap-1 lg:gap-2 justify-center items-center  h-12 md:h-14">
                 <HeaderLogoSection />
                 <HeaderNavBarSection forMedium={true} />
                 <HeaderSearchBarSection />
@@ -29,7 +29,8 @@ function HeaderLogoSection() {
 
 function HeaderNavBarSection({ forMedium: forMedium }: { forMedium: boolean }) {
     const height: string = forMedium ? "h-10" : "h-5";
-    const style: string = `flex max-w-[60px] items-center transition-colors hover:bg-gray-100 rounded-full flex-grow justify-center p-1 md:p-2 font-bold text-sky-500 ${height}`;
+    const style: string = `flex max-w-[60px] items-center transition-colors hover:bg-gray-100 
+    rounded-full flex-grow justify-center p-1 md:p-2 font-bold text-sky-500 ${height}`;
     return (
         <div className={`justify-around md: gap-2  max-w-[768px] lg: w - full ${forMedium ? "hidden md:flex" : "flex md:hidden"}`
         } >
@@ -60,10 +61,54 @@ function HeaderSearchBarSection() {
                 placeholder="Search..."
                 className="rounded-full border  shadow-inner my-1 py-1 pl-10 pr-4 text-lg w-full focus:border-sky-700 outline-none"
             />
+            <DropDownSearchOption />
         </div>
 
     )
 }
+
+
+type SearchOption = 'Music' | 'Movie' | 'Book';
+
+function DropDownSearchOption() {
+    const [selectedOption, setSelectedOption] = useState<SearchOption | null>(null);
+
+    const handleOptionClick = (option: SearchOption) => {
+        setSelectedOption(option);
+    };
+
+    const musicColor: string = "sky-600";
+    const movieColor: string = "orange-600";
+    const bookColor: string = "green-500";
+
+    return (
+        <div className="flex items-center justify-right transition-colors border-t-0 bg-white w-72 h-8 md:w-96 md:h-12 text-gray-500 border-gray-300 border absolute top-[52px] shadow-lg ring-1 ring-black ring-opacity-5">
+            <span className="block mx-3">Search for: </span>
+            <button
+                className={`px-1.5 py-1 hover:text-${musicColor} ${selectedOption === 'Music' ? `font-bold text-${musicColor} border-b-2 border-${musicColor}` : ''
+                    }`}
+                onClick={() => handleOptionClick('Music')}
+            >
+                Music
+            </button>
+            <button
+                className={`px-1.5 py-1 hover:text-${movieColor} ${selectedOption === 'Movie' ? `font-bold text-${movieColor} border-b-2 border-${movieColor}` : ''
+                    }`}
+                onClick={() => handleOptionClick('Movie')}
+            >
+                Movie
+            </button>
+            <button
+                className={`px-1.5 py-1 hover:text-${bookColor} ${selectedOption === 'Book' ? `font-bold text-${bookColor} border-b-2 border-${bookColor}` : ''
+                    }`}
+                onClick={() => handleOptionClick('Book')}
+            >
+                Book
+            </button>
+        </div>
+    );
+}
+
 
 function HeaderUserSection({ username: username }: { username: string }) {
     const [isOpen, setIsOpen] = useState(false)
@@ -74,7 +119,8 @@ function HeaderUserSection({ username: username }: { username: string }) {
             </a>
             <a className="hidden md:inline font-bold text-lg text-sky-600 h-8" href="/">{username}</a>
             <div className="relative">
-                <button onClick={() => { setIsOpen(!isOpen); }} className="flex  relative items-center transition-colors hover:bg-gray-100 rounded-full  h-10 flex-grow justify-center p-0.5">
+                <button onClick={() => { setIsOpen(!isOpen); }} className="flex  relative items-center transition-colors
+                 hover:bg-gray-100 rounded-full  h-10 flex-grow justify-center p-0.5">
                     <Menu size="32" color="#3974C7" />
                 </button>
                 <DropDownMenu isOpen={isOpen} />
@@ -97,7 +143,7 @@ function MenuItem({ link, text, isLast = false }: { link: string; text: string; 
 function DropDownMenu({ isOpen }: { isOpen: boolean }) {
     return (
         isOpen && (
-            <div className="absolute top-10 right-1 w-36 shadow-lg font-bold text-sky-600 bg-white ring-1 ring-black ring-opacity-5">
+            <div className="absolute top-10 right-1 w-36  font-bold text-sky-600 bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                 <div>
                     <MenuItem link="#" text="Profile" />
                     <MenuItem link="#" text="All Collections" />
