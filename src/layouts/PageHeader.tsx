@@ -123,19 +123,19 @@ function DropDownSearchOption({ selectedOption, onOptionClick }: DropDownSearchO
          border-gray-300 border-b-[0.5px] md:border absolute left-[-150px] md:left-3  right-0 top-[41px] md:top-[52px] md:shadow-sm shadow-gray-700">
             <span className="block mx-3">Search for: </span>
             <button
-                className={`px-0.5 mx-1.5 md:py-1 hover:text-sky-700 ${selectedOption === 'Music' ? musicColor : ''}`}
+                className={`px-0.5 mx-1.5  hover:text-sky-700 ${selectedOption === 'Music' ? musicColor : ''}`}
                 onClick={() => onOptionClick('Music')}
             >
                 Music
             </button>
             <button
-                className={`px-0.5 mx-1.5 md:py-1 hover:text-orange-800 ${selectedOption === 'Movie' ? movieColor : ''}`}
+                className={`px-0.5 mx-1.5  hover:text-orange-800 ${selectedOption === 'Movie' ? movieColor : ''}`}
                 onClick={() => onOptionClick('Movie')}
             >
                 Movie
             </button>
             <button
-                className={`px-0.5 mx-1.5 md:py-1 hover:text-green-700 ${selectedOption === 'Book' ? bookColor : ''}`}
+                className={`px-0.5 mx-1.5  hover:text-green-700 ${selectedOption === 'Book' ? bookColor : ''}`}
                 onClick={() => onOptionClick('Book')}
             >
                 Book

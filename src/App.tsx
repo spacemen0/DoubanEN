@@ -34,7 +34,7 @@ export default function App() {
   return (
     <div className="max-h-screen overflow-hidden flex flex-col">
       <PageHeader />
-      <div className=" overflow-y-scroll">
+      <div className="overflow-y-scroll">
         <Banner />
         <Featured>
           {featuredItems.map((item, index) => (
