@@ -2,7 +2,7 @@ export function Banner() {
     return (
         <div className="flex flex-col">
             <div className="flex items-center justify-center max-w-screen md:mt-16 mt-12">
-                <div className="px-1.5 md:px-3 flex-shrink-0">            <a href="/">
+                <div className="px-3 md:px-6 flex-shrink-0">            <a href="/">
                     <img src="https://e.snmc.io/3.0/img/logo/sonemic-512.png" title="Logo" className="sm:h-20 md:h-28 lg:h-36 h-14" />
                 </a></div>
                 <div className="flex flex-col max-w-[800px] mr-2">
@@ -21,7 +21,7 @@ export function Banner() {
 
 function SiteStatus() {
     return (
-        <div className="max-w-screen-lg mx-auto mt-6 px-4">
+        <div className="max-w-screen-lg mx-auto mt-12 px-4">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-4">
                 <StatusItem title="Artists" count="1,717,584" />
                 <StatusItem title="Releases" count="6,017,201" />
