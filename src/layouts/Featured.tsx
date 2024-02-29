@@ -1,11 +1,13 @@
 import { ReactNode } from "react";
 
-export function Featured({ children }: { children: ReactNode }) {
+export function Featured({ children }: { children: ReactNode[] }) {
   return (
-    <div className="flex justify-center items-center max-h-screen overflow-auto min-h-96 bg-cyan-300 text-center mt-5 border-s-purple-500">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {children}
-      </div>
+    <div className="flex flex-col justify-center items-center border-s-purple-500 mb-4">
+      {children.map((child, index) => (
+        <div key={index} className="mt-4">
+          {child}
+        </div>
+      ))}
     </div>
   );
 }

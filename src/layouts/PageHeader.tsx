@@ -2,7 +2,7 @@ import { Menu, Search } from "lucide-react"
 
 export function PageHeader() {
     return (
-        <div className="sticky top-0 flex flex-col bg-white shadow-md">
+        <div className="flex flex-col bg-white shadow-md">
             <div className=" flex gap-1 lg:gap-2 justify-center items-center  h-12 md:h-20">
                 <HeaderLogoSection />
                 <HeaderNavBarSection forMedium={true} />
@@ -18,9 +18,9 @@ function HeaderLogoSection() {
     return (
         <div className="flex gap-4 items-center flex-shrink-0  h-10 px-2">
             <a href="/">
-                <img src="https://e.snmc.io/3.0/img/logo/sonemic-32.png" title="Logo" className=" h-8" />
+                <img src="https://e.snmc.io/3.0/img/logo/sonemic-512.png" title="Logo" className=" h-8" />
             </a>
-            <a className=" font-bold text-lg text-sky-600 h-8" href="/">DoubanEN</a>
+            <a className=" font-bold text-lg text-sky-600 h-8" href="/">Douban EN</a>
         </div>
     )
 }
@@ -68,7 +68,7 @@ function HeaderUserSection({ username: username }: { username: string }) {
     return (
         <div className="flex gap-1.5 items-center flex-shrink-0">
             <a href="/">
-                <img src="https://e.snmc.io/3.0/img/logo/sonemic-32.png" title="Logo" className=" h-8" />
+                <img src="https://e.snmc.io/3.0/img/logo/sonemic-512.png" title="Logo" className=" h-8" />
             </a>
             <a className="hidden md:inline font-bold text-lg text-sky-600 h-8" href="/">{username}</a>
             <button className="flex items-center transition-colors hover:bg-gray-100 rounded-full  h-10 flex-grow justify-center p-0.5">

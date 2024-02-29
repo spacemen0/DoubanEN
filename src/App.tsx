@@ -32,14 +32,16 @@ export default function App() {
     // Add more items as needed
   ];
   return (
-    <div className="max-h-screen flex flex-col">
+    <div className="max-h-screen overflow-hidden flex flex-col">
       <PageHeader />
-      <Banner />
-      <Featured>
-        {featuredItems.map((item, index) => (
-          <FeaturedItem key={index} title={item.title} />
-        ))}
-      </Featured>
+      <div className=" overflow-y-scroll">
+        <Banner />
+        <Featured>
+          {featuredItems.map((item, index) => (
+            <FeaturedItem key={index} title={item.title} />
+          ))}
+        </Featured>
+      </div>
     </div>
   );
 
