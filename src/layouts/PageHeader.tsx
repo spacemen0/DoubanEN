@@ -97,7 +97,8 @@ function DropDownSearchOption() {
     const bookColor: string = "text-green-700 border-b-2 font-bold border-green-700";
 
     return (
-        <div className="flex items-center justify-right transition-colors  bg-white w-screen md:w-80 h-10  text-gray-500 border-gray-300 border-b-[0.5px] md:border absolute left-[-150px] md:left-3  right-0 top-[41px] md:top-[52px] md:shadow-sm shadow-gray-700">
+        <div className="flex items-center justify-right transition-colors  bg-white w-screen md:w-80 h-10  text-gray-500
+         border-gray-300 border-b-[0.5px] md:border absolute left-[-150px] md:left-3  right-0 top-[41px] md:top-[52px] md:shadow-sm shadow-gray-700">
             <span className="block mx-3">Search for: </span>
             <button
                 className={`px-0.5 mx-1.5 md:py-1 hover:text-sky-700 ${selectedOption === 'Music' ? musicColor : ''}`}
@@ -155,7 +156,7 @@ function MenuItem({ link, text, isLast = false }: { link: string; text: string; 
 function DropDownMenu({ isOpen }: { isOpen: boolean }) {
     return (
         isOpen && (
-            <div className="absolute top-10 right-1 w-36  font-bold text-sky-600 bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+            <div className="absolute top-10 md:top-9 right-1 w-36  font-bold text-sky-600 bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                 <div>
                     <MenuItem link="#" text="Profile" />
                     <MenuItem link="#" text="All Collections" />
