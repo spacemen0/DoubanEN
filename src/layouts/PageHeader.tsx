@@ -8,7 +8,7 @@ export function PageHeader() {
                 <HeaderLogoSection />
                 <HeaderNavBarSection forMedium={true} />
                 <HeaderSearchBarSection />
-                <HeaderUserSection username="spacemen0" />
+                <HeaderUserSection username="Spacemen0" />
             </div >
             <HeaderNavBarSection forMedium={false} />
         </div>
@@ -17,11 +17,11 @@ export function PageHeader() {
 
 function HeaderLogoSection() {
     return (
-        <div className="flex gap-2 md:gap-4 items-center flex-shrink-0  h-10 px-1 md:px-2">
+        <div className="flex gap-2 md:gap-4 items-center flex-shrink-0 transition-colors hover:bg-gray-100  h-10 px-1 md:px-2">
             <a href="/">
-                <img src="https://e.snmc.io/3.0/img/logo/sonemic-512.png" title="Logo" className=" h-8" />
+                <img src="https://e.snmc.io/3.0/img/logo/sonemic-512.png" title="Logo" className="h-10" />
             </a>
-            <a className=" font-bold text-lg text-sky-600 h-8" href="/">Douban EN</a>
+            <a className=" font-bold text-lg text-sky-600 h-7" href="/">Douban EN</a>
         </div>
     )
 }
@@ -91,7 +91,7 @@ function HeaderSearchBarSection() {
             <input
                 type="search"
                 placeholder="Search..."
-                className="rounded-full border shadow-inner my-1 py-1 pl-10 pr-10 text-lg w-full outline-none"
+                className="rounded-full border shadow-inner my-1 py-1 pl-8 md:pl-10 pr-10 text-lg w-full outline-none"
                 onClick={handleInputClick}
             />
             {isDropdownVisible && (
@@ -148,11 +148,14 @@ function DropDownSearchOption({ selectedOption, onOptionClick }: DropDownSearchO
 function HeaderUserSection({ username: username }: { username: string }) {
     const [isOpen, setIsOpen] = useState(false)
     return (
-        <div className="flex gap-1.5 items-center flex-shrink-0">
-            <a href="/">
-                <img src="https://e.snmc.io/3.0/img/logo/sonemic-512.png" title="Logo" className=" h-8" />
-            </a>
-            <a className="hidden md:inline font-bold text-lg text-sky-600 h-8" href="/">{username}</a>
+        <div className="flex gap-1.5 items-center flex-shrink-0  ">
+            <div className="transition-colors hover:bg-gray-100">
+                <a className="transition-colors hover:bg-gray-100" href="/">
+                    <img src="https://e.snmc.io/3.0/img/logo/sonemic-512.png" title="Logo" className="h-10" />
+                </a>
+            </div>
+            <div className="pb-1">            <a className="hidden md:inline font-bold text-lg text-sky-600 h-10" href="/">{username}</a></div>
+
             <div className="relative">
                 <button onClick={() => { setIsOpen(!isOpen); }} className="flex  relative items-center transition-colors
                  hover:bg-gray-100 rounded-full  h-10 flex-grow justify-center p-0.5">
