@@ -1,4 +1,5 @@
 import { Menu, Search } from "lucide-react"
+import { useState } from "react";
 
 export function PageHeader() {
     return (
@@ -57,7 +58,7 @@ function HeaderSearchBarSection() {
             <input
                 type="search"
                 placeholder="Search..."
-                className="rounded-full border  shadow-inner my-1 py-1 pl-10 pr-4 text-lg w-full focus:border-blue-700 outline-none"
+                className="rounded-full border  shadow-inner my-1 py-1 pl-10 pr-4 text-lg w-full focus:border-sky-700 outline-none"
             />
         </div>
 
@@ -65,15 +66,46 @@ function HeaderSearchBarSection() {
 }
 
 function HeaderUserSection({ username: username }: { username: string }) {
+    const [isOpen, setIsOpen] = useState(false)
     return (
         <div className="flex gap-1.5 items-center flex-shrink-0">
             <a href="/">
                 <img src="https://e.snmc.io/3.0/img/logo/sonemic-512.png" title="Logo" className=" h-8" />
             </a>
             <a className="hidden md:inline font-bold text-lg text-sky-600 h-8" href="/">{username}</a>
-            <button className="flex items-center transition-colors hover:bg-gray-100 rounded-full  h-10 flex-grow justify-center p-0.5">
-                <Menu size="32" color="#3974C7" />
-            </button>
+            <div className="relative">
+                <button onClick={() => { setIsOpen(!isOpen); }} className="flex  relative items-center transition-colors hover:bg-gray-100 rounded-full  h-10 flex-grow justify-center p-0.5">
+                    <Menu size="32" color="#3974C7" />
+                </button>
+                <DropDownMenu isOpen={isOpen} />
+            </div>
+
         </div>
     )
+}
+
+function MenuItem({ link, text, isLast = false }: { link: string; text: string; isLast?: boolean }) {
+    const borderClass = isLast ? '' : 'border-b border-gray-300';
+
+    return (
+        <a href={link} className={`block px-2 py-2 text-sm ${borderClass} hover:bg-gray-100`}>
+            {text}
+        </a>
+    );
+}
+
+function DropDownMenu({ isOpen }: { isOpen: boolean }) {
+    return (
+        isOpen && (
+            <div className="absolute top-10 right-1 w-36 shadow-lg font-bold text-sky-600 bg-white ring-1 ring-black ring-opacity-5">
+                <div>
+                    <MenuItem link="#" text="Profile" />
+                    <MenuItem link="#" text="All Collections" />
+                    <MenuItem link="#" text="Book Collection" />
+                    <MenuItem link="#" text="Music Collection" />
+                    <MenuItem link="#" text="Movie Collection" isLast={true} />
+                </div>
+            </div>
+        )
+    );
 }
