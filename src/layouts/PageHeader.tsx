@@ -178,7 +178,7 @@ function MenuItem({ link, text, isLast = false }: { link: string; text: string; 
 function DropDownMenu({ isOpen }: { isOpen: boolean }) {
     return (
         isOpen && (
-            <div className="absolute top-10 md:top-9 right-1 w-36  font-bold text-sky-600 bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+            <div className="absolute top-10 md:top-9 right-0 w-36  font-bold text-sky-600 bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                 <div>
                     <MenuItem link="#" text="Profile" />
                     <MenuItem link="#" text="All Collections" />
