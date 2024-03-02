@@ -8,6 +8,7 @@ export default {
     extend: {
       screens: {
         '!sm': { 'raw': '(max-width: 640px)' },
+        "!md": { 'raw': '(max-width: 768px)' },
 
       }
     }

@@ -120,7 +120,7 @@ function DropDownSearchOption({ selectedOption, onOptionClick }: DropDownSearchO
 
     return (
         <div className="flex items-center justify-right transition-colors  bg-white w-screen md:w-96 h-10  text-gray-500
-         border-gray-300 border-b-[0.5px] md:border absolute left-[-150px] md:left-3  right-0 top-[41px] md:top-[52px] md:shadow-sm shadow-gray-700">
+         border-gray-300 border-b-[0.5px] md:border absolute left-[-150px] md:left-3  right-0 top-[42px] md:top-[52px] md:shadow-sm shadow-gray-700">
             <span className="block mx-3">Search for: </span>
             <button
                 className={`px-0.5 mx-1.5  hover:text-sky-700 ${selectedOption === 'Music' ? musicColor : ''}`}
