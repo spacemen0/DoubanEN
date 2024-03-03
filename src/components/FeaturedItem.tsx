@@ -1,17 +1,41 @@
+import { Star, StarHalf } from "lucide-react";
 import { Image } from "./Image";
 
-export function FeaturedItem({ image, music, review }: { image: ImageProps; music: MusicProps, review: ReviewProps }) {
+
+export function FeaturedItem({ image, music, review }: { image: ImageProps; music: MusicProps; review: ReviewProps }) {
+    const renderStars = () => {
+        const stars = Math.floor(review.star);
+        const hasHalfStar = review.star % 1 !== 0;
+        const starElements = [];
+        for (let i = 0; i < stars; i++) {
+            starElements.push(<Star color="rgb(234 179 8)" fill="rgb(234 179 8)" />);
+        }
+        if (hasHalfStar) {
+            starElements.push(<StarHalf color="rgb(234 179 8)" fill="rgb(234 179 8)" />);
+        }
+        return starElements;
+    };
+
     return (
-        <div className="">
-            <Image {...image}></Image>
-            <h2>{music.title}</h2>
-            <p>Artist: {music.artist}</p>
-            <p>Genre: {music.genre}</p>
-            <p>Average Rating: {music.average}</p>
-            <p>Total Ratings: {music.ratings}</p>
-            <p>Reviewed by: {review.username}</p>
-            <p>Review Date: {review.reviewDate}</p>
-            <p>Review Content: {review.content}</p>
+        <div className="mx-auto bg-white rounded-md shadow-md p-4 text-gray-600">
+            <div className="flex !md:flex-col !md:items-start items-center">
+                <div className="max-w-[50%]">                <Image {...image} /></div>
+                <div className="md:ml-8 flex-1 flex flex-col items-center !md:items-start justify-center">
+                    <h2 className="text-xl font-semibold mt-2">{music.title}</h2>
+                    <p className="mt-2">Artist: {music.artist}</p>
+                    <p className="mt-2">Genre: {music.genre}</p>
+                    <div className="flex items-center mt-2">
+                        <p>Rating:&nbsp;</p>
+                        <div className="flex ">{renderStars()}</div>
+                    </div>
+                    <p className="mt-2">Average Rating: {music.average}</p>
+                    <p className="mt-2">Total Ratings: {music.ratings}</p>
+                </div>
+            </div>
+
+            <p className="mt-2">Reviewed by: <a href="/#" className="font-bold text-sky-900">{review.username}</a></p>
+            <p className="mt-2">Review Date: {review.reviewDate}</p>
+            <p className="mt-2">{review.content}</p>
         </div>
-    )
+    );
 }

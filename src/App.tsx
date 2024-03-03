@@ -12,8 +12,8 @@ export default function App() {
         href: "/#",
       },
       music: {
-        title: 'Awesome Song',
-        artist: 'Cool Artist',
+        title: 'Taking Drugs to Make Music To Take Drugs to',
+        artist: 'Spacemen3',
         genre: 'Pop',
         average: 4.5,
         ratings: 100,
@@ -22,6 +22,7 @@ export default function App() {
         username: 'MusicLover123',
         userID: 1,
         reviewDate: '2022-03-01',
+        star: 3.5,
         content: `This song is amazing!This song is amazing!This song is amazing!
         This song is amazing!This song is amazing!This song is amazing!This song is amazing!
         This song is amazing!This song is amazing!This song is amazing!This song is amazing!
@@ -45,6 +46,7 @@ export default function App() {
         username: 'MusicLover123',
         userID: 1,
         reviewDate: '2022-03-01',
+        star: 3.5,
         content: `This song is amazing!This song is amazing!This song is amazing!
         This song is amazing!This song is amazing!This song is amazing!This song is amazing!
         This song is amazing!This song is amazing!This song is amazing!This song is amazing!
@@ -68,6 +70,7 @@ export default function App() {
         username: 'MusicLover123',
         userID: 1,
         reviewDate: '2022-03-01',
+        star: 3.5,
         content: `This song is amazing!This song is amazing!This song is amazing!
         This song is amazing!This song is amazing!This song is amazing!This song is amazing!
         This song is amazing!This song is amazing!This song is amazing!This song is amazing!
@@ -91,6 +94,7 @@ export default function App() {
         username: 'MusicLover123',
         userID: 1,
         reviewDate: '2022-03-01',
+        star: 3.5,
         content: `This song is amazing!This song is amazing!This song is amazing!
         This song is amazing!This song is amazing!This song is amazing!This song is amazing!
         This song is amazing!This song is amazing!This song is amazing!This song is amazing!
@@ -114,6 +118,7 @@ export default function App() {
         username: 'MusicLover123',
         userID: 1,
         reviewDate: '2022-03-01',
+        star: 3.5,
         content: `This song is amazing!This song is amazing!This song is amazing!
         This song is amazing!This song is amazing!This song is amazing!This song is amazing!
         This song is amazing!This song is amazing!This song is amazing!This song is amazing!
@@ -137,6 +142,7 @@ export default function App() {
         username: 'MusicLover123',
         userID: 1,
         reviewDate: '2022-03-01',
+        star: 3.5,
         content: `This song is amazing!This song is amazing!This song is amazing!
         This song is amazing!This song is amazing!This song is amazing!This song is amazing!
         This song is amazing!This song is amazing!This song is amazing!This song is amazing!
@@ -160,6 +166,7 @@ export default function App() {
         username: 'MusicLover123',
         userID: 1,
         reviewDate: '2022-03-01',
+        star: 3.5,
         content: `This song is amazing!This song is amazing!This song is amazing!
         This song is amazing!This song is amazing!This song is amazing!This song is amazing!
         This song is amazing!This song is amazing!This song is amazing!This song is amazing!
