@@ -9,13 +9,25 @@ type ImageProps = {
     src: string; alt: string; href: string
 }
 
-type ListItemProps = {
-    image: ImageProps;
+type MusicProps = {
     title: string;
     artist: string;
-    releaseDate: string;
     genre: string;
     average: number;
     ratings: number;
+}
+
+type ReviewProps = {
+    username: string;
+    userID: number;
+    reviewDate: string;
+    content: string;
+}
+
+
+type ListItemProps = {
+    image: ImageProps;
+    music: MusicProps;
+    releaseDate: string;
     wants: number;
 }

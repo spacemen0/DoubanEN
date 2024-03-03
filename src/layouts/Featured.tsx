@@ -5,36 +5,42 @@ import { ListItem } from "../components/ListItem";
 export function Featured({ children }: { children: ReactNode[] }) {
   const items: ListItemProps[] = [{
     image: { src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017", alt: "", href: "/#" },
-    title: "title",
-    artist: "artist",
+    music: {
+      title: "title",
+      artist: "artist",
+      genre: "genre",
+      average: 3.5,
+      ratings: 15,
+    },
     releaseDate: "release_date",
-    genre: "genre",
-    average: 3.5,
-    ratings: 15,
     wants: 20
   }, {
     image: { src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017", alt: "", href: "/#" },
-    title: "title",
-    artist: "artist",
+    music: {
+      title: "title",
+      artist: "artist",
+      genre: "genre",
+      average: 3.5,
+      ratings: 15,
+    },
     releaseDate: "release_date",
-    genre: "genre",
-    average: 3.5,
-    ratings: 15,
     wants: 20
   }, {
     image: { src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017", alt: "", href: "/#" },
-    title: "title",
-    artist: "artist",
+    music: {
+      title: "title",
+      artist: "artist",
+      genre: "genre",
+      average: 3.5,
+      ratings: 15,
+    },
     releaseDate: "release_date",
-    genre: "genre",
-    average: 3.5,
-    ratings: 15,
     wants: 20
   }]
   return (
 
     <div className="flex ml-3 md:ml-6 lg:ml-12 mb-4">
-      <div className="flex flex-col flex-1 md:flex-[0.65] mr-4 md:mr-8 lg:mr-16">
+      <div className="flex flex-col flex-1 md:flex-[0.65] mr-4 md:mr-8 lg:mr-16 ">
         <FeaturedBanner />
         {children.map((child, index) => (
           <div key={index} className="flex mt-4 w-full h-auto ">
@@ -60,7 +66,7 @@ export function Featured({ children }: { children: ReactNode[] }) {
 function FeaturedBanner() {
   return (
     <a href="#">
-      <div className="flex md:hidden hover:bg-gray-100 transition-colors justify-start items-center mt-4 b-4">
+      <div className="flex md:hidden hover:bg-gray-100 transition-colors justify-start items-center mt-6 mb-6">
         <div className=" w-32 ">
           <img src="https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017" alt="Best of 2023" />
         </div>
@@ -76,7 +82,7 @@ function FeaturedBanner() {
 
 function FeaturedDisplay() {
   return (
-    <div className="flex flex-col md:w-11/12 lg:w-10/12 mt-4">
+    <div className="flex flex-col md:w-11/12 lg:w-10/12 mt-6">
       <div className="mb-4">
         <Image src="https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017" alt="Big Image" href="/#" />
       </div>
@@ -98,7 +104,7 @@ function FeaturedDisplay() {
 
 function FeaturedList({ children }: { children: ReactNode[] }) {
   return (
-    <div className="flex mt-2 lg:mt-4 flex-col md:w-11/12 lg:w-10/12 pr-4 lg:pr-8">
+    <div className="flex mt-6 lg:mt-12 flex-col md:w-11/12 lg:w-10/12 pr-4 lg:pr-8">
       <div className="text-sky-700 font-bold text-xl md:text-3xl">Featured List</div>
       <div className="flex gap-2">
         <button>Main List</button>
@@ -116,7 +122,7 @@ function FeaturedList({ children }: { children: ReactNode[] }) {
 
 function AdditionalInfo() {
   return (
-    <div className="flex mt-2 lg:mt-4 md:w-11/12 lg:w-10/12 flex-col ">
+    <div className="flex mt-6 lg:mt-12 md:w-11/12 lg:w-10/12 flex-col ">
       <div className="text-sky-700 font-bold text-xl md:text-3xl">Douban EN</div>
       <div className="text-gray-500">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, doloremque est.
