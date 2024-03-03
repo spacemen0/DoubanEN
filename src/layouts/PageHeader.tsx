@@ -50,7 +50,7 @@ function HeaderNavBarSection({ forMedium: forMedium }: { forMedium: boolean }) {
     )
 }
 
-type SearchOption = 'Music' | 'Movie' | 'Book';
+
 
 function HeaderSearchBarSection() {
     const [selectedOption, setSelectedOption] = useState<SearchOption>('Music');
@@ -107,10 +107,7 @@ function HeaderSearchBarSection() {
     );
 }
 
-interface DropDownSearchOptionProps {
-    selectedOption: SearchOption;
-    onOptionClick: (option: SearchOption) => void;
-}
+
 
 function DropDownSearchOption({ selectedOption, onOptionClick }: DropDownSearchOptionProps) {
 
