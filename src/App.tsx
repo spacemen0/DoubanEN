@@ -36,6 +36,7 @@ export default function App() {
       <PageHeader />
       <div className="overflow-y-scroll">
         <Banner />
+        <div className="text-sky-700 font-bold text-xl mt-8 md:mt-12 ml-3 md:ml-6 lg:ml-12 md:text-3xl">Featured Reviews</div>
         <Featured>
           {featuredItems.map((item, index) => (
             <FeaturedItem key={index} title={item.title} />

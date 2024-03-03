@@ -3,20 +3,19 @@ import { ReactNode } from "react";
 export function Featured({ children }: { children: ReactNode[] }) {
   const items = [{}, {}, {}]
   return (
-    <div className="flex flex-col mt-8 md:mt-12 ml-3 md:ml-6 lg:ml-12 items-start mb-4">
-      <FeaturedBanner />
-      <div className="text-sky-700 font-bold text-xl  md:text-3xl">Featured Reviews</div>
-      {children.map((child, index) => (
-        <div key={index} className="flex mt-4 w-full h-auto ">
-          {child}
-          {(index == 0) && <div className="!sm:hidden"><FeaturedDisplay /></div>}
-          {(index == 1) && <FeaturedList>{items.map(() => <div>bullshit</div>)}</FeaturedList>}
-          {(index == 2) && <AdditionalInfo />}
-          {(index > 2) && <div className="bg-transparent hidden md:block flex-[0.33] "></div>}
-        </div>
-      ))}
-      <div className="md:hidden">
-        <FeaturedDisplay />
+
+    <div className="flex ml-3 md:ml-6 lg:ml-12 mb-4">
+      <div className="flex flex-col flex-1 md:flex-[0.7] md:mr-4">
+        <FeaturedBanner />
+        {children.map((child, index) => (
+          <div key={index} className="flex mt-4 w-full h-auto ">
+            {child}
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-col flex-[0.3] !md:hidden"> <FeaturedDisplay />
+        <FeaturedList>{items.map(() => <div>bullshit</div>)}</FeaturedList>
+        <AdditionalInfo />
       </div>
     </div>
   );
@@ -26,11 +25,11 @@ export function Featured({ children }: { children: ReactNode[] }) {
 function FeaturedBanner() {
   return (
     <a href="#">
-      <div className="flex lg:hidden hover:bg-gray-100 transition-colors justify-start items-center mb-4">
-        <div className="flex-1 w-32 h-32 sm:h-48 sm:w-48">
+      <div className="flex md:hidden hover:bg-gray-100 transition-colors justify-start items-center mt-4 b-4">
+        <div className=" w-32 ">
           <img src="https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017" alt="Best of 2023" />
         </div>
-        <div className="px-2 h-32 sm:h-48 sm:text-2xl w-auto font-bold text-sky-700 flex flex-col justify-center items-center">
+        <div className="px-2 h-auto sm:text-xl w-auto font-bold text-sky-700 flex flex-col justify-center items-center">
           <h3>Douban EN Best of 2023</h3>
         </div>
       </div>
@@ -48,7 +47,7 @@ function Image({ src, alt }: { src: string; alt: string }) {
 
 function FeaturedDisplay() {
   return (
-    <div className="flex flex-col md:max-w-md w-11/12">
+    <div className="flex flex-col max-w-full mt-4">
       <div className="mb-4">
         <Image src="https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017" alt="Big Image" />
       </div>
@@ -91,9 +90,6 @@ function AdditionalInfo() {
     <div className="md:flex hidden flex-col flex-[0.3]">
       <div className="text-sky-700 font-bold text-xl md:text-3xl">Douban EN</div>
       <div className="text-gray-500">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, doloremque est.
-          Maxime repudiandae odit ad, ratione aliquid doloribus sint quas similique
-          natus laudantium adipisci recusandae eum consequatur ullam unde repellat.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, doloremque est.
           Maxime repudiandae odit ad, ratione aliquid doloribus sint quas similique
           natus laudantium adipisci recusandae eum consequatur ullam unde repellat.</p>
