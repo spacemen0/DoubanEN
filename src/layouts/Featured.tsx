@@ -82,7 +82,7 @@ function FeaturedBanner() {
 
 function FeaturedDisplay() {
   return (
-    <div className="flex flex-col md:w-11/12 lg:w-10/12 mt-6">
+    <div className="flex flex-col md:w-11/12 lg:w-10/12 md:mt-4 mt-6">
       <div className="mb-4">
         <Image src="https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017" alt="Big Image" href="/#" />
       </div>
