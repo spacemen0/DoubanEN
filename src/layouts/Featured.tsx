@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { Image } from "../components/Image";
 import { ListItem } from "../components/ListItem";
 
@@ -6,13 +6,13 @@ export function Featured({ children }: { children: ReactNode[] }) {
   const items: ListItemProps[] = [{
     image: { src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017", alt: "", href: "/#" },
     music: {
-      title: "title",
-      artist: "artist",
-      genre: "genre",
+      title: "Taking Drugs to Make Music to Take Drugs to",
+      artist: "Spacemen3",
+      genre: "SpaceRock Revival",
       average: 3.5,
       ratings: 15,
     },
-    releaseDate: "release_date",
+    releaseDate: "14 February 1998",
     wants: 20
   }, {
     image: { src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017", alt: "", href: "/#" },
@@ -37,26 +37,30 @@ export function Featured({ children }: { children: ReactNode[] }) {
     releaseDate: "release_date",
     wants: 20
   }]
+  const [selectedOption, setSelectedOption] = useState<"Editor" | "My">('Editor');
+  const handleOptionClick = (option: "Editor" | "My") => {
+    setSelectedOption(option);
+  };
   return (
 
     <div className="flex ml-3 md:ml-6 lg:ml-12 mb-4">
-      <div className="flex flex-col flex-1 md:flex-[0.65] mr-4 md:mr-8 lg:mr-16 ">
+      <div className="flex flex-col flex-1 lg:flex-[0.65] mr-4 md:mr-8 lg:mr-16 ">
         <FeaturedBanner />
         {children.map((child, index) => (
           <div key={index} className="flex mt-4 w-full h-auto ">
             {child}
           </div>
         ))}
-        <div className="md:hidden flex flex-col mr-4">
-          <FeaturedDisplay />
-          <FeaturedList>{items.map((item) => <ListItem {...item}></ListItem>)}</FeaturedList>
-          <AdditionalInfo />
+        <div className="lg:hidden flex flex-col mr-4">
+          <SideDisplay />
+          <SideList selectedOption={selectedOption} onOptionClick={handleOptionClick}>{items.map((item) => <ListItem {...item}></ListItem>)}</SideList>
+          <SideInfo />
         </div>
       </div>
-      <div className="flex flex-col flex-[0.35] !md:hidden">
-        <FeaturedDisplay />
-        <FeaturedList>{items.map((item) => <ListItem {...item}></ListItem>)}</FeaturedList>
-        <AdditionalInfo />
+      <div className="flex flex-col flex-[0.35] !lg:hidden">
+        <SideDisplay />
+        <SideList selectedOption={selectedOption} onOptionClick={handleOptionClick}>{items.map((item) => <ListItem {...item}></ListItem>)}</SideList>
+        <SideInfo />
       </div>
     </div>
   );
@@ -66,11 +70,11 @@ export function Featured({ children }: { children: ReactNode[] }) {
 function FeaturedBanner() {
   return (
     <a href="#">
-      <div className="flex md:hidden hover:bg-gray-100 transition-colors justify-start items-center mt-6 mb-6">
+      <div className="flex lg:hidden hover:bg-gray-100 transition-colors justify-start items-center mt-6 mb-6">
         <div className=" w-32 ">
           <img src="https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017" alt="Best of 2023" />
         </div>
-        <div className="px-2 h-auto sm:text-xl w-auto font-bold text-sky-700 flex flex-col justify-center items-center">
+        <div className="px-2 sm:px-4 md:px-8 h-auto sm:text-xl w-auto font-bold text-sky-700 flex flex-col justify-center items-center">
           <h3>Douban EN Best of 2023</h3>
         </div>
       </div>
@@ -80,7 +84,7 @@ function FeaturedBanner() {
 
 
 
-function FeaturedDisplay() {
+function SideDisplay() {
   return (
     <div className="flex flex-col md:w-11/12 lg:w-10/12 md:mt-4 mt-6">
       <div className="mb-4">
@@ -102,15 +106,22 @@ function FeaturedDisplay() {
   );
 }
 
-function FeaturedList({ children }: { children: ReactNode[] }) {
+function SideList({ selectedOption, onOptionClick, children }:
+  { selectedOption: "Editor" | "My"; onOptionClick: (Option: "Editor" | "My") => void; children: ReactNode[] }) {
+
   return (
-    <div className="flex mt-6 lg:mt-12 flex-col md:w-11/12 lg:w-10/12 pr-4 lg:pr-8">
-      <div className="text-sky-700 font-bold text-xl md:text-3xl">Featured List</div>
-      <div className="flex gap-2">
-        <button>Main List</button>
-        <button>My List</button>
+    <div className="flex mt-6 lg:mt-12 flex-col md:w-11/12 lg:w-10/12 pr-4 lg:pr-8 text-gray-600">
+      <div className="text-sky-700 font-bold text-xl md:text-3xl">Featured Music</div>
+      <div className="my-4 flex gap-10 justify-start">
+        <button className={`border-b-2 text-2xl ${selectedOption == "Editor" ? "text-sky-900 font-bold" : ''}`}
+          onClick={() => { onOptionClick("Editor") }}>Editor's Selection</button>
+        <button className={`border-b-2 text-2xl ${selectedOption == "My" ? "text-sky-900 font-bold" : ''}`}
+          onClick={() => { onOptionClick("My") }}>My Collection</button>
       </div>
-      <div className="border-b border-gray-200"><span>Average</span> <span>Rated</span> <span>Wants</span></div>
+      <div className="border-b border-gray-200 text-lg pb-1 flex lg:gap-9 md:gap-6 gap-3 text-gray-800 lg:justify-end justify-between lg:pl-0 md:pl-40  pl-32">
+        <span>Average</span> <span>Rated</span> <span>Wants</span>
+
+      </div>
       {children.map((child, index) => (
         <div key={index} className="flex mt-4 w-full h-auto">
           {child}
@@ -120,10 +131,10 @@ function FeaturedList({ children }: { children: ReactNode[] }) {
   )
 }
 
-function AdditionalInfo() {
+function SideInfo() {
   return (
-    <div className="flex mt-6 lg:mt-12 md:w-11/12 lg:w-10/12 flex-col ">
-      <div className="text-sky-700 font-bold text-xl md:text-3xl">Douban EN</div>
+    <div className="flex md:w-11/12 lg:w-10/12 flex-col ">
+      <div className="text-sky-700 font-bold text-xl md:text-3xl my-4 xl:my-8">Douban EN</div>
       <div className="text-gray-500">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, doloremque est.
           Maxime repudiandae odit ad, ratione aliquid doloribus sint quas similique
@@ -132,9 +143,7 @@ function AdditionalInfo() {
           Maxime repudiandae odit ad, ratione aliquid doloribus sint quas similique
           natus laudantium adipisci recusandae eum consequatur ullam unde repellat.</p>
       </div>
-      <div className="bg-sky-700">
-        <button>Know More</button>
-      </div>
+      <button className="mt-4 h-10 text-xl font-bold text-white bg-blue-500 rounded-md hover:bg-blue-400">Know More</button>
     </div>
   )
 }

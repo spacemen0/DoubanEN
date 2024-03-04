@@ -21,7 +21,7 @@ function HeaderLogoSection() {
             <a href="/">
                 <img src="https://e.snmc.io/3.0/img/logo/sonemic-512.png" title="Logo" className="h-10" />
             </a>
-            <a className=" font-bold text-lg text-sky-600 h-7" href="/">Douban EN</a>
+            <a className="hidden md:inline font-bold text-lg text-sky-600 h-7" href="/">Douban EN</a>
         </div>
     )
 }
@@ -117,8 +117,8 @@ function DropDownSearchOption({ selectedOption, onOptionClick }: DropDownSearchO
 
     return (
         <div className="flex items-center justify-right transition-colors  bg-white w-screen md:w-96 h-10  text-gray-500
-         border-gray-300 border-b-[0.5px] md:border absolute left-[-150px]
-         md:left-3  right-0 top-[42px] md:top-[52px] md:shadow-sm shadow-gray-700">
+         border-gray-300 border-b-[0.5px] md:border absolute left-[-51px]
+         md:left-3   top-[42px] md:top-[52px] md:shadow-sm shadow-gray-700">
             <span className="block mx-3">Search for: </span>
             <button
                 className={`px-0.5 mx-1.5  hover:text-sky-700 ${selectedOption === 'Music' ? musicColor : ''}`}
