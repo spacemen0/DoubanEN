@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 export function PageHeader() {
     return (
-        <div className="flex flex-col bg-white shadow-md">
+        <div className="flex flex-col bg-white shadow-md border-b">
             <div className=" flex gap-1 lg:gap-2 justify-center items-center  h-12 md:h-14">
                 <HeaderLogoSection />
                 <HeaderNavBarSection forMedium={true} />

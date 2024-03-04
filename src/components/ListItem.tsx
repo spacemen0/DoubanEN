@@ -3,7 +3,7 @@ import { Image } from "./Image"
 export function ListItem({ image, music, releaseDate, wants }: ListItemProps) {
     return (
         <div className="flex w-full">
-            <div className="w-full mr-2 lg:mr-4 h-full max-w-32 max-h-32 mt-2">
+            <div className="w-full mr-2 md:mr-4 lg:mr-6 h-full max-w-32 max-h-32 mt-2">
                 <Image src={image.src} alt={image.alt} href={image.href} />
             </div>
             <div className="flex-col flex justify-between w-full border-b border-gray-200 pb-1 align-top">

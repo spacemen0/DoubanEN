@@ -43,8 +43,8 @@ export function Featured({ children }: { children: ReactNode[] }) {
   };
   return (
 
-    <div className="flex ml-3 md:ml-6 lg:ml-12 mb-4">
-      <div className="flex flex-col flex-1 lg:flex-[0.65] mr-4 md:mr-8 lg:mr-16 ">
+    <div className="flex pl-3 bg-white md:pl-6 lg:pl-12 mb-4">
+      <div className="flex flex-col flex-1 lg:flex-[0.65] mr-4 md:mr-8 ">
         <FeaturedBanner />
         {children.map((child, index) => (
           <div key={index} className="flex mt-4 w-full h-auto ">
@@ -57,7 +57,7 @@ export function Featured({ children }: { children: ReactNode[] }) {
           <SideInfo />
         </div>
       </div>
-      <div className="flex flex-col flex-[0.35] !lg:hidden">
+      <div className="flex flex-col flex-[0.35]  items-center !lg:hidden">
         <SideDisplay />
         <SideList selectedOption={selectedOption} onOptionClick={handleOptionClick}>{items.map((item) => <ListItem {...item}></ListItem>)}</SideList>
         <SideInfo />
