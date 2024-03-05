@@ -3,40 +3,7 @@ import { Image } from "../components/Image";
 import { ListItem } from "../components/ListItem";
 
 export function Featured({ children }: { children: ReactNode[] }) {
-  const items: ListItemProps[] = [{
-    image: { src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017", alt: "", href: "/#" },
-    music: {
-      title: "Taking Drugs to Make Music to Take Drugs to",
-      artist: "Spacemen3",
-      genre: "SpaceRock Revival",
-      average: 3.5,
-      ratings: 15,
-    },
-    releaseDate: "14 February 1998",
-    wants: 20
-  }, {
-    image: { src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017", alt: "", href: "/#" },
-    music: {
-      title: "title",
-      artist: "artist",
-      genre: "genre",
-      average: 3.5,
-      ratings: 15,
-    },
-    releaseDate: "release_date",
-    wants: 20
-  }, {
-    image: { src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017", alt: "", href: "/#" },
-    music: {
-      title: "title",
-      artist: "artist",
-      genre: "genre",
-      average: 3.5,
-      ratings: 15,
-    },
-    releaseDate: "release_date",
-    wants: 20
-  }]
+
   const [selectedOption, setSelectedOption] = useState<"Editor" | "My">('Editor');
   const handleOptionClick = (option: "Editor" | "My") => {
     setSelectedOption(option);
