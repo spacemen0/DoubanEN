@@ -146,7 +146,7 @@ function DropDownSearchOption({ selectedOption, onOptionClick }: DropDownSearchO
 function HeaderUserSection({ username: username }: { username: string }) {
     const [isOpen, setIsOpen] = useState(false)
     return (
-        <div className="flex gap-1.5 items-center flex-shrink-0  ">
+        <div className="flex md:gap-1.5 items-center flex-shrink-0  ">
             <div className="transition-colors hover:bg-gray-100">
                 <a className="transition-colors hover:bg-gray-100" href="/">
                     <img src="https://e.snmc.io/3.0/img/logo/sonemic-512.png" title="Logo" className="h-10" />

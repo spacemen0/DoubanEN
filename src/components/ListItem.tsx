@@ -11,7 +11,7 @@ export function ListItem({ image, music, releaseDate, wants }: ListItemProps) {
                 <a href="/#" className="text-sky-800 text-xl font-bold">{music.artist}</a>
                 <p className="text-xl">{releaseDate}</p>
                 <p className="text-xl">{music.genre}</p>
-                <div className="flex justify-between items-center text-xl 3xl:pl-28 3xl:pr-4 xl:pr-2 xl:pl-8">
+                <div className="flex justify-between items-center text-xl 3xl:pl-28 3xl:pr-4 xl:pr-2 2xl:pl-10 pl-0">
 
                     <p className="text-sky-600 text-2xl">{music.average}</p>
                     <p>{music.ratings}</p>

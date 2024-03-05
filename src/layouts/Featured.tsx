@@ -118,7 +118,7 @@ function SideList({ selectedOption, onOptionClick, children }:
         <button className={`border-b-2 text-2xl ${selectedOption == "My" ? "text-sky-900 font-bold" : ''}`}
           onClick={() => { onOptionClick("My") }}>My Collection</button>
       </div>
-      <div className="border-b border-gray-200 text-lg pb-1 flex lg:gap-9 md:gap-6 gap-3 text-gray-800 lg:justify-end justify-between lg:pl-0 md:pl-40  pl-32">
+      <div className="border-b border-gray-200 text-lg pb-1 flex lg:gap-9 md:gap-6 gap-3 text-gray-800 lg:justify-end justify-between lg:pl-0  pl-32">
         <span>Average</span> <span>Rated</span> <span>Wants</span>
 
       </div>
