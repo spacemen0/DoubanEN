@@ -1,44 +1,45 @@
-type SearchOption = 'Music' | 'Movie' | 'Book';
+type SearchOption = "Music" | "Movie" | "Book";
 
 type DropDownSearchOptionProps = {
-    selectedOption: SearchOption;
-    onOptionClick: (option: SearchOption) => void;
-}
+  selectedOption: SearchOption;
+  onOptionClick: (option: SearchOption) => void;
+};
 
 type ImageProps = {
-    src: string; alt: string; href: string
-}
+  src: string;
+  alt: string;
+  href: string;
+};
 
 type MusicProps = {
-    title: string;
-    artist: string;
-    genre: string;
-    average: number;
-    ratings: number;
-}
+  title: string;
+  artist: string;
+  genre: string;
+  average: number;
+  ratings: number;
+};
 
 type ReviewProps = {
-    username: string;
-    userID: number;
-    reviewDate: string;
-    star: 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | 3.5 | 4.0 | 4.5 | 5.0;
-    content: string;
-}
-
+  username: string;
+  userID: number;
+  reviewDate: string;
+  star: 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | 3.5 | 4.0 | 4.5 | 5.0;
+  content: string;
+};
 
 type ListItemProps = {
-    image: ImageProps;
-    music: MusicProps;
-    releaseDate: string;
-    wants: number;
-}
+  image: ImageProps;
+  music: MusicProps;
+  releaseDate: string;
+  wants: number;
+};
 
 type User = {
-    name: string;
-    ID: number;
-}
+  name: string;
+  ID: number;
+};
 
 type UserState = {
-    user: User | null;
-    isLoggedIn: boolean;
-}
+  user: User | null;
+  isLoggedIn: boolean;
+};
