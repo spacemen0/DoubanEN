@@ -1,6 +1,7 @@
 import { Star, StarHalf } from "lucide-react";
 import { Image } from "./Image";
 import { useState } from "react";
+import { ImageProps, MusicProps, ReviewProps } from "../type";
 
 export function FeaturedItem({
   image,

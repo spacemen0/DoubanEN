@@ -1,4 +1,6 @@
-const featuredItems: {
+import { ImageProps, ListItemProps, MusicProps, ReviewProps } from "./type";
+
+export const featuredItems: {
   image: ImageProps;
   music: MusicProps;
   review: ReviewProps;
@@ -10,6 +12,7 @@ const featuredItems: {
       href: "/#",
     },
     music: {
+      id: 0,
       title: "Taking Drugs to Make Music To Take Drugs to",
       artist: "Spacemen3",
       genre: "Pop",
@@ -38,6 +41,7 @@ Flickers of horrifying tech love on Hardware Software create another in a series
       href: "/#",
     },
     music: {
+      id: 0,
       title: "Awesome Song",
       artist: "Cool Artist",
       genre: "Pop",
@@ -62,6 +66,7 @@ Flickers of horrifying tech love on Hardware Software create another in a series
       href: "/#",
     },
     music: {
+      id: 0,
       title: "Awesome Song",
       artist: "Cool Artist",
       genre: "Pop",
@@ -86,6 +91,7 @@ Flickers of horrifying tech love on Hardware Software create another in a series
       href: "/#",
     },
     music: {
+      id: 0,
       title: "Awesome Song",
       artist: "Cool Artist",
       genre: "Pop",
@@ -110,6 +116,7 @@ Flickers of horrifying tech love on Hardware Software create another in a series
       href: "/#",
     },
     music: {
+      id: 0,
       title: "Awesome Song",
       artist: "Cool Artist",
       genre: "Pop",
@@ -134,6 +141,7 @@ Flickers of horrifying tech love on Hardware Software create another in a series
       href: "/#",
     },
     music: {
+      id: 0,
       title: "Awesome Song",
       artist: "Cool Artist",
       genre: "Pop",
@@ -158,6 +166,7 @@ Flickers of horrifying tech love on Hardware Software create another in a series
       href: "/#",
     },
     music: {
+      id: 0,
       title: "Awesome Song",
       artist: "Cool Artist",
       genre: "Pop",
@@ -176,7 +185,7 @@ Flickers of horrifying tech love on Hardware Software create another in a series
     },
   },
 ];
-const items: ListItemProps[] = [
+export const editorItems: ListItemProps[] = [
   {
     image: {
       src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017",
@@ -184,6 +193,7 @@ const items: ListItemProps[] = [
       href: "/#",
     },
     music: {
+      id: 0,
       title: "Taking Drugs to Make Music to Take Drugs to",
       artist: "Spacemen3",
       genre: "SpaceRock Revival",
@@ -200,6 +210,7 @@ const items: ListItemProps[] = [
       href: "/#",
     },
     music: {
+      id: 0,
       title: "title",
       artist: "artist",
       genre: "genre",
@@ -216,6 +227,7 @@ const items: ListItemProps[] = [
       href: "/#",
     },
     music: {
+      id: 0,
       title: "title",
       artist: "artist",
       genre: "genre",

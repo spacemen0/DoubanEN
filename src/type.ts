@@ -1,17 +1,18 @@
-type SearchOption = "Music" | "Movie" | "Book";
+export type SearchOption = "Music" | "Movie" | "Book";
 
-type DropDownSearchOptionProps = {
+export type DropDownSearchOptionProps = {
   selectedOption: SearchOption;
   onOptionClick: (option: SearchOption) => void;
 };
 
-type ImageProps = {
+export type ImageProps = {
   src: string;
   alt: string;
   href: string;
 };
 
-type MusicProps = {
+export type MusicProps = {
+  id: number;
   title: string;
   artist: string;
   genre: string;
@@ -19,7 +20,7 @@ type MusicProps = {
   ratings: number;
 };
 
-type ReviewProps = {
+export type ReviewProps = {
   username: string;
   userID: number;
   reviewDate: string;
@@ -27,19 +28,19 @@ type ReviewProps = {
   content: string;
 };
 
-type ListItemProps = {
+export type ListItemProps = {
   image: ImageProps;
   music: MusicProps;
   releaseDate: string;
   wants: number;
 };
 
-type User = {
+export type User = {
   name: string;
   ID: number;
 };
 
-type UserState = {
+export type UserState = {
   user: User | null;
   isLoggedIn: boolean;
 };

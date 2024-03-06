@@ -1,4 +1,5 @@
 import { FeaturedItem } from "./components/FeaturedItem";
+import { featuredItems } from "./data";
 import { Banner } from "./layouts/Banner";
 import { Featured } from "./layouts/Featured";
 import { PageHeader } from "./layouts/PageHeader";

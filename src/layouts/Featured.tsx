@@ -1,14 +1,13 @@
 import { ReactNode, useState } from "react";
 import { Image } from "../components/Image";
 import { ListItem } from "../components/ListItem";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn, selectUser } from "../slices/userSlice";
+import { fetchMyCollectionItems } from "../apiService";
+import { editorItems } from "../data";
+import { ListItemProps } from "../type";
 
 export function Featured({ children }: { children: ReactNode[] }) {
-  const [selectedOption, setSelectedOption] = useState<"Editor" | "My">(
-    "Editor"
-  );
-  const handleOptionClick = (option: "Editor" | "My") => {
-    setSelectedOption(option);
-  };
   return (
     <div className="flex pl-3 bg-white md:pl-6 lg:pl-12 mb-4">
       <div className="flex flex-col flex-1 lg:flex-[0.65] mr-4 md:mr-8 ">
@@ -20,27 +19,13 @@ export function Featured({ children }: { children: ReactNode[] }) {
         ))}
         <div className="lg:hidden flex flex-col mr-4">
           <SideDisplay />
-          <SideList
-            selectedOption={selectedOption}
-            onOptionClick={handleOptionClick}
-          >
-            {items.map((item) => (
-              <ListItem {...item}></ListItem>
-            ))}
-          </SideList>
+          <SideList></SideList>
           <SideInfo />
         </div>
       </div>
       <div className="flex flex-col flex-[0.35]  items-center !lg:hidden">
         <SideDisplay />
-        <SideList
-          selectedOption={selectedOption}
-          onOptionClick={handleOptionClick}
-        >
-          {items.map((item) => (
-            <ListItem {...item}></ListItem>
-          ))}
-        </SideList>
+        <SideList></SideList>
         <SideInfo />
       </div>
     </div>
@@ -115,15 +100,34 @@ function SideDisplay() {
   );
 }
 
-function SideList({
-  selectedOption,
-  onOptionClick,
-  children,
-}: {
-  selectedOption: "Editor" | "My";
-  onOptionClick: (Option: "Editor" | "My") => void;
-  children: ReactNode[];
-}) {
+function SideList() {
+  const [selectedOption, setSelectedOption] = useState<"Editor" | "My">(
+    "Editor"
+  );
+  const [myItems, setMyItems] = useState<ListItemProps[]>([]);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const user = useSelector(selectUser);
+
+  const handleOptionClick = async (option: "Editor" | "My") => {
+    setSelectedOption(option);
+    if (option === "My" && user) {
+      try {
+        const items = await fetchMyCollectionItems(user.ID);
+        setMyItems(items);
+      } catch (error) {
+        console.error("Error fetching My Collection items:", error);
+        // Handle the error appropriately, e.g., show a message to the user
+      }
+    }
+  };
+
+  const EditorList = editorItems.map((item) => (
+    <ListItem {...item} key={item.music.id} />
+  ));
+  const MyList = myItems.map((item) => (
+    <ListItem {...item} key={item.music.id} />
+  ));
+
   return (
     <div className="flex mt-6 lg:mt-12 flex-col md:w-11/12 lg:w-10/12 pr-4 lg:pr-8 text-gray-600">
       <div className="text-sky-700 font-bold text-xl md:text-3xl">
@@ -135,7 +139,7 @@ function SideList({
             selectedOption == "Editor" ? "text-sky-900 font-bold" : ""
           }`}
           onClick={() => {
-            onOptionClick("Editor");
+            handleOptionClick("Editor");
           }}
         >
           Editor's Selection
@@ -145,7 +149,7 @@ function SideList({
             selectedOption == "My" ? "text-sky-900 font-bold" : ""
           }`}
           onClick={() => {
-            onOptionClick("My");
+            handleOptionClick("My");
           }}
         >
           My Collection
@@ -154,11 +158,22 @@ function SideList({
       <div className="border-b border-gray-200 text-lg pb-1 flex lg:gap-9 md:gap-6 gap-3 text-gray-800 lg:justify-end justify-between lg:pl-0  pl-32">
         <span>Average</span> <span>Rated</span> <span>Wants</span>
       </div>
-      {children.map((child, index) => (
-        <div key={index} className="flex mt-4 w-full h-auto">
-          {child}
-        </div>
-      ))}
+      {selectedOption == "Editor" &&
+        EditorList.map((listItem, index) => (
+          <div key={index} className="flex mt-4 w-full h-auto">
+            {listItem}
+          </div>
+        ))}
+      {selectedOption == "My" &&
+        isLoggedIn &&
+        MyList.map((listItem, index) => (
+          <div key={index} className="flex mt-4 w-full h-auto">
+            {listItem}
+          </div>
+        ))}
+      {selectedOption == "My" && !isLoggedIn && (
+        <p>Create a new account or sign in to keep track of your favorites</p>
+      )}
     </div>
   );
 }

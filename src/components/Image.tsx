@@ -1,3 +1,5 @@
+import { ImageProps } from "../type";
+
 export function Image({ src, alt, href }: ImageProps) {
   return (
     <a href={href}>

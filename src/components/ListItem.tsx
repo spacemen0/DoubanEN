@@ -1,3 +1,4 @@
+import { ListItemProps } from "../type";
 import { Image } from "./Image";
 
 export function ListItem({ image, music, releaseDate, wants }: ListItemProps) {
