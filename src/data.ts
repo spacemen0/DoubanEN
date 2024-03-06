@@ -238,3 +238,41 @@ export const editorItems: ListItemProps[] = [
     wants: 20,
   },
 ];
+
+export const sideImages: ImageProps[] = [
+  {
+    src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017",
+    href: "/#",
+    alt: "Big Image",
+  },
+  {
+    src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017",
+    href: "/#",
+    alt: "Big Image",
+  },
+  {
+    src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017",
+    href: "/#",
+    alt: "Big Image",
+  },
+  {
+    src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017",
+    href: "/#",
+    alt: "Big Image",
+  },
+  {
+    src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017",
+    href: "/#",
+    alt: "Big Image",
+  },
+  {
+    src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017",
+    href: "/#",
+    alt: "Big Image",
+  },
+  {
+    src: "https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017",
+    href: "/#",
+    alt: "Big Image",
+  },
+];

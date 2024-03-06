@@ -4,7 +4,7 @@ import { ListItem } from "../components/ListItem";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn, selectUser } from "../slices/userSlice";
 import { fetchMyCollectionItems } from "../apiService";
-import { editorItems } from "../data";
+import { editorItems, sideImages } from "../data";
 import { ListItemProps } from "../type";
 
 export function Featured({ children }: { children: ReactNode[] }) {
@@ -54,47 +54,19 @@ function SideDisplay() {
   return (
     <div className="flex flex-col md:w-11/12 lg:w-10/12 md:mt-4 mt-6">
       <div className="mb-4">
-        <Image
-          src="https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017"
-          alt="Big Image"
-          href="/#"
-        />
+        <Image {...sideImages[0]} />
       </div>
 
       <div className="flex justify-between mb-4">
-        <Image
-          src="https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017"
-          alt="Image 1"
-          href="/#"
-        />
-        <Image
-          src="https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017"
-          alt="Image 2"
-          href="/#"
-        />
-        <Image
-          src="https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017"
-          alt="Image 3"
-          href="/#"
-        />
+        <Image {...sideImages[1]} />
+        <Image {...sideImages[2]} />
+        <Image {...sideImages[3]} />
       </div>
 
       <div className="flex justify-between">
-        <Image
-          src="https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017"
-          alt="Image 4"
-          href="/#"
-        />
-        <Image
-          src="https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017"
-          alt="Image 5"
-          href="/#"
-        />
-        <Image
-          src="https://e.snmc.io/i/600/w/62e535430e1b458faba554645469442c/11618017"
-          alt="Image 6"
-          href="/#"
-        />
+        <Image {...sideImages[4]} />
+        <Image {...sideImages[5]} />
+        <Image {...sideImages[6]} />
       </div>
     </div>
   );
