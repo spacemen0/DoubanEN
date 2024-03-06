@@ -5,6 +5,7 @@ import { PageHeader } from "./layouts/PageHeader";
 
 export default function App() {
   return (
+
     <div className="max-h-screen overflow-hidden flex flex-col">
       <PageHeader />
       <div className="overflow-y-scroll">
@@ -17,6 +18,7 @@ export default function App() {
         </Featured>
       </div>
     </div>
+
   );
 
 }

@@ -32,3 +32,13 @@ type ListItemProps = {
     releaseDate: string;
     wants: number;
 }
+
+type User = {
+    name: string;
+    ID: number;
+}
+
+type UserState = {
+    user: User | null;
+    isLoggedIn: boolean;
+}
