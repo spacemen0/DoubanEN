@@ -1,10 +1,9 @@
 import { Menu, Search, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectIsLoggedIn, selectUser, setUser } from "../slices/userSlice";
 import { SearchOption, DropDownSearchOptionProps } from "../type";
 import { faker } from "@faker-js/faker";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../contexts/AuthContext";
 
 export function PageHeader() {
   return (
@@ -171,8 +170,7 @@ function DropDownSearchOption({
 }
 
 function HeaderUserSection() {
-  const user = useSelector(selectUser);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const { isLoggedIn, user } = useAuthContext();
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="flex md:gap-1.5 items-center flex-shrink-0  ">
@@ -246,16 +244,12 @@ function MenuItem({
 }
 
 function DropDownMenu({ isOpen }: { isOpen: boolean }) {
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const { isLoggedIn, login } = useAuthContext();
 
   const handleLogin = () => {
-    const userData = {
-      name: "spacemen0",
-      id: "1",
-    };
-    console.log(userData);
-    dispatch(setUser(userData));
+    const username = "spacemen0";
+    const password = "mypassword";
+    login(username, password);
   };
   return (
     isOpen && (

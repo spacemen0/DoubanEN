@@ -1,12 +1,11 @@
 import { ReactNode, useState } from "react";
 import { Image } from "../components/Image";
 import { ListItem } from "../components/ListItem";
-import { useSelector } from "react-redux";
-import { selectIsLoggedIn, selectUser } from "../slices/userSlice";
 import { fetchMyCollectionItems } from "../apiService";
 import { editorItems, sideImages } from "../data";
 import { ListItemProps } from "../type";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../contexts/AuthContext";
 
 export function Featured({ children }: { children: ReactNode[] }) {
   return (
@@ -78,9 +77,7 @@ function SideList() {
     "Editor"
   );
   const [myItems, setMyItems] = useState<ListItemProps[]>([]);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const user = useSelector(selectUser);
-
+  const { isLoggedIn, user } = useAuthContext();
   const handleOptionClick = async (option: "Editor" | "My") => {
     setSelectedOption(option);
     if (option === "My" && user) {

@@ -31,7 +31,7 @@ function getWithExpiry<T>(key: string): T | null {
 export const AuthProvider: FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(() =>
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(() =>
     getWithExpiry<boolean>("isAuthenticated")
   );
   const [user, setUser] = useState<User | null>(() =>
@@ -41,43 +41,20 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     getWithExpiry<string>("token")
   );
 
+  const [error, setError] = useState<string | null>(() =>
+    getWithExpiry<string>("error")
+  );
+
   useEffect(() => {
-    setWithExpiry("isAuthenticated", isAuthenticated, expiryTime);
+    setWithExpiry("isAuthenticated", isLoggedIn, expiryTime);
     setWithExpiry("user", user, expiryTime);
     setWithExpiry("token", token, expiryTime);
-  }, [isAuthenticated, user, token]);
-
-  const login = async (username: string, password: string) => {
-    try {
-      const url = `${apiUrl}user-login/username`;
-      const body = { username, password };
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-
-      if (response.status === 200) {
-        const data = await response.json();
-        setIsAuthenticated(true);
-        setToken(data);
-        getUser(data);
-        return { success: true, error: null };
-      } else {
-        const data = await response.json();
-        console.log(data);
-        return { success: false, error: data };
-      }
-    } catch (error) {
-      return { success: false, error: error };
-    }
-  };
+    setWithExpiry("error", error, expiryTime);
+  }, [isLoggedIn, user, token, error]);
 
   const getUser = async (token: string) => {
     try {
-      const response = await fetch(`${apiUrl}get-user`, {
+      const response = await fetch(`${apiUrl}user`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -92,22 +69,99 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
         console.log(data);
       }
     } catch (error) {
-      console.error("Get user info failed:", error);
+      console.error("Get user failed:", error);
     }
   };
 
-  const logout = () => {
-    setIsAuthenticated(false);
-    setUser(null);
-    setToken(null);
+  const login = async (username: string, password: string) => {
+    try {
+      const url = `${apiUrl}login`;
+      const body = { username, password };
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (response.status === 200) {
+        const data = await response.json();
+        setIsLoggedIn(true);
+        setToken(data.token);
+        getUser(data.token);
+      } else {
+        const data = await response.json();
+        console.log(data.message);
+        setError(data.message);
+      }
+    } catch (error) {
+      setError(error as string);
+    }
+  };
+
+  const logout = async (token: string) => {
+    try {
+      const response = await fetch(`${apiUrl}logout`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.status === 204) {
+        setIsLoggedIn(false);
+        setUser(null);
+        setToken(null);
+        setError(null);
+      } else {
+        const data = await response.json();
+        setError(data.message);
+      }
+    } catch (error) {
+      setError(error as string);
+    }
+  };
+
+  const register = async (
+    username: string,
+    email: string,
+    password: string
+  ) => {
+    try {
+      const url = `${apiUrl}login`;
+      const body = { username, password, email };
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (response.status === 200) {
+        const data = await response.json();
+        setIsLoggedIn(true);
+        setToken(data.token);
+        getUser(data.token);
+      } else {
+        const data = await response.json();
+        console.log(data.message);
+        setError(data.message);
+      }
+    } catch (error) {
+      setError(error as string);
+    }
   };
 
   const contextValue: AuthContextType = {
-    isLoggedIn: isAuthenticated || false,
+    isLoggedIn,
     user,
-    token: token || "",
+    token,
+    error,
     login,
     logout,
+    register,
   };
 
   return (

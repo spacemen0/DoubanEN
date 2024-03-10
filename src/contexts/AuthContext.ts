@@ -3,13 +3,16 @@ import React, { useContext } from "react";
 
 export interface AuthContextType {
   isLoggedIn: boolean | null;
-  user: User | null; // Replace 'any' with the type of userInfo
+  user: User | null;
   token: string | null;
-  login: (
+  error: string | null;
+  login: (username: string, password: string) => Promise<void>;
+  logout: (token: string) => Promise<void>;
+  register: (
     username: string,
+    email: string,
     password: string
-  ) => Promise<{ success: boolean; error: string }>;
-  logout: () => void;
+  ) => Promise<void>;
 }
 
 export const AuthContext = React.createContext<AuthContextType | null>(null);
