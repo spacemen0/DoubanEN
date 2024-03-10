@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { selectIsLoggedIn, selectUser } from "../slices/userSlice";
 import { SearchOption, DropDownSearchOptionProps } from "../type";
 import { faker } from "@faker-js/faker";
+import { Link } from "react-router-dom";
 
 export function PageHeader() {
   return (
@@ -179,7 +180,7 @@ function HeaderUserSection() {
         <a className="transition-colors hover:bg-gray-100" href="/">
           <img
             src={faker.image.url({ width: 64, height: 64 })}
-            title="Profile Image"
+            title="Profile Image "
             className="h-10"
           />
         </a>
@@ -215,20 +216,29 @@ function MenuItem({
   link,
   text,
   isLast = false,
+  onClick,
 }: {
   link: string;
   text: string;
   isLast?: boolean;
+  onClick?: () => void;
 }) {
   const borderClass = isLast ? "" : "border-b border-gray-300";
 
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
-    <a
-      href={link}
+    <Link
+      to={link}
       className={`block px-2 py-2 text-sm ${borderClass} hover:bg-gray-100`}
+      onClick={handleClick}
     >
       {text}
-    </a>
+    </Link>
   );
 }
 
@@ -239,17 +249,17 @@ function DropDownMenu({ isOpen }: { isOpen: boolean }) {
       <div className="absolute top-10 md:top-9 right-0 w-36  font-bold text-sky-600 bg-white shadow-lg ring-1 ring-black ring-opacity-5">
         {isLoggedIn ? (
           <div>
-            <MenuItem link="#" text="Profile" />
-            <MenuItem link="#" text="All Collections" />
-            <MenuItem link="#" text="Book Collection" />
-            <MenuItem link="#" text="Music Collection" />
-            <MenuItem link="#" text="Movie Collection" />
-            <MenuItem link="#" text="Log Out" isLast={true} />
+            <MenuItem link="/profile" text="Profile" />
+            <MenuItem link="/collection" text="All Collections" />
+            <MenuItem link="/collection" text="Book Collection" />
+            <MenuItem link="/collection" text="Music Collection" />
+            <MenuItem link="/collection" text="Movie Collection" />
+            <MenuItem link="/" text="Log Out" isLast={true} />
           </div>
         ) : (
           <div>
-            <MenuItem link="#" text="Log In" />
-            <MenuItem link="#" text="Sign Up" isLast={true} />
+            <MenuItem link="/login" text="Log In" />
+            <MenuItem link="/register" text="Register" isLast={true} />
           </div>
         )}
       </div>

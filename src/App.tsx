@@ -1,29 +1,20 @@
-import { FeaturedItem } from "./components/FeaturedItem";
-import { featuredItems } from "./data";
-import { Banner } from "./layouts/Banner";
-import { Featured } from "./layouts/Featured";
-import { PageHeader } from "./layouts/PageHeader";
+import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { Profile } from "./pages/Profile";
+import { Collection } from "./pages/Collection";
+import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
 
 export default function App() {
   return (
-    <div className="max-h-screen overflow-hidden flex flex-col">
-      <PageHeader />
-      <div className="overflow-y-scroll">
-        <Banner />
-        <div className="text-sky-700 font-bold text-xl mt-8 md:mt-12 ml-3 md:ml-6 lg:ml-12 md:text-3xl">
-          Featured Reviews
-        </div>
-        <Featured>
-          {featuredItems.map((item, index) => (
-            <FeaturedItem
-              key={index}
-              image={item.image}
-              music={item.music}
-              review={item.review}
-            />
-          ))}
-        </Featured>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/collection" element={<Collection />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </Router>
   );
 }
