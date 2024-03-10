@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn, selectUser } from "../slices/userSlice";
 import { SearchOption, DropDownSearchOptionProps } from "../type";
+import { faker } from "@faker-js/faker";
 
 export function PageHeader() {
   return (
@@ -177,8 +178,8 @@ function HeaderUserSection() {
       <div className="transition-colors hover:bg-gray-100">
         <a className="transition-colors hover:bg-gray-100" href="/">
           <img
-            src="https://e.snmc.io/3.0/img/logo/sonemic-512.png"
-            title="Logo"
+            src={faker.image.url({ width: 64, height: 64 })}
+            title="Profile Image"
             className="h-10"
           />
         </a>

@@ -1,7 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { ImageProps, ListItemProps, MusicProps, ReviewProps } from "./type";
 
-// Function to generate random data
 const generateRandomData = () => ({
   src: faker.image.url({ width: 512, height: 512 }),
   alt: faker.lorem.words(),
