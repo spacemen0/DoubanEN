@@ -1,16 +1,18 @@
+import { Link } from "react-router-dom";
+
 export function Banner() {
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-center max-w-screen md:mt-16 mt-12">
         <div className="px-3 md:px-6 flex-shrink-0">
           {" "}
-          <a href="/">
+          <Link to="/">
             <img
               src="https://e.snmc.io/3.0/img/logo/sonemic-512.png"
               title="Logo"
               className="sm:h-20 md:h-28 lg:h-36 h-14"
             />
-          </a>
+          </Link>
         </div>
         <div className="flex flex-col max-w-[800px] mr-2">
           <div className="lg:text-4xl text-3xl flex !sm:flex-col font-bold text-gray-600">
@@ -24,10 +26,10 @@ export function Banner() {
             <p>
               Douban EN is one of the largest music databases and communities
               online, which you can use in endless ways to discover new music.{" "}
-              <a href="/" className=" text-sky-800">
+              <Link to="/" className=" text-sky-800">
                 Learn about some of the ways you can use Douban EN for music
                 discovery.
-              </a>
+              </Link>
             </p>
           </div>
         </div>

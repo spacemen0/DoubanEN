@@ -23,19 +23,19 @@ export function PageHeader() {
 function HeaderLogoSection() {
   return (
     <div className="flex gap-2 md:gap-4 items-center flex-shrink-0 transition-colors hover:bg-gray-100  h-10 px-1 md:px-2">
-      <a href="/">
+      <Link to="/">
         <img
           src="https://e.snmc.io/3.0/img/logo/sonemic-512.png"
           title="Logo"
           className="h-10"
         />
-      </a>
-      <a
+      </Link>
+      <Link
         className="hidden md:inline font-bold text-lg text-sky-600 h-7"
-        href="/"
+        to="/"
       >
         Douban EN
-      </a>
+      </Link>
     </div>
   );
 }
@@ -177,22 +177,22 @@ function HeaderUserSection() {
   return (
     <div className="flex md:gap-1.5 items-center flex-shrink-0  ">
       <div className="transition-colors hover:bg-gray-100">
-        <a className="transition-colors hover:bg-gray-100" href="/">
+        <Link className="transition-colors hover:bg-gray-100" to={"/profile"}>
           <img
             src={faker.image.url({ width: 64, height: 64 })}
             title="Profile Image "
             className="h-10"
           />
-        </a>
+        </Link>
       </div>
       {isLoggedIn && (
         <div className="pb-1">
-          <a
+          <Link
             className="hidden md:inline font-bold text-lg text-sky-600 h-10"
-            href="/"
+            to={"profile"}
           >
             {user?.name}
-          </a>
+          </Link>
         </div>
       )}
 

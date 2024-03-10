@@ -6,6 +6,7 @@ import { selectIsLoggedIn, selectUser } from "../slices/userSlice";
 import { fetchMyCollectionItems } from "../apiService";
 import { editorItems, sideImages } from "../data";
 import { ListItemProps } from "../type";
+import { Link } from "react-router-dom";
 
 export function Featured({ children }: { children: ReactNode[] }) {
   return (
@@ -34,7 +35,7 @@ export function Featured({ children }: { children: ReactNode[] }) {
 
 function FeaturedBanner() {
   return (
-    <a href="#">
+    <Link to="/">
       <div className="flex lg:hidden hover:bg-gray-100 transition-colors justify-start items-center mt-6 mb-6">
         <div className=" w-32 ">
           <img
@@ -46,7 +47,7 @@ function FeaturedBanner() {
           <h3>Douban EN Best of 2023</h3>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }
 
