@@ -1,7 +1,7 @@
 import { Menu, Search, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectIsLoggedIn, selectUser } from "../slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsLoggedIn, selectUser, setUser } from "../slices/userSlice";
 import { SearchOption, DropDownSearchOptionProps } from "../type";
 import { faker } from "@faker-js/faker";
 import { Link } from "react-router-dom";
@@ -176,15 +176,18 @@ function HeaderUserSection() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="flex md:gap-1.5 items-center flex-shrink-0  ">
-      <div className="transition-colors hover:bg-gray-100">
-        <Link className="transition-colors hover:bg-gray-100" to={"/profile"}>
-          <img
-            src={faker.image.url({ width: 64, height: 64 })}
-            title="Profile Image "
-            className="h-10"
-          />
-        </Link>
-      </div>
+      {isLoggedIn && (
+        <div className="transition-colors hover:bg-gray-100">
+          <Link className="transition-colors hover:bg-gray-100" to={"/profile"}>
+            <img
+              src={faker.image.url({ width: 64, height: 64 })}
+              title="Profile Image "
+              className="h-10"
+            />
+          </Link>
+        </div>
+      )}
+
       {isLoggedIn && (
         <div className="pb-1">
           <Link
@@ -243,7 +246,17 @@ function MenuItem({
 }
 
 function DropDownMenu({ isOpen }: { isOpen: boolean }) {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  const handleLogin = () => {
+    const userData = {
+      name: "spacemen0",
+      id: "1",
+    };
+    console.log(userData);
+    dispatch(setUser(userData));
+  };
   return (
     isOpen && (
       <div className="absolute top-10 md:top-9 right-0 w-36  font-bold text-sky-600 bg-white shadow-lg ring-1 ring-black ring-opacity-5">
@@ -258,8 +271,9 @@ function DropDownMenu({ isOpen }: { isOpen: boolean }) {
           </div>
         ) : (
           <div>
-            <MenuItem link="/login" text="Log In" />
+            <MenuItem link="/login" onClick={handleLogin} text="Log In" />
             <MenuItem link="/register" text="Register" isLast={true} />
+            <MenuItem link="/profile" text="Profile" />
           </div>
         )}
       </div>
