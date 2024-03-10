@@ -13,7 +13,7 @@ export function Featured({ children }: { children: ReactNode[] }) {
       <div className="flex flex-col flex-1 lg:flex-[0.65] mr-4 md:mr-8 ">
         <FeaturedBanner />
         {children.map((child, index) => (
-          <div key={index} className="flex mt-4 w-full h-auto ">
+          <div key={index} className="flex mt-4 w-full h-auto justify-start">
             {child}
           </div>
         ))}

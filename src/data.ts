@@ -3,7 +3,7 @@ import { ImageProps, ListItemProps, MusicProps, ReviewProps } from "./type";
 
 // Function to generate random data
 const generateRandomData = () => ({
-  src: faker.image.url(),
+  src: faker.image.url({ width: 512, height: 512 }),
   alt: faker.lorem.words(),
   href: faker.internet.url(),
 });
@@ -21,7 +21,7 @@ export const featuredItems: {
       artist: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
-      ratings: faker.number.int(),
+      ratings: faker.number.int({ min: 100, max: 500 }),
     },
     review: {
       username: faker.internet.userName(),
@@ -39,7 +39,25 @@ export const featuredItems: {
       artist: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
-      ratings: faker.number.int(),
+      ratings: faker.number.int({ min: 100, max: 500 }),
+    },
+    review: {
+      username: faker.internet.userName(),
+      userID: faker.number.int(),
+      reviewDate: faker.date.past().toISOString().split("T")[0],
+      star: 3.5,
+      content: faker.lorem.paragraphs(),
+    },
+  },
+  {
+    image: generateRandomData(),
+    music: {
+      id: faker.number.int(),
+      title: faker.lorem.words(),
+      artist: faker.person.fullName(),
+      genre: faker.music.genre(),
+      average: 3.5,
+      ratings: faker.number.int({ min: 100, max: 500 }),
     },
     review: {
       username: faker.internet.userName(),
@@ -57,7 +75,7 @@ export const featuredItems: {
       artist: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
-      ratings: faker.number.int(),
+      ratings: faker.number.int({ min: 100, max: 500 }),
     },
     review: {
       username: faker.internet.userName(),
@@ -75,25 +93,7 @@ export const featuredItems: {
       artist: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
-      ratings: faker.number.int(),
-    },
-    review: {
-      username: faker.internet.userName(),
-      userID: faker.number.int(),
-      reviewDate: faker.date.past().toISOString().split("T")[0],
-      star: 3.5,
-      content: faker.lorem.paragraph(),
-    },
-  },
-  {
-    image: generateRandomData(),
-    music: {
-      id: faker.number.int(),
-      title: faker.lorem.words(),
-      artist: faker.person.fullName(),
-      genre: faker.music.genre(),
-      average: 3.5,
-      ratings: faker.number.int(),
+      ratings: faker.number.int({ min: 100, max: 500 }),
     },
     review: {
       username: faker.internet.userName(),
@@ -114,10 +114,10 @@ export const editorItems: ListItemProps[] = [
       artist: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
-      ratings: faker.number.int(),
+      ratings: faker.number.int({ min: 100, max: 500 }),
     },
     releaseDate: faker.date.past().toISOString().split("T")[0],
-    wants: faker.number.int(),
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     image: generateRandomData(),
@@ -127,10 +127,10 @@ export const editorItems: ListItemProps[] = [
       artist: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
-      ratings: faker.number.int(),
+      ratings: faker.number.int({ min: 100, max: 500 }),
     },
     releaseDate: faker.date.past().toISOString().split("T")[0],
-    wants: faker.number.int(),
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     image: generateRandomData(),
@@ -140,10 +140,10 @@ export const editorItems: ListItemProps[] = [
       artist: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
-      ratings: faker.number.int(),
+      ratings: faker.number.int({ min: 100, max: 500 }),
     },
     releaseDate: faker.date.past().toISOString().split("T")[0],
-    wants: faker.number.int(),
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     image: generateRandomData(),
@@ -153,10 +153,10 @@ export const editorItems: ListItemProps[] = [
       artist: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
-      ratings: faker.number.int(),
+      ratings: faker.number.int({ min: 100, max: 500 }),
     },
     releaseDate: faker.date.past().toISOString().split("T")[0],
-    wants: faker.number.int(),
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     image: generateRandomData(),
@@ -166,10 +166,10 @@ export const editorItems: ListItemProps[] = [
       artist: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
-      ratings: faker.number.int(),
+      ratings: faker.number.int({ min: 100, max: 500 }),
     },
     releaseDate: faker.date.past().toISOString().split("T")[0],
-    wants: faker.number.int(),
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     image: generateRandomData(),
@@ -179,10 +179,10 @@ export const editorItems: ListItemProps[] = [
       artist: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
-      ratings: faker.number.int(),
+      ratings: faker.number.int({ min: 100, max: 500 }),
     },
     releaseDate: faker.date.past().toISOString().split("T")[0],
-    wants: faker.number.int(),
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
 ];
 
