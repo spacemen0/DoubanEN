@@ -244,12 +244,10 @@ function MenuItem({
 }
 
 function DropDownMenu({ isOpen }: { isOpen: boolean }) {
-  const { isLoggedIn, login } = useAuthContext();
+  const { isLoggedIn, logout, token } = useAuthContext();
 
-  const handleLogin = () => {
-    const username = "spacemen0";
-    const password = "mypassword";
-    login(username, password);
+  const handleLogout = () => {
+    if (token) logout(token);
   };
   return (
     isOpen && (
@@ -261,11 +259,16 @@ function DropDownMenu({ isOpen }: { isOpen: boolean }) {
             <MenuItem link="/collection" text="Book Collection" />
             <MenuItem link="/collection" text="Music Collection" />
             <MenuItem link="/collection" text="Movie Collection" />
-            <MenuItem link="/" text="Log Out" isLast={true} />
+            <MenuItem
+              link="/"
+              text="Log Out"
+              onClick={handleLogout}
+              isLast={true}
+            />
           </div>
         ) : (
           <div>
-            <MenuItem link="/login" onClick={handleLogin} text="Log In" />
+            <MenuItem link="/login" text="Log In" />
             <MenuItem link="/register" text="Register" isLast={true} />
             <MenuItem link="/profile" text="Profile" />
           </div>

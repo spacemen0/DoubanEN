@@ -74,53 +74,61 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
   };
 
   const login = async (username: string, password: string) => {
-    try {
-      const url = `${apiUrl}login`;
-      const body = { username, password };
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-
-      if (response.status === 200) {
-        const data = await response.json();
-        setIsLoggedIn(true);
-        setToken(data.token);
-        getUser(data.token);
-      } else {
-        const data = await response.json();
-        console.log(data.message);
-        setError(data.message);
-      }
-    } catch (error) {
-      setError(error as string);
-    }
+    // try {
+    //   const url = `${apiUrl}login`;
+    //   const body = { username, password };
+    //   const response = await fetch(url, {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(body),
+    //   });
+    //   if (response.status === 200) {
+    //     const data = await response.json();
+    //     setIsLoggedIn(true);
+    //     setToken(data.token);
+    //     getUser(data.token);
+    //   } else {
+    //     const data = await response.json();
+    //     console.log(data.message);
+    //     setError(data.message);
+    //   }
+    // } catch (error) {
+    //   setError(error as string);
+    // }
+    console.log(username, password);
+    setIsLoggedIn(true);
+    setUser({ ID: 1, name: "User" });
+    setToken("data.token");
   };
 
   const logout = async (token: string) => {
-    try {
-      const response = await fetch(`${apiUrl}logout`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    // try {
+    //   const response = await fetch(`${apiUrl}logout`, {
+    //     method: "DELETE",
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   });
 
-      if (response.status === 204) {
-        setIsLoggedIn(false);
-        setUser(null);
-        setToken(null);
-        setError(null);
-      } else {
-        const data = await response.json();
-        setError(data.message);
-      }
-    } catch (error) {
-      setError(error as string);
-    }
+    //   if (response.status === 204) {
+    //     setIsLoggedIn(false);
+    //     setUser(null);
+    //     setToken(null);
+    //     setError(null);
+    //   } else {
+    //     const data = await response.json();
+    //     setError(data.message);
+    //   }
+    // } catch (error) {
+    //   setError(error as string);
+    // }
+    console.log(token);
+    setIsLoggedIn(false);
+    setUser(null);
+    setToken(null);
+    setError(null);
   };
 
   const register = async (
