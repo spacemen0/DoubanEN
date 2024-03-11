@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { generateRandomData } from "../data";
 import { Image } from "../components/Image";
 
-export function Login() {
+export default function Login() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -61,6 +61,7 @@ export function Login() {
                     value={formData.username}
                     onChange={handleInputChange}
                     required={true}
+                    autoComplete="username"
                     className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
                   />
                 </div>

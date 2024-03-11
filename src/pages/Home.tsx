@@ -4,7 +4,7 @@ import { Banner } from "../layouts/Banner";
 import { Featured } from "../layouts/Featured";
 import { PageHeader } from "../layouts/PageHeader";
 
-export function Home() {
+export default function Home() {
   return (
     <div className="max-h-screen overflow-hidden flex flex-col">
       <PageHeader />

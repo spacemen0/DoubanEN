@@ -5,7 +5,7 @@ import { useAuthContext } from "../contexts/AuthContext";
 import { useEffect, useState } from "react";
 import { Image } from "../components/Image";
 
-export function Register() {
+export default function Register() {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -67,6 +67,7 @@ export function Register() {
                     value={formData.username}
                     onChange={handleInputChange}
                     required={true}
+                    autoComplete="username"
                     className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
                   />
                 </div>

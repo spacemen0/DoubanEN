@@ -1,6 +1,6 @@
 import { PageHeader } from "../layouts/PageHeader";
 
-export function Collection() {
+export default function Collection() {
   return (
     <div className="">
       <PageHeader />
