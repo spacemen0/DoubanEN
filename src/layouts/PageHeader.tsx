@@ -190,7 +190,7 @@ function HeaderUserSection() {
         <div className="pb-1">
           <Link
             className="hidden md:inline font-bold text-lg text-sky-600 h-10"
-            to={"profile"}
+            to={"/profile"}
           >
             {user?.name}
           </Link>

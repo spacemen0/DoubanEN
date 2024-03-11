@@ -1,5 +1,5 @@
 import { useState, useEffect, FC } from "react";
-import { apiUrl, expiryTime } from "../config";
+import { expiryTime } from "../config";
 import { AuthContextType } from "./AuthContext";
 import { AuthContext } from "./AuthContext";
 import { User } from "../type";
@@ -52,26 +52,26 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     setWithExpiry("error", error, expiryTime);
   }, [isLoggedIn, user, token, error]);
 
-  const getUser = async (token: string) => {
-    try {
-      const response = await fetch(`${apiUrl}user`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  // const getUser = async (token: string) => {
+  //   try {
+  //     const response = await fetch(`${apiUrl}user`, {
+  //       method: "GET",
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
 
-      if (response.status === 200) {
-        const data = await response.json();
-        setUser(data);
-      } else {
-        const data = await response.json();
-        console.log(data);
-      }
-    } catch (error) {
-      console.error("Get user failed:", error);
-    }
-  };
+  //     if (response.status === 200) {
+  //       const data = await response.json();
+  //       setUser(data);
+  //     } else {
+  //       const data = await response.json();
+  //       console.log(data);
+  //     }
+  //   } catch (error) {
+  //     console.error("Get user failed:", error);
+  //   }
+  // };
 
   const login = async (username: string, password: string) => {
     // try {
@@ -136,30 +136,34 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     email: string,
     password: string
   ) => {
-    try {
-      const url = `${apiUrl}login`;
-      const body = { username, password, email };
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
+    // try {
+    //   const url = `${apiUrl}login`;
+    //   const body = { username, password, email };
+    //   const response = await fetch(url, {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(body),
+    //   });
 
-      if (response.status === 200) {
-        const data = await response.json();
-        setIsLoggedIn(true);
-        setToken(data.token);
-        getUser(data.token);
-      } else {
-        const data = await response.json();
-        console.log(data.message);
-        setError(data.message);
-      }
-    } catch (error) {
-      setError(error as string);
-    }
+    //   if (response.status === 200) {
+    //     const data = await response.json();
+    //     setIsLoggedIn(true);
+    //     setToken(data.token);
+    //     getUser(data.token);
+    //   } else {
+    //     const data = await response.json();
+    //     console.log(data.message);
+    //     setError(data.message);
+    //   }
+    // } catch (error) {
+    //   setError(error as string);
+    // }
+    console.log(username, email, password);
+    setIsLoggedIn(true);
+    setToken("token");
+    setUser({ ID: 1, name: "User" });
   };
 
   const contextValue: AuthContextType = {
