@@ -4,6 +4,7 @@ import { SearchOption, DropDownSearchOptionProps } from "../type";
 import { faker } from "@faker-js/faker";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
+import { MenuItem } from "../components/MenuItem";
 
 export function PageHeader() {
   return (
@@ -42,17 +43,16 @@ function HeaderLogoSection() {
 function HeaderNavBarSection({ forMedium: forMedium }: { forMedium: boolean }) {
   const height: string = forMedium ? "h-10" : "h-7";
   const style: string = `flex max-w-[60px] items-center transition-colors hover:bg-gray-100 
-    rounded-full flex-grow justify-center p-1 md:p-2 font-bold text-sky-600 ${height}`;
+    rounded-full flex-grow justify-center p-1 md:p-2 font-bold ${height} `;
   return (
     <div
       className={`justify-around md: gap-2  max-w-[768px] lg: w - full ${
         forMedium ? "hidden md:flex" : "flex md:hidden"
       }`}
     >
-      <button className={`${style}`}>Music</button>
-      <button className={`${style}`}>Movie</button>
-      <button className={`${style}`}>Book</button>
-      <button className={`${style}`}>Game</button>
+      <button className={`${style}text-sky-600`}>Music</button>
+      <button className={`${style}text-orange-800`}>Movie</button>
+      <button className={`${style}text-green-700`}>Book</button>
     </div>
   );
 }
@@ -210,36 +210,6 @@ function HeaderUserSection() {
         <DropDownMenu isOpen={isOpen} />
       </div>
     </div>
-  );
-}
-
-function MenuItem({
-  link,
-  text,
-  isLast = false,
-  onClick,
-}: {
-  link: string;
-  text: string;
-  isLast?: boolean;
-  onClick?: () => void;
-}) {
-  const borderClass = isLast ? "" : "border-b border-gray-300";
-
-  const handleClick = () => {
-    if (onClick) {
-      onClick();
-    }
-  };
-
-  return (
-    <Link
-      to={link}
-      className={`block px-2 py-2 text-sm ${borderClass} hover:bg-gray-100`}
-      onClick={handleClick}
-    >
-      {text}
-    </Link>
   );
 }
 
