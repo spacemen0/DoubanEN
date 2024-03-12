@@ -22,7 +22,7 @@ export function Banner() {
             <p>
               Douban EN is one of the largest music databases and communities
               online, which you can use in endless ways to discover new music.{" "}
-              <Link to="/profile" className=" text-sky-800">
+              <Link to="/profile" className=" text-Music">
                 Learn about some of the ways you can use Douban EN for music
                 discovery.
               </Link>

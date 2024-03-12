@@ -61,8 +61,10 @@ export function FeaturedItem({
         <div className="max-w-[50%]">
           <Image {...image} />
         </div>
-        <div className="md:ml-8 flex-1 flex flex-col items-center !md:items-start justify-center">
-          <h2 className="text-xl font-semibold mt-2">{media.title}</h2>
+        <div className="md:ml-8 flex-1 flex flex-col items-center !md:items-start justify-center lg:text-xl">
+          <h2 className="text-xl lg:text-2xl font-semibold mt-2">
+            {media.title}
+          </h2>
           <p className="mt-2">
             <span className="font-semibold">Type:&nbsp;</span> {media.type}
           </p>
@@ -85,9 +87,11 @@ export function FeaturedItem({
             <div className="flex">{renderStars()}</div>
           </div>
           <p className="mt-2">
-            <span className="text-xl font-semibold">{media.average}&nbsp;</span>
+            <span className="text-xl lg:text-2xl font-semibold">
+              {media.average}&nbsp;
+            </span>
             from{" "}
-            <span className="text-xl font-semibold">
+            <span className="text-xl lg:text-2xl font-semibold">
               {" "}
               {media.ratings}&nbsp;
             </span>
@@ -96,21 +100,21 @@ export function FeaturedItem({
         </div>
       </div>
 
-      <p className="mt-2">
+      <p className="mt-2 lg:text-xl">
         <span className="font-semibold"> Reviewed by: </span>{" "}
-        <a href="/#" className="font-bold text-sky-900">
+        <a href="/#" className="font-bold text-Music">
           {review.username}
         </a>
       </p>
-      <p className="mt-2">
+      <p className="mt-2 lg:text-xl">
         <span className="font-semibold">Review Date: </span>
         {review.reviewDate}
       </p>
-      <p className="mt-2">{truncateContent(review.content, 800)}</p>
-      {review.content.length > 800 && (
+      <p className="mt-2 lg:text-xl">{truncateContent(review.content, 200)}</p>
+      {review.content.length > 200 && (
         <button
           onClick={toggleExpand}
-          className="text-sky-600 font-bold rounded-md mt-2 "
+          className="text-Music font-bold rounded-md mt-2 "
         >
           {expanded ? "Show Less" : "Show More"}
         </button>

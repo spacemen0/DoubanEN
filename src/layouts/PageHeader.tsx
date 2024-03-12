@@ -31,7 +31,7 @@ function HeaderLogoSection() {
         />
       </Link>
       <Link
-        className="hidden md:inline font-bold text-lg text-sky-600 h-7"
+        className="hidden md:inline font-bold text-lg text-Music h-7"
         to="/"
       >
         Douban EN
@@ -50,7 +50,7 @@ function HeaderNavBarSection({ forMedium: forMedium }: { forMedium: boolean }) {
         forMedium ? "hidden md:flex" : "flex md:hidden"
       }`}
     >
-      <button className={`${style}text-sky-600`}>Music</button>
+      <button className={`${style}text-Music`}>Music</button>
       <button className={`${style}text-orange-800`}>Movie</button>
       <button className={`${style}text-green-700`}>Book</button>
     </div>
@@ -100,7 +100,7 @@ function HeaderSearchBarSection() {
       <input
         type="search"
         placeholder="Search..."
-        className="rounded-full border shadow-inner my-1 py-1 pl-8 md:pl-10 pr-10 text-lg w-full outline-none"
+        className="rounded-full border shadow-inner my-1 py-1 pl-8 md:pl-10 pr-10 text-lg text-gray-600 w-full outline-none"
         onClick={handleInputClick}
       />
       {isDropdownVisible && (
@@ -128,7 +128,7 @@ function DropDownSearchOption({
   selectedOption,
   onOptionClick,
 }: DropDownSearchOptionProps) {
-  const musicColor: string = "text-sky-700 border-b-2 font-bold border-sky-700";
+  const musicColor: string = "text-Music border-b-2 font-bold border-sky-700";
   const movieColor: string =
     "text-orange-800 border-b-2 font-bold border-orange-800";
   const bookColor: string =
@@ -142,7 +142,7 @@ function DropDownSearchOption({
     >
       <span className="block mx-3">Search for: </span>
       <button
-        className={`px-0.5 mx-1.5  hover:text-sky-700 ${
+        className={`px-0.5 mx-1.5  hover:text-Music ${
           selectedOption === "Music" ? musicColor : ""
         }`}
         onClick={() => onOptionClick("Music")}
@@ -189,7 +189,7 @@ function HeaderUserSection() {
       {isLoggedIn && (
         <div className="pb-1">
           <Link
-            className="hidden md:inline font-bold text-lg text-sky-600 h-10"
+            className="hidden md:inline font-bold text-lg text-Music h-10"
             to={"/profile"}
           >
             {user?.name}
@@ -214,17 +214,17 @@ function HeaderUserSection() {
 }
 
 function DropDownMenu({ isOpen }: { isOpen: boolean }) {
-  const { isLoggedIn, logout, token } = useAuthContext();
+  const { isLoggedIn, logout, token, user } = useAuthContext();
 
   const handleLogout = () => {
     if (token) logout(token);
   };
   return (
     isOpen && (
-      <div className="absolute top-10 md:top-9 right-0 w-36  font-bold text-sky-600 bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+      <div className="absolute top-10 md:top-9 right-0 w-36  font-bold text-Music bg-white shadow-lg ring-1 ring-black ring-opacity-5">
         {isLoggedIn ? (
           <div>
-            <MenuItem link="/profile" text="Profile" />
+            <MenuItem link={`/profile/${user!.ID}`} text="Profile" />
             <MenuItem link="/collection" text="All Collections" />
             <MenuItem link="/collection" text="Book Collection" />
             <MenuItem link="/collection" text="Music Collection" />

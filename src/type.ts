@@ -37,6 +37,7 @@ export type User = {
   role: "Admin" | "Contributor" | "Standard";
   memberSince: string;
   imageUrl: string;
+  bio: string;
   ID: number;
 };
 

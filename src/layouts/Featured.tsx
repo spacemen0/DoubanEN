@@ -1,7 +1,7 @@
 import { ReactNode, useState } from "react";
 import { Image } from "../components/Image";
 import { ListItem } from "../components/ListItem";
-import { fetchMyCollectionItems } from "../apiService";
+import { fetchCollectionItems } from "../apiService";
 import { editorItems, sideImages } from "../data";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
@@ -42,7 +42,7 @@ function FeaturedBanner() {
             alt="Best of 2023"
           />
         </div>
-        <div className="px-2 sm:px-4 md:px-8 h-auto sm:text-xl w-auto font-bold text-sky-700 flex flex-col justify-center items-center">
+        <div className="px-2 sm:px-4 md:px-8 h-auto sm:text-xl w-auto font-bold text-Music flex flex-col justify-center items-center">
           <h3>Douban EN Best of 2023</h3>
         </div>
       </div>
@@ -82,7 +82,7 @@ function SideList() {
     setSelectedOption(option);
     if (option === "My" && user) {
       try {
-        const items = await fetchMyCollectionItems(user.ID);
+        const items = await fetchCollectionItems(user.ID, "All");
         setMyItems(items);
       } catch (error) {
         console.error("Error fetching My Collection items:", error);
@@ -97,13 +97,13 @@ function SideList() {
 
   return (
     <div className="flex mt-6 lg:mt-12 flex-col md:w-11/12 lg:w-10/12 pr-4 lg:pr-8 text-gray-600">
-      <div className="text-sky-700 font-bold text-xl md:text-3xl">
-        Featured Music
+      <div className="text-Music font-bold text-2xl  xl:text-3xl">
+        Featured Collection
       </div>
       <div className="my-4 flex gap-10 justify-start">
         <button
-          className={`border-b-2 text-2xl ${
-            selectedOption == "Editor" ? "text-sky-900 font-bold" : ""
+          className={`border-b-2 text-xl lg:text-2xl ${
+            selectedOption == "Editor" ? "text-Music font-bold" : ""
           }`}
           onClick={() => {
             handleOptionClick("Editor");
@@ -112,8 +112,8 @@ function SideList() {
           Editor's Selection
         </button>
         <button
-          className={`border-b-2 text-2xl ${
-            selectedOption == "My" ? "text-sky-900 font-bold" : ""
+          className={`border-b-2 text-xl lg:text-2xl ${
+            selectedOption == "My" ? "text-Music font-bold" : ""
           }`}
           onClick={() => {
             handleOptionClick("My");
@@ -122,7 +122,7 @@ function SideList() {
           My Collection
         </button>
       </div>
-      <div className="border-b border-gray-200 text-lg pb-1 flex lg:gap-9 md:gap-6 gap-3 text-gray-800 lg:justify-end justify-between lg:pl-0  pl-32">
+      <div className="border-b border-gray-200  pb-1 flex lg:gap-9 md:gap-6 gap-3 text-gray-600 text-xl font-semibold lg:justify-end justify-between lg:pl-0  pl-32">
         <span>Average</span> <span>Rated</span> <span>Wants</span>
       </div>
       {selectedOption == "Editor" &&
@@ -139,7 +139,9 @@ function SideList() {
           </div>
         ))}
       {selectedOption == "My" && !isLoggedIn && (
-        <p>Create a new account or sign in to keep track of your favorites</p>
+        <p className="text-xl mt-2">
+          Create a new account or sign in to keep track of your favorites
+        </p>
       )}
     </div>
   );
@@ -148,7 +150,7 @@ function SideList() {
 function SideInfo() {
   return (
     <div className="flex md:w-11/12 lg:w-10/12 flex-col ">
-      <div className="text-sky-700 font-bold text-xl md:text-3xl my-4 xl:my-8">
+      <div className="text-Music font-bold text-xl md:text-3xl my-4 xl:my-8">
         Douban EN
       </div>
       <div className="text-gray-500">

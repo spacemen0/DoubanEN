@@ -23,7 +23,7 @@ export default function App() {
     >
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:id" element={<Profile />} />
         <Route path="/collection" element={<Collection />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

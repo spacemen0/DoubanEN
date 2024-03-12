@@ -52,27 +52,6 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     setWithExpiry("error", error, expiryTime);
   }, [isLoggedIn, user, token, error]);
 
-  // const getUser = async (token: string) => {
-  //   try {
-  //     const response = await fetch(`${apiUrl}user`, {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-
-  //     if (response.status === 200) {
-  //       const data = await response.json();
-  //       setUser(data);
-  //     } else {
-  //       const data = await response.json();
-  //       console.log(data);
-  //     }
-  //   } catch (error) {
-  //     console.error("Get user failed:", error);
-  //   }
-  // };
-
   const login = async (username: string, password: string) => {
     // try {
     //   const url = `${apiUrl}login`;
@@ -104,6 +83,10 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       name: "Spacemen0",
       imageUrl: "",
       role: "Standard",
+      bio: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut 
+      labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+       nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur.`,
       memberSince: "2002-10-2",
     });
     setToken("data.token");
@@ -174,6 +157,10 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       name: "Spacemen0",
       imageUrl: "",
       role: "Standard",
+      bio: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut 
+      labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+       nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur.`,
       memberSince: "2002-10-2",
     });
   };
