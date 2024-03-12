@@ -3,9 +3,15 @@ import { Suspense, lazy } from "react";
 
 const Home = lazy(() => import("./pages/Home"));
 const Profile = lazy(() => import("./pages/Profile"));
-const Collection = lazy(() => import("./pages/Collection"));
+const List = lazy(() => import("./pages/List"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
+const Book = lazy(() => import("./pages/Book"));
+const Books = lazy(() => import("./pages/Books"));
+const Music = lazy(() => import("./pages/Music"));
+const Musics = lazy(() => import("./pages/Musics"));
+const Movie = lazy(() => import("./pages/Movie"));
+const Movies = lazy(() => import("./pages/Movies"));
 
 export default function App() {
   return (
@@ -24,9 +30,15 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/profile/:id" element={<Profile />} />
-        <Route path="/collection" element={<Collection />} />
+        <Route path="/list/:id" element={<List />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/book/:id" element={<Book />} />
+        <Route path="/books" element={<Books />} />
+        <Route path="/music/:id" element={<Music />} />
+        <Route path="/musics" element={<Musics />} />
+        <Route path="/movie/:id" element={<Movie />} />
+        <Route path="/movies" element={<Movies />} />
       </Routes>
     </Suspense>
   );

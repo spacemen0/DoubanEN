@@ -57,7 +57,7 @@ export function FeaturedItem({
   };
 
   return (
-    <div className="w-full bg-white rounded-md shadow-md p-2 text-gray-600">
+    <div className="w-full bg-white rounded-md border shadow-md p-2 text-gray-600">
       <div className="flex !md:flex-col !md:items-start items-center">
         <div className="max-w-[50%]">
           <Image {...image} />

@@ -2,7 +2,7 @@ import { Menu, Search, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { SearchOption, DropDownSearchOptionProps } from "../type";
 import { faker } from "@faker-js/faker";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import { MenuItem } from "../components/MenuItem";
 
@@ -41,6 +41,7 @@ function HeaderLogoSection() {
 }
 
 function HeaderNavBarSection({ forMedium: forMedium }: { forMedium: boolean }) {
+  const navigate = useNavigate();
   const height: string = forMedium ? "h-10" : "h-7";
   const style: string = `flex max-w-[60px] items-center transition-colors hover:bg-gray-100 
     rounded-full flex-grow justify-center p-1 md:p-2 font-bold ${height} `;
@@ -50,9 +51,30 @@ function HeaderNavBarSection({ forMedium: forMedium }: { forMedium: boolean }) {
         forMedium ? "hidden md:flex" : "flex md:hidden"
       }`}
     >
-      <button className={`${style}text-Music`}>Music</button>
-      <button className={`${style}text-orange-800`}>Movie</button>
-      <button className={`${style}text-green-700`}>Book</button>
+      <button
+        onClick={() => {
+          navigate("/musics");
+        }}
+        className={`${style}text-Music`}
+      >
+        Music
+      </button>
+      <button
+        onClick={() => {
+          navigate("/movies");
+        }}
+        className={`${style}text-orange-800`}
+      >
+        Movie
+      </button>
+      <button
+        onClick={() => {
+          navigate("/books");
+        }}
+        className={`${style}text-green-700`}
+      >
+        Book
+      </button>
     </div>
   );
 }
