@@ -1,9 +1,12 @@
-import { generateRandomData } from "../data";
+import { editorItems, generateRandomData } from "../data";
 import { PageHeader } from "../layouts/PageHeader";
 import { Image } from "../components/Image";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
+import { fetchMyCollectionItems } from "../apiService";
+import { ListItem } from "../components/ListItem";
+import { Media } from "../type";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -25,6 +28,7 @@ export default function Profile() {
             <UserInfo />
             <CurrentOn />
           </div>
+          <Collections />
         </div>
       </div>
     </div>
@@ -114,6 +118,91 @@ function CurrentOn() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function Collections() {
+  const [selectedOption, setSelectedOption] = useState<
+    "Music" | "Movie" | "Book"
+  >("Music");
+  const [myItems, setItems] = useState<Media[]>([]);
+  const { isLoggedIn, user } = useAuthContext();
+  const handleOptionClick = async (option: "Music" | "Movie" | "Book") => {
+    setSelectedOption(option);
+    if (option === "Movie" && user) {
+      try {
+        const items = await fetchMyCollectionItems(user.ID);
+        setItems(items);
+      } catch (error) {
+        console.error("Error fetching Movie Collection items:", error);
+      }
+    }
+  };
+
+  const MusicList = editorItems.map((item) => (
+    <ListItem media={item} key={item.id} />
+  ));
+  const MovieList = myItems.map((item) => (
+    <ListItem media={item} key={item.id} />
+  ));
+
+  return (
+    <div className="flex mt-6 lg:mt-12 flex-col md:w-11/12 lg:w-10/12 pr-4 lg:pr-8 text-gray-600">
+      <div className="text-sky-700 font-bold text-xl md:text-3xl">
+        Featured Music
+      </div>
+      <div className="my-4 flex gap-10 justify-start">
+        <button
+          className={`border-b-2 text-2xl ${
+            selectedOption == "Music" ? "text-sky-900 font-bold" : ""
+          }`}
+          onClick={() => {
+            handleOptionClick("Music");
+          }}
+        >
+          Music Collection
+        </button>
+        <button
+          className={`border-b-2 text-2xl ${
+            selectedOption == "Movie" ? "text-sky-900 font-bold" : ""
+          }`}
+          onClick={() => {
+            handleOptionClick("Movie");
+          }}
+        >
+          Movie Collection
+        </button>
+        <button
+          className={`border-b-2 text-2xl ${
+            selectedOption == "Book" ? "text-sky-900 font-bold" : ""
+          }`}
+          onClick={() => {
+            handleOptionClick("Book");
+          }}
+        >
+          Book Collection
+        </button>
+      </div>
+      <div className="border-b border-gray-200 text-lg pb-1 flex lg:gap-9 md:gap-6 gap-3 text-gray-800 lg:justify-end justify-between lg:pl-0  pl-32">
+        <span>Average</span> <span>Rated</span> <span>Wants</span>
+      </div>
+      {selectedOption == "Music" &&
+        MusicList.map((listItem, index) => (
+          <div key={index} className="flex mt-4 w-full h-auto">
+            {listItem}
+          </div>
+        ))}
+      {selectedOption == "Movie" &&
+        isLoggedIn &&
+        MovieList.map((listItem, index) => (
+          <div key={index} className="flex mt-4 w-full h-auto">
+            {listItem}
+          </div>
+        ))}
+      {selectedOption == "Movie" && !isLoggedIn && (
+        <p>Create a new account or sign in to keep track of your favorites</p>
+      )}
     </div>
   );
 }

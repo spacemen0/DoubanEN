@@ -1,8 +1,8 @@
-import { ListItemProps } from "./type";
+import { Media } from "./type";
 
 export const fetchMyCollectionItems = async (
   userId: number
-): Promise<ListItemProps[]> => {
+): Promise<Media[]> => {
   try {
     const response = await fetch(`/api/my-collection/${userId}`);
     const data = await response.json();

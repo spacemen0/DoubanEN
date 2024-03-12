@@ -3,9 +3,9 @@ import { Image } from "../components/Image";
 import { ListItem } from "../components/ListItem";
 import { fetchMyCollectionItems } from "../apiService";
 import { editorItems, sideImages } from "../data";
-import { ListItemProps } from "../type";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
+import { Media } from "../type";
 
 export function Featured({ children }: { children: ReactNode[] }) {
   return (
@@ -76,7 +76,7 @@ function SideList() {
   const [selectedOption, setSelectedOption] = useState<"Editor" | "My">(
     "Editor"
   );
-  const [myItems, setMyItems] = useState<ListItemProps[]>([]);
+  const [myItems, setMyItems] = useState<Media[]>([]);
   const { isLoggedIn, user } = useAuthContext();
   const handleOptionClick = async (option: "Editor" | "My") => {
     setSelectedOption(option);
@@ -86,17 +86,14 @@ function SideList() {
         setMyItems(items);
       } catch (error) {
         console.error("Error fetching My Collection items:", error);
-        // Handle the error appropriately, e.g., show a message to the user
       }
     }
   };
 
   const EditorList = editorItems.map((item) => (
-    <ListItem {...item} key={item.media.id} />
+    <ListItem media={item} key={item.id} />
   ));
-  const MyList = myItems.map((item) => (
-    <ListItem {...item} key={item.media.id} />
-  ));
+  const MyList = myItems.map((item) => <ListItem media={item} key={item.id} />);
 
   return (
     <div className="flex mt-6 lg:mt-12 flex-col md:w-11/12 lg:w-10/12 pr-4 lg:pr-8 text-gray-600">
