@@ -1,16 +1,16 @@
 import { Star, StarHalf } from "lucide-react";
 import { Image } from "./Image";
 import { useState } from "react";
-import { ImageProps, MusicProps, ReviewProps } from "../type";
+import { ImageProps, Media, Review } from "../type";
 
 export function FeaturedItem({
   image,
-  music,
+  media,
   review,
 }: {
   image: ImageProps;
-  music: MusicProps;
-  review: ReviewProps;
+  media: Media;
+  review: Review;
 }) {
   const [expanded, setExpanded] = useState(false);
 
@@ -62,23 +62,34 @@ export function FeaturedItem({
           <Image {...image} />
         </div>
         <div className="md:ml-8 flex-1 flex flex-col items-center !md:items-start justify-center">
-          <h2 className="text-xl font-semibold mt-2">{music.title}</h2>
+          <h2 className="text-xl font-semibold mt-2">{media.title}</h2>
           <p className="mt-2">
-            <span className="font-semibold">Artist:&nbsp;</span> {music.artist}
+            <span className="font-semibold">Type:&nbsp;</span> {media.type}
           </p>
           <p className="mt-2">
-            <span className="font-semibold">Genre:&nbsp;</span> {music.genre}
+            <span className="font-semibold">
+              {media.type === "Music"
+                ? "Artist"
+                : media.type === "Book"
+                ? "Author"
+                : "Director"}
+              :&nbsp;
+            </span>{" "}
+            {media.author}
+          </p>
+          <p className="mt-2">
+            <span className="font-semibold">Genre:&nbsp;</span> {media.genre}
           </p>
           <div className="flex items-center mt-2">
             <p className="font-semibold">Rating:&nbsp;</p>
             <div className="flex">{renderStars()}</div>
           </div>
           <p className="mt-2">
-            <span className="text-xl font-semibold">{music.average}&nbsp;</span>
+            <span className="text-xl font-semibold">{media.average}&nbsp;</span>
             from{" "}
             <span className="text-xl font-semibold">
               {" "}
-              {music.ratings}&nbsp;
+              {media.ratings}&nbsp;
             </span>
             ratings
           </p>

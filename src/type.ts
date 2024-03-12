@@ -11,16 +11,18 @@ export type ImageProps = {
   href: string;
 };
 
-export type MusicProps = {
+export type Media = {
   id: number;
+  type: "Music" | "Movie" | "Book";
   title: string;
-  artist: string;
+  author: string;
   genre: string;
   average: number;
   ratings: number;
+  wants: number;
 };
 
-export type ReviewProps = {
+export type Review = {
   username: string;
   userID: number;
   reviewDate: string;
@@ -30,9 +32,8 @@ export type ReviewProps = {
 
 export type ListItemProps = {
   image: ImageProps;
-  music: MusicProps;
+  media: Media;
   releaseDate: string;
-  wants: number;
 };
 
 export type User = {

@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { ImageProps, ListItemProps, MusicProps, ReviewProps } from "./type";
+import { ImageProps, ListItemProps, Media, Review } from "./type";
 
 export const generateRandomData = () => ({
   src: faker.image.url({ width: 512, height: 512 }),
@@ -9,18 +9,20 @@ export const generateRandomData = () => ({
 
 export const featuredItems: {
   image: ImageProps;
-  music: MusicProps;
-  review: ReviewProps;
+  music: Media;
+  review: Review;
 }[] = [
   {
     image: generateRandomData(),
     music: {
       id: faker.number.int(),
       title: faker.lorem.words(),
-      artist: faker.person.fullName(),
+      author: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
+      type: "Movie",
+      wants: 0,
     },
     review: {
       username: faker.internet.userName(),
@@ -35,10 +37,12 @@ export const featuredItems: {
     music: {
       id: faker.number.int(),
       title: faker.lorem.words(),
-      artist: faker.person.fullName(),
+      author: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
+      type: "Music",
+      wants: 0,
     },
     review: {
       username: faker.internet.userName(),
@@ -53,10 +57,12 @@ export const featuredItems: {
     music: {
       id: faker.number.int(),
       title: faker.lorem.words(),
-      artist: faker.person.fullName(),
+      author: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
+      type: "Movie",
+      wants: 0,
     },
     review: {
       username: faker.internet.userName(),
@@ -71,10 +77,12 @@ export const featuredItems: {
     music: {
       id: faker.number.int(),
       title: faker.lorem.words(),
-      artist: faker.person.fullName(),
+      author: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
+      type: "Book",
+      wants: 0,
     },
     review: {
       username: faker.internet.userName(),
@@ -89,10 +97,12 @@ export const featuredItems: {
     music: {
       id: faker.number.int(),
       title: faker.lorem.words(),
-      artist: faker.person.fullName(),
+      author: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
+      type: "Music",
+      wants: 0,
     },
     review: {
       username: faker.internet.userName(),
@@ -107,81 +117,87 @@ export const featuredItems: {
 export const editorItems: ListItemProps[] = [
   {
     image: generateRandomData(),
-    music: {
+    media: {
       id: faker.number.int(),
       title: faker.lorem.words(),
-      artist: faker.person.fullName(),
+      author: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
+      type: "Movie",
+      wants: 0,
     },
     releaseDate: faker.date.past().toISOString().split("T")[0],
-    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     image: generateRandomData(),
-    music: {
+    media: {
       id: faker.number.int(),
       title: faker.lorem.words(),
-      artist: faker.person.fullName(),
+      author: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
+      type: "Music",
+      wants: 0,
     },
     releaseDate: faker.date.past().toISOString().split("T")[0],
-    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     image: generateRandomData(),
-    music: {
+    media: {
       id: faker.number.int(),
       title: faker.lorem.words(),
-      artist: faker.person.fullName(),
+      author: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
+      type: "Book",
+      wants: 0,
     },
     releaseDate: faker.date.past().toISOString().split("T")[0],
-    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     image: generateRandomData(),
-    music: {
+    media: {
       id: faker.number.int(),
       title: faker.lorem.words(),
-      artist: faker.person.fullName(),
+      author: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
+      type: "Music",
+      wants: 0,
     },
     releaseDate: faker.date.past().toISOString().split("T")[0],
-    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     image: generateRandomData(),
-    music: {
+    media: {
       id: faker.number.int(),
       title: faker.lorem.words(),
-      artist: faker.person.fullName(),
+      author: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
+      type: "Movie",
+      wants: 0,
     },
     releaseDate: faker.date.past().toISOString().split("T")[0],
-    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     image: generateRandomData(),
-    music: {
+    media: {
       id: faker.number.int(),
       title: faker.lorem.words(),
-      artist: faker.person.fullName(),
+      author: faker.person.fullName(),
       genre: faker.music.genre(),
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
+      type: "Book",
+      wants: 0,
     },
     releaseDate: faker.date.past().toISOString().split("T")[0],
-    wants: faker.number.int({ min: 100, max: 500 }),
   },
 ];
 

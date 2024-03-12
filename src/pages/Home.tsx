@@ -18,7 +18,7 @@ export default function Home() {
             <FeaturedItem
               key={index}
               image={item.image}
-              music={item.music}
+              media={item.music}
               review={item.review}
             />
           ))}

@@ -15,7 +15,7 @@ export default function Profile() {
     <div className="max-h-screen overflow-hidden flex flex-col ">
       <PageHeader />
       <div className="overflow-y-scroll">
-        <div className="flex flex-col w-11/12 md:10/12 h-auto mx-auto mt-3 lg:mt-5">
+        <div className="flex flex-col w-full md:10/12 h-auto mx-auto lg:mt-5">
           <div className="flex !md:flex-col gap-5 lg:gap-10 justify-center items-center px-4 py-4 lg:py-8 bg-gray-100">
             <div className="w-56">
               {" "}
@@ -70,7 +70,7 @@ function UserInfo() {
 
 function CurrentOn() {
   return (
-    <div className="flex-col w-72 md:w-96 xl:w-[420px]  pb-6 md:pl-4 gap-2 items-center justify-center text-xl text-sky-600">
+    <div className="flex-col w-72 md:w-96 xl:w-[420px]  pb-6 md:pl-4 gap-2 items-center justify-center text-lg text-gray-600">
       <div className="flex flex-col mb-2 w-full shadow-md rounded-md bg-white">
         {" "}
         <h1 className=" font-bold text-center m-2">Listening</h1>

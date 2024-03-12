@@ -92,10 +92,10 @@ function SideList() {
   };
 
   const EditorList = editorItems.map((item) => (
-    <ListItem {...item} key={item.music.id} />
+    <ListItem {...item} key={item.media.id} />
   ));
   const MyList = myItems.map((item) => (
-    <ListItem {...item} key={item.music.id} />
+    <ListItem {...item} key={item.media.id} />
   ));
 
   return (
