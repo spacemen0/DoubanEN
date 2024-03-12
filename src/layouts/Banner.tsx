@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { bannerText } from "../data";
+import { bannerText, statusInfo } from "../data";
 
 export function Banner() {
   return (
@@ -39,12 +39,12 @@ function SiteStatus() {
   return (
     <div className="max-w-screen-lg mx-auto mt-12 px-4">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-4">
-        <StatusItem title="Artists" count="1,717,584" />
-        <StatusItem title="Releases" count="6,017,201" />
-        <StatusItem title="Labels" count="135,764" />
-        <StatusItem title="Ratings" count="129,452,924" />
-        <StatusItem title="Reviews" count="3,138,489" />
-        <StatusItem title="Lists" count="734,976" />
+        <StatusItem title="Musics" count={statusInfo[0]} />
+        <StatusItem title="Movies" count={statusInfo[1]} />
+        <StatusItem title="Books" count={statusInfo[2]} />
+        <StatusItem title="Ratings" count={statusInfo[3]} />
+        <StatusItem title="Reviews" count={statusInfo[4]} />
+        <StatusItem title="Lists" count={statusInfo[5]} />
       </div>
     </div>
   );

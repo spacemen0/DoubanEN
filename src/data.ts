@@ -15,7 +15,7 @@ export const featuredItems: {
   {
     image: generateRandomData(),
     media: {
-      id: faker.number.int(),
+      id: 1,
       image: generateRandomData().src,
       releaseDate: faker.date.past().toISOString().split("T")[0],
       title: faker.lorem.words(),
@@ -37,7 +37,7 @@ export const featuredItems: {
   {
     image: generateRandomData(),
     media: {
-      id: faker.number.int(),
+      id: 1,
       title: faker.lorem.words(),
       image: generateRandomData().src,
       releaseDate: faker.date.past().toISOString().split("T")[0],
@@ -59,7 +59,7 @@ export const featuredItems: {
   {
     image: generateRandomData(),
     media: {
-      id: faker.number.int(),
+      id: 1,
       title: faker.lorem.words(),
       author: faker.person.fullName(),
       image: generateRandomData().src,
@@ -81,7 +81,7 @@ export const featuredItems: {
   {
     image: generateRandomData(),
     media: {
-      id: faker.number.int(),
+      id: 1,
       title: faker.lorem.words(),
       image: generateRandomData().src,
       releaseDate: faker.date.past().toISOString().split("T")[0],
@@ -103,7 +103,7 @@ export const featuredItems: {
   {
     image: generateRandomData(),
     media: {
-      id: faker.number.int(),
+      id: 1,
       title: faker.lorem.words(),
       image: generateRandomData().src,
       releaseDate: faker.date.past().toISOString().split("T")[0],
@@ -126,7 +126,7 @@ export const featuredItems: {
 
 export const editorItems: Media[] = [
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -138,7 +138,7 @@ export const editorItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -150,7 +150,7 @@ export const editorItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -162,7 +162,7 @@ export const editorItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -174,7 +174,7 @@ export const editorItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -186,7 +186,7 @@ export const editorItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -201,7 +201,7 @@ export const editorItems: Media[] = [
 
 export const myItems: Media[] = [
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -213,7 +213,7 @@ export const myItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -225,7 +225,7 @@ export const myItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -237,7 +237,7 @@ export const myItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -249,7 +249,7 @@ export const myItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -261,7 +261,7 @@ export const myItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -276,7 +276,7 @@ export const myItems: Media[] = [
 
 export const musicItems: Media[] = [
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -288,7 +288,7 @@ export const musicItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -300,7 +300,7 @@ export const musicItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -315,7 +315,7 @@ export const musicItems: Media[] = [
 
 export const movieItems: Media[] = [
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -327,7 +327,7 @@ export const movieItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -339,7 +339,7 @@ export const movieItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -354,7 +354,7 @@ export const movieItems: Media[] = [
 
 export const bookItems: Media[] = [
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -366,7 +366,7 @@ export const bookItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -378,7 +378,7 @@ export const bookItems: Media[] = [
     wants: 0,
   },
   {
-    id: faker.number.int(),
+    id: 1,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -397,11 +397,22 @@ export const sideImages: ImageProps[] = Array.from({ length: 7 }, () =>
 
 export const bannerText: string = `Douban EN is one of the largest music databases and communities
               online, which you can use in endless ways to discover new music.`;
+
 export const infoPara1: string = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias,
           doloremque est. Maxime repudiandae odit ad, ratione aliquid doloribus
           sint quas similique natus laudantium adipisci recusandae eum
           consequatur ullam unde repellat.`;
+
 export const infoPara2: string = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias,
           doloremque est. Maxime repudiandae odit ad, ratione aliquid doloribus
           sint quas similique natus laudantium adipisci recusandae eum
           consequatur ullam unde repellat.`;
+
+export const statusInfo: string[] = [
+  "1,717,584",
+  "6,017,201",
+  "135,764",
+  "129,452,924",
+  "3,138,489",
+  "734,976",
+];

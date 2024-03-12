@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Media } from "../type";
 import { Image } from "./Image";
 
@@ -12,8 +13,8 @@ export function ListItem({ media }: { media: Media }) {
         />
       </div>
       <div className="flex-col flex justify-between w-full border-b border-gray-200 pb-1 align-top">
-        <a
-          href="/#"
+        <Link
+          to={`/${media.type}/${media.id}`}
           className={
             " text-xl font-bold " +
             (media.type === "Music"
@@ -24,9 +25,9 @@ export function ListItem({ media }: { media: Media }) {
           }
         >
           {media.title}
-        </a>
-        <a
-          href="/#"
+        </Link>
+        <Link
+          to={`/${media.type}/${media.id}`}
           className={
             "text-xl " +
             (media.type === "Music"
@@ -37,7 +38,7 @@ export function ListItem({ media }: { media: Media }) {
           }
         >
           {media.author}
-        </a>
+        </Link>
         <p
           className={
             "text-xl " +

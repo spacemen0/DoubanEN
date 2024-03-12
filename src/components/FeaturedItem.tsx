@@ -2,6 +2,7 @@ import { Star, StarHalf } from "lucide-react";
 import { Image } from "./Image";
 import { useState } from "react";
 import { ImageProps, Media, Review } from "../type";
+import { Link } from "react-router-dom";
 
 export function FeaturedItem({
   image,
@@ -62,9 +63,12 @@ export function FeaturedItem({
           <Image {...image} />
         </div>
         <div className="md:ml-8 flex-1 flex flex-col items-center !md:items-start justify-center lg:text-xl">
-          <h2 className="text-xl lg:text-2xl font-semibold mt-2">
+          <Link
+            to={`/${media.type}/${media.id}`}
+            className="text-xl lg:text-2xl font-semibold mt-2"
+          >
             {media.title}
-          </h2>
+          </Link>
           <p className="mt-2">
             <span className="font-semibold">Type:&nbsp;</span> {media.type}
           </p>

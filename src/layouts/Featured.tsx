@@ -157,9 +157,12 @@ function SideInfo() {
         <p>{infoPara1}</p>
         <p>{infoPara2}</p>
       </div>
-      <button className="mt-4 h-10 text-xl font-bold text-white bg-blue-500 rounded-md hover:bg-blue-400">
+      <Link
+        to={"/"}
+        className="flex justify-center mt-4 pt-1 h-10 text-xl font-bold text-white bg-blue-500 rounded-md hover:bg-blue-400"
+      >
         Know More
-      </button>
+      </Link>
     </div>
   );
 }
