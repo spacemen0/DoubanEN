@@ -240,7 +240,6 @@ function DropDownMenu({ isOpen }: { isOpen: boolean }) {
           <div>
             <MenuItem link="/login" text="Log In" />
             <MenuItem link="/register" text="Register" isLast={true} />
-            <MenuItem link="/profile" text="Profile" />
           </div>
         )}
       </div>
