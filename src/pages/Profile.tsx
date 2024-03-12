@@ -16,7 +16,7 @@ export default function Profile() {
       <PageHeader />
       <div className="overflow-y-scroll">
         <div className="flex flex-col w-11/12 md:10/12 h-auto mx-auto mt-5 lg:mt-10">
-          <div className="flex !sm:flex-col gap-10 justify-center max-h-screen items-center px-4 py-4 lg:py-8 bg-gray-100">
+          <div className="flex !sm:flex-col gap-10 justify-center items-center px-4 py-4 lg:py-8 bg-gray-100">
             <div className="w-56">
               {" "}
               <Image {...generateRandomData()} />
@@ -43,7 +43,7 @@ function UserInfo() {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.";
 
   return (
-    <div className="max-w-56 md:max-w-96 lg:max-w-md p-4 bg-white shadow-md rounded-md">
+    <div className="w-56 md:max-w-96 lg:max-w-md p-4 bg-white shadow-md rounded-md">
       <h1 className="text-xl lg:text-2xl font-semibold mb-4">{user?.name}</h1>
       <div className="mb-4">
         <p className="text-gray-600">{user?.role}</p>
