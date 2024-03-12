@@ -37,6 +37,9 @@ export type ListItemProps = {
 
 export type User = {
   name: string;
+  role: "Admin" | "Contributor" | "Standard";
+  memberSince: string;
+  imageUrl: string;
   ID: number;
 };
 

@@ -99,7 +99,13 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     // }
     console.log(username, password);
     setIsLoggedIn(true);
-    setUser({ ID: 1, name: "User" });
+    setUser({
+      ID: 1,
+      name: "Spacemen0",
+      imageUrl: "",
+      role: "Standard",
+      memberSince: "2002-10-2",
+    });
     setToken("data.token");
   };
 
@@ -163,7 +169,13 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     console.log(username, email, password);
     setIsLoggedIn(true);
     setToken("token");
-    setUser({ ID: 1, name: "User" });
+    setUser({
+      ID: 1,
+      name: "Spacemen0",
+      imageUrl: "",
+      role: "Standard",
+      memberSince: "2002-10-2",
+    });
   };
 
   const contextValue: AuthContextType = {
