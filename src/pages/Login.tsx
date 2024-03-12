@@ -98,10 +98,11 @@ export default function Login() {
         <div className="bg-gray-100 w-full lg:w-4/6 mx-auto mt-1 lg:mt-10 p-12 lg:p-24">
           <h1 className="text-2xl text-center">Don't Have an Account?</h1>
           <p className="mt-4 lg:mt-8">
+            {" "}
             With a <strong>DoubanEN</strong> account, you can:{" "}
             <strong>rate, review, catalog</strong>, and tag your music track
             your upcoming (and past) shows find new music and people through
-            <strong>recommendations</strong> create and publish lists of your
+            <strong> recommendations</strong> create and publish lists of your
             favorite things research music, cross-referenced by label, artist,
             location, and genre. <strong>socialize</strong> through forums and
             private messaging contribute to an always-growing public music

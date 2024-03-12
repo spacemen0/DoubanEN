@@ -5,6 +5,11 @@ export type DropDownSearchOptionProps = {
   onOptionClick: (option: SearchOption) => void;
 };
 
+export type AuthResponse = {
+  userId: number | null;
+  token: string | null;
+};
+
 export type ImageProps = {
   src: string;
   alt: string;

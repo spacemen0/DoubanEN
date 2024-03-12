@@ -2,7 +2,7 @@ import { ReactNode, useState } from "react";
 import { Image } from "../components/Image";
 import { ListItem } from "../components/ListItem";
 import { fetchCollectionItems } from "../apiService";
-import { editorItems, sideImages } from "../data";
+import { editorItems, infoPara1, infoPara2, sideImages } from "../data";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import { Media } from "../type";
@@ -154,18 +154,8 @@ function SideInfo() {
         Douban EN
       </div>
       <div className="text-gray-500">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias,
-          doloremque est. Maxime repudiandae odit ad, ratione aliquid doloribus
-          sint quas similique natus laudantium adipisci recusandae eum
-          consequatur ullam unde repellat.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias,
-          doloremque est. Maxime repudiandae odit ad, ratione aliquid doloribus
-          sint quas similique natus laudantium adipisci recusandae eum
-          consequatur ullam unde repellat.
-        </p>
+        <p>{infoPara1}</p>
+        <p>{infoPara2}</p>
       </div>
       <button className="mt-4 h-10 text-xl font-bold text-white bg-blue-500 rounded-md hover:bg-blue-400">
         Know More

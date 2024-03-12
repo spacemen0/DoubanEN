@@ -394,3 +394,14 @@ export const bookItems: Media[] = [
 export const sideImages: ImageProps[] = Array.from({ length: 7 }, () =>
   generateRandomData()
 );
+
+export const bannerText: string = `Douban EN is one of the largest music databases and communities
+              online, which you can use in endless ways to discover new music.`;
+export const infoPara1: string = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias,
+          doloremque est. Maxime repudiandae odit ad, ratione aliquid doloribus
+          sint quas similique natus laudantium adipisci recusandae eum
+          consequatur ullam unde repellat.`;
+export const infoPara2: string = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias,
+          doloremque est. Maxime repudiandae odit ad, ratione aliquid doloribus
+          sint quas similique natus laudantium adipisci recusandae eum
+          consequatur ullam unde repellat.`;

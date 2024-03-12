@@ -67,7 +67,7 @@ export default function Register() {
                     value={formData.username}
                     onChange={handleInputChange}
                     required={true}
-                    autoComplete="username"
+                    autoComplete="off"
                     className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
                   />
                 </div>
@@ -85,6 +85,7 @@ export default function Register() {
                     value={formData.email}
                     onChange={handleInputChange}
                     required={true}
+                    autoComplete="email"
                     className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
                   />
                 </div>
@@ -129,7 +130,7 @@ export default function Register() {
                     type="submit"
                     className="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-black focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
                   >
-                    Login
+                    Register
                   </button>
                 </div>
               </form>
@@ -139,10 +140,11 @@ export default function Register() {
         <div className="bg-gray-100 w-full lg:w-4/6 mx-auto mt-1 lg:mt-10 p-12 lg:p-24">
           <h1 className="text-2xl text-center">Already Have an Account?</h1>
           <p className="mt-4 lg:mt-8">
+            {" "}
             With a <strong>DoubanEN</strong> account, you can:{" "}
             <strong>rate, review, catalog</strong>, and tag your music track
             your upcoming (and past) shows find new music and people through
-            <strong>recommendations</strong> create and publish lists of your
+            <strong> recommendations</strong> create and publish lists of your
             favorite things research music, cross-referenced by label, artist,
             location, and genre. <strong>socialize</strong> through forums and
             private messaging contribute to an always-growing public music

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { bannerText } from "../data";
 
 export function Banner() {
   return (
@@ -20,8 +21,7 @@ export function Banner() {
           </div>
           <div className="mt-2 md:text-xl">
             <p>
-              Douban EN is one of the largest music databases and communities
-              online, which you can use in endless ways to discover new music.{" "}
+              {bannerText}
               <Link to="/profile" className=" text-Music">
                 Learn about some of the ways you can use Douban EN for music
                 discovery.

@@ -3,6 +3,7 @@ import { expiryTime } from "../config";
 import { AuthContextType } from "./AuthContext";
 import { AuthContext } from "./AuthContext";
 import { User } from "../type";
+import { getUser, login, logout, register } from "../apiService";
 
 function setWithExpiry<T>(key: string, value: T, ttl: number): void {
   const now = new Date();
@@ -52,117 +53,36 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     setWithExpiry("error", error, expiryTime);
   }, [isLoggedIn, user, token, error]);
 
-  const login = async (username: string, password: string) => {
-    // try {
-    //   const url = `${apiUrl}login`;
-    //   const body = { username, password };
-    //   const response = await fetch(url, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(body),
-    //   });
-    //   if (response.status === 200) {
-    //     const data = await response.json();
-    //     setIsLoggedIn(true);
-    //     setToken(data.token);
-    //     getUser(data.token);
-    //   } else {
-    //     const data = await response.json();
-    //     console.log(data.message);
-    //     setError(data.message);
-    //   }
-    // } catch (error) {
-    //   setError(error as string);
-    // }
-    console.log(username, password);
-    setIsLoggedIn(true);
-    setUser({
-      ID: 1,
-      name: "Spacemen0",
-      imageUrl: "",
-      role: "Standard",
-      bio: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut 
-      labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-       nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur.`,
-      memberSince: "2002-10-2",
-    });
-    setToken("data.token");
+  const handleLogin = async (username: string, password: string) => {
+    const response = await login(username, password);
+    if (response.userId) {
+      const currentUser = await getUser(response.userId);
+      setIsLoggedIn(true);
+      setToken(response.token);
+      setUser(currentUser);
+    }
   };
 
-  const logout = async (token: string) => {
-    // try {
-    //   const response = await fetch(`${apiUrl}logout`, {
-    //     method: "DELETE",
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   });
-
-    //   if (response.status === 204) {
-    //     setIsLoggedIn(false);
-    //     setUser(null);
-    //     setToken(null);
-    //     setError(null);
-    //   } else {
-    //     const data = await response.json();
-    //     setError(data.message);
-    //   }
-    // } catch (error) {
-    //   setError(error as string);
-    // }
-    console.log(token);
+  const handleLogout = async (token: string) => {
+    logout(token);
     setIsLoggedIn(false);
     setUser(null);
     setToken(null);
     setError(null);
   };
 
-  const register = async (
+  const handleRegister = async (
     username: string,
     email: string,
     password: string
   ) => {
-    // try {
-    //   const url = `${apiUrl}login`;
-    //   const body = { username, password, email };
-    //   const response = await fetch(url, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(body),
-    //   });
-
-    //   if (response.status === 200) {
-    //     const data = await response.json();
-    //     setIsLoggedIn(true);
-    //     setToken(data.token);
-    //     getUser(data.token);
-    //   } else {
-    //     const data = await response.json();
-    //     console.log(data.message);
-    //     setError(data.message);
-    //   }
-    // } catch (error) {
-    //   setError(error as string);
-    // }
-    console.log(username, email, password);
-    setIsLoggedIn(true);
-    setToken("token");
-    setUser({
-      ID: 1,
-      name: "Spacemen0",
-      imageUrl: "",
-      role: "Standard",
-      bio: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut 
-      labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-       nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur.`,
-      memberSince: "2002-10-2",
-    });
+    const response = await register(username, email, password);
+    if (response.userId) {
+      const newUser = await getUser(response.userId);
+      setIsLoggedIn(true);
+      setToken(response.token);
+      setUser(newUser);
+    }
   };
 
   const contextValue: AuthContextType = {
@@ -170,9 +90,9 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     user,
     token,
     error,
-    login,
-    logout,
-    register,
+    login: handleLogin,
+    logout: handleLogout,
+    register: handleRegister,
   };
 
   return (

@@ -1,6 +1,5 @@
-import { apiUrl } from "./config";
 import { bookItems, movieItems, musicItems, myItems } from "./data";
-import { Media, User } from "./type";
+import { AuthResponse, Media, User } from "./type";
 
 export const fetchCollectionItems = async (
   userId: number,
@@ -22,22 +21,120 @@ export const fetchCollectionItems = async (
   throw new Error(`Invalid type: ${type}`);
 };
 
-export const getUser = async (token: string): Promise<User> => {
-  try {
-    const response = await fetch(`${apiUrl}user`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    if (response.status === 200) {
-      return data as User;
-    } else {
-      throw data;
-    }
-  } catch (error) {
-    console.error("Get user failed:", error);
-    throw error;
-  }
+export const getUser = async (id: number): Promise<User> => {
+  // try {
+  //   const response = await fetch(`${apiUrl}user/${id}`, {
+  //     method: "GET",
+  //   });
+  //   const data = await response.json();
+  //   if (response.status === 200) {
+  //     return data as User;
+  //   } else {
+  //     throw data;
+  //   }
+  // } catch (error) {
+  //   console.error("Get user failed:", error);
+  //   throw error;
+  // }
+  console.log(id);
+  return {
+    ID: 1,
+    name: "Spacemen0",
+    imageUrl: "",
+    role: "Standard",
+    bio: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut 
+      labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+       nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur.`,
+    memberSince: "2002-10-2",
+  };
+};
+
+export const register = async (
+  username: string,
+  email: string,
+  password: string
+): Promise<AuthResponse> => {
+  // try {
+  //   const url = `${apiUrl}login`;
+  //   const body = { username, password, email };
+  //   const response = await fetch(url, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(body),
+  //   });
+
+  //   if (response.status === 200) {
+  //     const data = await response.json();
+  //     setIsLoggedIn(true);
+  //     setToken(data.token);
+  //     getUser(data.token);
+  //   } else {
+  //     const data = await response.json();
+  //     console.log(data.message);
+  //     setError(data.message);
+  //   }
+  // } catch (error) {
+  //   setError(error as string);
+  // }
+  console.log(username, email, password);
+  return { userId: 1, token: "randomToken" };
+};
+
+export const login = async (
+  username: string,
+  password: string
+): Promise<AuthResponse> => {
+  // try {
+  //   const url = `${apiUrl}login`;
+  //   const body = { username, password };
+  //   const response = await fetch(url, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(body),
+  //   });
+  //   if (response.status === 200) {
+  //     const data = await response.json();
+  //     setIsLoggedIn(true);
+  //     setToken(data.token);
+  //     getUser(data.token);
+  //   } else {
+  //     const data = await response.json();
+  //     console.log(data.message);
+  //     setError(data.message);
+  //   }
+  // } catch (error) {
+  //   setError(error as string);
+  // }
+  console.log(username, password);
+  return { userId: 1, token: "randomToken" };
+};
+
+export const logout = async (token: string) => {
+  // try {
+  //   const response = await fetch(`${apiUrl}logout`, {
+  //     method: "DELETE",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   });
+
+  //   if (response.status === 204) {
+  //     setIsLoggedIn(false);
+  //     setUser(null);
+  //     setToken(null);
+  //     setError(null);
+  //   } else {
+  //     const data = await response.json();
+  //     setError(data.message);
+  //   }
+  // } catch (error) {
+  //   setError(error as string);
+  // }
+  if (token === "randomToken") return;
+  throw new Error("Error logging out");
 };
