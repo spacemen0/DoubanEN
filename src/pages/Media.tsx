@@ -4,7 +4,6 @@ import { NotFound } from "../components/NotFound";
 import { useEffect, useState } from "react";
 import { getMedia } from "../apiService";
 import { Media } from "../type";
-import { MyImage } from "../components/Image";
 
 export default function MediaPage() {
   const { type, id } = useParams();
