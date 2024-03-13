@@ -1,9 +1,5 @@
 import { ImageProps } from "../type";
 
-export function Image({ src, alt, href }: ImageProps) {
-  return (
-    <a href={href}>
-      <img src={src} alt={alt} className="h-full w-full " />
-    </a>
-  );
+export function MyImage({ src, alt }: ImageProps) {
+  return <img src={src} alt={alt} className="h-full w-full " />;
 }

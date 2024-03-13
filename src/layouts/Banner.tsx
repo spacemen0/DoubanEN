@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { bannerText, statusInfo } from "../data";
+import Logo from "../Logo.jpg";
 
 export function Banner() {
   return (
@@ -7,7 +8,7 @@ export function Banner() {
       <div className="flex items-center justify-center max-w-screen md:mt-16 mt-12">
         <div className="px-3 md:px-6 flex-shrink-0">
           <img
-            src="https://e.snmc.io/3.0/img/logo/sonemic-512.png"
+            src={Logo}
             title="Logo"
             className="sm:h-20 md:h-28 lg:h-36 h-14"
           />
@@ -22,9 +23,9 @@ export function Banner() {
           <div className="mt-2 md:text-xl">
             <p className="text-Neutral-Mild">
               {bannerText + " "}
-              <Link to="/profile" className=" text-Neutral-Strong">
-                Learn about some of the ways you can use Douban EN for music
-                discovery.
+              <Link to="/login" className=" text-Neutral-Strong">
+                Currently all data and images are generated randomly using
+                Faker-js.
               </Link>
             </p>
           </div>

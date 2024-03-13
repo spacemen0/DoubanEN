@@ -1,10 +1,12 @@
+import { useParams } from "react-router-dom";
 import { PageHeader } from "../layouts/PageHeader";
 
-export default function Collection() {
+export default function List() {
+  const { id } = useParams();
   return (
     <div className="">
       <PageHeader />
-      Collection
+      List: {id}
     </div>
   );
 }

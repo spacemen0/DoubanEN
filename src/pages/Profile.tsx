@@ -1,6 +1,6 @@
 import { generateRandomData } from "../data";
 import { PageHeader } from "../layouts/PageHeader";
-import { Image } from "../components/Image";
+import { MyImage } from "../components/Image";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
@@ -47,7 +47,7 @@ function UserInfo() {
     <div className="w-96 md:max-w-sm lg:max-w-md xl:max-w-lg p-4 bg-white shadow-md rounded-md">
       <div className="flex items-center mb-4">
         <div className="mr-4 !md:max-w-48">
-          <Image {...generateRandomData()} />
+          <MyImage {...generateRandomData()} />
         </div>
         <div>
           <h1 className="text-xl lg:text-2xl font-semibold mb-1">
@@ -86,7 +86,7 @@ function CurrentOn() {
         <h1 className=" font-bold text-center m-2">Listening</h1>
         <div className="flex p-2 text-center">
           <div className="w-32">
-            <Image {...generateRandomData()} />
+            <MyImage {...generateRandomData()} />
           </div>
 
           <div className=" ml-4 flex flex-col justify-center">
@@ -101,7 +101,7 @@ function CurrentOn() {
         <h1 className=" font-bold text-center m-2">Watching</h1>
         <div className=" flex p-2 text-center">
           <div className="w-32">
-            <Image {...generateRandomData()} />
+            <MyImage {...generateRandomData()} />
           </div>
           <div className=" ml-4 flex flex-col justify-center">
             {" "}
@@ -115,7 +115,7 @@ function CurrentOn() {
         <h1 className="font-bold text-center m-2">Reading</h1>
         <div className="flex p-2 text-center">
           <div className="w-32">
-            <Image {...generateRandomData()} />
+            <MyImage {...generateRandomData()} />
           </div>
           <div className=" ml-4 flex flex-col justify-center">
             {" "}

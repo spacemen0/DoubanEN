@@ -3,7 +3,7 @@ import { useAuthContext } from "../contexts/AuthContext";
 import { PageHeader } from "../layouts/PageHeader";
 import { Link, useNavigate } from "react-router-dom";
 import { generateRandomData } from "../data";
-import { Image } from "../components/Image";
+import { MyImage } from "../components/Image";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -35,7 +35,7 @@ export default function Login() {
       <div className="flex flex-col">
         <div className="flex justify-center w-full lg:w-4/6 mx-auto mt-1 lg:mt-10">
           <div className="hidden lg:flex flex-1 items-center justify-center bg-gray-100 px-6 py-2 lg:py-6">
-            <Image {...generateRandomData()} />
+            <MyImage {...generateRandomData()} />
           </div>
           <div className="w-full bg-gray-100 lg:w-1/2 flex items-center justify-center">
             <div className="max-w-md w-full p-3 lg:p-6">
@@ -99,14 +99,19 @@ export default function Login() {
           <h1 className="text-2xl text-center">Don't Have an Account?</h1>
           <p className="mt-4 lg:mt-8">
             {" "}
-            With a <strong>DoubanEN</strong> account, you can:{" "}
-            <strong>rate, review, catalog</strong>, and tag your music track
-            your upcoming (and past) shows find new music and people through
-            <strong> recommendations</strong> create and publish lists of your
-            favorite things research music, cross-referenced by label, artist,
-            location, and genre. <strong>socialize</strong> through forums and
-            private messaging contribute to an always-growing public music
-            database
+            Unlock the full potential of Douban EN by <strong>
+              creating
+            </strong>{" "}
+            an account. With your <strong>DoubanEN account</strong>, you gain
+            access to a myriad of features, allowing you to{" "}
+            <strong>rate, review, catalog, and tag</strong> your favorite music,
+            movies, and books. Discover new medias and like-minded individuals
+            through <strong>personalized recommendations</strong>. Create and
+            share <strong>lists</strong> of your favorite items, engage in
+            lively discussions through{" "}
+            <strong>forums and private messaging</strong>, and{" "}
+            <strong>contribute</strong> to our ever-expanding public music
+            database.
           </p>
           <Link
             to={"/register"}

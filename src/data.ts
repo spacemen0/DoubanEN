@@ -8,12 +8,10 @@ export const generateRandomData = () => ({
 });
 
 export const featuredItems: {
-  image: ImageProps;
   media: Media;
   review: Review;
 }[] = [
   {
-    image: generateRandomData(),
     media: {
       id: 1,
       image: generateRandomData().src,
@@ -35,7 +33,6 @@ export const featuredItems: {
     },
   },
   {
-    image: generateRandomData(),
     media: {
       id: 1,
       title: faker.lorem.words(),
@@ -57,7 +54,6 @@ export const featuredItems: {
     },
   },
   {
-    image: generateRandomData(),
     media: {
       id: 1,
       title: faker.lorem.words(),
@@ -79,7 +75,6 @@ export const featuredItems: {
     },
   },
   {
-    image: generateRandomData(),
     media: {
       id: 1,
       title: faker.lorem.words(),
@@ -101,7 +96,6 @@ export const featuredItems: {
     },
   },
   {
-    image: generateRandomData(),
     media: {
       id: 1,
       title: faker.lorem.words(),
@@ -395,8 +389,8 @@ export const sideImages: ImageProps[] = Array.from({ length: 7 }, () =>
   generateRandomData()
 );
 
-export const bannerText: string = `Douban EN is one of the largest music databases and communities
-              online, which you can use in endless ways to discover new music.`;
+export const bannerText: string = `Douban EN is a website built with React, TypeScript and Tailwind CSS. 
+The primary features of the site is to mark, track and organize your favorite Musics, Movies, and Books. `;
 
 export const infoPara1: string = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias,
           doloremque est. Maxime repudiandae odit ad, ratione aliquid doloribus

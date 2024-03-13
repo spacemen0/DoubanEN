@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react";
-import { Image } from "../components/Image";
+import { MyImage } from "../components/Image";
 import { ListItem } from "../components/ListItem";
 import { fetchCollectionItems } from "../apiService";
 import { editorItems, infoPara1, infoPara2, sideImages } from "../data";
@@ -34,7 +34,7 @@ export function Featured({ children }: { children: ReactNode[] }) {
 
 function FeaturedBanner() {
   return (
-    <Link to="/">
+    <Link to="/list/1">
       <div className="flex lg:hidden hover:bg-gray-100 transition-colors justify-start items-center mt-6 mb-6">
         <div className=" w-32 ">
           <img
@@ -54,19 +54,33 @@ function SideDisplay() {
   return (
     <div className="flex flex-col md:w-11/12 lg:w-10/12 md:mt-4 mt-6">
       <div className="mb-4">
-        <Image {...sideImages[0]} />
+        <Link to="/list/2">
+          <MyImage {...sideImages[0]} />
+        </Link>
       </div>
 
       <div className="flex justify-between mb-4">
-        <Image {...sideImages[1]} />
-        <Image {...sideImages[2]} />
-        <Image {...sideImages[3]} />
+        <Link to="/list/3">
+          <MyImage {...sideImages[1]} />
+        </Link>
+        <Link to="/list/4">
+          <MyImage {...sideImages[2]} />
+        </Link>
+        <Link to="/list/5">
+          <MyImage {...sideImages[3]} />
+        </Link>
       </div>
 
       <div className="flex justify-between">
-        <Image {...sideImages[4]} />
-        <Image {...sideImages[5]} />
-        <Image {...sideImages[6]} />
+        <Link to="/list/6">
+          <MyImage {...sideImages[4]} />
+        </Link>
+        <Link to="/list/7">
+          <MyImage {...sideImages[5]} />
+        </Link>
+        <Link to="/list/8">
+          <MyImage {...sideImages[6]} />
+        </Link>
       </div>
     </div>
   );
@@ -158,7 +172,7 @@ function SideInfo() {
         <p>{infoPara2}</p>
       </div>
       <Link
-        to={"/"}
+        to={"/login"}
         className="flex justify-center mt-4 pt-1 h-10 text-xl font-bold text-white  rounded-md bg-Neutral hover:bg-Neutral-Mild"
       >
         Know More

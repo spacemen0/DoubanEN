@@ -15,12 +15,7 @@ export default function Home() {
         </div>
         <Featured>
           {featuredItems.map((item, index) => (
-            <FeaturedItem
-              key={index}
-              image={item.image}
-              media={item.media}
-              review={item.review}
-            />
+            <FeaturedItem key={index} media={item.media} review={item.review} />
           ))}
         </Featured>
       </div>

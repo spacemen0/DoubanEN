@@ -1,4 +1,11 @@
-import { bookItems, movieItems, musicItems, myItems } from "./data";
+import { faker } from "@faker-js/faker";
+import {
+  bookItems,
+  generateRandomData,
+  movieItems,
+  musicItems,
+  myItems,
+} from "./data";
 import { AuthResponse, Media, User } from "./type";
 
 export const fetchCollectionItems = async (
@@ -137,4 +144,50 @@ export const logout = async (token: string) => {
   // }
   if (token === "randomToken") return;
   throw new Error("Error logging out");
+};
+
+export const getMedia = async (
+  id: number,
+  type: "Music" | "Movie" | "Book"
+): Promise<Media> => {
+  console.log(id, type);
+  if (type === "Music")
+    return {
+      id: 1,
+      title: faker.lorem.words(),
+      image: generateRandomData().src,
+      releaseDate: faker.date.past().toISOString().split("T")[0],
+      author: faker.person.fullName(),
+      genre: faker.music.genre(),
+      average: 3.5,
+      ratings: faker.number.int({ min: 100, max: 500 }),
+      type: "Music",
+      wants: 0,
+    };
+  else if (type === "Movie")
+    return {
+      id: 1,
+      title: faker.lorem.words(),
+      image: generateRandomData().src,
+      releaseDate: faker.date.past().toISOString().split("T")[0],
+      author: faker.person.fullName(),
+      genre: faker.music.genre(),
+      average: 3.5,
+      ratings: faker.number.int({ min: 100, max: 500 }),
+      type: "Movie",
+      wants: 0,
+    };
+  else
+    return {
+      id: 1,
+      title: faker.lorem.words(),
+      image: generateRandomData().src,
+      releaseDate: faker.date.past().toISOString().split("T")[0],
+      author: faker.person.fullName(),
+      genre: faker.music.genre(),
+      average: 3.5,
+      ratings: faker.number.int({ min: 100, max: 500 }),
+      type: "Book",
+      wants: 0,
+    };
 };

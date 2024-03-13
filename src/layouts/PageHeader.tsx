@@ -5,6 +5,7 @@ import { faker } from "@faker-js/faker";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import { MenuItem } from "../components/MenuItem";
+import Logo from "../Logo.jpg";
 
 export function PageHeader() {
   return (
@@ -22,16 +23,12 @@ export function PageHeader() {
 
 function HeaderLogoSection() {
   return (
-    <div className="flex gap-2 md:gap-4 items-center flex-shrink-0 transition-colors hover:bg-gray-100  h-10 px-1 md:px-2">
+    <div className="flex gap-2 md:gap-4 items-center flex-shrink-0 transition-colors  h-16 px-1 md:px-2">
       <Link to="/">
-        <img
-          src="https://e.snmc.io/3.0/img/logo/sonemic-512.png"
-          title="Logo"
-          className="h-10"
-        />
+        <img src={Logo} title="Logo" className="h-10" />
       </Link>
       <Link
-        className="hidden md:inline font-bold text-lg text-Neutral-Mild h-7"
+        className="hidden md:inline font-bold text-lg text-Neutral-Mild rounded-lg p-1.5 hover:bg-gray-100 h-10"
         to="/"
       >
         Douban EN
@@ -44,16 +41,16 @@ function HeaderNavBarSection({ forMedium: forMedium }: { forMedium: boolean }) {
   const navigate = useNavigate();
   const height: string = forMedium ? "h-10" : "h-7";
   const style: string = `flex max-w-[60px] items-center transition-colors hover:bg-gray-100 
-    rounded-full flex-grow justify-center p-1 md:p-2 font-bold ${height} `;
+    rounded-lg flex-grow justify-center p-1 md:p-2 font-bold ${height} `;
   return (
     <div
-      className={`justify-around md: gap-2  max-w-[768px] lg: w - full ${
+      className={`justify-around md: gap-2 text-lg  max-w-[768px] lg: w - full ${
         forMedium ? "hidden md:flex" : "flex md:hidden"
       }`}
     >
       <button
         onClick={() => {
-          navigate("/musics");
+          navigate("/media/music");
         }}
         className={`${style}text-Music`}
       >
@@ -61,17 +58,17 @@ function HeaderNavBarSection({ forMedium: forMedium }: { forMedium: boolean }) {
       </button>
       <button
         onClick={() => {
-          navigate("/movies");
+          navigate("/media/movie");
         }}
-        className={`${style}text-orange-800`}
+        className={`${style}text-Movie`}
       >
         Movie
       </button>
       <button
         onClick={() => {
-          navigate("/books");
+          navigate("/media/book");
         }}
-        className={`${style}text-green-700`}
+        className={`${style}text-Book`}
       >
         Book
       </button>
@@ -170,7 +167,7 @@ function DropDownSearchOption({
         Music
       </button>
       <button
-        className={`px-0.5 mx-1.5  hover:text-orange-800 ${
+        className={`px-0.5 mx-1.5  hover:text-Movie ${
           selectedOption === "Movie" ? movieColor : ""
         }`}
         onClick={() => onOptionClick("Movie")}
@@ -178,7 +175,7 @@ function DropDownSearchOption({
         Movie
       </button>
       <button
-        className={`px-0.5 mx-1.5  hover:text-green-700 ${
+        className={`px-0.5 mx-1.5  hover:text-Book ${
           selectedOption === "Book" ? bookColor : ""
         }`}
         onClick={() => onOptionClick("Book")}
