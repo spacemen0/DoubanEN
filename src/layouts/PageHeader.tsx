@@ -31,7 +31,7 @@ function HeaderLogoSection() {
         />
       </Link>
       <Link
-        className="hidden md:inline font-bold text-lg text-Music h-7"
+        className="hidden md:inline font-bold text-lg text-Neutral-Mild h-7"
         to="/"
       >
         Douban EN
@@ -150,11 +150,9 @@ function DropDownSearchOption({
   selectedOption,
   onOptionClick,
 }: DropDownSearchOptionProps) {
-  const musicColor: string = "text-Music border-b-2 font-bold border-sky-700";
-  const movieColor: string =
-    "text-orange-800 border-b-2 font-bold border-orange-800";
-  const bookColor: string =
-    "text-green-700 border-b-2 font-bold border-green-700";
+  const musicColor: string = "text-Music border-b-2 font-bold border-Music";
+  const movieColor: string = "text-Movie border-b-2 font-bold border-Movie";
+  const bookColor: string = "text-Book border-b-2 font-bold border-Book";
 
   return (
     <div

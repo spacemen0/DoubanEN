@@ -31,7 +31,7 @@ export const featuredItems: {
       userID: faker.number.int(),
       reviewDate: faker.date.past().toISOString().split("T")[0],
       star: 3.5,
-      content: faker.lorem.paragraph(),
+      content: faker.lorem.paragraph() + faker.lorem.paragraph(),
     },
   },
   {
@@ -53,7 +53,7 @@ export const featuredItems: {
       userID: faker.number.int(),
       reviewDate: faker.date.past().toISOString().split("T")[0],
       star: 3.5,
-      content: faker.lorem.paragraphs(),
+      content: faker.lorem.paragraph() + faker.lorem.paragraph(),
     },
   },
   {
@@ -75,7 +75,7 @@ export const featuredItems: {
       userID: faker.number.int(),
       reviewDate: faker.date.past().toISOString().split("T")[0],
       star: 3.5,
-      content: faker.lorem.paragraph(),
+      content: faker.lorem.paragraph() + faker.lorem.paragraph(),
     },
   },
   {
@@ -97,7 +97,7 @@ export const featuredItems: {
       userID: faker.number.int(),
       reviewDate: faker.date.past().toISOString().split("T")[0],
       star: 3.5,
-      content: faker.lorem.paragraph(),
+      content: faker.lorem.paragraph() + faker.lorem.paragraph(),
     },
   },
   {
@@ -119,7 +119,7 @@ export const featuredItems: {
       userID: faker.number.int(),
       reviewDate: faker.date.past().toISOString().split("T")[0],
       star: 3.5,
-      content: faker.lorem.paragraph(),
+      content: faker.lorem.paragraph() + faker.lorem.paragraph(),
     },
   },
 ];

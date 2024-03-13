@@ -10,7 +10,7 @@ import { Media } from "../type";
 export function Featured({ children }: { children: ReactNode[] }) {
   return (
     <div className="flex pl-3 bg-white md:pl-6 lg:pl-12 mb-4">
-      <div className="flex flex-col flex-1 lg:flex-[0.65] mr-4 md:mr-8 ">
+      <div className="flex flex-col flex-1 lg:flex-[0.65] mr-4 md:mr-8">
         <FeaturedBanner />
         {children.map((child, index) => (
           <div key={index} className="flex mt-4 w-full h-auto justify-start">
@@ -42,7 +42,7 @@ function FeaturedBanner() {
             alt="Best of 2023"
           />
         </div>
-        <div className="px-2 sm:px-4 md:px-8 h-auto sm:text-xl w-auto font-bold text-Music flex flex-col justify-center items-center">
+        <div className="px-2 sm:px-4 md:px-8 h-auto sm:text-xl w-auto font-bold text-Neutral-Mild flex flex-col justify-center items-center">
           <h3>Douban EN Best of 2023</h3>
         </div>
       </div>
@@ -96,14 +96,14 @@ function SideList() {
   const MyList = myItems.map((item) => <ListItem media={item} key={item.id} />);
 
   return (
-    <div className="flex mt-6 lg:mt-12 flex-col md:w-11/12 lg:w-10/12 pr-4 lg:pr-8 text-gray-600">
-      <div className="text-Music font-bold text-2xl  xl:text-3xl">
+    <div className="flex mt-6 lg:mt-12 flex-col md:w-11/12 lg:w-10/12 pr-4 lg:pr-8 text-Neutral-Mild">
+      <div className="text-Neutral-Mild font-bold text-2xl  xl:text-3xl">
         Featured Collection
       </div>
       <div className="my-4 flex gap-10 justify-start">
         <button
           className={`border-b-2 text-xl lg:text-2xl ${
-            selectedOption == "Editor" ? "text-Music font-bold" : ""
+            selectedOption == "Editor" ? "text-Neutral-Mild font-bold" : ""
           }`}
           onClick={() => {
             handleOptionClick("Editor");
@@ -113,7 +113,7 @@ function SideList() {
         </button>
         <button
           className={`border-b-2 text-xl lg:text-2xl ${
-            selectedOption == "My" ? "text-Music font-bold" : ""
+            selectedOption == "My" ? "text-Neutral-Mild font-bold" : ""
           }`}
           onClick={() => {
             handleOptionClick("My");
@@ -122,7 +122,7 @@ function SideList() {
           My Collection
         </button>
       </div>
-      <div className="border-b border-gray-200  pb-1 flex lg:gap-9 md:gap-6 gap-3 text-gray-600 text-xl font-semibold lg:justify-end justify-between lg:pl-0  pl-32">
+      <div className="border-b border-gray-200  pb-1 flex lg:gap-9 md:gap-6 gap-3 text-Neutral-Mild text-xl font-semibold lg:justify-end justify-between lg:pl-0  pl-32">
         <span>Average</span> <span>Rated</span> <span>Wants</span>
       </div>
       {selectedOption == "Editor" &&
@@ -150,16 +150,16 @@ function SideList() {
 function SideInfo() {
   return (
     <div className="flex md:w-11/12 lg:w-10/12 flex-col ">
-      <div className="text-Music font-bold text-xl md:text-3xl my-4 xl:my-8">
+      <div className="text-Neutral font-bold text-xl md:text-3xl my-3 xl:my-6">
         Douban EN
       </div>
-      <div className="text-gray-500">
+      <div className="text-Neutral-Mild">
         <p>{infoPara1}</p>
         <p>{infoPara2}</p>
       </div>
       <Link
         to={"/"}
-        className="flex justify-center mt-4 pt-1 h-10 text-xl font-bold text-white bg-blue-500 rounded-md hover:bg-blue-400"
+        className="flex justify-center mt-4 pt-1 h-10 text-xl font-bold text-white  rounded-md bg-Neutral hover:bg-Neutral-Mild"
       >
         Know More
       </Link>

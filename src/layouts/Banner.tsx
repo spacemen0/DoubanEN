@@ -13,16 +13,16 @@ export function Banner() {
           />
         </div>
         <div className="flex flex-col max-w-[800px] mr-2">
-          <div className="lg:text-4xl text-3xl flex !sm:flex-col font-bold text-gray-600">
+          <div className="lg:text-4xl text-3xl flex !sm:flex-col font-bold text-Neutral-Mild">
             <h1>Welcome to &nbsp;</h1>
             <span className="bg-gradient-to-r from-blue-900  to-sky-400 inline-block text-transparent bg-clip-text">
               Douban EN
             </span>
           </div>
           <div className="mt-2 md:text-xl">
-            <p>
-              {bannerText}
-              <Link to="/profile" className=" text-Music">
+            <p className="text-Neutral-Mild">
+              {bannerText + " "}
+              <Link to="/profile" className=" text-Neutral-Strong">
                 Learn about some of the ways you can use Douban EN for music
                 discovery.
               </Link>
