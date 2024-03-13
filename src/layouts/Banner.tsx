@@ -15,7 +15,7 @@ export function Banner() {
         <div className="flex flex-col max-w-[800px] mr-2">
           <div className="lg:text-4xl text-3xl flex !sm:flex-col font-bold text-Neutral-Mild">
             <h1>Welcome to &nbsp;</h1>
-            <span className="bg-gradient-to-r from-blue-900  to-sky-400 inline-block text-transparent bg-clip-text">
+            <span className="bg-gradient-to-r from-Music via-Movie  to-Book inline-block text-transparent bg-clip-text">
               Douban EN
             </span>
           </div>

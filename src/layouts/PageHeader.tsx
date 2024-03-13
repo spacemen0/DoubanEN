@@ -156,7 +156,7 @@ function DropDownSearchOption({
 
   return (
     <div
-      className="flex items-center justify-right transition-colors  bg-white w-screen md:w-96 h-10  text-gray-500
+      className="flex items-center justify-right transition-colors  bg-white w-screen md:w-96 h-10  text-Neutral-Mild
          border-gray-300 border-b-[0.5px] md:border absolute left-[-51px]
          md:left-3   top-[42px] md:top-[52px] md:shadow-sm shadow-gray-700"
     >
@@ -225,7 +225,7 @@ function HeaderUserSection() {
           className="flex  relative items-center transition-colors
                  hover:bg-gray-100 rounded-full  h-10 flex-grow justify-center p-0.5"
         >
-          <Menu size="32" color="#3974C7" />
+          <Menu size="32" color="rgb(75 85 99)" />
         </button>
         <DropDownMenu isOpen={isOpen} />
       </div>
@@ -241,7 +241,7 @@ function DropDownMenu({ isOpen }: { isOpen: boolean }) {
   };
   return (
     isOpen && (
-      <div className="absolute top-10 md:top-9 right-0 w-36  font-bold text-Music bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+      <div className="absolute top-10 md:top-9 right-0 w-36  font-bold text-Neutral bg-white shadow-lg ring-1 ring-Neutral-Strong ring-opacity-5">
         {isLoggedIn ? (
           <div>
             <MenuItem link={`/profile/${user!.ID}`} text="Profile" />

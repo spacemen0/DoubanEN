@@ -39,10 +39,10 @@ export default function Login() {
           </div>
           <div className="w-full bg-gray-100 lg:w-1/2 flex items-center justify-center">
             <div className="max-w-md w-full p-3 lg:p-6">
-              <h1 className="text-3xl font-semibold mb-6 text-black text-center">
+              <h1 className="text-3xl font-semibold mb-6 text-Neutral-Strong text-center">
                 Welcome Back
               </h1>
-              <h1 className="text-sm font-semibold mb-6 text-gray-500 text-center">
+              <h1 className="text-sm font-semibold mb-6 text-Neutral-Mild text-center">
                 Login to keep track of your favorites
               </h1>
 
@@ -50,7 +50,7 @@ export default function Login() {
                 <div>
                   <label
                     htmlFor="username"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-Neutral"
                   >
                     Username
                   </label>
@@ -68,7 +68,7 @@ export default function Login() {
                 <div>
                   <label
                     htmlFor="password"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-Neutral"
                   >
                     Password
                   </label>
@@ -86,7 +86,7 @@ export default function Login() {
                 <div>
                   <button
                     type="submit"
-                    className="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-black focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
+                    className="w-full bg-Neutral-Strong text-white p-2 rounded-md hover:bg-Neutral focus:outline-none focus:bg-Neutral-Strong focus:ring-2 focus:ring-offset-2 focus:ring-Neutral-Strong transition-colors duration-300"
                   >
                     Login
                   </button>
@@ -110,7 +110,7 @@ export default function Login() {
           </p>
           <Link
             to={"/register"}
-            className="flex justify-center mt-4 lg:mt-8 bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-black focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
+            className="flex justify-center mt-4 lg:mt-8 bg-Neutral-Strong text-white p-2 rounded-md hover:bg-Neutral focus:outline-none focus:Neutral-Strong focus:ring-2 focus:ring-offset-2 focus:ring-Neutral-Strong transition-colors duration-300"
           >
             Sign Up Now
           </Link>

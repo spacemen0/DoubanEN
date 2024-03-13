@@ -159,7 +159,7 @@ function Collections() {
   }, [id]);
 
   return (
-    <div className="flex flex-col p-2 md:p-4 lg:p-6 bg-gray-100 text-gray-600 border-t-2">
+    <div className="flex flex-col p-2 md:p-4 lg:p-6 bg-gray-100 text-Neutral-Mild border-t-2">
       <div className="flex gap-10 justify-start lg:text-2xl text-lg md:text-xl">
         <button
           className={`border-b-2  ${
@@ -173,7 +173,7 @@ function Collections() {
         </button>
         <button
           className={`border-b-2  ${
-            selectedOption == "Movie" ? "text-orange-800 font-bold" : ""
+            selectedOption == "Movie" ? "text-Movie font-bold" : ""
           }`}
           onClick={() => {
             handleOptionClick("Movie");
@@ -183,7 +183,7 @@ function Collections() {
         </button>
         <button
           className={`border-b-2  ${
-            selectedOption == "Book" ? "text-green-700 font-bold" : ""
+            selectedOption == "Book" ? "text-Book font-bold" : ""
           }`}
           onClick={() => {
             handleOptionClick("Book");
@@ -192,7 +192,7 @@ function Collections() {
           Book Collection
         </button>
       </div>
-      <div className="border-b py-2 border-gray-200 text-xl font-semibold flex 3xl:pl-64 2xl:pl-48 text-gray-600  justify-between   pl-32">
+      <div className="border-b py-2 border-gray-200 text-xl font-semibold flex 3xl:pl-64 2xl:pl-48 text-Neutral-Mild justify-between pl-32">
         <span>Average</span> <span>Rated</span> <span>Wants</span>
       </div>
       {myItems.map((item) => (
