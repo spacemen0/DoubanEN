@@ -163,6 +163,13 @@ export const getMedia = async (
       ratings: faker.number.int({ min: 100, max: 500 }),
       type: "Music",
       wants: 0,
+      tracks: [
+        faker.music.songName(),
+        faker.music.songName(),
+        faker.music.songName(),
+        faker.music.songName(),
+        faker.music.songName(),
+      ],
     };
   else if (type === "Movie")
     return {

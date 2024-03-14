@@ -27,6 +27,7 @@ export type Media = {
   average: number;
   ratings: number;
   wants: number;
+  tracks?: string[];
 };
 
 export type Review = {
