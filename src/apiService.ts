@@ -6,7 +6,7 @@ import {
   musicItems,
   myItems,
 } from "./data";
-import { AuthResponse, Media, User } from "./type";
+import { AuthResponse, Media, Review, User } from "./type";
 
 export const fetchCollectionItems = async (
   userId: number,
@@ -162,7 +162,7 @@ export const getMedia = async (
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
       type: "Music",
-      wants: 0,
+      wants: faker.number.int({ min: 100, max: 500 }),
       tracks: [
         faker.music.songName(),
         faker.music.songName(),
@@ -182,7 +182,14 @@ export const getMedia = async (
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
       type: "Movie",
-      wants: 0,
+      wants: faker.number.int({ min: 100, max: 500 }),
+      casts: [
+        { character: faker.person.fullName(), actor: faker.person.fullName() },
+        { character: faker.person.fullName(), actor: faker.person.fullName() },
+        { character: faker.person.fullName(), actor: faker.person.fullName() },
+        { character: faker.person.fullName(), actor: faker.person.fullName() },
+        { character: faker.person.fullName(), actor: faker.person.fullName() },
+      ],
     };
   else
     return {
@@ -195,6 +202,40 @@ export const getMedia = async (
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
       type: "Book",
-      wants: 0,
+      wants: faker.number.int({ min: 100, max: 500 }),
+      chapters: [
+        faker.music.songName(),
+        faker.music.songName(),
+        faker.music.songName(),
+        faker.music.songName(),
+        faker.music.songName(),
+      ],
     };
+};
+
+export const getMediaReviews = (
+  id: number,
+  type: "Music" | "Movie" | "Book"
+): Promise<Review[]> => {
+  console.log(id, type);
+  if (type === "Music") {
+    return Promise.resolve([
+      {
+        username: faker.internet.userName(),
+        userID: faker.number.int(),
+        reviewDate: faker.date.past().toISOString().split("T")[0],
+        star: 3.5,
+        content: faker.lorem.paragraph() + faker.lorem.paragraph(),
+      },
+      {
+        username: faker.internet.userName(),
+        userID: faker.number.int(),
+        reviewDate: faker.date.past().toISOString().split("T")[0],
+        star: 3.5,
+        content: faker.lorem.paragraph() + faker.lorem.paragraph(),
+      },
+    ]);
+  } else {
+    return Promise.reject(new Error("Unsupported media type"));
+  }
 };

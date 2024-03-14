@@ -16,8 +16,8 @@ export function FeaturedItem({
         (media.type === "Music"
           ? "text-Music"
           : media.type === "Movie"
-          ? "text-Movie"
-          : "text-Book")
+          ? "text-Movie "
+          : "text-Book ")
       }
     >
       <MediaDisplay media={media} />

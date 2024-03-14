@@ -61,7 +61,10 @@ export function ReviewDisplay({ review }: { review: Review }) {
       </div>
       <p className="mt-2 lg:text-xl">{truncateContent(review.content, 200)}</p>
       {review.content.length > 200 && (
-        <button onClick={toggleExpand} className=" font-bold rounded-md mt-2 ">
+        <button
+          onClick={toggleExpand}
+          className=" font-extrabold rounded-md mt-1 lg:font-bold"
+        >
           {expanded ? "Show Less" : "Show More"}
         </button>
       )}

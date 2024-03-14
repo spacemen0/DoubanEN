@@ -28,6 +28,8 @@ export type Media = {
   ratings: number;
   wants: number;
   tracks?: string[];
+  chapters?: string[];
+  casts?: { character: string; actor: string }[];
 };
 
 export type Review = {
