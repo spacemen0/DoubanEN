@@ -206,7 +206,7 @@ function HeaderUserSection() {
       {isLoggedIn && (
         <div className="pb-1">
           <Link
-            className="hidden md:inline font-bold text-lg text-Music h-10"
+            className="hidden md:inline font-bold text-lg text-Neutral-Mild h-10"
             to={"/profile"}
           >
             {user?.name}

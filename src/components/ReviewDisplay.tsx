@@ -57,7 +57,18 @@ export function ReviewDisplay({ review }: { review: Review }) {
       </p>
       <div className="flex items-center lg:text-xl mt-2">
         <p className="font-semibold">Rating:&nbsp;</p>
-        <div className="flex">{renderStars()}</div>
+        <div className="relative">
+          <div className="flex gap-1 text-Neutral-Mild">
+            {Array.from({ length: 5 }, () => (
+              <Star
+                fill="rgb(209 213 219)"
+                strokeWidth={2}
+                strokeOpacity={0.5}
+              />
+            ))}
+          </div>
+          <div className="flex gap-1 top-0 absolute">{renderStars()}</div>
+        </div>
       </div>
       <p className="mt-2 lg:text-xl">{truncateContent(review.content, 200)}</p>
       {review.content.length > 200 && (

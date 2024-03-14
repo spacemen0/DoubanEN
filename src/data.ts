@@ -22,7 +22,7 @@ export const featuredItems: {
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
       type: "Movie",
-      wants: 0,
+      wants: faker.number.int({ min: 100, max: 500 }),
     },
     review: {
       username: faker.internet.userName(),
@@ -43,7 +43,7 @@ export const featuredItems: {
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
       type: "Music",
-      wants: 0,
+      wants: faker.number.int({ min: 100, max: 500 }),
     },
     review: {
       username: faker.internet.userName(),
@@ -64,7 +64,7 @@ export const featuredItems: {
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
       type: "Movie",
-      wants: 0,
+      wants: faker.number.int({ min: 100, max: 500 }),
     },
     review: {
       username: faker.internet.userName(),
@@ -85,7 +85,7 @@ export const featuredItems: {
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
       type: "Book",
-      wants: 0,
+      wants: faker.number.int({ min: 100, max: 500 }),
     },
     review: {
       username: faker.internet.userName(),
@@ -106,7 +106,7 @@ export const featuredItems: {
       average: 3.5,
       ratings: faker.number.int({ min: 100, max: 500 }),
       type: "Music",
-      wants: 0,
+      wants: faker.number.int({ min: 100, max: 500 }),
     },
     review: {
       username: faker.internet.userName(),
@@ -129,7 +129,7 @@ export const editorItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Book",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     id: 1,
@@ -141,7 +141,7 @@ export const editorItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Movie",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     id: 1,
@@ -153,7 +153,7 @@ export const editorItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Book",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     id: 1,
@@ -165,7 +165,7 @@ export const editorItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Music",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     id: 1,
@@ -177,7 +177,7 @@ export const editorItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Music",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     id: 1,
@@ -189,7 +189,7 @@ export const editorItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Movie",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
 ];
 
@@ -204,7 +204,7 @@ export const myItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Music",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     id: 1,
@@ -216,7 +216,7 @@ export const myItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Movie",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     id: 1,
@@ -228,7 +228,7 @@ export const myItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Music",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     id: 1,
@@ -240,7 +240,7 @@ export const myItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Book",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     id: 1,
@@ -252,7 +252,7 @@ export const myItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Movie",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     id: 1,
@@ -264,7 +264,7 @@ export const myItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Book",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
 ];
 
@@ -279,10 +279,10 @@ export const musicItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Music",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
-    id: 1,
+    id: 2,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -291,10 +291,10 @@ export const musicItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Music",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
-    id: 1,
+    id: 4,
     image: generateRandomData().src,
     title: faker.lorem.words(),
     author: faker.person.fullName(),
@@ -303,7 +303,7 @@ export const musicItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Music",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
 ];
 
@@ -318,7 +318,7 @@ export const movieItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Movie",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     id: 1,
@@ -330,7 +330,7 @@ export const movieItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Movie",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     id: 1,
@@ -342,7 +342,7 @@ export const movieItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Movie",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
 ];
 
@@ -357,7 +357,7 @@ export const bookItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Book",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     id: 1,
@@ -369,7 +369,7 @@ export const bookItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Book",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
   {
     id: 1,
@@ -381,7 +381,7 @@ export const bookItems: Media[] = [
     average: 3.5,
     ratings: faker.number.int({ min: 100, max: 500 }),
     type: "Book",
-    wants: 0,
+    wants: faker.number.int({ min: 100, max: 500 }),
   },
 ];
 

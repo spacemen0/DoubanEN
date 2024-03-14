@@ -1,10 +1,9 @@
-import { generateRandomData } from "../data";
 import { PageHeader } from "../layouts/PageHeader";
 import { MyImage } from "../components/Image";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
-import { fetchCollectionItems } from "../apiService";
+import { fetchCollectionItems, fetchCurrentOn } from "../apiService";
 import { ListItem } from "../components/ListItem";
 import { Media } from "../type";
 
@@ -20,11 +19,6 @@ export default function Profile() {
       <div className="overflow-y-scroll">
         <div className="flex flex-col w-full md:10/12 h-auto mx-auto">
           <div className="flex !md:flex-col gap-5 lg:gap-10 justify-center items-center px-4 py-4 lg:py-8 bg-gray-100">
-            {/* <div className="w-56">
-              {" "}
-              <Image {...generateRandomData()} />
-            </div> */}
-
             <UserInfo />
             <CurrentOn />
           </div>
@@ -47,7 +41,11 @@ function UserInfo() {
     <div className="w-96 md:max-w-sm lg:max-w-md xl:max-w-lg p-4 bg-white shadow-md rounded-md">
       <div className="flex items-center mb-4">
         <div className="mr-4 !md:max-w-48">
-          <MyImage {...generateRandomData()} />
+          <MyImage
+            src={user!.imageUrl}
+            alt={"Profile Image of " + user!.name}
+            href={`/profile/${user!.ID}`}
+          />
         </div>
         <div>
           <h1 className="text-xl lg:text-2xl font-semibold mb-1">
@@ -79,6 +77,22 @@ function UserInfo() {
   );
 }
 function CurrentOn() {
+  const { user } = useAuthContext();
+  const [currentOn, SetCurrentOn] = useState<Media[]>();
+  useEffect(() => {
+    const getCurrentOn = async () => {
+      try {
+        const items = await fetchCurrentOn(user!.ID);
+        SetCurrentOn(items);
+      } catch (error) {
+        console.error("Error fetching default Music Collection items:", error);
+      }
+    };
+    getCurrentOn();
+  }, [user]);
+  if (!currentOn) {
+    return <></>;
+  }
   return (
     <div className="flex-col w-96 md:w-[420px]  pb-6 md:pl-4 gap-2 items-center justify-center text-lg text-gray-600">
       <div className="flex flex-col mb-2 w-full shadow-md rounded-md bg-white">
@@ -86,7 +100,11 @@ function CurrentOn() {
         <h1 className=" font-bold text-center m-2">Listening</h1>
         <div className="flex p-2 text-center">
           <div className="w-32">
-            <MyImage {...generateRandomData()} />
+            <MyImage
+              src={currentOn[0].image}
+              alt={currentOn[0].title}
+              href={`/media/${currentOn[0].type}/${currentOn[0].id}`}
+            />
           </div>
 
           <div className=" ml-4 flex flex-col justify-center">
@@ -101,7 +119,11 @@ function CurrentOn() {
         <h1 className=" font-bold text-center m-2">Watching</h1>
         <div className=" flex p-2 text-center">
           <div className="w-32">
-            <MyImage {...generateRandomData()} />
+            <MyImage
+              src={currentOn[1].image}
+              alt={currentOn[1].title}
+              href={`/media/${currentOn[0].type}/${currentOn[1].id}`}
+            />
           </div>
           <div className=" ml-4 flex flex-col justify-center">
             {" "}
@@ -115,7 +137,11 @@ function CurrentOn() {
         <h1 className="font-bold text-center m-2">Reading</h1>
         <div className="flex p-2 text-center">
           <div className="w-32">
-            <MyImage {...generateRandomData()} />
+            <MyImage
+              src={currentOn[2].image}
+              alt={currentOn[2].title}
+              href={`/media/${currentOn[0].type}/${currentOn[2].id}`}
+            />
           </div>
           <div className=" ml-4 flex flex-col justify-center">
             {" "}
@@ -139,6 +165,7 @@ function Collections() {
     setSelectedOption(option);
     try {
       const items = await fetchCollectionItems(parseInt(id!), option);
+      console.log(items);
       setItems(items);
     } catch (error) {
       console.error(`Error fetching ${option} Collection items:`, error);

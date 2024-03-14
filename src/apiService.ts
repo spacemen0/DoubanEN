@@ -28,6 +28,12 @@ export const fetchCollectionItems = async (
   throw new Error(`Invalid type: ${type}`);
 };
 
+export const fetchCurrentOn = async (userId: number): Promise<Media[]> => {
+  console.log(userId);
+  console.log(myItems.slice(0, 3));
+  return myItems.slice(0, 3);
+};
+
 export const getUser = async (id: number): Promise<User> => {
   // try {
   //   const response = await fetch(`${apiUrl}user/${id}`, {
@@ -46,14 +52,14 @@ export const getUser = async (id: number): Promise<User> => {
   console.log(id);
   return {
     ID: 1,
-    name: "Spacemen0",
-    imageUrl: "",
+    name: faker.person.fullName(),
+    imageUrl: generateRandomData().src,
     role: "Standard",
-    bio: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut 
-      labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-       nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur.`,
-    memberSince: "2002-10-2",
+    bio:
+      faker.lorem.paragraphs() +
+      faker.lorem.paragraphs() +
+      faker.lorem.paragraphs(),
+    memberSince: faker.date.past().toISOString().split("T")[0],
   };
 };
 

@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
 import { PageHeader } from "../layouts/PageHeader";
 import { NotFound } from "../components/NotFound";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { getMedia } from "../apiService";
 import { Media } from "../type";
 import { MyImage } from "../components/Image";
 import { MediaInfo } from "../components/MediaInfo";
+import { ChevronDown, ChevronUp, Star, StarHalf } from "lucide-react";
 
 export default function MediaPage() {
   const { type, id } = useParams();
@@ -43,6 +44,7 @@ export default function MediaPage() {
           </div>
           <div className="flex-1 lg:flex-[0.7] w-full mt-2 flex flex-col mb-4 text-Neutral border-Neutral-Mild">
             <MediaInfo media={media} home={false} />
+            <Rating media={media} />
             <div className="lg:hidden">
               <AdditionalInfo media={media} />
             </div>
@@ -50,6 +52,116 @@ export default function MediaPage() {
         </div>
       )}
     </>
+  );
+}
+
+function Rating({ media }: { media: Media }) {
+  const [stars, setStars] = useState<ReactNode[]>();
+  const [showDropDown, setShowDropDown] = useState(false);
+  const [score, setScore] = useState<number | string>("");
+
+  const renderStars = (score: number) => {
+    const stars = Math.floor(score);
+    const hasHalfStar = score % 1 !== 0;
+    const starElements = [];
+
+    for (let i = 0; i < stars; i++) {
+      starElements.push(
+        <Star
+          key={`full-star-${i}`}
+          color="rgb(234 179 8)"
+          fill="rgb(234 179 8)"
+        />
+      );
+    }
+
+    if (hasHalfStar) {
+      starElements.push(
+        <StarHalf
+          key="half-star"
+          color="rgb(234 179 8)"
+          fill="rgb(234 179 8)"
+        />
+      );
+    }
+
+    return starElements;
+  };
+  const handleScoreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const MyScore = parseFloat(event.target.value);
+    setScore(MyScore);
+    setStars(renderStars(MyScore as number));
+  };
+
+  return (
+    <div className="mt-4 lg:ml-8 relative pb-4 border-b-2">
+      <p className="font-bold text-2xl">Rating/Catalog</p>
+      <div className="flex !lg:flex-col">
+        <div className="border flex justify-center items-center rounded-sm pl-2 pr-4 py-2 mt-4 w-48 h-10">
+          <div className="relative">
+            <div className="flex gap-1">
+              {Array.from({ length: 5 }, () => (
+                <Star
+                  fill="rgb(209 213 219)"
+                  strokeWidth={2}
+                  strokeOpacity={0.5}
+                />
+              ))}
+            </div>
+            <div className="flex gap-1 top-0 absolute">{stars}</div>
+          </div>
+          <button
+            onClick={() => {
+              setShowDropDown(!showDropDown);
+            }}
+          >
+            {!showDropDown ? (
+              <ChevronDown size={32} className="mt-1" />
+            ) : (
+              <ChevronUp size={32} className="mb-1" />
+            )}
+          </button>
+        </div>
+        <div>
+          <button
+            className="h-10 mt-4 lg:ml-2 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
+         focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors"
+          >
+            Set{" "}
+            {media.type === "Music"
+              ? "Listing"
+              : media.type === "Movie"
+              ? "Watching"
+              : "Reading"}
+          </button>
+          <button
+            className=" h-10 mt-4 ml-2 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
+         focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors"
+          >
+            On Wishlist
+          </button>
+          <button
+            className=" h-10 mt-4 ml-2 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
+         focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors"
+          >
+            Review
+          </button>
+        </div>
+      </div>
+      {showDropDown && (
+        <div className="absolute top-18 w-48 h-6 border rounded-md flex justify-center bg-gray-200 items-center">
+          <input
+            type="range"
+            min="0.5"
+            max="5"
+            step="0.5"
+            value={score as number}
+            onChange={handleScoreChange}
+            className=" w-40 h-1 bg-Neutral-Mild appearance-none"
+          />
+        </div>
+      )}
+    </div>
   );
 }
 
