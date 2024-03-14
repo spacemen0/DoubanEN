@@ -13,7 +13,10 @@ export default function MediaPage() {
       try {
         const media = await getMedia(
           parseInt(id!),
-          type as "Music" | "Movie" | "Book"
+          (type!.charAt(0).toUpperCase() + type!.slice(1)) as
+            | "Music"
+            | "Movie"
+            | "Book"
         );
         setMedia(media);
       } catch (error) {
@@ -39,46 +42,69 @@ export default function MediaPage() {
 
 function MediaPageMediaDisplay({ media }: { media: Media }) {
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="md:ml-8 flex-1 flex flex-col items-center !md:items-start justify-center lg:text-xl">
-        <Link
-          to={`/media/${media.type.toLowerCase()}/${media.id}`}
-          className="text-xl lg:text-2xl font-semibold mt-2"
-        >
-          {media.title}
-        </Link>
-        <p className="mt-2">
-          <span className="font-semibold">Type:&nbsp;</span> {media.type}
-        </p>
-        <p className="mt-2">
-          <span className="font-semibold">
-            {media.type === "Music"
-              ? "Artist"
-              : media.type === "Book"
-              ? "Author"
-              : "Director"}
-            :&nbsp;
-          </span>{" "}
-          {media.author}
-        </p>
-        <p className="mt-2">
-          <span className="font-semibold">Genre:&nbsp;</span> {media.genre}
-        </p>
-        <p className="mt-2">
-          <span className="text-xl lg:text-2xl font-semibold">
-            {media.average}&nbsp;
-          </span>
-          from{" "}
-          <span className="text-xl lg:text-2xl font-semibold">
-            {" "}
-            {media.ratings}&nbsp;
-          </span>
-          ratings
-        </p>
-        <p className="mt-2 text-xl lg:text-2xl font-semibold">
-          {media.wants + " "}wants
-        </p>
-      </div>
+    <div className="flex justify-center items-center">
+      <MediaInfo media={media} />
+    </div>
+  );
+}
+
+function MediaInfo({ media }: { media: Media }) {
+  return (
+    <div className="md:ml-8 flex-1 flex flex-col items-center !md:items-start justify-center lg:text-xl">
+      <Link
+        to={`/media/${media.type.toLowerCase()}/${media.id}`}
+        className="text-xl lg:text-2xl font-semibold mt-2"
+      >
+        {media.title}
+      </Link>
+      <table className="w-full">
+        <tbody>
+          <tr>
+            <td className="font-semibold pr-4 pb-2">Type:</td>
+            <td>{media.type}</td>
+          </tr>
+          <tr>
+            <td className="font-semibold pr-4 pb-2">Released Date:</td>
+            <td>{media.releaseDate}</td>
+          </tr>
+          <tr>
+            <td className="font-semibold pr-4 pb-2">
+              {media.type === "Music"
+                ? "Artist"
+                : media.type === "Book"
+                ? "Author"
+                : "Director"}
+              :
+            </td>
+            <td>{media.author}</td>
+          </tr>
+          <tr>
+            <td className="font-semibold pr-4 pb-2">Genre:</td>
+            <td>{media.genre}</td>
+          </tr>
+          <tr>
+            <td className="font-semibold pr-4 pb-2">Ratings:</td>
+            <td>
+              <span className="text-xl lg:text-2xl font-semibold">
+                {media.average}&nbsp;
+              </span>
+              from&nbsp;
+              <span className="text-xl lg:text-2xl font-semibold">
+                {media.ratings}&nbsp;
+              </span>
+              ratings
+            </td>
+          </tr>
+          <tr>
+            <td className="font-semibold pr-4 pb-2">Wants:</td>
+            <td>
+              <span className="text-xl lg:text-2xl font-semibold">
+                {media.wants}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }
