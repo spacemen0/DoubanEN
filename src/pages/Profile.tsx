@@ -42,9 +42,9 @@ function UserInfo() {
       <div className="flex items-center mb-4">
         <div className="mr-4 !md:max-w-48">
           <MyImage
-            src={user!.imageUrl}
+            src={user!.profileImage}
             alt={"Profile Image of " + user!.name}
-            href={`/profile/${user!.ID}`}
+            href={`/profile/${user!.Id}`}
           />
         </div>
         <div>
@@ -82,7 +82,7 @@ function CurrentOn() {
   useEffect(() => {
     const getCurrentOn = async () => {
       try {
-        const items = await fetchCurrentOn(user!.ID);
+        const items = await fetchCurrentOn(user!.Id);
         SetCurrentOn(items);
       } catch (error) {
         console.error("Error fetching default Music Collection items:", error);

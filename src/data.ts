@@ -26,7 +26,8 @@ export const featuredItems: {
     },
     review: {
       username: faker.internet.userName(),
-      userID: faker.number.int(),
+      userId: faker.number.int(),
+      mediaId: faker.number.int(),
       reviewDate: faker.date.past().toISOString().split("T")[0],
       star: 3.5,
       content: faker.lorem.paragraph() + faker.lorem.paragraph(),
@@ -47,7 +48,8 @@ export const featuredItems: {
     },
     review: {
       username: faker.internet.userName(),
-      userID: faker.number.int(),
+      userId: faker.number.int(),
+      mediaId: faker.number.int(),
       reviewDate: faker.date.past().toISOString().split("T")[0],
       star: 3.5,
       content: faker.lorem.paragraph() + faker.lorem.paragraph(),
@@ -68,7 +70,8 @@ export const featuredItems: {
     },
     review: {
       username: faker.internet.userName(),
-      userID: faker.number.int(),
+      userId: faker.number.int(),
+      mediaId: faker.number.int(),
       reviewDate: faker.date.past().toISOString().split("T")[0],
       star: 3.5,
       content: faker.lorem.paragraph() + faker.lorem.paragraph(),
@@ -89,7 +92,8 @@ export const featuredItems: {
     },
     review: {
       username: faker.internet.userName(),
-      userID: faker.number.int(),
+      userId: faker.number.int(),
+      mediaId: faker.number.int(),
       reviewDate: faker.date.past().toISOString().split("T")[0],
       star: 3.5,
       content: faker.lorem.paragraph() + faker.lorem.paragraph(),
@@ -110,7 +114,8 @@ export const featuredItems: {
     },
     review: {
       username: faker.internet.userName(),
-      userID: faker.number.int(),
+      userId: faker.number.int(),
+      mediaId: faker.number.int(),
       reviewDate: faker.date.past().toISOString().split("T")[0],
       star: 3.5,
       content: faker.lorem.paragraph() + faker.lorem.paragraph(),

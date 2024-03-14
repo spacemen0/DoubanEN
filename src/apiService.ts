@@ -12,14 +12,6 @@ export const fetchCollectionItems = async (
   userId: number,
   type: "Music" | "Movie" | "Book" | "All"
 ): Promise<Media[]> => {
-  // try {
-  //   const response = await fetch(`/${type}/${userId}`);
-  //   const data = await response.json();
-  //   return JSON.parse(data);
-  // } catch (error) {
-  //   console.error("Error fetching My Collection items:", error);
-  //   throw error;
-  // }
   console.log(userId);
   if (type === "Music") return musicItems;
   if (type === "Movie") return movieItems;
@@ -34,26 +26,32 @@ export const fetchCurrentOn = async (userId: number): Promise<Media[]> => {
   return myItems.slice(0, 3);
 };
 
+export const fetchMyRating = async (
+  userId: number,
+  mediaId: number
+): Promise<Review> => {
+  console.log(userId, mediaId);
+  return {
+    userId: userId,
+    username: "Spacemen0",
+    mediaId: mediaId,
+    reviewDate: "2024-02-13",
+    star: 3.5,
+    content: "My Review",
+  };
+};
+
+export function submitRating(review: Review) {
+  console.log(review);
+  throw new Error("Function not implemented.");
+}
+
 export const getUser = async (id: number): Promise<User> => {
-  // try {
-  //   const response = await fetch(`${apiUrl}user/${id}`, {
-  //     method: "GET",
-  //   });
-  //   const data = await response.json();
-  //   if (response.status === 200) {
-  //     return data as User;
-  //   } else {
-  //     throw data;
-  //   }
-  // } catch (error) {
-  //   console.error("Get user failed:", error);
-  //   throw error;
-  // }
   console.log(id);
   return {
-    ID: 1,
+    Id: 1,
     name: faker.person.fullName(),
-    imageUrl: generateRandomData().src,
+    profileImage: generateRandomData().src,
     role: "Standard",
     bio:
       faker.lorem.paragraphs() +
@@ -68,30 +66,6 @@ export const register = async (
   email: string,
   password: string
 ): Promise<AuthResponse> => {
-  // try {
-  //   const url = `${apiUrl}login`;
-  //   const body = { username, password, email };
-  //   const response = await fetch(url, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(body),
-  //   });
-
-  //   if (response.status === 200) {
-  //     const data = await response.json();
-  //     setIsLoggedIn(true);
-  //     setToken(data.token);
-  //     getUser(data.token);
-  //   } else {
-  //     const data = await response.json();
-  //     console.log(data.message);
-  //     setError(data.message);
-  //   }
-  // } catch (error) {
-  //   setError(error as string);
-  // }
   console.log(username, email, password);
   return { userId: 1, token: "randomToken" };
 };
@@ -100,54 +74,11 @@ export const login = async (
   username: string,
   password: string
 ): Promise<AuthResponse> => {
-  // try {
-  //   const url = `${apiUrl}login`;
-  //   const body = { username, password };
-  //   const response = await fetch(url, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(body),
-  //   });
-  //   if (response.status === 200) {
-  //     const data = await response.json();
-  //     setIsLoggedIn(true);
-  //     setToken(data.token);
-  //     getUser(data.token);
-  //   } else {
-  //     const data = await response.json();
-  //     console.log(data.message);
-  //     setError(data.message);
-  //   }
-  // } catch (error) {
-  //   setError(error as string);
-  // }
   console.log(username, password);
   return { userId: 1, token: "randomToken" };
 };
 
 export const logout = async (token: string) => {
-  // try {
-  //   const response = await fetch(`${apiUrl}logout`, {
-  //     method: "DELETE",
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   });
-
-  //   if (response.status === 204) {
-  //     setIsLoggedIn(false);
-  //     setUser(null);
-  //     setToken(null);
-  //     setError(null);
-  //   } else {
-  //     const data = await response.json();
-  //     setError(data.message);
-  //   }
-  // } catch (error) {
-  //   setError(error as string);
-  // }
   if (token === "randomToken") return;
   throw new Error("Error logging out");
 };
@@ -219,29 +150,21 @@ export const getMedia = async (
     };
 };
 
-export const getMediaReviews = (
+export const getMediaReviews = async (
   id: number,
   type: "Music" | "Movie" | "Book"
 ): Promise<Review[]> => {
   console.log(id, type);
-  if (type === "Music") {
-    return Promise.resolve([
-      {
-        username: faker.internet.userName(),
-        userID: faker.number.int(),
-        reviewDate: faker.date.past().toISOString().split("T")[0],
-        star: 3.5,
-        content: faker.lorem.paragraph() + faker.lorem.paragraph(),
-      },
-      {
-        username: faker.internet.userName(),
-        userID: faker.number.int(),
-        reviewDate: faker.date.past().toISOString().split("T")[0],
-        star: 3.5,
-        content: faker.lorem.paragraph() + faker.lorem.paragraph(),
-      },
-    ]);
-  } else {
-    return Promise.reject(new Error("Unsupported media type"));
-  }
+  const reviews: Review[] = [];
+  Array.from({ length: 5 }, () => {
+    reviews.push({
+      username: faker.internet.userName(),
+      userId: faker.number.int(),
+      mediaId: faker.number.int(),
+      reviewDate: faker.date.past().toISOString().split("T")[0],
+      star: 3.5,
+      content: faker.lorem.paragraph() + faker.lorem.paragraph(),
+    });
+  });
+  return reviews;
 };

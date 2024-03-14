@@ -61,8 +61,13 @@ export function ReviewDisplay({ review }: { review: Review }) {
         <p className="font-semibold">Rating:&nbsp;</p>
         <div className="relative">
           <div className="flex gap-1 text-Neutral-Mild">
-            {Array.from({ length: 5 }, () => (
-              <Star fill="rgb(209 213 219)" strokeWidth={0} />
+            {Array.from({ length: 5 }, (_, index) => (
+              <Star
+                key={index}
+                fill="rgb(209 213 219)"
+                strokeWidth={0}
+                size={28}
+              />
             ))}
           </div>
           <div className="flex gap-1 top-0 absolute">{renderStars()}</div>

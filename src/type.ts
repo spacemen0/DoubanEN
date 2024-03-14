@@ -34,7 +34,8 @@ export type Media = {
 
 export type Review = {
   username: string;
-  userID: number;
+  userId: number;
+  mediaId: number;
   reviewDate: string;
   star: 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | 3.5 | 4.0 | 4.5 | 5.0;
   content: string;
@@ -44,9 +45,9 @@ export type User = {
   name: string;
   role: "Admin" | "Contributor" | "Standard";
   memberSince: string;
-  imageUrl: string;
+  profileImage: string;
   bio: string;
-  ID: number;
+  Id: number;
 };
 
 export type UserState = {
