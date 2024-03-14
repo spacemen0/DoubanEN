@@ -42,16 +42,16 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     getWithExpiry<string>("token")
   );
 
-  const [error, setError] = useState<string | null>(() =>
-    getWithExpiry<string>("error")
+  const [message, setMessage] = useState<string | null>(() =>
+    getWithExpiry<string>("message")
   );
 
   useEffect(() => {
     setWithExpiry("isAuthenticated", isLoggedIn, expiryTime);
     setWithExpiry("user", user, expiryTime);
     setWithExpiry("token", token, expiryTime);
-    setWithExpiry("error", error, expiryTime);
-  }, [isLoggedIn, user, token, error]);
+    setWithExpiry("message", message, expiryTime);
+  }, [isLoggedIn, user, token, message]);
 
   const handleLogin = async (username: string, password: string) => {
     const response = await login(username, password);
@@ -68,7 +68,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     setIsLoggedIn(false);
     setUser(null);
     setToken(null);
-    setError(null);
+    setMessage(null);
   };
 
   const handleRegister = async (
@@ -85,17 +85,60 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  const handleSetMessage = (message: string) => {
+    console.log(message);
+    setMessage(message);
+  };
+
   const contextValue: AuthContextType = {
     isLoggedIn,
     user,
     token,
-    error,
+    message: message,
     login: handleLogin,
     logout: handleLogout,
     register: handleRegister,
+    setMessage: handleSetMessage,
   };
 
   return (
-    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>
+      <MessageBox
+        message={message}
+        onHover={(e) => {
+          e.currentTarget.classList.remove("opacity-90");
+          e.currentTarget.classList.add("opacity-0");
+          const timer = setTimeout(() => {
+            setMessage(null);
+            clearTimeout(timer);
+          }, 1000);
+        }}
+      />
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+const MessageBox = ({
+  message,
+  onHover,
+}: {
+  message: string | null;
+  onHover: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+}) => {
+  return (
+    <>
+      {message && (
+        <div
+          className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+          p-6 rounded-md bg-gray-200 border font-semibold text-xl text-Neutral transition-opacity duration-1000 opacity-90"
+          onMouseEnter={(e) => {
+            onHover(e);
+          }}
+        >
+          {message}
+        </div>
+      )}
+    </>
   );
 };

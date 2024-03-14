@@ -5,7 +5,7 @@ export interface AuthContextType {
   isLoggedIn: boolean | null;
   user: User | null;
   token: string | null;
-  error: string | null;
+  message: string | null;
   login: (username: string, password: string) => Promise<void>;
   logout: (token: string) => Promise<void>;
   register: (
@@ -13,6 +13,7 @@ export interface AuthContextType {
     email: string,
     password: string
   ) => Promise<void>;
+  setMessage: (message: string) => void;
 }
 
 export const AuthContext = React.createContext<AuthContextType | null>(null);

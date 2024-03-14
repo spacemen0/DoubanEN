@@ -61,7 +61,7 @@ function Rating({ media }: { media: Media }) {
   const [showDropDown, setShowDropDown] = useState(false);
   const [score, setScore] = useState<number>(0);
   const [rated, setRated] = useState<Date>();
-  const { isLoggedIn, user } = useAuthContext();
+  const { isLoggedIn, user, setMessage } = useAuthContext();
   const renderStars = (score: number) => {
     const stars = Math.floor(score);
     const hasHalfStar = score % 1 !== 0;
@@ -125,7 +125,7 @@ function Rating({ media }: { media: Media }) {
       </div>
 
       <div className="flex !lg:flex-col lg:justify-start lg:items-center items-start">
-        <div className="border flex justify-center items-centerrounded-sm lg:pl-2 pr-2 py-2 mt-4">
+        <div className="border flex justify-center items-center rounded-sm lg:pl-2 pr-2 py-2 mt-4">
           <div className="relative ">
             <div className="flex gap-1 h-[28px]">
               {Array.from({ length: 5 }, (_, index) => (
@@ -168,19 +168,19 @@ function Rating({ media }: { media: Media }) {
         <div className="grid gap-2 lg:grid-cols-4 md:grid-cols-2">
           <button
             onClick={() => {
-              const star = score as
-                | 2
-                | 1
-                | 0.5
-                | 1.5
-                | 2.5
-                | 3
-                | 3.5
-                | 4
-                | 4.5
-                | 5;
               if (user) {
                 try {
+                  const star = score as
+                    | 2
+                    | 1
+                    | 0.5
+                    | 1.5
+                    | 2.5
+                    | 3
+                    | 3.5
+                    | 4
+                    | 4.5
+                    | 5;
                   submitRating({
                     userId: user.Id,
                     username: user.name,
@@ -194,6 +194,8 @@ function Rating({ media }: { media: Media }) {
                 } catch (error) {
                   console.log(error);
                 }
+              } else {
+                setMessage("Please log in");
               }
             }}
             className="  mt-4 lg:ml-2 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
