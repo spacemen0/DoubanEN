@@ -13,6 +13,7 @@ export function ReviewDisplay({ review }: { review: Review }) {
       starElements.push(
         <Star
           strokeWidth={0}
+          size={28}
           key={`full-star-${i}`}
           color="rgb(234 179 8)"
           fill="rgb(234 179 8)"
@@ -24,6 +25,7 @@ export function ReviewDisplay({ review }: { review: Review }) {
       starElements.push(
         <StarHalf
           strokeWidth={0}
+          size={28}
           key="half-star"
           color="rgb(234 179 8)"
           fill="rgb(234 179 8)"
