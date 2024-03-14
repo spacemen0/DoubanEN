@@ -68,6 +68,7 @@ function Rating({ media }: { media: Media }) {
     for (let i = 0; i < stars; i++) {
       starElements.push(
         <Star
+          strokeWidth={0}
           key={`full-star-${i}`}
           color="rgb(234 179 8)"
           fill="rgb(234 179 8)"
@@ -78,6 +79,7 @@ function Rating({ media }: { media: Media }) {
     if (hasHalfStar) {
       starElements.push(
         <StarHalf
+          strokeWidth={0}
           key="half-star"
           color="rgb(234 179 8)"
           fill="rgb(234 179 8)"
@@ -101,11 +103,7 @@ function Rating({ media }: { media: Media }) {
           <div className="relative">
             <div className="flex gap-1">
               {Array.from({ length: 5 }, () => (
-                <Star
-                  fill="rgb(209 213 219)"
-                  strokeWidth={2}
-                  strokeOpacity={0.5}
-                />
+                <Star fill="rgb(209 213 219)" strokeWidth={0} />
               ))}
             </div>
             <div className="flex gap-1 top-0 absolute">{stars}</div>

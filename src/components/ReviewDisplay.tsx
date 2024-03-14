@@ -12,6 +12,7 @@ export function ReviewDisplay({ review }: { review: Review }) {
     for (let i = 0; i < stars; i++) {
       starElements.push(
         <Star
+          strokeWidth={0}
           key={`full-star-${i}`}
           color="rgb(234 179 8)"
           fill="rgb(234 179 8)"
@@ -22,6 +23,7 @@ export function ReviewDisplay({ review }: { review: Review }) {
     if (hasHalfStar) {
       starElements.push(
         <StarHalf
+          strokeWidth={0}
           key="half-star"
           color="rgb(234 179 8)"
           fill="rgb(234 179 8)"
@@ -60,11 +62,7 @@ export function ReviewDisplay({ review }: { review: Review }) {
         <div className="relative">
           <div className="flex gap-1 text-Neutral-Mild">
             {Array.from({ length: 5 }, () => (
-              <Star
-                fill="rgb(209 213 219)"
-                strokeWidth={2}
-                strokeOpacity={0.5}
-              />
+              <Star fill="rgb(209 213 219)" strokeWidth={0} />
             ))}
           </div>
           <div className="flex gap-1 top-0 absolute">{renderStars()}</div>
