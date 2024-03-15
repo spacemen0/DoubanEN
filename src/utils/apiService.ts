@@ -147,9 +147,9 @@ export const getMedia = async (
 
 export const getMediaReviews = async (
     id: number,
-    type: "Music" | "Movie" | "Book"
+    page:number,
 ): Promise<Review[]> => {
-    console.log(id, type);
+    console.log(id,page);
     const reviews: Review[] = [];
     Array.from({length: 5}, () => {
         reviews.push({
@@ -163,6 +163,13 @@ export const getMediaReviews = async (
         });
     });
     return reviews;
+};
+
+export const getMediaReviewCount = async (
+    id: number
+): Promise<number> => {
+    console.log(id);
+    return faker.number.int({max:100,min:10});
 };
 
 export const postReview = async (review: Review) => {

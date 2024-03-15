@@ -47,7 +47,7 @@ export default function MediaPage() {
                         </div>
                     </div>
                     <div
-                        className="flex-1 lg:flex-[0.7] w-full mt-2 flex flex-col mb-4 text-Neutral border-Neutral-Mild">
+                        className="flex-1 lg:border-l lg:pl-2 lg:ml-6 lg:flex-[0.7] w-full mt-2 flex flex-col mb-4 text-Neutral border-gray-300">
                         <MediaInfo media={media} home={false}/>
                         <Rating media={media}/>
                         <div className="lg:hidden">

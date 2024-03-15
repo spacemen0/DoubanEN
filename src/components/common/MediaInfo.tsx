@@ -4,7 +4,7 @@ import {Media} from "../../utils/type.ts";
 export function MediaInfo({media, home}: { media: Media; home: boolean }) {
     return (
         <div
-            className={`lg:ml-8 flex-1 flex flex-col items-center !md:items-start justify-center text-xl py-3
+            className={`flex-1 flex flex-col items-center !md:items-start justify-center text-xl py-3
           ${!home && " border-b-2"} `}
         >
             <div

@@ -65,7 +65,7 @@ export function Rating({media}: { media: Media }) {
     };
 
     return (
-        <div className="mt-4 lg:ml-8 pb-4 border-b-2">
+        <div className="mt-4 pb-4 border-b-2">
             {showReviewBox && (
                 <ReviewBox
                     setShowReviewBox={setShowReviewBox}
