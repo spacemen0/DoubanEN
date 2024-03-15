@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
-import { PageHeader } from "../layouts/PageHeader";
+import { PageHeader } from "../layouts/common/PageHeader";
 import { generateRandomData } from "../data";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useEffect, useState } from "react";
-import { MyImage } from "../components/Image";
+import { MyImage } from "../layouts/common/MyImage";
 
 export default function Register() {
   const [formData, setFormData] = useState({

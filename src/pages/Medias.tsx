@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { PageHeader } from "../layouts/PageHeader";
-import { NotFound } from "../components/NotFound";
+import { PageHeader } from "../layouts/common/PageHeader";
+import { NotFound } from "../layouts/common/NotFound";
 
 export default function Medias() {
   const { type } = useParams();

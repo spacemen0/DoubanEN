@@ -1,6 +1,6 @@
-import { Media } from "../type";
-import { MyImage } from "./Image";
-import { MediaInfo } from "./MediaInfo";
+import { Media } from "../../type";
+import { MyImage } from "../common/MyImage";
+import { MediaInfo } from "../common/MediaInfo";
 
 export function MediaDisplay({ media }: { media: Media }) {
   return (

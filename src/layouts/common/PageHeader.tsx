@@ -1,11 +1,11 @@
 import { Menu, Search, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { SearchOption, DropDownSearchOptionProps } from "../type";
+import { SearchOption, DropDownSearchOptionProps } from "../../type";
 import { faker } from "@faker-js/faker";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthContext } from "../contexts/AuthContext";
-import { MenuItem } from "../components/MenuItem";
-import Logo from "../Logo.jpg";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { MenuItem } from "./MenuItem";
+import Logo from "../assets/Logo.jpg";
 
 export function PageHeader() {
   return (

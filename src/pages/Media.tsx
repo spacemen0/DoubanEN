@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { PageHeader } from "../layouts/PageHeader";
-import { NotFound } from "../components/NotFound";
+import { PageHeader } from "../layouts/common/PageHeader";
+import { NotFound } from "../layouts/common/NotFound";
 import { ReactNode, useEffect, useState } from "react";
 import {
   fetchMyRating,
@@ -9,8 +9,8 @@ import {
   submitRating,
 } from "../apiService";
 import { Media } from "../type";
-import { MyImage } from "../components/Image";
-import { MediaInfo } from "../components/MediaInfo";
+import { MyImage } from "../layouts/common/MyImage";
+import { MediaInfo } from "../layouts/common/MediaInfo";
 import { ChevronDown, ChevronUp, Star, StarHalf } from "lucide-react";
 import { useAuthContext } from "../contexts/AuthContext";
 import Draggable from "react-draggable";
@@ -56,6 +56,7 @@ export default function MediaPage() {
             <div className="lg:hidden">
               <AdditionalInfo media={media} />
             </div>
+            <ReviewSection media={media} />
           </div>
         </div>
       )}
@@ -182,7 +183,7 @@ function Rating({ media }: { media: Media }) {
         </div>
         <div className="grid gap-2 lg:grid-cols-4 md:grid-cols-2">
           <button
-            onClick={() => {
+            onClick={async () => {
               if (user) {
                 try {
                   const star = score as
@@ -196,17 +197,19 @@ function Rating({ media }: { media: Media }) {
                     | 4
                     | 4.5
                     | 5;
-                  submitRating({
+                  const newDate = new Date(Date.now());
+                  const newRating = {
                     userId: user.Id,
                     username: user.name,
                     star: star,
-                    reviewDate: new Date(Date.now())
-                      .toISOString()
-                      .split("T")[0],
+                    reviewDate: newDate.toISOString().split("T")[0],
                     mediaId: media.id,
                     title: "",
                     content: "",
-                  });
+                  };
+                  await submitRating(newRating);
+                  setRated(newDate);
+                  setMessage("Rating submitted");
                 } catch (error) {
                   setMessage("Error processing Submit Rating request");
                 }
@@ -314,7 +317,7 @@ function Rating({ media }: { media: Media }) {
          focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors"
             onClick={() => {
               if (isLoggedIn) setShowReviewBox(!showReviewBox);
-              setMessage("Please log in to take action");
+              else setMessage("Please log in to take action");
             }}
           >
             Review
@@ -421,7 +424,7 @@ function ReviewBox({
   };
 
   return (
-    <div className="z-40 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div className="z-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <Draggable cancel=".need-interaction">
         <div
           id="message"
@@ -429,7 +432,7 @@ function ReviewBox({
         >
           <label
             htmlFor="message"
-            className="block py-2 px-4 text-xl rounded-t-lg bg-gray-100 font-semibold text-Neutral-Strong border-b border-Neutral-Mild"
+            className="block py-2 px-4 text-xl rounded-t-lg bg-gray-100 font-semibold text-Neutral-Strong border-b-2 border-Neutral-Mild"
           >
             Your Review
           </label>
@@ -437,7 +440,7 @@ function ReviewBox({
             rows={1}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="need-interaction block p-2.5 w-full focus:outline-none font-semibold text-Neutral-Strong border-b border-Neutral-Mild focus:ring-Neutral-Mild bg-white"
+            className="need-interaction block p-2.5 w-full focus:outline-none font-semibold text-Neutral-Strong border-b-2 border-Neutral-Mild focus:ring-Neutral-Mild bg-white"
             placeholder="Title"
             onMouseDown={(event) => {
               event.stopPropagation();
@@ -463,7 +466,7 @@ function ReviewBox({
               event.stopPropagation();
             }}
           ></textarea>
-          <div className="need-interaction border-t-2 w-full flex justify-end border-Neutral-Mild ">
+          <div className="need-interaction border-t-2 w-full flex justify-end border-Neutral-Mild rounded-br-lg">
             <button
               className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild  border-Neutral-Mild
          focus:ring-1 focus:ring-Neutral transition-colors"
@@ -473,7 +476,7 @@ function ReviewBox({
             </button>
             <button
               className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild  border-Neutral-Mild
-          focus:ring-1 focus:ring-Neutral transition-colors"
+          focus:ring-1 focus:ring-Neutral transition-colors rounded-br-lg"
               onClick={handlePostReview}
             >
               Post
@@ -483,4 +486,8 @@ function ReviewBox({
       </Draggable>
     </div>
   );
+}
+
+function ReviewSection({ media }: { media: Media }) {
+  return <div className="">{media.id}</div>;
 }

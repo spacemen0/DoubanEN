@@ -42,10 +42,10 @@ export const fetchMyRating = async (
   };
 };
 
-export function submitRating(review: Review) {
+export const submitRating = async (review: Review) => {
   console.log(review);
-  throw new Error("Function not implemented.");
-}
+  // throw new Error("Function not implemented.");
+};
 
 export const getUser = async (id: number): Promise<User> => {
   console.log(id);

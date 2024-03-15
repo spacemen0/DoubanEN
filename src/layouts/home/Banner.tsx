@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { bannerText, statusInfo } from "../data";
-import Logo from "../Logo.jpg";
+import { bannerText, statusInfo } from "../../data";
+import Logo from "../assets/Logo.jpg";
 
 export function Banner() {
   return (

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../contexts/AuthContext";
-import { PageHeader } from "../layouts/PageHeader";
+import { PageHeader } from "../layouts/common/PageHeader";
 import { Link, useNavigate } from "react-router-dom";
 import { generateRandomData } from "../data";
-import { MyImage } from "../components/Image";
+import { MyImage } from "../layouts/common/MyImage";
 
 export default function Login() {
   const [formData, setFormData] = useState({

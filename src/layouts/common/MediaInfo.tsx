@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Media } from "../type";
+import { Media } from "../../type";
 
 export function MediaInfo({ media, home }: { media: Media; home: boolean }) {
   return (

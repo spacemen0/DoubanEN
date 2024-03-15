@@ -1,10 +1,10 @@
-import { PageHeader } from "../layouts/PageHeader";
-import { MyImage } from "../components/Image";
+import { PageHeader } from "../layouts/common/PageHeader";
+import { MyImage } from "../layouts/common/MyImage";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import { fetchCollectionItems, fetchCurrentOn } from "../apiService";
-import { ListItem } from "../components/ListItem";
+import { ListItem } from "../layouts/common/ListItem";
 import { Media } from "../type";
 
 export default function Profile() {

@@ -1,4 +1,4 @@
-import { Media, Review } from "../type";
+import { Media, Review } from "../../type";
 import { MediaDisplay } from "./MediaDisplay";
 import { ReviewDisplay } from "./ReviewDisplay";
 

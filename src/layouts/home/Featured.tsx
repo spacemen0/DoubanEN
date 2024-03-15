@@ -1,11 +1,11 @@
 import { ReactNode, useState } from "react";
-import { MyImage } from "../components/Image";
-import { ListItem } from "../components/ListItem";
-import { fetchCollectionItems } from "../apiService";
-import { editorItems, infoPara1, infoPara2, sideImages } from "../data";
+import { MyImage } from "../common/MyImage";
+import { ListItem } from "../common/ListItem";
+import { fetchCollectionItems } from "../../apiService";
+import { editorItems, infoPara1, infoPara2, sideImages } from "../../data";
 import { Link } from "react-router-dom";
-import { useAuthContext } from "../contexts/AuthContext";
-import { Media } from "../type";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { Media } from "../../type";
 
 export function Featured({ children }: { children: ReactNode[] }) {
   return (
