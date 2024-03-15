@@ -8,6 +8,7 @@ import { MyImage } from "../components/Image";
 import { MediaInfo } from "../components/MediaInfo";
 import { ChevronDown, ChevronUp, Star, StarHalf } from "lucide-react";
 import { useAuthContext } from "../contexts/AuthContext";
+import Draggable from "react-draggable";
 
 export default function MediaPage() {
   const { setMessage } = useAuthContext();
@@ -369,28 +370,44 @@ function AdditionalInfo({ media }: { media: Media }) {
 
 function ReviewBox() {
   return (
-    <div className="z-40 fixed left-1/2 top-1/3 transform -translate-x-1/2">
-      <div
-        id="message"
-        className="rounded-md border lg:w-96 md:w-64 w-36 border-Neutral-Mild  bg-gray-100 "
-      >
-        <label
-          htmlFor="message"
-          className="block pb-2 px-2 text-xl font-semibold text-Neutral-Strong border-b border-Neutral-Mild"
+    <div className="z-40 fixed left-[40%] top-1/3 w-full">
+      <Draggable cancel=".need-interaction">
+        <div
+          id="message"
+          className="rounded-md border-2 lg:w-1/4 md:w-1/2 sm:w-3/5 w-1/2 border-Neutral-Mild  bg-gray-100 "
         >
-          Your Review
-        </label>
-        <textarea
-          rows={1}
-          className="block p-2.5 w-full font-semibold text-Neutral-Strong border-b border-Neutral-Mild focus:ring-Neutral-Mild bg-gray-100"
-          placeholder="Title"
-        ></textarea>
-        <textarea
-          rows={6}
-          className="block p-2.5 w-full  text-Neutral bg-gray-100"
-          placeholder="Write your review here..."
-        ></textarea>
-      </div>
+          <label
+            htmlFor="message"
+            className="block py-2 px-4 text-xl font-semibold text-Neutral-Strong border-b border-Neutral-Mild"
+          >
+            Your Review
+          </label>
+          <textarea
+            rows={1}
+            className="need-interaction block p-2.5 w-full focus:outline-none font-semibold text-Neutral-Strong border-b border-Neutral-Mild focus:ring-Neutral-Mild bg-gray-100"
+            placeholder="Title"
+            onMouseDown={(event) => {
+              event.stopPropagation();
+            }}
+          ></textarea>
+          <textarea
+            rows={6}
+            className="need-interaction hidden lg:block p-2.5 w-full focus:outline-none text-Neutral bg-gray-100"
+            placeholder="Write your review here..."
+            onMouseDown={(event) => {
+              event.stopPropagation();
+            }}
+          ></textarea>
+          <textarea
+            rows={4}
+            className="need-interaction lg:hidden p-2.5 w-full focus:outline-none text-Neutral bg-gray-100"
+            placeholder="Write your review here..."
+            onMouseDown={(event) => {
+              event.stopPropagation();
+            }}
+          ></textarea>
+        </div>
+      </Draggable>
     </div>
   );
 }

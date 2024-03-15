@@ -89,7 +89,7 @@ function CurrentOn() {
       }
     };
     getCurrentOn();
-  }, [user]);
+  }, [setMessage, user]);
   if (!currentOn) {
     return <></>;
   }
