@@ -7,7 +7,6 @@ import {MyImage} from "../components/common/MyImage";
 import {WelcomeInfo} from "../components/common/WelcomeInfo.tsx";
 
 
-
 export default function Register() {
     const [formData, setFormData] = useState({
         username: "",
@@ -25,7 +24,7 @@ export default function Register() {
         e.preventDefault();
         const {username, password, email, password_repeat} = formData;
         if (password_repeat !== password) return;
-       await register(username, email, password);
+        await register(username, email, password);
         navigate("/");
     };
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
