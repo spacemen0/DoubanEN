@@ -8,7 +8,7 @@ export function ReviewSection({media}: { media: Media }) {
     const [reviews, setReviews] = useState<Review[]>([]);
     const [count, setCount] = useState(0)
     const [currentPage, setCurrentPage] = useState(1);
-    const [jumpTo, setJumpTo] = useState(1)
+    const [jumpTo, setJumpTo] = useState<number | "">(1)
     const {setMessage} = useAuthContext()
     const pagination = 10
     useEffect(() => {
@@ -77,17 +77,18 @@ export function ReviewSection({media}: { media: Media }) {
                         type="text"
                         value={jumpTo}
                         onChange={(e) => {
+                            if (e.target.value === "") {
+                                setJumpTo(e.target.value)
+                                return
+                            }
                             const value = parseInt(e.target.value);
-                            if (value) setJumpTo(value)
+                            if (value && value <= (count / pagination) + 1) setJumpTo(value)
                         }}
                     />
                     <button className="bg-Neutral-Mild hover:bg-Neutral text-white font-semibold p-1 rounded-md"
                             onClick={() => {
-                                if (jumpTo > count / pagination) {
-                                    setMessage("Exceed maximum page number")
-                                    setJumpTo(1)
-                                }
-                                setCurrentPage(jumpTo)
+                                if (jumpTo !== "")
+                                    setCurrentPage(jumpTo)
                             }}>Jump
                     </button>
                 </div>
