@@ -37,6 +37,7 @@ export const fetchMyRating = async (
     mediaId: mediaId,
     reviewDate: "2024-02-13",
     star: 3.5,
+    title: faker.lorem.words(),
     content: "My Review",
   };
 };
@@ -163,6 +164,7 @@ export const getMediaReviews = async (
       mediaId: faker.number.int(),
       reviewDate: faker.date.past().toISOString().split("T")[0],
       star: 3.5,
+      title: faker.lorem.words(),
       content: faker.lorem.paragraph() + faker.lorem.paragraph(),
     });
   });

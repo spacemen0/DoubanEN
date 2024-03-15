@@ -77,7 +77,7 @@ function UserInfo() {
   );
 }
 function CurrentOn() {
-  const { user } = useAuthContext();
+  const { user, setMessage } = useAuthContext();
   const [currentOn, SetCurrentOn] = useState<Media[]>();
   useEffect(() => {
     const getCurrentOn = async () => {
@@ -85,7 +85,7 @@ function CurrentOn() {
         const items = await fetchCurrentOn(user!.Id);
         SetCurrentOn(items);
       } catch (error) {
-        console.error("Error fetching default Music Collection items:", error);
+        setMessage("Error fetching default Music Collection items:");
       }
     };
     getCurrentOn();

@@ -10,6 +10,7 @@ import { ChevronDown, ChevronUp, Star, StarHalf } from "lucide-react";
 import { useAuthContext } from "../contexts/AuthContext";
 
 export default function MediaPage() {
+  const { setMessage } = useAuthContext();
   const { type, id } = useParams();
   const [media, setMedia] = useState<Media>();
   useEffect(() => {
@@ -24,11 +25,11 @@ export default function MediaPage() {
         );
         setMedia(media);
       } catch (error) {
-        console.error(`Error fetching Media:`, error);
+        setMessage("Error fetch Media information");
       }
     };
     FetchMedia();
-  }, [id, type]);
+  }, [id, setMessage, type]);
   if (!["music", "movie", "book"].includes(type!)) {
     return <NotFound />;
   }
@@ -59,6 +60,7 @@ export default function MediaPage() {
 function Rating({ media }: { media: Media }) {
   const [stars, setStars] = useState<ReactNode[]>();
   const [showDropDown, setShowDropDown] = useState(false);
+  const [showReviewBox, setShowReviewBox] = useState(false);
   const [score, setScore] = useState<number>(0);
   const [rated, setRated] = useState<Date>();
   const { isLoggedIn, user, setMessage } = useAuthContext();
@@ -102,11 +104,11 @@ function Rating({ media }: { media: Media }) {
         setStars(renderStars(MyRating.star as number));
         setRated(new Date(MyRating.reviewDate));
       } catch (error) {
-        console.log(error);
+        setMessage("Error fetch your previous rating");
       }
     };
     if (isLoggedIn) fetchRating();
-  }, [isLoggedIn, media.id, user]);
+  }, [isLoggedIn, media.id, setMessage, user]);
   const handleScoreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const MyScore = parseFloat(event.target.value);
     setScore(MyScore);
@@ -115,6 +117,7 @@ function Rating({ media }: { media: Media }) {
 
   return (
     <div className="mt-4 lg:ml-8 pb-4 border-b-2">
+      {showReviewBox && <ReviewBox />}
       <div className="flex !md:flex-col justify-center items-start md:justify-start md:items-center">
         <p className="font-bold text-2xl">Rating/Catalog</p>
         {rated && (
@@ -189,13 +192,14 @@ function Rating({ media }: { media: Media }) {
                       .toISOString()
                       .split("T")[0],
                     mediaId: media.id,
+                    title: "",
                     content: "",
                   });
                 } catch (error) {
-                  console.log(error);
+                  setMessage("Error processing Submit Rating request");
                 }
               } else {
-                setMessage("Please log in before submitting a rating");
+                setMessage("Please log in to take action");
               }
             }}
             className="  mt-4 lg:ml-2 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
@@ -206,6 +210,46 @@ function Rating({ media }: { media: Media }) {
           <button
             className=" md:mt-4 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
          focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors"
+            onClick={() => {
+              if (user) {
+                try {
+                  const star = score as
+                    | 2
+                    | 1
+                    | 0.5
+                    | 1.5
+                    | 2.5
+                    | 3
+                    | 3.5
+                    | 4
+                    | 4.5
+                    | 5;
+                  submitRating({
+                    userId: user.Id,
+                    username: user.name,
+                    star: star,
+                    reviewDate: new Date(Date.now())
+                      .toISOString()
+                      .split("T")[0],
+                    mediaId: media.id,
+                    title: "",
+                    content: "",
+                  });
+                } catch (error) {
+                  setMessage(
+                    `Error processing Set ${
+                      media.type === "Music"
+                        ? "Listing"
+                        : media.type === "Movie"
+                        ? "Watching"
+                        : "Reading"
+                    }request`
+                  );
+                }
+              } else {
+                setMessage("Please log in to take action");
+              }
+            }}
           >
             Set{" "}
             {media.type === "Music"
@@ -218,12 +262,47 @@ function Rating({ media }: { media: Media }) {
           <button
             className="  lg:mt-4 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
          focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors"
+            onClick={() => {
+              if (user) {
+                try {
+                  const star = score as
+                    | 2
+                    | 1
+                    | 0.5
+                    | 1.5
+                    | 2.5
+                    | 3
+                    | 3.5
+                    | 4
+                    | 4.5
+                    | 5;
+                  submitRating({
+                    userId: user.Id,
+                    username: user.name,
+                    star: star,
+                    reviewDate: new Date(Date.now())
+                      .toISOString()
+                      .split("T")[0],
+                    mediaId: media.id,
+                    title: "",
+                    content: "",
+                  });
+                } catch (error) {
+                  setMessage("Error processing Set On Wishlist request");
+                }
+              } else {
+                setMessage("Please log in to take action");
+              }
+            }}
           >
             On Wishlist
           </button>
           <button
             className="  lg:mt-4 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
          focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors"
+            onClick={() => {
+              setShowReviewBox(!showReviewBox);
+            }}
           >
             Review
           </button>
@@ -285,5 +364,33 @@ function AdditionalInfo({ media }: { media: Media }) {
         )}
       </div>
     </>
+  );
+}
+
+function ReviewBox() {
+  return (
+    <div className="z-40 fixed left-1/2 top-1/3 transform -translate-x-1/2">
+      <div
+        id="message"
+        className="rounded-md border lg:w-96 md:w-64 w-36 border-Neutral-Mild  bg-gray-100 "
+      >
+        <label
+          htmlFor="message"
+          className="block pb-2 px-2 text-xl font-semibold text-Neutral-Strong border-b border-Neutral-Mild"
+        >
+          Your Review
+        </label>
+        <textarea
+          rows={1}
+          className="block p-2.5 w-full font-semibold text-Neutral-Strong border-b border-Neutral-Mild focus:ring-Neutral-Mild bg-gray-100"
+          placeholder="Title"
+        ></textarea>
+        <textarea
+          rows={6}
+          className="block p-2.5 w-full  text-Neutral bg-gray-100"
+          placeholder="Write your review here..."
+        ></textarea>
+      </div>
+    </div>
   );
 }

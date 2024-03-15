@@ -60,7 +60,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       setIsLoggedIn(true);
       setToken(response.token);
       setUser(currentUser);
-    }
+    } else setMessage("Error logging you in");
   };
 
   const handleLogout = async (token: string) => {
@@ -82,7 +82,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       setIsLoggedIn(true);
       setToken(response.token);
       setUser(newUser);
-    }
+    } else setMessage("Error registering your new account");
   };
 
   const handleSetMessage = (message: string) => {
@@ -137,7 +137,7 @@ const MessageBox = ({
           }}
         >
           <p className="font-semibold text-center text-lg">{message}</p>
-          <p className="text-center font-semibold">{`(click me)`}</p>
+          <p className="text-center text-sm font-semibold">{`(click me)`}</p>
         </div>
       )}
     </>

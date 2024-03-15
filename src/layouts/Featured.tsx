@@ -91,7 +91,7 @@ function SideList() {
     "Editor"
   );
   const [myItems, setMyItems] = useState<Media[]>([]);
-  const { isLoggedIn, user } = useAuthContext();
+  const { isLoggedIn, user, setMessage } = useAuthContext();
   const handleOptionClick = async (option: "Editor" | "My") => {
     setSelectedOption(option);
     if (option === "My" && user) {
@@ -99,7 +99,7 @@ function SideList() {
         const items = await fetchCollectionItems(user.Id, "All");
         setMyItems(items);
       } catch (error) {
-        console.error("Error fetching My Collection items:", error);
+        setMessage("Error fetching your collection items");
       }
     }
   };
