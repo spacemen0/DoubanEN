@@ -170,3 +170,8 @@ export const getMediaReviews = async (
   });
   return reviews;
 };
+
+export const postReview = async (review: Review) => {
+  console.log(review);
+  throw new Error("Function Not implemented yet");
+};
