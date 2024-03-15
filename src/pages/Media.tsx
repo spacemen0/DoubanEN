@@ -195,7 +195,7 @@ function Rating({ media }: { media: Media }) {
                   console.log(error);
                 }
               } else {
-                setMessage("Please log in");
+                setMessage("Please log in before submitting a rating");
               }
             }}
             className="  mt-4 lg:ml-2 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none

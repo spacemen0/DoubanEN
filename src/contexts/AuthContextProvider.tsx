@@ -106,7 +106,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       <MessageBox
         message={message}
         onHover={(e) => {
-          e.currentTarget.classList.remove("opacity-90");
+          e.currentTarget.classList.remove("opacity-100");
           e.currentTarget.classList.add("opacity-0");
           const timer = setTimeout(() => {
             setMessage(null);
@@ -130,13 +130,14 @@ const MessageBox = ({
     <>
       {message && (
         <div
-          className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-          p-6 rounded-md bg-gray-200 border font-semibold text-xl text-Neutral transition-opacity duration-1000 opacity-90"
+          className="z-50 fixed top-1/4 left-1/2 transform -translate-x-1/2 
+          px-4 py-4 rounded-md bg-Neutral border text-white transition-opacity duration-1000 opacity-100"
           onMouseEnter={(e) => {
             onHover(e);
           }}
         >
-          {message}
+          <p className="font-semibold text-center text-lg">{message}</p>
+          <p className="text-center font-semibold">{`(click me)`}</p>
         </div>
       )}
     </>
