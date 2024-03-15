@@ -118,7 +118,7 @@ function Rating({ media }: { media: Media }) {
 
   return (
     <div className="mt-4 lg:ml-8 pb-4 border-b-2">
-      {showReviewBox && <ReviewBox />}
+      {showReviewBox && <ReviewBox setShowReviewBox={setShowReviewBox} />}
       <div className="flex !md:flex-col justify-center items-start md:justify-start md:items-center">
         <p className="font-bold text-2xl">Rating/Catalog</p>
         {rated && (
@@ -368,23 +368,27 @@ function AdditionalInfo({ media }: { media: Media }) {
   );
 }
 
-function ReviewBox() {
+function ReviewBox({
+  setShowReviewBox,
+}: {
+  setShowReviewBox: (value: React.SetStateAction<boolean>) => void;
+}) {
   return (
     <div className="z-40 fixed left-[40%] top-1/3 w-full">
       <Draggable cancel=".need-interaction">
         <div
           id="message"
-          className="rounded-md border-2 lg:w-1/4 md:w-1/2 sm:w-3/5 w-1/2 border-Neutral-Mild  bg-gray-100 "
+          className="rounded-md border-2 text-center lg:w-1/4 md:w-1/2 sm:w-3/5 w-1/2 border-Neutral-Mild bg-white"
         >
           <label
             htmlFor="message"
-            className="block py-2 px-4 text-xl font-semibold text-Neutral-Strong border-b border-Neutral-Mild"
+            className="block py-2 px-4 text-xl bg-gray-100 font-semibold text-Neutral-Strong border-b border-Neutral-Mild"
           >
             Your Review
           </label>
           <textarea
             rows={1}
-            className="need-interaction block p-2.5 w-full focus:outline-none font-semibold text-Neutral-Strong border-b border-Neutral-Mild focus:ring-Neutral-Mild bg-gray-100"
+            className="need-interaction block p-2.5 w-full focus:outline-none font-semibold text-Neutral-Strong border-b border-Neutral-Mild focus:ring-Neutral-Mild bg-white"
             placeholder="Title"
             onMouseDown={(event) => {
               event.stopPropagation();
@@ -392,7 +396,7 @@ function ReviewBox() {
           ></textarea>
           <textarea
             rows={6}
-            className="need-interaction hidden lg:block p-2.5 w-full focus:outline-none text-Neutral bg-gray-100"
+            className="need-interaction hidden lg:block p-2.5 w-full focus:outline-none text-Neutral bg-white"
             placeholder="Write your review here..."
             onMouseDown={(event) => {
               event.stopPropagation();
@@ -400,12 +404,24 @@ function ReviewBox() {
           ></textarea>
           <textarea
             rows={4}
-            className="need-interaction lg:hidden p-2.5 w-full focus:outline-none text-Neutral bg-gray-100"
+            className="need-interaction lg:hidden p-2.5 w-full focus:outline-none text-Neutral bg-white"
             placeholder="Write your review here..."
             onMouseDown={(event) => {
               event.stopPropagation();
             }}
           ></textarea>
+          <div className="need-interaction border-t-2 w-full flex justify-end ">
+            {" "}
+            <button
+              className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-gray-400 focus:outline-none
+         focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors"
+              onClick={() => {
+                setShowReviewBox(false);
+              }}
+            >
+              Post
+            </button>
+          </div>
         </div>
       </Draggable>
     </div>
