@@ -1,8 +1,8 @@
-import { FeaturedItem } from "../layouts/home/FeaturedItem";
-import { featuredItems } from "../data";
-import { Banner } from "../layouts/home/Banner";
-import { Featured } from "../layouts/home/Featured";
-import { PageHeader } from "../layouts/common/PageHeader";
+import { FeaturedItem } from "../components/home/FeaturedItem";
+import { featuredItems } from "../utils/data.ts";
+import { Banner } from "../components/home/Banner";
+import { Featured } from "../components/home/Featured";
+import { PageHeader } from "../components/common/PageHeader";
 
 export default function Home() {
   return (

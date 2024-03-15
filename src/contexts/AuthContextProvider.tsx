@@ -1,9 +1,9 @@
-import { useState, useEffect, FC } from "react";
-import { expiryTime } from "../config";
+import React, { useState, useEffect, FC } from "react";
+import { expiryTime } from "../utils/config.ts";
 import { AuthContextType } from "./AuthContext";
 import { AuthContext } from "./AuthContext";
-import { User } from "../type";
-import { getUser, login, logout, register } from "../apiService";
+import { User } from "../utils/type.ts";
+import { getUser, login, logout, register } from "../utils/apiService.ts";
 
 function setWithExpiry<T>(key: string, value: T, ttl: number): void {
   const now = new Date();
@@ -64,7 +64,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
   };
 
   const handleLogout = async (token: string) => {
-    logout(token);
+    await logout(token);
     setIsLoggedIn(false);
     setUser(null);
     setToken(null);

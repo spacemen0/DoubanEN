@@ -1,4 +1,4 @@
-import { Media } from "../../type";
+import { Media } from "../../utils/type.ts";
 import { MyImage } from "../common/MyImage";
 import { MediaInfo } from "../common/MediaInfo";
 

@@ -1,4 +1,4 @@
-import { User } from "../type";
+import { User } from "../utils/type.ts";
 import React, { useContext } from "react";
 
 export interface AuthContextType {

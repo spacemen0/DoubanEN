@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { Media } from "../../type";
-import { MyImage } from "./MyImage";
+import { Media } from "../../utils/type.ts";
+import { MyImage } from "./MyImage.tsx";
 
 export function ListItem({ media }: { media: Media }) {
   return (

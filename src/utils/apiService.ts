@@ -5,8 +5,8 @@ import {
   movieItems,
   musicItems,
   myItems,
-} from "./data";
-import { AuthResponse, Media, Review, User } from "./type";
+} from "./data.ts";
+import { AuthResponse, Media, Review, User } from "./type.ts";
 
 export const fetchCollectionItems = async (
   userId: number,

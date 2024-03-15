@@ -1,11 +1,11 @@
 import { ReactNode, useState } from "react";
 import { MyImage } from "../common/MyImage";
 import { ListItem } from "../common/ListItem";
-import { fetchCollectionItems } from "../../apiService";
-import { editorItems, infoPara1, infoPara2, sideImages } from "../../data";
+import { fetchCollectionItems } from "../../utils/apiService.ts";
+import { editorItems, infoPara1, infoPara2, sideImages } from "../../utils/data.ts";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { Media } from "../../type";
+import { Media } from "../../utils/type.ts";
 
 export function Featured({ children }: { children: ReactNode[] }) {
   return (
@@ -119,8 +119,8 @@ function SideList() {
           className={`border-b-2 text-xl lg:text-2xl ${
             selectedOption == "Editor" ? "text-Neutral-Mild font-bold" : ""
           }`}
-          onClick={() => {
-            handleOptionClick("Editor");
+          onClick={async  () => {
+            await handleOptionClick("Editor");
           }}
         >
           Editor's Selection
@@ -129,8 +129,8 @@ function SideList() {
           className={`border-b-2 text-xl lg:text-2xl ${
             selectedOption == "My" ? "text-Neutral-Mild font-bold" : ""
           }`}
-          onClick={() => {
-            handleOptionClick("My");
+          onClick={async () => {
+           await handleOptionClick("My");
           }}
         >
           My Collection

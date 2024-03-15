@@ -1,6 +1,6 @@
 import { Star, StarHalf } from "lucide-react";
 import { useState } from "react";
-import { Review } from "../../type";
+import { Review } from "../../utils/type.ts";
 
 export function ReviewDisplay({ review }: { review: Review }) {
   const [expanded, setExpanded] = useState(false);

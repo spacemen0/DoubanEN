@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { bannerText, statusInfo } from "../../data";
-import Logo from "../assets/Logo.jpg";
+import { bannerText, statusInfo } from "../../utils/data.ts";
+import Logo from "../../assets/Logo.jpg";
 
 export function Banner() {
   return (
@@ -9,7 +9,7 @@ export function Banner() {
         <div className="px-3 md:px-6 flex-shrink-0">
           <img
             src={Logo}
-            title="Logo"
+            alt="Logo"
             className="sm:h-20 md:h-28 lg:h-36 h-14"
           />
         </div>

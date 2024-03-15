@@ -1,11 +1,11 @@
 import { Menu, Search, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { SearchOption, DropDownSearchOptionProps } from "../../type";
+import { SearchOption, DropDownSearchOptionProps } from "../../utils/type.ts";
 import { faker } from "@faker-js/faker";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../contexts/AuthContext";
-import { MenuItem } from "./MenuItem";
-import Logo from "../assets/Logo.jpg";
+import { useAuthContext } from "../../contexts/AuthContext.ts";
+import { MenuItem } from "./MenuItem.tsx";
+import Logo from "../../assets/Logo.jpg";
 
 export function PageHeader() {
   return (
@@ -25,7 +25,7 @@ function HeaderLogoSection() {
   return (
     <div className="flex gap-2 md:gap-4 items-center flex-shrink-0 transition-colors  h-16 px-1 md:px-2">
       <Link to="/">
-        <img src={Logo} title="Logo" className="h-10" />
+        <img src={Logo} alt="Logo" className="h-10" />
       </Link>
       <Link
         className="hidden md:inline font-bold text-lg text-Neutral-Mild rounded-lg p-1.5 hover:bg-gray-100 h-10"
@@ -196,7 +196,7 @@ function HeaderUserSection() {
           <Link className="transition-colors hover:bg-gray-100" to={"/profile"}>
             <img
               src={faker.image.url({ width: 64, height: 64 })}
-              title="Profile Image "
+              alt="Profile Image "
               className="h-10"
             />
           </Link>
@@ -233,8 +233,8 @@ function HeaderUserSection() {
 function DropDownMenu({ isOpen }: { isOpen: boolean }) {
   const { isLoggedIn, logout, token, user } = useAuthContext();
 
-  const handleLogout = () => {
-    if (token) logout(token);
+  const handleLogout = async () => {
+    if (token) await logout(token);
   };
   return (
     isOpen && (
