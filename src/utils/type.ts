@@ -51,7 +51,3 @@ export type User = {
   Id: number;
 };
 
-export type UserState = {
-  user: User | null;
-  isLoggedIn: boolean;
-};
