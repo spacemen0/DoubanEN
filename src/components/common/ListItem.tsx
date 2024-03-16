@@ -51,7 +51,7 @@ export function ListItem({media}: { media: Media }) {
                 >
                     {media.releaseDate}
                 </p>
-                <div className="flex justify-between">
+                <div className="flex justify-between 3xl:pr-4 xl:pr-2">
                     <p
                         className={
                             "text-xl font-semibold " +

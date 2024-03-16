@@ -14,7 +14,7 @@ export function ReviewDisplay({review}: { review: Review }) {
             starElements.push(
                 <Star
                     strokeWidth={0}
-                    size={28}
+                    size={26}
                     key={`full-star-${i}`}
                     color="rgb(234 179 8)"
                     fill="rgb(234 179 8)"
@@ -26,7 +26,7 @@ export function ReviewDisplay({review}: { review: Review }) {
             starElements.push(
                 <StarHalf
                     strokeWidth={0}
-                    size={28}
+                    size={26}
                     key="half-star"
                     color="rgb(234 179 8)"
                     fill="rgb(234 179 8)"
@@ -50,25 +50,25 @@ export function ReviewDisplay({review}: { review: Review }) {
     };
     return (
         <div>
-            <div className="flex justify-between bg-gray-200 items-center pr-4 pl-2 py-2 rounded-md mt-2">
+            <div className="flex justify-between bg-gray-200 items-center pr-2 lg:pr-4 pl-2 py-2 rounded-md mt-2">
                 <p className="lg:text-xl">
                     <Link to="/" className="font-bold ">
                         {review.username}
                     </Link>
                 </p>
-                <div className="flex items-center lg:text-xl">
+                <div className="flex items-center">
                     <div className="relative">
-                        <div className="flex gap-1 text-Neutral-Mild">
+                        <div className="flex gap-0.5 lg:gap-1 text-Neutral-Mild">
                             {Array.from({length: 5}, (_, index) => (
                                 <Star
                                     key={index}
                                     fill="rgb(209 213 219)"
                                     strokeWidth={0}
-                                    size={28}
+                                    size={26}
                                 />
                             ))}
                         </div>
-                        <div className="flex gap-1 top-0 absolute">{renderStars()}</div>
+                        <div className="flex gap-0.5 lg:gap-1 top-0 absolute">{renderStars()}</div>
                     </div>
                 </div>
             </div>
