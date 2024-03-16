@@ -147,9 +147,9 @@ export const getMedia = async (
 
 export const getMediaReviews = async (
     id: number,
-    page:number,
+    page: number,
 ): Promise<Review[]> => {
-    console.log(id,page);
+    console.log(id, page);
     const reviews: Review[] = [];
     Array.from({length: 5}, () => {
         reviews.push({
@@ -169,10 +169,42 @@ export const getMediaReviewCount = async (
     id: number
 ): Promise<number> => {
     console.log(id);
-    return faker.number.int({max:100,min:10});
+    return faker.number.int({max: 100, min: 10});
 };
 
 export const postReview = async (review: Review) => {
     console.log(review);
     throw new Error("Function Not implemented yet");
 };
+
+export const getAllMedias = async (type: "Music" | "Book" | "Movie", page: number): Promise<Media[]> => {
+    console.log(type, page);
+    const media: Media[] = [];
+    Array.from({length: 5}, () => {
+        media.push({
+            id: faker.number.int(),
+            releaseDate: faker.date.past().toISOString().split("T")[0],
+            type: type,
+            title: faker.lorem.words(),
+            genre: faker.music.genre(),
+            tracks: [faker.music.songName(), faker.music.songName(), faker.music.songName(), faker.music.songName(),],
+            author: faker.person.fullName(),
+            average: 3.2,
+            casts: [{
+                character: faker.person.fullName(),
+                actor: faker.person.fullName()
+            }, {
+                character: faker.person.fullName(),
+                actor: faker.person.fullName()
+            }, {
+                character: faker.person.fullName(),
+                actor: faker.person.fullName()
+            }, {character: faker.person.fullName(), actor: faker.person.fullName()}],
+            chapters: [faker.music.songName(), faker.music.songName(), faker.music.songName(), faker.music.songName(),],
+            image: generateRandomData().src,
+            ratings: faker.number.int({min: 100, max: 500}),
+            wants: faker.number.int({min: 100, max: 500})
+        });
+    });
+    return media
+}
