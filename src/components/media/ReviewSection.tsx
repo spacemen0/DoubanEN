@@ -1,7 +1,7 @@
 import {Media, Review} from "../../utils/type.ts";
 import {useEffect, useState} from "react";
 import {getMediaReviewCount, getMediaReviews} from "../../utils/apiService.ts";
-import {ReviewDisplay} from "../home/ReviewDisplay.tsx";
+import {ReviewDisplay} from "../common/ReviewDisplay.tsx";
 import {useAuthContext} from "../../contexts/AuthContext.ts";
 
 export function ReviewSection({media}: { media: Media }) {

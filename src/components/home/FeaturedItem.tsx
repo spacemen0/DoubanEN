@@ -1,6 +1,6 @@
 import {Media, Review} from "../../utils/type.ts";
 import {MediaDisplay} from "./MediaDisplay";
-import {ReviewDisplay} from "./ReviewDisplay";
+import {ReviewDisplay} from "../common/ReviewDisplay.tsx";
 
 export function FeaturedItem({
                                  media,

@@ -7,7 +7,7 @@ import {FeaturedBanner} from "./FeaturedBanner.tsx";
 export function Featured({children}: { children: ReactNode[] }) {
     return (
         <div className="flex pl-3 bg-white md:pl-6 lg:pl-12 mb-4">
-            <div className="flex flex-col flex-1 lg:flex-[0.65] mr-4 md:mr-8">
+            <div className="flex flex-col flex-1 lg:flex-[0.65] mr-4">
                 <FeaturedBanner/>
                 {children.map((child, index) => (
                     <div key={index} className="flex mt-4 w-full h-auto justify-start">
