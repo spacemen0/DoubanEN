@@ -166,41 +166,41 @@ export const getMediaReviewCount = async (
 
 export const postReview = async (review: Review) => {
     console.log(review);
-    throw new Error("Function Not implemented yet");
+    //throw new Error("Function Not implemented yet");
 };
 
 export const deleteReview = async (userId: number, mediaId: number) => {
     console.log(userId, mediaId)
-    throw new Error("Function Not implemented yet")
+    //throw new Error("Function Not implemented yet")
 }
 export const setWishlist = async (userId: number, mediaId: number) => {
     console.log(userId, mediaId)
-    throw new Error("Function Not implemented yet")
+    //throw new Error("Function Not implemented yet")
 }
 
 export const cancelWishlist = async (userId: number, mediaId: number) => {
     console.log(userId, mediaId)
-    throw new Error("Function Not implemented yet")
+    //throw new Error("Function Not implemented yet")
 }
 
 export const setDoing = async (userId: number, mediaId: number) => {
     console.log(userId, mediaId)
-    throw new Error("Function Not implemented yet")
+    //throw new Error("Function Not implemented yet")
 }
 
 export const cancelDoing = async (userId: number, mediaId: number) => {
     console.log(userId, mediaId)
-    throw new Error("Function Not implemented yet")
+    //throw new Error("Function Not implemented yet")
 }
 
 export const submitRating = async (review: Review) => {
     console.log(review);
-    throw new Error("Function not implemented.");
+    //throw new Error("Function Not implemented yet");
 };
 
 export const deleteRating = async (userId: number, mediaId: number) => {
     console.log(userId, mediaId)
-    throw new Error("Function Not implemented yet")
+    //throw new Error("Function Not implemented yet")
 }
 
 

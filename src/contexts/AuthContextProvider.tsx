@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useCallback, useEffect, useState} from "react";
 import {expiryTime} from "../utils/config.ts";
 import {AuthContext, AuthContextType} from "./AuthContext";
 import {User} from "../utils/type.ts";
@@ -52,7 +52,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
         setWithExpiry("message", message, expiryTime);
     }, [isLoggedIn, user, token, message]);
 
-    const handleLogin = async (username: string, password: string) => {
+    const handleLogin = useCallback( async (username: string, password: string) => {
         const response = await login(username, password);
         if (response.userId) {
             const currentUser = await getUser(response.userId);
@@ -60,17 +60,17 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
             setToken(response.token);
             setUser(currentUser);
         } else setMessage("Error logging you in");
-    };
+    },[]);
 
-    const handleLogout = async (token: string) => {
+    const handleLogout = useCallback(async (token: string) => {
         await logout(token);
         setIsLoggedIn(false);
         setUser(null);
         setToken(null);
         setMessage(null);
-    };
+    },[]);
 
-    const handleRegister = async (
+    const handleRegister = useCallback(async (
         username: string,
         email: string,
         password: string
@@ -82,12 +82,12 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
             setToken(response.token);
             setUser(newUser);
         } else setMessage("Error registering your new account");
-    };
+    },[]);
 
-    const handleSetMessage = (message: string) => {
+    const handleSetMessage = useCallback((message: string) => {
         console.log(message);
         setMessage(message);
-    };
+    },[]);
 
     const contextValue: AuthContextType = {
         isLoggedIn,
