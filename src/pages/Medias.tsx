@@ -10,12 +10,12 @@ import {Pagination} from "../components/common/Pagination.tsx";
 
 export default function Medias() {
     const {type} = useParams();
-    const [medias,setMedias] = useState<Media[]>()
+    const [medias, setMedias] = useState<Media[]>()
     const [count, setCount] = useState(0)
     const [currentPage, setCurrentPage] = useState(1);
     const {setMessage} = useAuthContext()
     useEffect(() => {
-        const fetchReviewsCount = async (type:  "Music"
+        const fetchReviewsCount = async (type: "Music"
             | "Movie"
             | "Book") => {
             try {
@@ -26,12 +26,12 @@ export default function Medias() {
             }
         }
         fetchReviewsCount((type!.charAt(0).toUpperCase() + type!.slice(1)) as
-            MediaType ).then()
+            MediaType).then()
     }, [setMessage, type]);
 
     useEffect(() => {
         const fetchAllMedias = async () => {
-            setMedias( await getAllMedias((type!.charAt(0).toUpperCase() + type!.slice(1)) as
+            setMedias(await getAllMedias((type!.charAt(0).toUpperCase() + type!.slice(1)) as
                 MediaType, currentPage))
         }
         fetchAllMedias().then()
@@ -42,20 +42,20 @@ export default function Medias() {
 
 
     return (
-        <div className="max-h-screen overflow-hidden flex flex-col">
+        <div className="flex max-h-screen flex-col overflow-hidden">
             <PageHeader/>
-            <div className="overflow-y-scroll px-2 lg:px-4 mt-2">
+            <div className="mt-2 overflow-y-scroll px-2 lg:px-4">
                 <Pagination title={(type!.charAt(0).toUpperCase() + type!.slice(1)) as
                     MediaType} count={count} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
                 <div
-                    className="border-b border-gray-200 my-2 pb-1 flex lg:gap-9 md:gap-6 gap-3 text-Neutral-Mild text-xl font-semibold justify-between 3xl:pl-56 lg:pl-36 2xl:pl-44 pl-32">
+                    className="my-2 flex justify-between gap-3 border-b border-gray-200 pb-1 pl-32 text-xl font-semibold text-Neutral-Mild md:gap-6 lg:gap-9 lg:pl-36 2xl:pl-44 3xl:pl-56">
                     <span>Average</span> <span>Rated</span> <span>Wants</span>
                 </div>
-                    {medias?.map(
-                        (media, index) => {
-                            return <ListItem media={media} key={index}/>
-                        }
-                    )}
+                {medias?.map(
+                    (media, index) => {
+                        return <ListItem media={media} key={index}/>
+                    }
+                )}
             </div>
         </div>
     );

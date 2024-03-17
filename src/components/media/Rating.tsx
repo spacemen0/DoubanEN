@@ -65,7 +65,7 @@ export function Rating({media}: { media: Media }) {
     };
 
     return (
-        <div className="mt-4 pb-4 border-b-2">
+        <div className="mt-4 border-b-2 pb-4">
             {showReviewBox && (
                 <NewReviewBox
                     setShowReviewBox={setShowReviewBox}
@@ -74,17 +74,17 @@ export function Rating({media}: { media: Media }) {
                 />
             )}
             <div className="flex !md:flex-col justify-center items-start md:justify-start md:items-center">
-                <p className="font-bold text-2xl">Rating/Catalog</p>
+                <p className="text-2xl font-bold">Rating/Catalog</p>
                 {rated && (
-                    <div className="md:pl-2 text-xl">
+                    <div className="text-xl md:pl-2">
                         Rated at: {rated.toISOString().split("T")[0]}
                     </div>
                 )}
             </div>
 
             <div className="flex !lg:flex-col lg:justify-start lg:items-center items-start">
-                <div className="border flex justify-center items-center rounded-sm lg:pl-2 pr-2 py-2 mt-4">
-                    <div className="relative ">
+                <div className="mt-4 flex items-center justify-center rounded-sm border py-2 pr-2 lg:pl-2">
+                    <div className="relative">
                         <div className="flex gap-1 h-[28px]">
                             {Array.from({length: 5}, (_, index) => (
                                 <Star
@@ -95,7 +95,7 @@ export function Rating({media}: { media: Media }) {
                                 />
                             ))}
                         </div>
-                        <div className="flex gap-1 top-0 absolute">{stars}</div>
+                        <div className="absolute top-0 flex gap-1">{stars}</div>
                     </div>
                     <button
                         className="relative"
@@ -110,7 +110,7 @@ export function Rating({media}: { media: Media }) {
                         )}
                         {showDropDown && (
                             <div
-                                className="absolute top-10 right-0 w-48 h-6 border rounded-md flex justify-center bg-gray-200 items-center">
+                                className="absolute top-10 right-0 flex h-6 w-48 items-center justify-center rounded-md border bg-gray-200">
                                 <input
                                     type="range"
                                     min="0.5"
@@ -118,13 +118,13 @@ export function Rating({media}: { media: Media }) {
                                     step="0.5"
                                     value={score as number}
                                     onChange={handleScoreChange}
-                                    className="w-40 h-1 bg-Neutral-Mild appearance-none"
+                                    className="h-1 w-40 appearance-none bg-Neutral-Mild"
                                 />
                             </div>
                         )}
                     </button>
                 </div>
-                <div className="grid gap-2 lg:grid-cols-4 md:grid-cols-2">
+                <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4">
                     <button
                         onClick={() => {
                             if (user) {

@@ -40,14 +40,14 @@ export default function MediaPage() {
             <PageHeader/>
             {media && (
                 <div className="flex !lg:flex-col items-center lg:items-start justify-center ml-10 mr-10 mt-6 ">
-                    <div className="flex-1 lg:flex-[0.3] w-full flex flex-col ">
+                    <div className="flex w-full flex-1 flex-col lg:flex-[0.3]">
                         <MyImage src={media.image} alt={media.title} href={media.image}/>
                         <div className="hidden lg:block">
                             <AdditionalInfo media={media}/>
                         </div>
                     </div>
                     <div
-                        className="flex-1 lg:border-l lg:border-t lg:pl-2 lg:ml-6 lg:flex-[0.7] w-full mt-2 flex flex-col mb-4 text-Neutral border-gray-300">
+                        className="mt-2 mb-4 flex w-full flex-1 flex-col border-gray-300 text-Neutral lg:flex-[0.7] lg:ml-6 lg:border-t lg:border-l lg:pl-2">
                         <MediaInfo media={media} home={false}/>
                         <Rating media={media}/>
                         <div className="lg:hidden">

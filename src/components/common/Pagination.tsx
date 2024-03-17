@@ -1,6 +1,11 @@
 import React, {useState} from "react";
 
-export function Pagination({title,count,currentPage,setCurrentPage}:{title:string,count:number,currentPage:number,setCurrentPage: React.Dispatch<React.SetStateAction<number>>}){
+export function Pagination({title, count, currentPage, setCurrentPage}: {
+    title: string,
+    count: number,
+    currentPage: number,
+    setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+}) {
     const [jumpTo, setJumpTo] = useState<number | "">(1)
     const pagination = 10
     const handlePageClick = (page: number) => {
@@ -33,14 +38,14 @@ export function Pagination({title,count,currentPage,setCurrentPage}:{title:strin
         ));
     };
 
-    return(
+    return (
         <>
             <div className="flex items-center justify-between">
-                <p className="font-semibold text-Neutral-Strong py-2 text-2xl">{count} {title}s</p>
-                <div className="flex justify-center items-center align-middle py-2 text-lg">
+                <p className="py-2 text-2xl font-semibold text-Neutral-Strong">{count} {title}s</p>
+                <div className="flex items-center justify-center py-2 align-middle text-lg">
                     <input
                         id="jump"
-                        className="border rounded-md border-gray-300 mx-2 p-1 text-Neutral text-center font-semibold align-middle w-16 focus:outline-0"
+                        className="mx-2 w-16 rounded-md border border-gray-300 p-1 text-center align-middle font-semibold text-Neutral focus:outline-0"
                         type="text"
                         value={jumpTo}
                         onChange={(e) => {
@@ -52,7 +57,7 @@ export function Pagination({title,count,currentPage,setCurrentPage}:{title:strin
                             if (value && value <= (count / pagination) + 1) setJumpTo(value)
                         }}
                     />
-                    <button className="bg-Neutral-Mild hover:bg-Neutral text-white font-semibold p-1 rounded-md"
+                    <button className="rounded-md p-1 font-semibold text-white bg-Neutral-Mild hover:bg-Neutral"
                             onClick={() => {
                                 if (jumpTo !== "")
                                     setCurrentPage(jumpTo)
@@ -62,8 +67,8 @@ export function Pagination({title,count,currentPage,setCurrentPage}:{title:strin
 
             </div>
 
-            <div className="flex justify-end items-center bg-gray-200 rounded-md text-lg font-semibold text-Neutral">
-                <span className="text-xl font-semibold pr-3">Page:</span>
+            <div className="flex items-center justify-end rounded-md bg-gray-200 text-lg font-semibold text-Neutral">
+                <span className="pr-3 text-xl font-semibold">Page:</span>
 
 
                 {renderPageButtons()}

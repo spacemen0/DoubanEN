@@ -5,14 +5,14 @@ import {MyImage} from "./MyImage.tsx";
 export function ListItem({media}: { media: Media }) {
     return (
         <div className="flex w-full">
-            <div className="w-full mr-2 md:mr-4 lg:mr-6 h-full max-w-32 max-h-32 mt-2">
+            <div className="mt-2 mr-2 h-full max-h-32 w-full max-w-32 md:mr-4 lg:mr-6">
                 <MyImage
                     src={media.image}
                     alt={media.title}
                     href={`/${media.type}/${media.id}`}
                 />
             </div>
-            <div className="flex-col flex justify-between w-full border-b border-gray-200 pb-1 align-top">
+            <div className="flex w-full flex-col justify-between border-b border-gray-200 pb-1 align-top">
                 <Link
                     to={`/media/${media.type.toLowerCase()}/${media.id}`}
                     className={
@@ -51,7 +51,7 @@ export function ListItem({media}: { media: Media }) {
                 >
                     {media.releaseDate}
                 </p>
-                <div className="flex justify-between 3xl:pr-4 xl:pr-2">
+                <div className="flex justify-between xl:pr-2 3xl:pr-4">
                     <p
                         className={
                             "text-xl font-semibold " +
@@ -79,7 +79,7 @@ export function ListItem({media}: { media: Media }) {
                     </p>
                 </div>
 
-                <div className="flex justify-between items-center text-xl 3xl:pl-28 3xl:pr-4 xl:pr-2 2xl:pl-10 pl-0">
+                <div className="flex items-center justify-between pl-0 text-xl xl:pr-2 2xl:pl-10 3xl:pr-4 3xl:pl-28">
                     <p
                         className={
                             "text-xl " +

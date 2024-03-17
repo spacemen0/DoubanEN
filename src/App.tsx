@@ -15,7 +15,7 @@ export default function App() {
         <Suspense
             fallback={
                 <div
-                    className="inline-block h-8 w-8 animate-[spinner-grow_0.75s_linear_infinite] rounded-full bg-current align-[-0.125em] text-surface opacity-0 motion-reduce:animate-[spinner-grow_1.5s_linear_infinite] dark:text-white"
+                    className="inline-block h-8 w-8 rounded-full bg-current opacity-0 animate-[spinner-grow_0.75s_linear_infinite] align-[-0.125em] text-surface motion-reduce:animate-[spinner-grow_1.5s_linear_infinite] dark:text-white"
                     role="status"
                 >
           <span

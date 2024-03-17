@@ -19,24 +19,24 @@ export function MediaInfo({media, home}: { media: Media; home: boolean }) {
             >
                 <Link
                     to={`/media/${media.type.toLowerCase()}/${media.id}`}
-                    className="text-4xl font-semibold "
+                    className="text-4xl font-semibold"
                 >
                     {media.title}
                 </Link>
                 {!home && <span className="pt-2">{`[${media.type}${media.id}]`}</span>}
             </div>
-            <table className="w-full mt-3">
+            <table className="mt-3 w-full">
                 <tbody>
                 <tr>
-                    <td className="font-semibold pr-4 pb-3">Type:</td>
+                    <td className="pr-4 pb-3 font-semibold">Type:</td>
                     <td>{media.type}</td>
                 </tr>
                 <tr>
-                    <td className="font-semibold pr-4 pb-3">Released Date:</td>
+                    <td className="pr-4 pb-3 font-semibold">Released Date:</td>
                     <td>{media.releaseDate}</td>
                 </tr>
                 <tr>
-                    <td className="font-semibold pr-4 pb-3">
+                    <td className="pr-4 pb-3 font-semibold">
                         {media.type === "Music"
                             ? "Artist"
                             : media.type === "Book"
@@ -47,27 +47,27 @@ export function MediaInfo({media, home}: { media: Media; home: boolean }) {
                     <td>{media.author}</td>
                 </tr>
                 <tr>
-                    <td className="font-semibold pr-4 pb-3">Genre:</td>
+                    <td className="pr-4 pb-3 font-semibold">Genre:</td>
                     <td>{media.genre}</td>
                 </tr>
                 <tr>
-                    <td className="font-semibold pr-4 pb-3">Ratings:</td>
+                    <td className="pr-4 pb-3 font-semibold">Ratings:</td>
                     <td>
-              <span className="text-xl lg:text-2xl font-semibold">
+              <span className="text-xl font-semibold lg:text-2xl">
                 {media.average}&nbsp;
               </span>
-                        <span className="text-lg pr-2">/5.0</span>
+                        <span className="pr-2 text-lg">/5.0</span>
                         from&nbsp;
-                        <span className="text-xl lg:text-2xl font-semibold">
+                        <span className="text-xl font-semibold lg:text-2xl">
                 {media.ratings}&nbsp;
               </span>
                         ratings
                     </td>
                 </tr>
                 <tr>
-                    <td className="font-semibold pr-4">Wants:</td>
+                    <td className="pr-4 font-semibold">Wants:</td>
                     <td>
-              <span className="text-xl lg:text-2xl font-semibold">
+              <span className="text-xl font-semibold lg:text-2xl">
                 {media.wants}
               </span>
                     </td>

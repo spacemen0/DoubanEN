@@ -4,14 +4,14 @@ import {sideImages} from "../../utils/data.ts";
 
 export function SideDisplay() {
     return (
-        <div className="flex flex-col md:w-11/12 lg:w-10/12 md:mt-4 mt-6">
+        <div className="mt-6 flex flex-col md:mt-4 md:w-11/12 lg:w-10/12">
             <div className="mb-4">
                 <Link to="/list/2">
                     <MyImage {...sideImages[0]} />
                 </Link>
             </div>
 
-            <div className="flex justify-between mb-4">
+            <div className="mb-4 flex justify-between">
                 <Link to="/list/3">
                     <MyImage {...sideImages[1]} />
                 </Link>

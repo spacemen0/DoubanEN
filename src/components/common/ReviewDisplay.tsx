@@ -50,15 +50,15 @@ export function ReviewDisplay({review}: { review: Review }) {
     };
     return (
         <div>
-            <div className="flex justify-between bg-gray-200 items-center pr-2 lg:pr-4 pl-2 py-2 rounded-md mt-2">
+            <div className="mt-2 flex items-center justify-between rounded-md bg-gray-200 py-2 pr-2 pl-2 lg:pr-4">
                 <p className="lg:text-xl">
-                    <Link to="/" className="font-bold ">
+                    <Link to="/" className="font-bold">
                         {review.username}
                     </Link>
                 </p>
                 <div className="flex items-center">
                     <div className="relative">
-                        <div className="flex gap-0.5 lg:gap-1 text-Neutral-Mild">
+                        <div className="flex gap-0.5 text-Neutral-Mild lg:gap-1">
                             {Array.from({length: 5}, (_, index) => (
                                 <Star
                                     key={index}
@@ -68,7 +68,7 @@ export function ReviewDisplay({review}: { review: Review }) {
                                 />
                             ))}
                         </div>
-                        <div className="flex gap-0.5 lg:gap-1 top-0 absolute">{renderStars()}</div>
+                        <div className="absolute top-0 flex gap-0.5 lg:gap-1">{renderStars()}</div>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@ export function ReviewDisplay({review}: { review: Review }) {
                 {review.content.length > 200 && (
                     <button
                         onClick={toggleExpand}
-                        className="font-semibold rounded-md mt-1 lg:font-bold"
+                        className="mt-1 rounded-md font-semibold lg:font-bold"
                     >
                         {expanded ? "Show Less" : "Show More"}
                     </button>

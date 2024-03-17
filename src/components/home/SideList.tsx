@@ -29,11 +29,11 @@ export function SideList() {
     const MyList = myItems.map((item) => <ListItem media={item} key={item.id}/>);
 
     return (
-        <div className="flex mt-6 lg:mt-12 flex-col md:w-11/12 lg:w-10/12 pr-4 lg:pr-8 text-Neutral-Mild">
-            <div className="text-Neutral-Mild font-bold text-2xl  xl:text-3xl">
+        <div className="mt-6 flex flex-col pr-4 text-Neutral-Mild md:w-11/12 lg:mt-12 lg:w-10/12 lg:pr-8">
+            <div className="text-2xl font-bold text-Neutral-Mild xl:text-3xl">
                 Featured Collection
             </div>
-            <div className="my-4 flex gap-10 justify-start">
+            <div className="my-4 flex justify-start gap-10">
                 <button
                     className={`border-b-2 text-xl lg:text-2xl ${
                         selectedOption == "Editor" ? "text-Neutral-Mild font-bold" : ""
@@ -56,24 +56,24 @@ export function SideList() {
                 </button>
             </div>
             <div
-                className="border-b border-gray-200  pb-1 flex lg:gap-9 md:gap-6 gap-3 text-Neutral-Mild text-xl font-semibold lg:justify-end justify-between lg:pl-0  pl-32">
+                className="flex justify-between gap-3 border-b border-gray-200 pb-1 pl-32 text-xl font-semibold text-Neutral-Mild md:gap-6 lg:justify-end lg:gap-9 lg:pl-0">
                 <span>Average</span> <span>Rated</span> <span>Wants</span>
             </div>
             {selectedOption == "Editor" &&
                 EditorList.map((listItem, index) => (
-                    <div key={index} className="flex mt-4 w-full h-auto">
+                    <div key={index} className="mt-4 flex h-auto w-full">
                         {listItem}
                     </div>
                 ))}
             {selectedOption == "My" &&
                 isLoggedIn &&
                 MyList.map((listItem, index) => (
-                    <div key={index} className="flex mt-4 w-full h-auto">
+                    <div key={index} className="mt-4 flex h-auto w-full">
                         {listItem}
                     </div>
                 ))}
             {selectedOption == "My" && !isLoggedIn && (
-                <p className="text-xl mt-2">
+                <p className="mt-2 text-xl">
                     Create a new account or sign in to keep track of your favorites
                 </p>
             )}

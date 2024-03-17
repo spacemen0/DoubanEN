@@ -10,7 +10,7 @@ export type AuthResponse = {
     token: string | null;
 };
 
-export type MediaType = "Music"|"Movie"|"Book"
+export type MediaType = "Music" | "Movie" | "Book"
 
 export type ImageProps = {
     src: string;

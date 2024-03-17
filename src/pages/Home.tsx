@@ -6,11 +6,11 @@ import {PageHeader} from "../components/common/PageHeader";
 
 export default function Home() {
     return (
-        <div className="max-h-screen overflow-hidden flex flex-col">
+        <div className="flex max-h-screen flex-col overflow-hidden">
             <PageHeader/>
             <div className="overflow-y-scroll">
                 <Banner/>
-                <div className="text-Neutral-Mild font-bold text-xl mt-8 md:mt-12 ml-3 md:ml-6 lg:ml-12 md:text-3xl">
+                <div className="mt-8 ml-3 text-xl font-bold text-Neutral-Mild md:mt-12 md:ml-6 md:text-3xl lg:ml-12">
                     Featured Reviews
                 </div>
                 <Featured>

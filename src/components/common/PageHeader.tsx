@@ -9,8 +9,8 @@ import Logo from "../../assets/Logo.jpg";
 
 export function PageHeader() {
     return (
-        <div className="flex flex-col bg-white shadow-md border-b">
-            <div className=" flex gap-1 lg:gap-2 justify-center items-center  h-12 md:h-14">
+        <div className="flex flex-col border-b bg-white shadow-md">
+            <div className="flex h-12 items-center justify-center gap-1 md:h-14 lg:gap-2">
                 <HeaderLogoSection/>
                 <HeaderNavBarSection forMedium={true}/>
                 <HeaderSearchBarSection/>
@@ -23,12 +23,12 @@ export function PageHeader() {
 
 function HeaderLogoSection() {
     return (
-        <div className="flex gap-2 md:gap-4 items-center flex-shrink-0 transition-colors  h-16 px-1 md:px-2">
+        <div className="flex h-16 flex-shrink-0 items-center gap-2 px-1 transition-colors md:gap-4 md:px-2">
             <Link to="/">
                 <img src={Logo} alt="Logo" className="h-10"/>
             </Link>
             <Link
-                className="hidden md:inline font-bold text-lg text-Neutral-Mild rounded-lg p-1.5 hover:bg-gray-100 h-10"
+                className="hidden h-10 rounded-lg text-lg font-bold text-Neutral-Mild p-1.5 hover:bg-gray-100 md:inline"
                 to="/"
             >
                 Douban EN
@@ -113,19 +113,19 @@ function HeaderSearchBarSection() {
 
     return (
         <div className="relative flex flex-grow max-w-[800px]" ref={searchBarRef}>
-            <button className="h-10 absolute inset-y-0 left-0 flex items-center pt-1 pl-2 md:pl-3">
+            <button className="absolute inset-y-0 left-0 flex h-10 items-center pt-1 pl-2 md:pl-3">
                 <Search size="20" color="#4E5464"/>
             </button>
             <input
                 type="search"
                 placeholder="Search..."
-                className="rounded-full border shadow-inner my-1 py-1 pl-8 md:pl-10 pr-10 text-lg text-gray-600 w-full outline-none"
+                className="my-1 w-full rounded-full border py-1 pr-10 pl-8 text-lg text-gray-600 shadow-inner outline-none md:pl-10"
                 onClick={handleInputClick}
             />
             {isDropdownVisible && (
                 <>
                     <button
-                        className="h-10 absolute inset-y-0 right-0 flex items-center pt-1 pr-3"
+                        className="absolute inset-y-0 right-0 flex h-10 items-center pt-1 pr-3"
                         onClick={handleXButtonClick}
                     >
                         <X size="16" color="#4E5464"/>
@@ -157,7 +157,7 @@ function DropDownSearchOption({
          border-gray-300 border-b-[0.5px] md:border absolute left-[-51px]
          md:left-3   top-[42px] md:top-[52px] md:shadow-sm shadow-gray-700"
         >
-            <span className="block mx-3">Search for: </span>
+            <span className="mx-3 block">Search for: </span>
             <button
                 className={`px-0.5 mx-1.5  hover:text-Music ${
                     selectedOption === "Music" ? musicColor : ""
@@ -190,7 +190,7 @@ function HeaderUserSection() {
     const {isLoggedIn, user} = useAuthContext();
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <div className="flex md:gap-1.5 items-center flex-shrink-0  ">
+        <div className="flex flex-shrink-0 items-center md:gap-1.5">
             {isLoggedIn && (
                 <div className="transition-colors hover:bg-gray-100">
                     <Link className="transition-colors hover:bg-gray-100" to={"/profile"}>
@@ -206,7 +206,7 @@ function HeaderUserSection() {
             {isLoggedIn && (
                 <div className="pb-1">
                     <Link
-                        className="hidden md:inline font-bold text-lg text-Neutral-Mild h-10"
+                        className="hidden h-10 text-lg font-bold text-Neutral-Mild md:inline"
                         to={"/profile"}
                     >
                         {user?.name}
@@ -239,7 +239,7 @@ function DropDownMenu({isOpen}: { isOpen: boolean }) {
     return (
         isOpen && (
             <div
-                className="absolute top-10 md:top-9 right-0 w-36  font-bold text-Neutral bg-white shadow-lg ring-1 ring-Neutral-Strong ring-opacity-5">
+                className="absolute top-10 right-0 w-36 bg-white font-bold shadow-lg ring-1 ring-opacity-5 text-Neutral ring-Neutral-Strong md:top-9">
                 {isLoggedIn ? (
                     <div>
                         <MenuItem link={`/profile/${user!.Id}`} text="Profile"/>

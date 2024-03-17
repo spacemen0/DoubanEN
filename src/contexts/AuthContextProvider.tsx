@@ -135,7 +135,7 @@ const MessageBox = ({
                         onHover(e);
                     }}
                 >
-                    <p className="font-semibold text-center text-lg">{message}</p>
+                    <p className="text-center text-lg font-semibold">{message}</p>
                     <p className="text-center text-sm font-semibold">{`(click me)`}</p>
                 </div>
             )}

@@ -36,8 +36,8 @@ export function Collections() {
     }, [id]);
 
     return (
-        <div className="flex flex-col p-2 md:p-4 lg:p-6 bg-gray-100 text-Neutral-Mild border-t-2">
-            <div className="flex gap-10 justify-start lg:text-2xl text-lg md:text-xl">
+        <div className="flex flex-col border-t-2 bg-gray-100 p-2 text-Neutral-Mild md:p-4 lg:p-6">
+            <div className="flex justify-start gap-10 text-lg md:text-xl lg:text-2xl">
                 <button
                     className={`border-b-2  ${
                         selectedOption == "Music" ? "text-Music font-bold" : ""
@@ -70,11 +70,11 @@ export function Collections() {
                 </button>
             </div>
             <div
-                className="border-b py-2 border-gray-200 text-xl font-semibold flex 3xl:pl-64 2xl:pl-48 text-Neutral-Mild justify-between pl-32">
+                className="flex justify-between border-b border-gray-200 py-2 pl-32 text-xl font-semibold text-Neutral-Mild 2xl:pl-48 3xl:pl-64">
                 <span>Average</span> <span>Rated</span> <span>Wants</span>
             </div>
             {myItems.map((item) => (
-                <div key={item.id} className="flex mt-4 w-full h-auto">
+                <div key={item.id} className="mt-4 flex h-auto w-full">
                     <ListItem media={item}/>
                 </div>
             ))}

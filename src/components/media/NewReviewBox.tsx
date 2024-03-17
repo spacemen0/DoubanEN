@@ -5,10 +5,10 @@ import {postReview} from "../../utils/apiService.ts";
 import Draggable from "react-draggable";
 
 export function NewReviewBox({
-                              setShowReviewBox,
-                              media,
-                              score,
-                          }: {
+                                 setShowReviewBox,
+                                 media,
+                                 score,
+                             }: {
     setShowReviewBox: (value: React.SetStateAction<boolean>) => void;
     media: Media;
     score: number;
@@ -45,15 +45,15 @@ export function NewReviewBox({
     };
 
     return (
-        <div className="z-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div className="fixed top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
             <Draggable cancel=".need-interaction">
                 <div
                     id="message"
-                    className="rounded-lg border-2 text-center lg:w-[480px] md:w-96 w-72 border-Neutral-Mild bg-white"
+                    className="w-72 rounded-lg border-2 bg-white text-center border-Neutral-Mild md:w-96 lg:w-[480px]"
                 >
                     <label
                         htmlFor="message"
-                        className="block py-2 px-4 text-xl rounded-t-lg bg-gray-100 font-semibold text-Neutral-Strong border-b-2 border-Neutral-Mild"
+                        className="block rounded-t-lg border-b-2 bg-gray-100 px-4 py-2 text-xl font-semibold text-Neutral-Strong border-Neutral-Mild"
                     >
                         Your Review
                     </label>
@@ -61,7 +61,7 @@ export function NewReviewBox({
                         rows={1}
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        className="need-interaction block p-2.5 w-full focus:outline-none font-semibold text-Neutral-Strong border-b-2 border-Neutral-Mild focus:ring-Neutral-Mild bg-white"
+                        className="block w-full border-b-2 bg-white font-semibold need-interaction p-2.5 text-Neutral-Strong border-Neutral-Mild focus:ring-Neutral-Mild focus:outline-none"
                         placeholder="Title"
                         onMouseDown={(event) => {
                             event.stopPropagation();
@@ -71,7 +71,7 @@ export function NewReviewBox({
                         rows={6}
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
-                        className="need-interaction hidden lg:block p-2.5 w-full focus:outline-none text-Neutral bg-white"
+                        className="hidden w-full bg-white need-interaction p-2.5 text-Neutral focus:outline-none lg:block"
                         placeholder="Write your review here..."
                         onMouseDown={(event) => {
                             event.stopPropagation();
@@ -81,14 +81,14 @@ export function NewReviewBox({
                         rows={4}
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
-                        className="need-interaction lg:hidden p-2.5 w-full focus:outline-none text-Neutral bg-white"
+                        className="w-full bg-white need-interaction p-2.5 text-Neutral focus:outline-none lg:hidden"
                         placeholder="Write your review here..."
                         onMouseDown={(event) => {
                             event.stopPropagation();
                         }}
                     ></textarea>
                     <div
-                        className="need-interaction border-t-2 w-full flex justify-end border-Neutral-Mild rounded-br-lg">
+                        className="flex w-full justify-end rounded-br-lg border-t-2 need-interaction border-Neutral-Mild">
                         <button
                             className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild  border-Neutral-Mild
          focus:ring-1 focus:ring-Neutral transition-colors"

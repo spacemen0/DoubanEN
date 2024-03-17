@@ -5,7 +5,7 @@ export function AdditionalInfo({media}: { media: Media }) {
 
     return (
         <>
-            <p className="font-bold text-2xl my-4">
+            <p className="my-4 text-2xl font-bold">
                 {media.type === "Music"
                     ? "Track Listing"
                     : media.type === "Book"
@@ -20,7 +20,7 @@ export function AdditionalInfo({media}: { media: Media }) {
                                 key={index}
                                 className={`border-b py-2 ${index % 2 === 0 && "bg-gray-100"}`}
                             >
-                                <span className="font-semibold px-4">{index + 1}</span> {item}
+                                <span className="px-4 font-semibold">{index + 1}</span> {item}
                             </p>
                         ))}
                     </>
@@ -32,7 +32,7 @@ export function AdditionalInfo({media}: { media: Media }) {
                                 key={index}
                                 className={`border-b py-2 ${index % 2 === 0 && "bg-gray-100"}`}
                             >
-                                <span className="font-semibold px-4">{index + 1}</span> {item}
+                                <span className="px-4 font-semibold">{index + 1}</span> {item}
                             </p>
                         ))}
                     </>
@@ -44,7 +44,7 @@ export function AdditionalInfo({media}: { media: Media }) {
                                 key={index}
                                 className={`border-b py-2 ${index % 2 === 0 && "bg-gray-100"}`}
                             >
-                                <p className="font-semibold px-4">{item.character}</p>
+                                <p className="px-4 font-semibold">{item.character}</p>
                                 <p className="px-4">{item.actor}</p>
                             </div>
                         ))}

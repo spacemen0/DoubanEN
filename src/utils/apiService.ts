@@ -210,7 +210,7 @@ export const getAllMedias = async (type: MediaType, page: number): Promise<Media
 }
 
 export const getAllMediasCount = async (
-    type:MediaType
+    type: MediaType
 ): Promise<number> => {
     console.log(type);
     return faker.number.int({max: 100, min: 10});

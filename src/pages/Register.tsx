@@ -47,16 +47,16 @@ function RegisterForm(props: {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }) {
     return <div className="flex flex-col">
-        <div className="flex justify-center w-full lg:w-4/6 mx-auto mt-1 lg:mt-10">
-            <div className="hidden lg:flex flex-1 items-center justify-center bg-gray-100 px-6 py-2 lg:py-6">
+        <div className="mx-auto mt-1 flex w-full justify-center lg:mt-10 lg:w-4/6">
+            <div className="hidden flex-1 items-center justify-center bg-gray-100 px-6 py-2 lg:flex lg:py-6">
                 <MyImage {...generateRandomData()} />
             </div>
-            <div className="w-full bg-gray-100 lg:w-1/2 flex items-center justify-center">
-                <div className="max-w-md w-full p-3 lg:p-6">
-                    <h1 className="text-3xl font-semibold mb-6 text-Neutral-Strong text-center">
+            <div className="flex w-full items-center justify-center bg-gray-100 lg:w-1/2">
+                <div className="w-full max-w-md p-3 lg:p-6">
+                    <h1 className="mb-6 text-center text-3xl font-semibold text-Neutral-Strong">
                         Sign Up
                     </h1>
-                    <h1 className="text-sm font-semibold mb-6 text-Neutral-Mild text-center">
+                    <h1 className="mb-6 text-center text-sm font-semibold text-Neutral-Mild">
                         Join our community to keep track of your favorites
                     </h1>
 
@@ -80,7 +80,7 @@ function RegisterForm(props: {
                                 onChange={props.onChange}
                                 required={true}
                                 autoComplete="off"
-                                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+                                className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                             />
                         </div>
                         <div>
@@ -98,7 +98,7 @@ function RegisterForm(props: {
                                 onChange={props.onChange}
                                 required={true}
                                 autoComplete="email"
-                                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+                                className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                             />
                         </div>
                         <div>
@@ -116,7 +116,7 @@ function RegisterForm(props: {
                                 onChange={props.onChange}
                                 required={true}
                                 autoComplete="new-password"
-                                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+                                className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                             />
                         </div>
                         <div>
@@ -134,13 +134,13 @@ function RegisterForm(props: {
                                 onChange={props.onChange}
                                 required={true}
                                 autoComplete="new-password"
-                                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+                                className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                             />
                         </div>
                         <div>
                             <button
                                 type="submit"
-                                className="w-full bg-Neutral-Strong text-white p-2 rounded-md hover:bg-Neutral focus:outline-none focus:bg-Neutral-Strong focus:ring-2 focus:ring-offset-2 focus:ring-Neutral-Strong transition-colors duration-300"
+                                className="w-full rounded-md p-2 text-white transition-colors duration-300 bg-Neutral-Strong hover:bg-Neutral focus:bg-Neutral-Strong focus:ring-Neutral-Strong focus:outline-none focus:ring-2 focus:ring-offset-2"
                             >
                                 Register
                             </button>

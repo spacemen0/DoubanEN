@@ -3,8 +3,8 @@ import {Link} from "react-router-dom";
 
 export function SideInfo() {
     return (
-        <div className="flex md:w-11/12 lg:w-10/12 flex-col ">
-            <div className="text-Neutral font-bold text-xl md:text-3xl my-3 xl:my-6">
+        <div className="flex flex-col md:w-11/12 lg:w-10/12">
+            <div className="my-3 text-xl font-bold text-Neutral md:text-3xl xl:my-6">
                 Douban EN
             </div>
             <div className="text-Neutral-Mild">
@@ -13,7 +13,7 @@ export function SideInfo() {
             </div>
             <Link
                 to={"/login"}
-                className="flex justify-center mt-4 pt-1 h-10 text-xl font-bold text-white  rounded-md bg-Neutral hover:bg-Neutral-Mild"
+                className="mt-4 flex h-10 justify-center rounded-md pt-1 text-xl font-bold text-white bg-Neutral hover:bg-Neutral-Mild"
             >
                 Know More
             </Link>

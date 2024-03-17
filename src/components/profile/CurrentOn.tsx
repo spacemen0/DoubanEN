@@ -23,10 +23,10 @@ export function CurrentOn() {
     }
     return (
         <div
-            className="flex-col w-96 md:w-[420px]  pb-6 md:pl-4 gap-2 items-center justify-center text-lg text-gray-600">
-            <div className="flex flex-col mb-2 w-full shadow-md rounded-md bg-white">
+            className="w-96 flex-col items-center justify-center gap-2 pb-6 text-lg text-gray-600 md:w-[420px] md:pl-4">
+            <div className="mb-2 flex w-full flex-col rounded-md bg-white shadow-md">
                 {" "}
-                <h1 className=" font-bold text-center m-2">Listening</h1>
+                <h1 className="m-2 text-center font-bold">Listening</h1>
                 <div className="flex p-2 text-center">
                     <div className="w-32">
                         <MyImage
@@ -36,17 +36,17 @@ export function CurrentOn() {
                         />
                     </div>
 
-                    <div className=" ml-4 flex flex-col justify-center">
+                    <div className="ml-4 flex flex-col justify-center">
                         {" "}
-                        <h1 className="font-bold ">Very Long Album Name</h1>
+                        <h1 className="font-bold">Very Long Album Name</h1>
                         <h1 className="">Artist Name</h1>
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col mb-2 w-full shadow-md rounded-md bg-white">
+            <div className="mb-2 flex w-full flex-col rounded-md bg-white shadow-md">
                 {" "}
-                <h1 className=" font-bold text-center m-2">Watching</h1>
-                <div className=" flex p-2 text-center">
+                <h1 className="m-2 text-center font-bold">Watching</h1>
+                <div className="flex p-2 text-center">
                     <div className="w-32">
                         <MyImage
                             src={currentOn[1].image}
@@ -54,16 +54,16 @@ export function CurrentOn() {
                             href={`/media/${currentOn[0].type}/${currentOn[1].id}`}
                         />
                     </div>
-                    <div className=" ml-4 flex flex-col justify-center">
+                    <div className="ml-4 flex flex-col justify-center">
                         {" "}
-                        <h1 className="font-bold ">Very Long Movie Name</h1>
+                        <h1 className="font-bold">Very Long Movie Name</h1>
                         <h1 className="">Director Name</h1>
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col mb-2 w-full shadow-md rounded-md bg-white">
+            <div className="mb-2 flex w-full flex-col rounded-md bg-white shadow-md">
                 {" "}
-                <h1 className="font-bold text-center m-2">Reading</h1>
+                <h1 className="m-2 text-center font-bold">Reading</h1>
                 <div className="flex p-2 text-center">
                     <div className="w-32">
                         <MyImage
@@ -72,9 +72,9 @@ export function CurrentOn() {
                             href={`/media/${currentOn[0].type}/${currentOn[2].id}`}
                         />
                     </div>
-                    <div className=" ml-4 flex flex-col justify-center">
+                    <div className="ml-4 flex flex-col justify-center">
                         {" "}
-                        <h1 className="font-bold ">Very Long Book Name</h1>
+                        <h1 className="font-bold">Very Long Book Name</h1>
                         <h1 className="">Author Name</h1>
                     </div>
                 </div>
