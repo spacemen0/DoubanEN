@@ -1,6 +1,6 @@
 import {faker} from "@faker-js/faker";
 import {bookItems, generateRandomData, movieItems, musicItems, myItems,} from "./data.ts";
-import {AuthResponse, Media, MediaType, Review, User} from "./type.ts";
+import {AuthResponse, Media, MediaStatus, MediaType, Review, User} from "./type.ts";
 
 export const fetchCollectionItems = async (
     userId: number,
@@ -20,26 +20,18 @@ export const fetchCurrentOn = async (userId: number): Promise<Media[]> => {
     return myItems.slice(0, 3);
 };
 
-export const fetchMyRating = async (
+export const fetchMediaStatus = async (
     userId: number,
     mediaId: number
-): Promise<Review> => {
+): Promise<MediaStatus> => {
     console.log(userId, mediaId);
     return {
-        userId: userId,
-        username: "Spacemen0",
-        mediaId: mediaId,
-        reviewDate: "2024-02-13",
-        star: 3.5,
-        title: faker.lorem.words(),
-        content: "My Review",
+        status: "None",
+        score: 0,
+        date: faker.date.past().toISOString().split("T")[0],
     };
 };
 
-export const submitRating = async (review: Review) => {
-    console.log(review);
-    // throw new Error("Function not implemented.");
-};
 
 export const getUser = async (id: number): Promise<User> => {
     console.log(id);
@@ -157,7 +149,7 @@ export const getMediaReviews = async (
             userId: faker.number.int(),
             mediaId: faker.number.int(),
             reviewDate: faker.date.past().toISOString().split("T")[0],
-            star: 3.5,
+            score: 3.5,
             title: faker.lorem.words(),
             content: faker.lorem.paragraph() + faker.lorem.paragraph(),
         });
@@ -176,6 +168,41 @@ export const postReview = async (review: Review) => {
     console.log(review);
     throw new Error("Function Not implemented yet");
 };
+
+export const deleteReview = async (userId: number, mediaId: number) => {
+    console.log(userId, mediaId)
+    throw new Error("Function Not implemented yet")
+}
+export const setWishlist = async (userId: number, mediaId: number) => {
+    console.log(userId, mediaId)
+    throw new Error("Function Not implemented yet")
+}
+
+export const cancelWishlist = async (userId: number, mediaId: number) => {
+    console.log(userId, mediaId)
+    throw new Error("Function Not implemented yet")
+}
+
+export const setDoing = async (userId: number, mediaId: number) => {
+    console.log(userId, mediaId)
+    throw new Error("Function Not implemented yet")
+}
+
+export const cancelDoing = async (userId: number, mediaId: number) => {
+    console.log(userId, mediaId)
+    throw new Error("Function Not implemented yet")
+}
+
+export const submitRating = async (review: Review) => {
+    console.log(review);
+    throw new Error("Function not implemented.");
+};
+
+export const deleteRating = async (userId: number, mediaId: number) => {
+    console.log(userId, mediaId)
+    throw new Error("Function Not implemented yet")
+}
+
 
 export const getAllMedias = async (type: MediaType, page: number): Promise<Media[]> => {
     console.log(type, page);

@@ -1,15 +1,17 @@
 import React, {useState} from "react";
-import {Media} from "../../utils/type.ts";
+import {Media, MediaStatus} from "../../utils/type.ts";
 import {useAuthContext} from "../../contexts/AuthContext.ts";
 import {postReview} from "../../utils/apiService.ts";
 import Draggable from "react-draggable";
 
 export function NewReviewBox({
                                  setShowReviewBox,
+    setMediaStatus,
                                  media,
                                  score,
                              }: {
     setShowReviewBox: (value: React.SetStateAction<boolean>) => void;
+    setMediaStatus:React.Dispatch<React.SetStateAction<MediaStatus>>;
     media: Media;
     score: number;
 }) {
@@ -24,7 +26,7 @@ export function NewReviewBox({
 
     const handlePostReview = async () => {
         if (score === 0) {
-            setMessage("Please rate before post a review");
+            setMessage("Please rate before posting a review");
             return;
         }
         const review = {
@@ -32,12 +34,13 @@ export function NewReviewBox({
             userId: user!.Id,
             mediaId: media.id,
             reviewDate: new Date(Date.now()).toISOString().split("T")[0],
-            star: score as 2 | 1 | 0.5 | 1.5 | 2.5 | 3 | 3.5 | 4 | 4.5 | 5,
+            score: score as 2 | 1 | 0.5 | 1.5 | 2.5 | 3 | 3.5 | 4 | 4.5 | 5,
             title: title,
             content: content,
         };
         try {
             await postReview(review);
+            setMediaStatus({status:"Reviewed",score:score,date:new Date(Date.now()).toISOString().split("T")[0]})
             setShowReviewBox(false);
         } catch (error) {
             setMessage("Error processing Post Review request");

@@ -39,10 +39,16 @@ export type Review = {
     userId: number;
     mediaId: number;
     reviewDate: string;
-    star: 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | 3.5 | 4.0 | 4.5 | 5.0;
+    score: 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | 3.5 | 4.0 | 4.5 | 5.0;
     title: string;
     content: string;
 };
+
+export type MediaStatus = {
+    score:number;
+    status:"Rated"|"Wishlist"|"Doing"|"Reviewed"|"None";
+    date?:string;
+}
 
 export type User = {
     name: string;

@@ -6,8 +6,8 @@ import {Link} from "react-router-dom";
 export function ReviewDisplay({review}: { review: Review }) {
     const [expanded, setExpanded] = useState(false);
     const renderStars = () => {
-        const stars = Math.floor(review.star);
-        const hasHalfStar = review.star % 1 !== 0;
+        const stars = Math.floor(review.score);
+        const hasHalfStar = review.score % 1 !== 0;
         const starElements = [];
 
         for (let i = 0; i < stars; i++) {
