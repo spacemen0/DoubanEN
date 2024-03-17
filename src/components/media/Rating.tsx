@@ -99,7 +99,7 @@ export function Rating({media}: { media: Media }) {
                 )}
                 {mediaStatus.status === "Doing" && (
                     <div className="text-xl md:pl-4">
-                    <span>Set {media.type === "Music" ? "listening" : media.type === "Movie" ? "watching" : "reading"}</span>
+                        <span>Set {media.type === "Music" ? "listening" : media.type === "Movie" ? "watching" : "reading"}</span>
                     </div>
                 )}
 
@@ -178,7 +178,11 @@ export function Rating({media}: { media: Media }) {
                                             content: "",
                                         };
                                         submitRating(newRating).then();
-                                        setMediaStatus({...mediaStatus, date: newDate.toISOString().split("T")[0]});
+                                        setMediaStatus({
+                                            score: score,
+                                            status: "Rated",
+                                            date: newDate.toISOString().split("T")[0]
+                                        });
                                         setMessage("Rating submitted");
                                     }
                                 } catch (error) {
@@ -206,7 +210,7 @@ export function Rating({media}: { media: Media }) {
                                             : media.type === "Movie"
                                                 ? "Watching"
                                                 : "Reading"} status canceled`)
-                                        setMediaStatus({score: 0,status:"None"})
+                                        setMediaStatus({score: 0, status: "None"})
                                     } else {
                                         setDoing(user.Id, media.id).then();
                                         setMessage(`Set ${media.type === "Music"
@@ -253,7 +257,7 @@ export function Rating({media}: { media: Media }) {
                                     if (mediaStatus.status === "Wishlist") {
                                         cancelWishlist(user.Id, media.id).then()
                                         setMessage("Removed from wishlist")
-                                        setMediaStatus({score: 0,status:"None"})
+                                        setMediaStatus({score: 0, status: "None"})
                                     } else {
                                         setWishlist(user.Id, media.id).then()
                                         setMessage("Added to wishlist")
@@ -283,10 +287,10 @@ export function Rating({media}: { media: Media }) {
                                     if (mediaStatus.status === "Reviewed") {
                                         deleteReview(user.Id, media.id).then();
                                         setMessage("Review deleted")
-                                        setMediaStatus({score: 0,status:"None"})
+                                        setMediaStatus({score: 0, status: "None"})
                                     } else {
-                                        if(mediaStatus.score!==0)
-                                        setShowReviewBox(!showReviewBox);
+                                        if (mediaStatus.score !== 0)
+                                            setShowReviewBox(!showReviewBox);
                                         else setMessage("Please rate before posting a review");
                                     }
                                 } catch (error) {
