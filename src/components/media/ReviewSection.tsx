@@ -37,7 +37,7 @@ export function ReviewSection({media}: { media: Media }) {
 
     return (
         <div className="mt-4 flex flex-col pb-4">
-            <Pagination title={"Review"} count={count} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+            <Pagination title={`${count} Reviews`} count={count} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
             <ul>
                 {reviews.map((review, index) => (
                     <li key={index} className="mb-4 border-b pb-2"><ReviewDisplay review={review}/></li>

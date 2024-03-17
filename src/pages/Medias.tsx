@@ -45,8 +45,8 @@ export default function Medias() {
         <div className="flex max-h-screen flex-col overflow-hidden">
             <PageHeader/>
             <div className="mt-2 overflow-y-scroll px-2 lg:px-4">
-                <Pagination title={(type!.charAt(0).toUpperCase() + type!.slice(1)) as
-                    MediaType} count={count} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+                <Pagination title={`${count} ${(type!.charAt(0).toUpperCase() + type!.slice(1)) as
+                    MediaType}s`} count={count} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
                 <div
                     className="my-2 flex justify-between gap-3 border-b border-gray-200 pb-1 pl-32 text-xl font-semibold text-Neutral-Mild md:gap-6 lg:gap-9 lg:pl-36 2xl:pl-44 3xl:pl-56">
                     <span>Average</span> <span>Rated</span> <span>Wants</span>

@@ -4,7 +4,7 @@ import {Media} from "../../utils/type.ts";
 export function MediaInfo({media, home}: { media: Media; home: boolean }) {
     return (
         <div
-            className={`flex-1 flex flex-col items-center !md:items-start justify-center text-xl py-3
+            className={`flex-1 flex flex-col items-center !md:items-start justify-center text-xl
           ${!home && " border-b-2"} `}
         >
             <div
@@ -28,15 +28,15 @@ export function MediaInfo({media, home}: { media: Media; home: boolean }) {
             <table className="mt-3 w-full">
                 <tbody>
                 <tr>
-                    <td className="pr-4 pb-3 font-semibold">Type:</td>
-                    <td>{media.type}</td>
+                    <td className="pr-4 font-semibold pb-1.5 lg:pb-3">Type:</td>
+                    <td className="pb-1.5 lg:pb-3">{media.type}</td>
                 </tr>
                 <tr>
-                    <td className="pr-4 pb-3 font-semibold">Released Date:</td>
-                    <td>{media.releaseDate}</td>
+                    <td className="pr-4 font-semibold pb-1.5 lg:pb-3">Released Date:</td>
+                    <td className="pb-1.5 lg:pb-3">{media.releaseDate}</td>
                 </tr>
                 <tr>
-                    <td className="pr-4 pb-3 font-semibold">
+                    <td className="pr-4 font-semibold pb-1.5 lg:pb-3">
                         {media.type === "Music"
                             ? "Artist"
                             : media.type === "Book"
@@ -44,15 +44,15 @@ export function MediaInfo({media, home}: { media: Media; home: boolean }) {
                                 : "Director"}
                         :
                     </td>
-                    <td>{media.author}</td>
+                    <td className="pb-1.5 lg:pb-3">{media.author}</td>
                 </tr>
                 <tr>
-                    <td className="pr-4 pb-3 font-semibold">Genre:</td>
-                    <td>{media.genre}</td>
+                    <td className="pr-4 font-semibold pb-1.5 lg:pb-3">Genre:</td>
+                    <td className="pb-1.5 lg:pb-3">{media.genre}</td>
                 </tr>
                 <tr>
-                    <td className="pr-4 pb-3 font-semibold">Ratings:</td>
-                    <td>
+                    <td className="pr-4 font-semibold pb-1.5 lg:pb-3">Ratings:</td>
+                    <td className="pb-1.5 lg:pb-3">
               <span className="text-xl font-semibold lg:text-2xl">
                 {media.average}&nbsp;
               </span>

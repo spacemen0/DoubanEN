@@ -41,7 +41,7 @@ export function Pagination({title, count, currentPage, setCurrentPage}: {
     return (
         <>
             <div className="flex items-center justify-between">
-                <p className="py-2 text-2xl font-semibold text-Neutral-Strong">{count} {title}s</p>
+                <p className="py-2 text-2xl font-semibold text-Neutral-Strong">{title}</p>
                 <div className="flex items-center justify-center py-2 align-middle text-lg">
                     <input
                         id="jump"

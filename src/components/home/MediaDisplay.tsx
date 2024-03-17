@@ -12,7 +12,7 @@ export function MediaDisplay({media}: { media: Media }) {
                     href={`/media/${media.type}/${media.id}`}
                 />
             </div>
-            <div className="flex flex-1 flex-col items-start justify-center md:ml-8 lg:text-xl">
+            <div className="flex flex-1 flex-col items-start justify-center md:ml-8 lg:text-xl !md:mt-2">
                 <MediaInfo media={media} home={true}/>
             </div>
         </div>
