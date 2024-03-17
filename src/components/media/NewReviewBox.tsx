@@ -4,7 +4,7 @@ import {useAuthContext} from "../../contexts/AuthContext.ts";
 import {postReview} from "../../utils/apiService.ts";
 import Draggable from "react-draggable";
 
-export function ReviewBox({
+export function NewReviewBox({
                               setShowReviewBox,
                               media,
                               score,

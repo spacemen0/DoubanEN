@@ -3,7 +3,7 @@ import React, {ReactNode, useEffect, useState} from "react";
 import {useAuthContext} from "../../contexts/AuthContext.ts";
 import {ChevronDown, ChevronUp, Star, StarHalf} from "lucide-react";
 import {fetchMyRating, submitRating} from "../../utils/apiService.ts";
-import {ReviewBox} from "./ReviewBox.tsx";
+import {NewReviewBox} from "./NewReviewBox.tsx";
 
 export function Rating({media}: { media: Media }) {
     const [stars, setStars] = useState<ReactNode[]>();
@@ -67,7 +67,7 @@ export function Rating({media}: { media: Media }) {
     return (
         <div className="mt-4 pb-4 border-b-2">
             {showReviewBox && (
-                <ReviewBox
+                <NewReviewBox
                     setShowReviewBox={setShowReviewBox}
                     media={media}
                     score={score}

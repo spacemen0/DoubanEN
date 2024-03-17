@@ -13,7 +13,7 @@ export default function Profile() {
         if (!isLoggedIn) navigate("/login");
     });
     return (
-        <div className="max-h-screen overflow-hidden flex flex-col ">
+        <div className="max-h-screen overflow-hidden flex flex-col">
             <PageHeader/>
             <div className="overflow-y-scroll">
                 <div className="flex flex-col w-full md:10/12 h-auto mx-auto">

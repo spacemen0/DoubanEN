@@ -1,10 +1,10 @@
 import {faker} from "@faker-js/faker";
 import {bookItems, generateRandomData, movieItems, musicItems, myItems,} from "./data.ts";
-import {AuthResponse, Media, Review, User} from "./type.ts";
+import {AuthResponse, Media, MediaType, Review, User} from "./type.ts";
 
 export const fetchCollectionItems = async (
     userId: number,
-    type: "Music" | "Movie" | "Book" | "All"
+    type: MediaType | "All"
 ): Promise<Media[]> => {
     console.log(userId);
     if (type === "Music") return musicItems;
@@ -80,7 +80,7 @@ export const logout = async (token: string) => {
 
 export const getMedia = async (
     id: number,
-    type: "Music" | "Movie" | "Book"
+    type: MediaType
 ): Promise<Media> => {
     console.log(id, type);
     if (type === "Music")
@@ -177,7 +177,7 @@ export const postReview = async (review: Review) => {
     throw new Error("Function Not implemented yet");
 };
 
-export const getAllMedias = async (type: "Music" | "Book" | "Movie", page: number): Promise<Media[]> => {
+export const getAllMedias = async (type: MediaType, page: number): Promise<Media[]> => {
     console.log(type, page);
     const media: Media[] = [];
     Array.from({length: 5}, () => {
@@ -208,3 +208,11 @@ export const getAllMedias = async (type: "Music" | "Book" | "Movie", page: numbe
     });
     return media
 }
+
+export const getAllMediasCount = async (
+    type:MediaType
+): Promise<number> => {
+    console.log(type);
+    return faker.number.int({max: 100, min: 10});
+};
+
