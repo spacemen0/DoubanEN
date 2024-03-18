@@ -9,6 +9,7 @@ const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const Media = lazy(() => import("./pages/Media"));
 const Medias = lazy(() => import("./pages/Medias"));
+const Author = lazy(() => import("./pages/Author"))
 
 export default function App() {
     return (
@@ -33,6 +34,7 @@ export default function App() {
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/media/:type/:id" element={<Media/>}/>
                 <Route path="/media/:type" element={<Medias/>}/>
+                <Route path="author/:id" element={<Author/>}/>
                 <Route path="/*" element={<NotFound/>}/>
             </Routes>
         </Suspense>

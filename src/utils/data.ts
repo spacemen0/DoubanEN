@@ -7,6 +7,11 @@ export const generateRandomData = () => ({
     href: faker.internet.url(),
 });
 
+export const bannerImage: { listId: number, imageProps: ImageProps } = {
+    listId: faker.number.int({min: 100, max: 500}),
+    imageProps: generateRandomData()
+}
+
 export const featuredItems: {
     media: Media;
     review: Review;
@@ -395,8 +400,9 @@ export const bookItems: Media[] = [
     },
 ];
 
-export const sideImages: ImageProps[] = Array.from({length: 7}, () =>
-    generateRandomData()
+export const sideImages: { listId: number, ImageProps: ImageProps }[] = Array.from({length: 7}, () => {
+        return {listId: faker.number.int({min: 100, max: 500}), ImageProps: generateRandomData()}
+    }
 );
 
 export const bannerText: string = `Douban EN is a website built with React, TypeScript and Tailwind CSS. 

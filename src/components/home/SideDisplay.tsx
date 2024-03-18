@@ -6,32 +6,32 @@ export function SideDisplay() {
     return (
         <div className="mt-6 flex flex-col md:mt-4 md:w-11/12 lg:w-10/12">
             <div className="mb-4">
-                <Link to="/list/2">
-                    <MyImage {...sideImages[0]} />
+                <Link to={`/list/${sideImages[0].listId}`}>
+                    <MyImage {...sideImages[0].ImageProps} />
                 </Link>
             </div>
 
             <div className="mb-4 flex justify-between">
-                <Link to="/list/3">
-                    <MyImage {...sideImages[1]} />
+                <Link to={`/list/${sideImages[1].listId}`}>
+                    <MyImage {...sideImages[1].ImageProps} />
                 </Link>
-                <Link to="/list/4">
-                    <MyImage {...sideImages[2]} />
+                <Link to={`/list/${sideImages[2].listId}`}>
+                    <MyImage {...sideImages[2].ImageProps} />
                 </Link>
-                <Link to="/list/5">
-                    <MyImage {...sideImages[3]} />
+                <Link to={`/list/${sideImages[3].listId}`}>
+                    <MyImage {...sideImages[3].ImageProps} />
                 </Link>
             </div>
 
             <div className="flex justify-between">
-                <Link to="/list/6">
-                    <MyImage {...sideImages[4]} />
+                <Link to={`/list/${sideImages[4].listId}`}>
+                    <MyImage {...sideImages[4].ImageProps} />
                 </Link>
-                <Link to="/list/7">
-                    <MyImage {...sideImages[5]} />
+                <Link to={`/list/${sideImages[5].listId}`}>
+                    <MyImage {...sideImages[5].ImageProps} />
                 </Link>
-                <Link to="/list/8">
-                    <MyImage {...sideImages[6]} />
+                <Link to={`/list/${sideImages[6].listId}`}>
+                    <MyImage {...sideImages[6].ImageProps} />
                 </Link>
             </div>
         </div>
