@@ -14,9 +14,9 @@ export default {
 
       },
       colors: {
-        "Music": "rgb(83, 86, 255)",
-        "Movie": "rgb(55, 140, 231)",
-        "Book": "rgb(103, 198, 227)",
+        "Music": "#0A8F08",
+        "Movie": "#039BE5",
+        "Book": "#B0120A",
         "Neutral": "rgb(75 85 99)",
         "Neutral-Mild": "rgb(107 114 128)",
         "Neutral-Strong": "rgb(31 41 55)",

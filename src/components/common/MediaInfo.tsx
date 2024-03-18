@@ -10,11 +10,7 @@ export function MediaInfo({media, home}: { media: Media; home: boolean }) {
             <div
                 className={`flex justify-between w-full pb-3 border-b-2 ${
                     home &&
-                    (media.type === "Music"
-                        ? " border-Music"
-                        : media.type === "Movie"
-                            ? " border-Movie"
-                            : " border-Book")
+                    "border-Neutral-Mild"
                 }`}
             >
                 <Link

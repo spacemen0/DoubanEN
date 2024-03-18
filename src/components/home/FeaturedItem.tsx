@@ -12,12 +12,7 @@ export function FeaturedItem({
     return (
         <div
             className={
-                "w-full bg-white rounded-md border shadow-md p-2 " +
-                (media.type === "Music"
-                    ? "text-Music"
-                    : media.type === "Movie"
-                        ? "text-Movie "
-                        : "text-Book ")
+                "w-full bg-white rounded-md border shadow-md p-2 text-Neutral-Mild"
             }
         >
             <MediaDisplay media={media}/>

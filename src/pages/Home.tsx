@@ -1,5 +1,3 @@
-import {FeaturedItem} from "../components/home/FeaturedItem";
-import {featuredItems} from "../utils/data.ts";
 import {Banner} from "../components/home/Banner";
 import {Featured} from "../components/home/Featured";
 import {PageHeader} from "../components/common/PageHeader";
@@ -14,9 +12,6 @@ export default function Home() {
                     Featured Reviews
                 </div>
                 <Featured>
-                    {featuredItems.map((item, index) => (
-                        <FeaturedItem key={index} media={item.media} review={item.review}/>
-                    ))}
                 </Featured>
             </div>
         </div>
