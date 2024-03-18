@@ -156,34 +156,36 @@ export function Rating({media}: { media: Media }) {
                                         deleteRating(user.Id, media.id).then();
                                         setMessage("Rating deleted")
                                     } else {
-                                        const score = mediaStatus.score as
-                                            | 2
-                                            | 1
-                                            | 0.5
-                                            | 1.5
-                                            | 2.5
-                                            | 3
-                                            | 3.5
-                                            | 4
-                                            | 4.5
-                                            | 5;
-                                        const newDate = new Date(Date.now());
-                                        const newRating = {
-                                            userId: user.Id,
-                                            username: user.name,
-                                            score: score,
-                                            reviewDate: newDate.toISOString().split("T")[0],
-                                            mediaId: media.id,
-                                            title: "",
-                                            content: "",
-                                        };
-                                        submitRating(newRating).then();
-                                        setMediaStatus({
-                                            score: score,
-                                            status: "Rated",
-                                            date: newDate.toISOString().split("T")[0]
-                                        });
-                                        setMessage("Rating submitted");
+                                        if (mediaStatus.score !== 0) {
+                                            const score = mediaStatus.score as
+                                                | 2
+                                                | 1
+                                                | 0.5
+                                                | 1.5
+                                                | 2.5
+                                                | 3
+                                                | 3.5
+                                                | 4
+                                                | 4.5
+                                                | 5;
+                                            const newDate = new Date(Date.now());
+                                            const newRating = {
+                                                userId: user.Id,
+                                                username: user.name,
+                                                score: score,
+                                                reviewDate: newDate.toISOString().split("T")[0],
+                                                mediaId: media.id,
+                                                title: "",
+                                                content: "",
+                                            };
+                                            submitRating(newRating).then();
+                                            setMediaStatus({
+                                                score: score,
+                                                status: "Rated",
+                                                date: newDate.toISOString().split("T")[0]
+                                            });
+                                            setMessage("Rating submitted");
+                                        } else setMessage("Please rate before submitting")
                                     }
                                 } catch (error) {
                                     setMessage("Error processing Submit Rating request");

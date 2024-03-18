@@ -1,12 +1,64 @@
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {PageHeader} from "../components/common/PageHeader";
+import {useEffect, useState} from "react";
+import {ListInfo, Media} from "../utils/type.ts";
+import {useAuthContext} from "../contexts/AuthContext.ts";
+import {Pagination} from "../components/common/Pagination.tsx";
+import {ListItem} from "../components/common/ListItem.tsx";
+import {getAllListItems, getListInfo, getListItemsCount} from "../utils/apiService.ts";
 
 export default function List() {
     const {id} = useParams();
+    const [medias, setMedias] = useState<Media[]>()
+    const [listInfo,setListInfo] = useState<ListInfo>()
+    const [count, setCount] = useState(0)
+    const [currentPage, setCurrentPage] = useState(1);
+    const {setMessage} = useAuthContext()
+    useEffect(() => {
+        const fetchListCount = async (id:number) => {
+            try {
+                const fetchedCount = await getListItemsCount(id);
+                setCount(fetchedCount)
+            } catch (error) {
+                setMessage("Error fetching reviews count")
+            }
+        }
+        fetchListCount(parseInt(id!)).then( )
+    }, [id, setMessage]);
+
+    useEffect(() => {
+        const fetchAllListItems = async () => {
+            setMedias(await getAllListItems(parseInt(id!), currentPage))
+        }
+        fetchAllListItems().then()
+    }, [currentPage, id]);
+
+    useEffect(() => {
+        const fetchListInfo = async () => {
+            setListInfo(await getListInfo(parseInt(id!)))
+        }
+        fetchListInfo().then()
+    }, [currentPage, id]);
     return (
-        <div className="">
+        <div className="flex max-h-screen flex-col overflow-hidden">
             <PageHeader/>
-            List: {id}
+
+            <p className="text-2xl font-bold my-2 mx-2  lg:mx-4">{listInfo?.title}</p>
+            <span className="ml-2 lg:ml-4">Created by: <Link to={`/profile/${listInfo?.userId}`}>{listInfo?.username}</Link></span>
+            <p className="tfont-bold my-2 mx-2 lg:mx-4">{listInfo?.description}</p>
+            <div className="mt-2 overflow-y-scroll px-2 lg:px-4">
+                <Pagination title={`${count} List Items`} count={count} currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}/>
+                <div
+                    className="my-2 flex justify-between gap-3 border-b border-gray-200 pb-1 pl-32 text-xl font-semibold text-Neutral-Mild md:gap-6 lg:gap-9 lg:pl-36 2xl:pl-44 3xl:pl-56">
+                    <span>Average</span> <span>Rated</span> <span>Wants</span>
+                </div>
+                {medias?.map(
+                    (media, index) => {
+                        return <ListItem media={media} key={index}/>
+                    }
+                )}
+            </div>
         </div>
     );
 }

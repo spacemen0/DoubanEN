@@ -4,20 +4,20 @@ import {fetchCurrentOn} from "../../utils/apiService.ts";
 import {useAuthContext} from "../../contexts/AuthContext.ts";
 import {MyImage} from "../common/MyImage.tsx";
 
-export function CurrentOn() {
-    const {user, setMessage} = useAuthContext();
+export function CurrentOn({id}:{id:number}) {
+    const { setMessage} = useAuthContext();
     const [currentOn, SetCurrentOn] = useState<Media[]>();
     useEffect(() => {
         const getCurrentOn = async () => {
             try {
-                const items = await fetchCurrentOn(user!.Id);
+                const items = await fetchCurrentOn(id);
                 SetCurrentOn(items);
             } catch (error) {
-                setMessage("Error fetching default Music Collection items:");
+                setMessage("Error fetching default Music Collection items");
             }
         };
         getCurrentOn().then();
-    }, [setMessage, user]);
+    }, [id, setMessage]);
     if (!currentOn) {
         return <></>;
     }

@@ -1,17 +1,17 @@
 import {faker} from "@faker-js/faker";
 import {bookItems, generateRandomData, movieItems, musicItems, myItems,} from "./data.ts";
-import {AuthResponse, Media, MediaStatus, MediaType, Review, User} from "./type.ts";
+import {AuthResponse, ListInfo, Media, MediaStatus, MediaType, Review, User} from "./type.ts";
 
 export const fetchCollectionItems = async (
     userId: number,
     type: MediaType | "All"
 ): Promise<Media[]> => {
-    console.log(userId);
+    console.log("Fetching Collection Items: ",userId);
     if (type === "Music") return musicItems;
     if (type === "Movie") return movieItems;
     if (type === "Book") return bookItems;
     if (type === "All") return myItems;
-    throw new Error(`Invalid type: ${type}`);
+    return []
 };
 
 export const fetchCurrentOn = async (userId: number): Promise<Media[]> => {
@@ -242,4 +242,53 @@ export const getAllMediasCount = async (
     console.log(type);
     return faker.number.int({max: 100, min: 10});
 };
+
+export const getListItemsCount = async (id:number): Promise<number> =>{
+    console.log(id)
+    return faker.number.int({max: 100, min: 10});
+}
+
+export const getAllListItems = async(id:number,page:number):Promise<Media[]> =>{
+    console.log(id, page);
+    const medias: Media[] = [];
+    Array.from({length: 5}, () => {
+        medias.push({
+            id: faker.number.int(),
+            releaseDate: faker.date.past().toISOString().split("T")[0],
+            type: "Music",
+            title: faker.lorem.words(),
+            genre: faker.music.genre(),
+            tracks: [faker.music.songName(), faker.music.songName(), faker.music.songName(), faker.music.songName(),],
+            author: faker.person.fullName(),
+            average: 3.2,
+            casts: [{
+                character: faker.person.fullName(),
+                actor: faker.person.fullName()
+            }, {
+                character: faker.person.fullName(),
+                actor: faker.person.fullName()
+            }, {
+                character: faker.person.fullName(),
+                actor: faker.person.fullName()
+            }, {character: faker.person.fullName(), actor: faker.person.fullName()}],
+            chapters: [faker.music.songName(), faker.music.songName(), faker.music.songName(), faker.music.songName(),],
+            image: generateRandomData().src,
+            ratings: faker.number.int({min: 100, max: 500}),
+            wants: faker.number.int({min: 100, max: 500})
+        });
+    });
+    return medias
+}
+
+export const getListInfo = async (id:number):Promise<ListInfo>=>{
+    console.log(id)
+    return {
+        username:"spacemen0",
+        userId:faker.number.int({max: 100, min: 10}),
+        description:faker.lorem.paragraphs()+faker.lorem.paragraphs(),
+        updatedAt:faker.date.past().toISOString().split("T")[0],
+        title:faker.lorem.words()
+
+    }
+}
 

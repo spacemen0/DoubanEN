@@ -1,39 +1,41 @@
 import {useEffect, useState} from "react";
 import {Media} from "../../utils/type.ts";
-import {useParams} from "react-router-dom";
 import {fetchCollectionItems} from "../../utils/apiService.ts";
 import {ListItem} from "../common/ListItem.tsx";
+import {useAuthContext} from "../../contexts/AuthContext.ts";
 
-export function Collections() {
+export function Collections({id}:{id:number}) {
     const [selectedOption, setSelectedOption] = useState<
         "Music" | "Movie" | "Book"
     >("Music");
     const [myItems, setItems] = useState<Media[]>([]);
-    const {id} = useParams();
+    const {setMessage} = useAuthContext()
 
     const handleOptionClick = async (option: "Music" | "Movie" | "Book") => {
         setSelectedOption(option);
         try {
-            const items = await fetchCollectionItems(parseInt(id!), option);
+            const items = await fetchCollectionItems(id, option);
             console.log(items);
             setItems(items);
         } catch (error) {
-            console.error(`Error fetching ${option} Collection items:`, error);
+            console.log("Error: ",error)
+            setMessage(`Error fetching ${option} Collection items`);
         }
     };
 
     useEffect(() => {
         const fetchDefaultMusicCollection = async () => {
             try {
-                const items = await fetchCollectionItems(parseInt(id!), "Music");
+                const items = await fetchCollectionItems(id, "Music");
                 setItems(items);
             } catch (error) {
-                console.error("Error fetching default Music Collection items:", error);
+                console.log("Error: ",error)
+                setMessage(`Error fetching Music Collection items`);
             }
         };
 
         fetchDefaultMusicCollection().then();
-    }, [id]);
+    }, [id, setMessage]);
 
     return (
         <div className="flex flex-col border-t-2 bg-gray-100 p-2 text-Neutral-Mild md:p-4 lg:p-6">
