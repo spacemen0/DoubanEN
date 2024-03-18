@@ -10,12 +10,12 @@ import {getAllListItems, getListInfo, getListItemsCount} from "../utils/apiServi
 export default function List() {
     const {id} = useParams();
     const [medias, setMedias] = useState<Media[]>()
-    const [listInfo,setListInfo] = useState<ListInfo>()
+    const [listInfo, setListInfo] = useState<ListInfo>()
     const [count, setCount] = useState(0)
     const [currentPage, setCurrentPage] = useState(1);
     const {setMessage} = useAuthContext()
     useEffect(() => {
-        const fetchListCount = async (id:number) => {
+        const fetchListCount = async (id: number) => {
             try {
                 const fetchedCount = await getListItemsCount(id);
                 setCount(fetchedCount)
@@ -23,7 +23,7 @@ export default function List() {
                 setMessage("Error fetching reviews count")
             }
         }
-        fetchListCount(parseInt(id!)).then( )
+        fetchListCount(parseInt(id!)).then()
     }, [id, setMessage]);
 
     useEffect(() => {
@@ -43,10 +43,13 @@ export default function List() {
         <div className="flex max-h-screen flex-col overflow-hidden">
             <PageHeader/>
 
-            <p className="text-2xl font-bold my-2 mx-2  lg:mx-4">{listInfo?.title}</p>
-            <span className="ml-2 lg:ml-4">Created by: <Link to={`/profile/${listInfo?.userId}`}>{listInfo?.username}</Link></span>
-            <p className="tfont-bold my-2 mx-2 lg:mx-4">{listInfo?.description}</p>
-            <div className="mt-2 overflow-y-scroll px-2 lg:px-4">
+            <div className="text-Neutral overflow-y-scroll px-2 lg:px-4">
+
+                <p className="text-3xl font-bold my-4   text-Neutral">{listInfo?.title}</p>
+                <span className=" text-Neutral text-2xl">Created by: <Link
+                    className="text-Neutral-Strong font-semibold pb-1 border-b-2 border-Neutral-Strong"
+                    to={`/profile/${listInfo?.userId}`}>{listInfo?.username}</Link></span>
+                <p className="text-xl my-4 ">{listInfo?.description}</p>
                 <Pagination title={`${count} List Items`} count={count} currentPage={currentPage}
                             setCurrentPage={setCurrentPage}/>
                 <div
