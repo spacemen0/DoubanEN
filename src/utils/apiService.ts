@@ -36,7 +36,7 @@ export const fetchMediaStatus = async (
 export const getUser = async (id: number): Promise<User> => {
     console.log(id);
     return {
-        Id: 1,
+        id: 1,
         name: faker.person.fullName(),
         profileImage: generateRandomData().src,
         role: "Standard",

@@ -61,7 +61,7 @@ function DropDownMenu({isOpen}: { isOpen: boolean }) {
                 className="absolute top-10 right-0 w-36 bg-white font-bold shadow-lg ring-1 ring-opacity-5 text-Neutral ring-Neutral-Strong md:top-9">
                 {isLoggedIn ? (
                     <div>
-                        <MenuItem link={`/profile/${user!.Id}`} text="Profile"/>
+                        <MenuItem link={`/profile/${user!.id}`} text="Profile"/>
                         <MenuItem link="/collection" text="All Collections"/>
                         <MenuItem link="/collection" text="Book Collection"/>
                         <MenuItem link="/collection" text="Music Collection"/>

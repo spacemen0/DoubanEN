@@ -31,7 +31,7 @@ export function UserInfo({id}:{id:number}) {
                     <MyImage
                         src={user.profileImage}
                         alt={"Profile Image of " + user.name}
-                        href={`/profile/${user.Id}`}
+                        href={`/profile/${user.id}`}
                     />
                 </div>
                 <div>

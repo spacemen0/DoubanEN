@@ -17,3 +17,8 @@ This project serves as an exercise for full-stack development as well as an expl
 - **Spring Boot**
 - **PostgreSQL**
 
+**To-do**
+- fix menu item link
+- fix MyImage
+- user be able to view collections of themselves
+

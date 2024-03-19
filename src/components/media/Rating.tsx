@@ -54,7 +54,7 @@ export function Rating({media}: { media: Media }) {
     useEffect(() => {
         const fetchRating = async () => {
             try {
-                const status = await fetchMediaStatus(user!.Id, media.id);
+                const status = await fetchMediaStatus(user!.id, media.id);
                 console.log("MyStar: ", status);
                 setMediaStatus({
                     score: status.score,
@@ -153,7 +153,7 @@ export function Rating({media}: { media: Media }) {
                             if (user) {
                                 try {
                                     if (mediaStatus.status === "Rated") {
-                                        deleteRating(user.Id, media.id).then();
+                                        deleteRating(user.id, media.id).then();
                                         setMessage("Rating deleted")
                                     } else {
                                         if (mediaStatus.score !== 0) {
@@ -170,7 +170,7 @@ export function Rating({media}: { media: Media }) {
                                                 | 5;
                                             const newDate = new Date(Date.now());
                                             const newRating = {
-                                                userId: user.Id,
+                                                userId: user.id,
                                                 username: user.name,
                                                 score: score,
                                                 reviewDate: newDate.toISOString().split("T")[0],
@@ -206,7 +206,7 @@ export function Rating({media}: { media: Media }) {
                             if (user) {
                                 try {
                                     if (mediaStatus.status === "Doing") {
-                                        cancelDoing(user.Id, media.id).then();
+                                        cancelDoing(user.id, media.id).then();
                                         setMessage(`${media.type === "Music"
                                             ? "Listing"
                                             : media.type === "Movie"
@@ -214,7 +214,7 @@ export function Rating({media}: { media: Media }) {
                                                 : "Reading"} status canceled`)
                                         setMediaStatus({score: 0, status: "None"})
                                     } else {
-                                        setDoing(user.Id, media.id).then();
+                                        setDoing(user.id, media.id).then();
                                         setMessage(`Set ${media.type === "Music"
                                             ? "listing"
                                             : media.type === "Movie"
@@ -257,11 +257,11 @@ export function Rating({media}: { media: Media }) {
                             if (user) {
                                 try {
                                     if (mediaStatus.status === "Wishlist") {
-                                        cancelWishlist(user.Id, media.id).then()
+                                        cancelWishlist(user.id, media.id).then()
                                         setMessage("Removed from wishlist")
                                         setMediaStatus({score: 0, status: "None"})
                                     } else {
-                                        setWishlist(user.Id, media.id).then()
+                                        setWishlist(user.id, media.id).then()
                                         setMessage("Added to wishlist")
                                         setMediaStatus({
                                             score: 0,
@@ -287,7 +287,7 @@ export function Rating({media}: { media: Media }) {
                             if (user) {
                                 try {
                                     if (mediaStatus.status === "Reviewed") {
-                                        deleteReview(user.Id, media.id).then();
+                                        deleteReview(user.id, media.id).then();
                                         setMessage("Review deleted")
                                         setMediaStatus({score: 0, status: "None"})
                                     } else {

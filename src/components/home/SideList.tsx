@@ -15,7 +15,7 @@ export function SideList() {
         setSelectedOption(option);
         if (option === "My" && user) {
             try {
-                const items = await fetchCollectionItems(user.Id, "All");
+                const items = await fetchCollectionItems(user.id, "All");
                 setMyItems(items);
             } catch (error) {
                 setMessage("Error fetching your collection items");

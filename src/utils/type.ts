@@ -58,7 +58,7 @@ export type User = {
     memberSince: string;
     profileImage: string;
     bio: string;
-    Id: number;
+    id: number;
 };
 
 export type ListInfo = {
