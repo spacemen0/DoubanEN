@@ -31,6 +31,7 @@ export type Media = {
     average: number;
     ratings: number;
     wants: number;
+    additional:string;
     tracks?: string[];
     chapters?: string[];
     casts?: { character: string; actor: string }[];
@@ -53,9 +54,9 @@ export type MediaStatus = {
 }
 
 export type User = {
-    name: string;
+    username: string;
     role: "Admin" | "Contributor" | "Standard";
-    memberSince: string;
+    date: string;
     profileImage: string;
     bio: string;
     id: number;

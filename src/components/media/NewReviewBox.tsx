@@ -30,7 +30,7 @@ export function NewReviewBox({
             return;
         }
         const review = {
-            username: user!.name,
+            username: user!.username,
             userId: user!.id,
             mediaId: media.id,
             reviewDate: new Date(Date.now()).toISOString().split("T")[0],

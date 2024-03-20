@@ -1,12 +1,13 @@
 import {faker} from "@faker-js/faker";
 import {bookItems, generateRandomData, movieItems, musicItems, myItems,} from "./data.ts";
 import {AuthResponse, ListInfo, Media, MediaStatus, MediaType, Review, User} from "./type.ts";
+import {apiUrl} from "./config.ts";
 
 export const fetchCollectionItems = async (
     userId: number,
     type: MediaType | "All"
 ): Promise<Media[]> => {
-    console.log("Fetching Collection Items: ",userId);
+    console.log("Fetching Collection Items: ", userId);
     if (type === "Music") return musicItems;
     if (type === "Movie") return movieItems;
     if (type === "Book") return bookItems;
@@ -34,107 +35,129 @@ export const fetchMediaStatus = async (
 
 
 export const getUser = async (id: number): Promise<User> => {
-    console.log(id);
-    return {
-        id: 1,
-        name: faker.person.fullName(),
-        profileImage: generateRandomData().src,
-        role: "Standard",
-        bio:
-            faker.lorem.paragraphs() +
-            faker.lorem.paragraphs() +
-            faker.lorem.paragraphs(),
-        memberSince: faker.date.past().toISOString().split("T")[0],
-    };
+    try {
+        const response = await fetch(`${apiUrl}/users/${id}`, {
+            method: 'GET',
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch user data');
+        }
+        const data = await response.json() as User
+        if (!data.profileImage) data.profileImage = generateRandomData().src
+        return data;
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        throw new Error('Failed to fetch user data. Please try again later.');
+    }
 };
+
 
 export const register = async (
     username: string,
     email: string,
     password: string
 ): Promise<AuthResponse> => {
-    console.log(username, email, password);
-    return {userId: 1, token: "randomToken"};
+    const requestBody = {
+        username: username,
+        email: email,
+        password: password
+    };
+    try {
+        const response = await fetch(`${apiUrl}/auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody)
+        });
+        if (!response.ok) {
+            throw new Error('Failed to log in');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Login error:', error);
+        throw error;
+    }
 };
 
+// login function sends a POST request to the backend server with user credentials
 export const login = async (
     username: string,
     password: string
 ): Promise<AuthResponse> => {
-    console.log(username, password);
-    return {userId: 1, token: "randomToken"};
+    const requestBody = {
+        username: username,
+        password: password
+    };
+    try {
+        const response = await fetch(`${apiUrl}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestBody)
+        });
+        if (!response.ok) {
+            throw new Error('Failed to log in');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Login error:', error);
+        throw new Error('Failed to log in. Please try again later.');
+    }
 };
 
-export const logout = async (token: string) => {
-    if (token === "randomToken") return;
-    throw new Error("Error logging out");
+export const logout = async (token: string): Promise<void> => {
+    try {
+        const response = await fetch(`${apiUrl}/auth/logout`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        if (!response.ok) {
+            throw new Error('Failed to log out');
+        }
+    } catch (error) {
+        console.error('Logout error:', error);
+        throw new Error('Failed to log out. Please try again later.'); // Throw a different error message or handle it accordingly
+    }
 };
+
 
 export const getMedia = async (
     id: number,
-    type: MediaType
 ): Promise<Media> => {
-    console.log(id, type);
-    if (type === "Music")
-        return {
-            id: 1,
-            title: faker.lorem.words(),
-            image: generateRandomData().src,
-            releaseDate: faker.date.past().toISOString().split("T")[0],
-            author: faker.person.fullName(),
-            genre: faker.music.genre(),
-            average: 3.5,
-            ratings: faker.number.int({min: 100, max: 500}),
-            type: "Music",
-            wants: faker.number.int({min: 100, max: 500}),
-            tracks: [
-                faker.music.songName(),
-                faker.music.songName(),
-                faker.music.songName(),
-                faker.music.songName(),
-                faker.music.songName(),
-            ],
-        };
-    else if (type === "Movie")
-        return {
-            id: 1,
-            title: faker.lorem.words(),
-            image: generateRandomData().src,
-            releaseDate: faker.date.past().toISOString().split("T")[0],
-            author: faker.person.fullName(),
-            genre: faker.music.genre(),
-            average: 3.5,
-            ratings: faker.number.int({min: 100, max: 500}),
-            type: "Movie",
-            wants: faker.number.int({min: 100, max: 500}),
-            casts: [
-                {character: faker.person.fullName(), actor: faker.person.fullName()},
-                {character: faker.person.fullName(), actor: faker.person.fullName()},
-                {character: faker.person.fullName(), actor: faker.person.fullName()},
-                {character: faker.person.fullName(), actor: faker.person.fullName()},
-                {character: faker.person.fullName(), actor: faker.person.fullName()},
-            ],
-        };
-    else
-        return {
-            id: 1,
-            title: faker.lorem.words(),
-            image: generateRandomData().src,
-            releaseDate: faker.date.past().toISOString().split("T")[0],
-            author: faker.person.fullName(),
-            genre: faker.music.genre(),
-            average: 3.5,
-            ratings: faker.number.int({min: 100, max: 500}),
-            type: "Book",
-            wants: faker.number.int({min: 100, max: 500}),
-            chapters: [
-                faker.music.songName(),
-                faker.music.songName(),
-                faker.music.songName(),
-                faker.music.songName(),
-                faker.music.songName(),
-            ],
-        };
+    try {
+        const response = await fetch(`${apiUrl}/users/${id}`, {
+            method: 'GET',
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch Media');
+        }
+        const data = await response.json()
+        if (data.type === "Music") data.tracks = data.additional.split('\n');
+        if (data.type === "Book") data.chapters = data.additional.split('\n');
+        if (data.type === "Movie") {
+            const lines = data.additional.split('\n');
+            const result: { character: string; actor: string }[] = [];
+
+            for (let i = 0; i < lines.length; i += 2) {
+                const obj: { character: string; actor: string } = {
+                    character: lines[i],
+                    actor: lines[i + 1] || '' // Handle case when there are an odd number of lines
+                };
+                result.push(obj);
+            }
+            data.casts = result
+        }
+        return data;
+    } catch (error) {
+        console.error('Error fetching Media:', error);
+        throw new Error('Failed to fetch Media. Please try again later.');
+    }
 };
 
 export const getMediaReviews = async (
@@ -214,6 +237,7 @@ export const getAllMedias = async (type: MediaType, page: number): Promise<Media
             type: type,
             title: faker.lorem.words(),
             genre: faker.music.genre(),
+            additional: faker.lorem.words(),
             tracks: [faker.music.songName(), faker.music.songName(), faker.music.songName(), faker.music.songName(),],
             author: faker.person.fullName(),
             average: 3.2,
@@ -243,12 +267,12 @@ export const getAllMediasCount = async (
     return faker.number.int({max: 100, min: 10});
 };
 
-export const getListItemsCount = async (id:number): Promise<number> =>{
+export const getListItemsCount = async (id: number): Promise<number> => {
     console.log(id)
     return faker.number.int({max: 100, min: 10});
 }
 
-export const getAllListItems = async(id:number,page:number):Promise<Media[]> =>{
+export const getAllListItems = async (id: number, page: number): Promise<Media[]> => {
     console.log(id, page);
     const medias: Media[] = [];
     Array.from({length: 5}, () => {
@@ -258,6 +282,7 @@ export const getAllListItems = async(id:number,page:number):Promise<Media[]> =>{
             type: "Music",
             title: faker.lorem.words(),
             genre: faker.music.genre(),
+            additional: faker.lorem.words(),
             tracks: [faker.music.songName(), faker.music.songName(), faker.music.songName(), faker.music.songName(),],
             author: faker.person.fullName(),
             average: 3.2,
@@ -280,14 +305,14 @@ export const getAllListItems = async(id:number,page:number):Promise<Media[]> =>{
     return medias
 }
 
-export const getListInfo = async (id:number):Promise<ListInfo>=>{
+export const getListInfo = async (id: number): Promise<ListInfo> => {
     console.log(id)
     return {
-        username:"spacemen0",
-        userId:faker.number.int({max: 100, min: 10}),
-        description:faker.lorem.paragraphs()+faker.lorem.paragraphs(),
-        updatedAt:faker.date.past().toISOString().split("T")[0],
-        title:faker.lorem.words()
+        username: "spacemen0",
+        userId: faker.number.int({max: 100, min: 10}),
+        description: faker.lorem.paragraphs() + faker.lorem.paragraphs(),
+        updatedAt: faker.date.past().toISOString().split("T")[0],
+        title: faker.lorem.words()
 
     }
 }

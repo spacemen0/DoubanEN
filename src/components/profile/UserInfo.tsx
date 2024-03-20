@@ -30,18 +30,18 @@ export function UserInfo({id}:{id:number}) {
                 <div className="mr-4 !md:max-w-48">
                     <MyImage
                         src={user.profileImage}
-                        alt={"Profile Image of " + user.name}
+                        alt={"Profile Image of " + user.username}
                         href={`/profile/${user.id}`}
                     />
                 </div>
                 <div>
                     <h1 className="mb-1 text-xl font-semibold lg:text-2xl">
-                        {user.name}
+                        {user.username}
                     </h1>
                     <p className="text-gray-600">{user?.role}</p>
                     <p className="text-gray-600">
                         <span className="font-semibold">Member Since:</span>{" "}
-                        {user?.memberSince}
+                        {user?.date}
                     </p>
                 </div>
             </div>}
@@ -49,9 +49,9 @@ export function UserInfo({id}:{id:number}) {
             {user&&<div className="mb-4 border-b pb-4">
                 <p className="mb-2 text-lg font-semibold lg:text-xl">Bio</p>
                 <div className="text-gray-600">
-                    {showFullBio ? user.bio : `${user.bio.slice(0, 100)}...`}
+                    {user.bio?showFullBio ? user.bio : `${user.bio.slice(0, 100)}...`:"This user hasn't written anything on their bio."}
                 </div>
-                {user.bio.length > 100 && (
+                {user.bio&&user.bio.length > 100 && (
                     <button
                         onClick={toggleBioVisibility}
                         className="pt-2 font-semibold text-blue-500 hover:underline focus:outline-none"

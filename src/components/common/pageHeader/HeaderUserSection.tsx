@@ -28,7 +28,7 @@ export default function HeaderUserSection() {
                         className="hidden h-10 text-lg font-bold text-Neutral-Mild md:inline"
                         to={"/profile"}
                     >
-                        {user?.name}
+                        {user?.username}
                     </Link>
                 </div>
             )}

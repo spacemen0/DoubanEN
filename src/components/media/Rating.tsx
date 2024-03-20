@@ -171,7 +171,7 @@ export function Rating({media}: { media: Media }) {
                                             const newDate = new Date(Date.now());
                                             const newRating = {
                                                 userId: user.id,
-                                                username: user.name,
+                                                username: user.username,
                                                 score: score,
                                                 reviewDate: newDate.toISOString().split("T")[0],
                                                 mediaId: media.id,
