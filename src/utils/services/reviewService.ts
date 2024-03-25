@@ -89,11 +89,11 @@ export const postReview = async (review: Review, type: MediaType) => {
       body: JSON.stringify(statusRequestBody),
     });
   } catch (error) {
-    console.error("Failed to set wishlist:", error);
+    console.error("Failed to update media status:", error);
     throw error;
   }
   if (!response.ok) {
-    throw new Error("Failed to set wishlist");
+    throw new Error("Failed to update media status");
   }
 };
 export const deleteReview = async (
@@ -107,24 +107,24 @@ export const deleteReview = async (
       method: "DELETE",
     });
   } catch (error) {
-    console.error("Failed to set wishlist:", error);
+    console.error("Failed to cancel reviewed status:", error);
     throw error;
   }
   if (!response.ok) {
-    throw new Error("Failed to set wishlist");
+    throw new Error("Failed to cancel reviewed status");
   }
   try {
     response = await fetch(
-      `${apiUrl}/reviews/?userId=${userId}&mediaId=${mediaId}`,
+      `${apiUrl}/reviews?userId=${userId}&mediaId=${mediaId}`,
       {
         method: "DELETE",
       },
     );
   } catch (error) {
-    console.error("Failed to set wishlist:", error);
+    console.error("Failed to delete reviewed status", error);
     throw error;
   }
   if (!response.ok) {
-    throw new Error("Failed to set wishlist");
+    throw new Error("Failed to delete reviewed status");
   }
 };
