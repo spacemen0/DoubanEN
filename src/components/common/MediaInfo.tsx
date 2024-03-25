@@ -1,8 +1,7 @@
-import {Link} from "react-router-dom";
-import {Media} from "../../utils/type";
+import { Link } from "react-router-dom";
+import { Media } from "../../utils/type";
 
-
-export function MediaInfo({media, home}: { media: Media; home: boolean }) {
+export function MediaInfo({ media, home }: { media: Media; home: boolean }) {
   return (
     <div
       className={`flex-1 flex flex-col items-center !md:items-start justify-center text-xl pb-2
@@ -20,53 +19,69 @@ export function MediaInfo({media, home}: { media: Media; home: boolean }) {
       </div>
       <table className="mt-3 w-full">
         <tbody>
-        <tr>
-          <td className="pr-4 font-semibold pb-1.5 lg:pb-3">Type:</td>
-          <td className="pb-1.5 lg:pb-3">{media.type}</td>
-        </tr>
-        <tr>
-          <td className="pr-4 font-semibold pb-1.5 lg:pb-3">
-            Released Date:
-          </td>
-          <td className="pb-1.5 lg:pb-3">{media.releaseDate}</td>
-        </tr>
-        <tr>
-          <td className="pr-4 font-semibold pb-1.5 lg:pb-3">
-            {media.type === "Music"
-              ? "Artist"
-              : media.type === "Book"
-                ? "Author"
-                : "Director"}
-            :
-          </td>
-          <td className="pb-1.5 lg:pb-3">{media.author}</td>
-        </tr>
-        <tr>
-          <td className="pr-4 font-semibold pb-1.5 lg:pb-3">Genre:</td>
-          <td className="pb-1.5 lg:pb-3">{media.genre}</td>
-        </tr>
-        <tr>
-          <td className="pr-4 font-semibold pb-1.5 lg:pb-3">Ratings:</td>
-          <td className="pb-1.5 lg:pb-3">
+          <tr>
+            <td className="pr-4 font-semibold pb-1.5 lg:pb-3">Type:</td>
+            <td className="pb-1.5 lg:pb-3">{media.type}</td>
+          </tr>
+          <tr>
+            <td className="pr-4 font-semibold pb-1.5 lg:pb-3">
+              Released Date:
+            </td>
+            <td className="pb-1.5 lg:pb-3">{media.releaseDate}</td>
+          </tr>
+          <tr>
+            <td className="pr-4 font-semibold pb-1.5 lg:pb-3">
+              {media.type === "Music"
+                ? "Artist"
+                : media.type === "Book"
+                  ? "Author"
+                  : "Director"}
+              :
+            </td>
+            <td className="pb-1.5 lg:pb-3">{media.author}</td>
+          </tr>
+          <tr>
+            <td className="pr-4 font-semibold pb-1.5 lg:pb-3">Genre:</td>
+            <td className="pb-1.5 lg:pb-3">{media.genre}</td>
+          </tr>
+          <tr>
+            <td className="pr-4 font-semibold pb-1.5 lg:pb-3">Ratings:</td>
+            <td className="pb-1.5 lg:pb-3">
               <span className="text-xl font-semibold lg:text-2xl">
                 {media.average.toFixed(2)}&nbsp;
               </span>
-            <span className="pr-2 text-lg">/5.0</span>
-            from&nbsp;
-            <span className="text-xl font-semibold lg:text-2xl">
+              <span className="pr-2 text-lg">/5.0</span>
+              from&nbsp;
+              <span className="text-xl font-semibold lg:text-2xl">
                 {media.ratings}&nbsp;
               </span>
-            ratings
-          </td>
-        </tr>
-        <tr>
-          <td className="pr-4 font-semibold">Wants:</td>
-          <td>
-              <span className="text-xl font-semibold lg:text-2xl">
+              ratings
+            </td>
+          </tr>
+          <tr>
+            <td className="pr-4 font-semibold pb-1.5 lg:pb-3">Wishlists:</td>
+            <td>
+              <span className="text-xl font-semibold lg:text-2xl pb-1.5 lg:pb-3">
                 {media.wants}
               </span>
-          </td>
-        </tr>
+            </td>
+          </tr>
+          <tr>
+            <td className="pr-4 font-semibold">
+              {" "}
+              {media.type === "Music"
+                ? "Listening"
+                : media.type === "Book"
+                  ? "Reading"
+                  : "Watching"}
+              :
+            </td>
+            <td>
+              <span className="text-xl font-semibold lg:text-2xl">
+                {media.doings}
+              </span>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

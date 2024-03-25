@@ -1,23 +1,23 @@
-import React, {useRef, useState} from "react";
-import {Media, MediaStatus, Score} from "../../utils/type";
-import {useAuthContext} from "../../contexts/AuthContext";
+import React, { useRef, useState } from "react";
+import { Media, Score } from "../../utils/type";
+import { useAuthContext } from "../../contexts/AuthContext";
 import Draggable from "react-draggable";
-import {postReview} from "../../utils/services/reviewService";
+import { postReview } from "../../utils/services/reviewService";
 
 export function NewReviewBox({
-                               setShowReviewBox,
-                               setMediaStatus,
-                               media,
-                               score,
-                             }: {
+  setShowReviewBox,
+  media,
+  score,
+  onSuccessAndRender,
+}: {
   setShowReviewBox: (value: React.SetStateAction<boolean>) => void;
-  setMediaStatus: React.Dispatch<React.SetStateAction<MediaStatus>>;
   media: Media;
   score: number;
+  onSuccessAndRender: () => Promise<void>;
 }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const {user, setMessage} = useAuthContext();
+  const { user, setMessage } = useAuthContext();
   const reviewBox = useRef(null);
 
   const handleReset = () => {
@@ -41,11 +41,7 @@ export function NewReviewBox({
     };
     try {
       await postReview(review, media.type);
-      setMediaStatus({
-        status: "Reviewed",
-        score: score,
-        date: new Date(Date.now()).toISOString().split("T")[0],
-      });
+      await onSuccessAndRender();
       setShowReviewBox(false);
     } catch (error) {
       setMessage("Error processing Post Review request");

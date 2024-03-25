@@ -32,6 +32,7 @@ export type Media = {
   average: number;
   ratings: number;
   wants: number;
+  doings: number;
   additional: string;
   tracks?: string[];
   chapters?: string[];

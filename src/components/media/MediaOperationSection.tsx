@@ -1,9 +1,9 @@
-import {Media, MediaStatus} from "../../utils/type";
-import React, {ReactNode, useEffect, useState} from "react";
-import {useAuthContext} from "../../contexts/AuthContext";
-import {ChevronDown, ChevronUp, Star, StarHalf} from "lucide-react";
-import {NewReviewBox} from "./NewReviewBox";
-import {deleteReview} from "../../utils/services/reviewService";
+import { Media, MediaStatus, Score } from "../../utils/type";
+import React, { ReactNode, useCallback, useEffect, useState } from "react";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { ChevronDown, ChevronUp, Star, StarHalf } from "lucide-react";
+import { NewReviewBox } from "./NewReviewBox";
+import { deleteReview } from "../../utils/services/reviewService";
 import {
   cancelDoing,
   cancelWishlist,
@@ -13,10 +13,17 @@ import {
   setWishlist,
   submitRating,
 } from "../../utils/services/mediaStatusService";
-import {ListBox} from "./ListBox";
+import { ListBox } from "./ListBox";
 
-
-export function MediaOperationSection({media}: { media: Media }) {
+export function MediaOperationSection({
+  media,
+  onSuccess,
+  onSuccessAndRender,
+}: {
+  media: Media;
+  onSuccess: () => Promise<void>;
+  onSuccessAndRender: () => Promise<void>;
+}) {
   const [stars, setStars] = useState<ReactNode[]>();
   const [showDropDown, setShowDropDown] = useState(false);
   const [showReviewBox, setShowReviewBox] = useState(false);
@@ -25,7 +32,7 @@ export function MediaOperationSection({media}: { media: Media }) {
     status: "None",
     score: 0,
   });
-  const {isLoggedIn, user, setMessage} = useAuthContext();
+  const { isLoggedIn, user, setMessage } = useAuthContext();
 
   useEffect(() => {
     const stars = Math.floor(mediaStatus.score);
@@ -57,27 +64,36 @@ export function MediaOperationSection({media}: { media: Media }) {
     }
     setStars(starElements);
   }, [mediaStatus]);
+  const fetchStatus = useCallback(async () => {
+    try {
+      const status = await getMediaStatus(user!.id, media.id);
+      console.log("MyStatus: ", status);
+      setMediaStatus({
+        id: status.id,
+        score: status.score,
+        status: status.status,
+        date: status.date,
+      });
+    } catch (error) {
+      setMessage("Error fetch your previous status");
+    }
+  }, [media.id, setMessage, user]);
   useEffect(() => {
-    const fetchRating = async () => {
-      try {
-        const status = await getMediaStatus(user!.id, media.id);
-        console.log("MyStar: ", status);
-        setMediaStatus({
-          id: status.id,
-          score: status.score,
-          status: status.status,
-          date: status.date,
-        });
-      } catch (error) {
-        setMessage("Error fetch your previous rating");
-      }
-    };
-    if (isLoggedIn) fetchRating().then(() => {
-    });
-  }, [isLoggedIn, media.id, setMessage, user]);
+    if (isLoggedIn) fetchStatus().then();
+  }, [fetchStatus, isLoggedIn]);
+
+  const handleSuccess = async () => {
+    await fetchStatus();
+    await onSuccess();
+  };
+  const handleOnSuccessAndRender = async () => {
+    await fetchStatus();
+    await onSuccessAndRender();
+  };
+
   const handleScoreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const MyScore = parseFloat(event.target.value);
-    setMediaStatus({...mediaStatus, score: MyScore});
+    setMediaStatus({ ...mediaStatus, score: MyScore });
   };
 
   return (
@@ -87,10 +103,10 @@ export function MediaOperationSection({media}: { media: Media }) {
           setShowReviewBox={setShowReviewBox}
           media={media}
           score={mediaStatus.score}
-          setMediaStatus={setMediaStatus}
+          onSuccessAndRender={handleOnSuccessAndRender}
         />
       )}
-      {showListBox && <ListBox setShowListBox={setShowListBox} media={media}/>}
+      {showListBox && <ListBox setShowListBox={setShowListBox} media={media} />}
       <div className="flex !md:flex-col justify-center items-start md:justify-start md:items-center">
         <p className="text-2xl font-bold">Rating/Catalog</p>
 
@@ -139,7 +155,7 @@ export function MediaOperationSection({media}: { media: Media }) {
         <div className="mt-4 flex items-center justify-center rounded-sm border py-2 pr-2 lg:pl-2">
           <div className="relative">
             <div className="flex gap-1 h-[28px]">
-              {Array.from({length: 5}, (_, index) => (
+              {Array.from({ length: 5 }, (_, index) => (
                 <Star
                   key={index}
                   fill="rgb(209 213 219)"
@@ -157,13 +173,12 @@ export function MediaOperationSection({media}: { media: Media }) {
             }}
           >
             {!showDropDown ? (
-              <ChevronDown size={32} className=""/>
+              <ChevronDown size={32} className="" />
             ) : (
-              <ChevronUp size={32} className=""/>
+              <ChevronUp size={32} className="" />
             )}
             {showDropDown && (
-              <div
-                className="absolute top-10 right-0 flex h-6 w-48 items-center justify-center rounded-md border bg-gray-200">
+              <div className="absolute top-10 right-0 flex h-6 w-48 items-center justify-center rounded-md border bg-gray-200">
                 <input
                   type="range"
                   min="0.5"
@@ -183,36 +198,23 @@ export function MediaOperationSection({media}: { media: Media }) {
               if (user) {
                 try {
                   if (mediaStatus.status === "Rated") {
-                    deleteRating(mediaStatus.id!).then();
+                    await deleteRating(mediaStatus.id!);
                     setMessage("Rating deleted");
+                    await handleSuccess();
                   } else {
                     if (mediaStatus.score !== 0) {
-                      const score = mediaStatus.score as
-                        | 2
-                        | 1
-                        | 0.5
-                        | 1.5
-                        | 2.5
-                        | 3
-                        | 3.5
-                        | 4
-                        | 4.5
-                        | 5;
-                      const newDate = new Date(Date.now());
-                      const flag = await submitRating(
-                        user.id,
-                        score,
-                        media.id,
-                        media.type,
-                      );
-                      flag &&
-                      setMediaStatus({
-                        ...mediaStatus,
-                        score: score,
-                        status: "Rated",
-                        date: newDate.toISOString().split("T")[0],
-                      });
+                      const score = mediaStatus.score as Score;
+                      // const newDate = new Date(Date.now());
+                      await submitRating(user.id, score, media.id, media.type);
+
+                      // setMediaStatus({
+                      //   ...mediaStatus,
+                      //   score: score,
+                      //   status: "Rated",
+                      //   date: newDate.toISOString().split("T")[0],
+                      // });
                       setMessage("Rating submitted");
+                      await handleSuccess();
                     } else setMessage("Please rate before submitting");
                   }
                 } catch (error) {
@@ -230,11 +232,11 @@ export function MediaOperationSection({media}: { media: Media }) {
           <button
             className={`md:mt-4 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
          focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors ${mediaStatus.status === "Doing" ? "bg-Neutral-Strong" : "bg-Neutral-Mild"}`}
-            onClick={() => {
+            onClick={async () => {
               if (user) {
                 try {
                   if (mediaStatus.status === "Doing") {
-                    cancelDoing(mediaStatus.id!).then();
+                    await cancelDoing(mediaStatus.id!);
                     setMessage(
                       `${
                         media.type === "Music"
@@ -244,13 +246,14 @@ export function MediaOperationSection({media}: { media: Media }) {
                             : "Reading"
                       } status canceled`,
                     );
-                    setMediaStatus({
-                      ...mediaStatus,
-                      score: 0,
-                      status: "None",
-                    });
+                    await handleSuccess();
+                    // setMediaStatus({
+                    //   ...mediaStatus,
+                    //   score: 0,
+                    //   status: "None",
+                    // });
                   } else {
-                    setDoing(user.id, media.id, media.type).then();
+                    await setDoing(user.id, media.id, media.type);
                     setMessage(
                       `Set ${
                         media.type === "Music"
@@ -260,12 +263,13 @@ export function MediaOperationSection({media}: { media: Media }) {
                             : "reading"
                       } status successfully`,
                     );
-                    setMediaStatus({
-                      ...mediaStatus,
-                      score: 0,
-                      status: "Doing",
-                      date: new Date(Date.now()).toISOString().split("T")[0],
-                    });
+                    await handleSuccess();
+                    // setMediaStatus({
+                    //   ...mediaStatus,
+                    //   score: 0,
+                    //   status: "Doing",
+                    //   date: new Date(Date.now()).toISOString().split("T")[0],
+                    // });
                   }
                 } catch (error) {
                   setMessage(
@@ -294,26 +298,28 @@ export function MediaOperationSection({media}: { media: Media }) {
           <button
             className={`  lg:mt-4 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
                             focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors ${mediaStatus.status === "Wishlist" ? "bg-Neutral-Strong" : "bg-Neutral-Mild"}`}
-            onClick={() => {
+            onClick={async () => {
               if (user) {
                 try {
                   if (mediaStatus.status === "Wishlist") {
-                    cancelWishlist(mediaStatus.id!).then();
+                    await cancelWishlist(mediaStatus.id!);
                     setMessage("Removed from wishlist");
-                    setMediaStatus({
-                      ...mediaStatus,
-                      score: 0,
-                      status: "None",
-                    });
+                    await handleSuccess();
+                    // setMediaStatus({
+                    //   ...mediaStatus,
+                    //   score: 0,
+                    //   status: "None",
+                    // });
                   } else {
-                    setWishlist(user.id, media.id, media.type).then();
+                    await setWishlist(user.id, media.id, media.type);
                     setMessage("Added to wishlist");
-                    setMediaStatus({
-                      ...mediaStatus,
-                      score: 0,
-                      status: "Wishlist",
-                      date: new Date(Date.now()).toISOString().split("T")[0],
-                    });
+                    // setMediaStatus({
+                    //   ...mediaStatus,
+                    //   score: 0,
+                    //   status: "Wishlist",
+                    //   date: new Date(Date.now()).toISOString().split("T")[0],
+                    // });
+                    await handleSuccess();
                   }
                 } catch (error) {
                   setMessage("Error processing Set On Wishlist request");
@@ -328,17 +334,18 @@ export function MediaOperationSection({media}: { media: Media }) {
           <button
             className={`  lg:mt-4 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
                             focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors ${mediaStatus.status === "Reviewed" ? "bg-Neutral-Strong" : "bg-Neutral-Mild"}`}
-            onClick={() => {
+            onClick={async () => {
               if (user) {
                 try {
                   if (mediaStatus.status === "Reviewed") {
-                    deleteReview(user.id, media.id, mediaStatus.id!).then();
+                    await deleteReview(user.id, media.id, mediaStatus.id!);
                     setMessage("Review deleted");
-                    setMediaStatus({
-                      ...mediaStatus,
-                      score: 0,
-                      status: "None",
-                    });
+                    await handleOnSuccessAndRender();
+                    // setMediaStatus({
+                    //   ...mediaStatus,
+                    //   score: 0,
+                    //   status: "None",
+                    // });
                   } else {
                     if (mediaStatus.score !== 0)
                       setShowReviewBox(!showReviewBox);

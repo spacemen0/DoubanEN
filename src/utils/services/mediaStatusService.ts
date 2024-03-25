@@ -1,5 +1,5 @@
-import {apiUrl} from "../config";
-import {MediaStatus, MediaType} from "../type";
+import { apiUrl } from "../config";
+import { MediaStatus, MediaType } from "../type";
 
 export const getMediaStatus = async (
   userId: number,
@@ -17,7 +17,7 @@ export const getMediaStatus = async (
     console.error("Error fetching Medias:", error);
     throw new Error("Failed to fetch Medias. Please try again later.");
   }
-  if (response.status == 404) return {score: 0, status: "None"};
+  if (response.status == 404) return { score: 0, status: "None" };
   if (!response.ok) {
     throw new Error("Failed to fetch Medias");
   }
@@ -112,7 +112,7 @@ export const submitRating = async (
   score: number,
   mediaId: number,
   type: MediaType,
-): Promise<boolean> => {
+): Promise<void> => {
   const requestBody = {
     userId: userId,
     mediaId: mediaId,
@@ -137,7 +137,6 @@ export const submitRating = async (
   if (!response.ok) {
     throw new Error("Failed to submit Rating");
   }
-  return true;
 };
 export const deleteRating = async (id: number) => {
   let response = new Response();
