@@ -1,21 +1,20 @@
-import React, {useEffect, useState} from "react";
-import {useAuthContext} from "../../contexts/AuthContext";
-import {MyImage} from "../common/MyImage";
-import {User} from "../../utils/type";
+import React, { useEffect, useState } from "react";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { MyImage } from "../common/MyImage";
+import { User } from "../../utils/type";
 
-import {getUser} from "../../utils/services/authService";
-
+import { getUser } from "../../utils/services/authService";
 
 export function UserInfo({
-                           id,
-                           setExist,
-                         }: {
+  id,
+  setExist,
+}: {
   id: number;
   setExist: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [showFullBio, setShowFullBio] = useState(false);
   const [user, setUser] = useState<User>();
-  const {setMessage} = useAuthContext();
+  const { setMessage } = useAuthContext();
 
   useEffect(() => {
     const fetchUser = async (id: number) => {

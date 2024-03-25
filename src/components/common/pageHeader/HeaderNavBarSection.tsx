@@ -1,8 +1,8 @@
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function HeaderNavBarSection({
-                                              forMedium: forMedium,
-                                            }: {
+  forMedium: forMedium,
+}: {
   forMedium: boolean;
 }) {
   const navigate = useNavigate();

@@ -1,17 +1,16 @@
-import React, {useRef, useState} from "react";
-import {useAuthContext} from "../../contexts/AuthContext";
+import React, { useRef, useState } from "react";
+import { useAuthContext } from "../../contexts/AuthContext";
 import Draggable from "react-draggable";
-import {createList} from "../../utils/services/mediaListService";
-
+import { createList } from "../../utils/services/mediaListService";
 
 export const NewListBox = ({
-                             setShowNewListBox,
-                           }: {
+  setShowNewListBox,
+}: {
   setShowNewListBox: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const {user, setMessage} = useAuthContext();
+  const { user, setMessage } = useAuthContext();
   const listBox = useRef(null);
 
   const handleReset = () => {

@@ -1,6 +1,6 @@
-import {Route, Routes} from "react-router-dom";
-import {lazy, Suspense} from "react";
-import {NotFound} from "./components/common/NotFound";
+import { Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { NotFound } from "./components/common/NotFound";
 import Loading from "./components/common/Loading.tsx";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -14,18 +14,18 @@ const Author = lazy(() => import("./pages/Author"));
 const Collection = lazy(() => import("./pages/Collection.tsx"));
 export default function App() {
   return (
-    <Suspense fallback={<Loading/>}>
+    <Suspense fallback={<Loading />}>
       <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/profile/:id" element={<Profile/>}/>
-        <Route path="/list/:id" element={<List/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
-        <Route path="/media/:id" element={<Media/>}/>
-        <Route path="/medias/:type" element={<Medias/>}/>
-        <Route path="/collection/:type" element={<Collection/>}/>
-        <Route path="/author/:id" element={<Author/>}/>
-        <Route path="/*" element={<NotFound/>}/>
+        <Route path="/" element={<Home />} />
+        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/list/:id" element={<List />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/media/:id" element={<Media />} />
+        <Route path="/medias/:type" element={<Medias />} />
+        <Route path="/collection/:type" element={<Collection />} />
+        <Route path="/author/:id" element={<Author />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </Suspense>
   );

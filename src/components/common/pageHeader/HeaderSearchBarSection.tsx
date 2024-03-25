@@ -1,7 +1,6 @@
-import {useEffect, useRef, useState} from "react";
-import {DropDownSearchOptionProps, SearchOption,} from "../../../utils/type";
-import {Search, X} from "lucide-react";
-
+import { useEffect, useRef, useState } from "react";
+import { DropDownSearchOptionProps, SearchOption } from "../../../utils/type";
+import { Search, X } from "lucide-react";
 
 export default function HeaderSearchBarSection() {
   const [selectedOption, setSelectedOption] = useState<SearchOption>("Music");
@@ -41,7 +40,7 @@ export default function HeaderSearchBarSection() {
   return (
     <div className="relative flex flex-grow max-w-[800px]" ref={searchBarRef}>
       <button className="absolute inset-y-0 left-0 flex h-10 items-center pt-1 pl-2 md:pl-3">
-        <Search size="20" color="#4E5464"/>
+        <Search size="20" color="#4E5464" />
       </button>
       <input
         type="search"
@@ -55,7 +54,7 @@ export default function HeaderSearchBarSection() {
             className="absolute inset-y-0 right-0 flex h-10 items-center pt-1 pr-3"
             onClick={handleXButtonClick}
           >
-            <X size="16" color="#4E5464"/>
+            <X size="16" color="#4E5464" />
           </button>
         </>
       )}
@@ -71,9 +70,9 @@ export default function HeaderSearchBarSection() {
 }
 
 function DropDownSearchOption({
-                                selectedOption,
-                                onOptionClick,
-                              }: DropDownSearchOptionProps) {
+  selectedOption,
+  onOptionClick,
+}: DropDownSearchOptionProps) {
   const musicColor: string = "text-Music border-b-2 font-bold border-Music";
   const movieColor: string = "text-Movie border-b-2 font-bold border-Movie";
   const bookColor: string = "text-Book border-b-2 font-bold border-Book";

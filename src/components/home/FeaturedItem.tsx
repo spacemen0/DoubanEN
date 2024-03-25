@@ -1,12 +1,11 @@
-import {Media, Review} from "../../utils/type";
-import {MediaDisplay} from "./MediaDisplay";
-import {ReviewDisplay} from "../common/ReviewDisplay";
-
+import { Media, Review } from "../../utils/type";
+import { MediaDisplay } from "./MediaDisplay";
+import { ReviewDisplay } from "../common/ReviewDisplay";
 
 export function FeaturedItem({
-                               media,
-                               review,
-                             }: {
+  media,
+  review,
+}: {
   media: Media;
   review: Review;
 }) {
@@ -16,8 +15,8 @@ export function FeaturedItem({
         "w-full bg-white rounded-md border shadow-md p-2 text-Neutral-Mild"
       }
     >
-      <MediaDisplay media={media}/>
-      <ReviewDisplay review={review}/>
+      <MediaDisplay media={media} />
+      <ReviewDisplay review={review} />
     </div>
   );
 }

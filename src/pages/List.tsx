@@ -1,24 +1,27 @@
-import {Link, useParams} from "react-router-dom";
-import {PageHeader} from "../components/common/PageHeader";
-import {useEffect, useState} from "react";
-import {ListInfo, Media} from "../utils/type";
-import {useAuthContext} from "../contexts/AuthContext";
-import {Pagination} from "../components/common/Pagination";
-import {ListItem} from "../components/common/ListItem";
+import { Link, useParams } from "react-router-dom";
+import { PageHeader } from "../components/common/PageHeader";
+import { useEffect, useState } from "react";
+import { ListInfo, Media } from "../utils/type";
+import { useAuthContext } from "../contexts/AuthContext";
+import { Pagination } from "../components/common/Pagination";
+import { ListItem } from "../components/common/ListItem";
 
-import {getAllListItems, getListInfo, getListItemsCount,} from "../utils/services/mediaListService";
-import {NotFound} from "../components/common/NotFound";
-import {EmptyMedias} from "../components/common/EmptyMedias";
-
+import {
+  getAllListItems,
+  getListInfo,
+  getListItemsCount,
+} from "../utils/services/mediaListService";
+import { NotFound } from "../components/common/NotFound";
+import { EmptyMedias } from "../components/common/EmptyMedias";
 
 export default function List() {
-  const {id} = useParams();
+  const { id } = useParams();
   const [medias, setMedias] = useState<Media[]>([]);
   const [exist, setExist] = useState(true);
   const [listInfo, setListInfo] = useState<ListInfo>();
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const {setMessage} = useAuthContext();
+  const { setMessage } = useAuthContext();
   useEffect(() => {
     const fetchListCount = async (id: number) => {
       try {
@@ -56,10 +59,10 @@ export default function List() {
     };
     fetchListInfo().then();
   }, [currentPage, id, setMessage]);
-  if (!exist) return <NotFound/>;
+  if (!exist) return <NotFound />;
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
-      <PageHeader/>
+      <PageHeader />
 
       <div className="overflow-y-scroll px-2 text-Neutral lg:px-4">
         <p className="my-4 text-3xl font-bold text-Neutral">
@@ -81,16 +84,15 @@ export default function List() {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />
-        <div
-          className="my-2 flex justify-between gap-3 border-b border-gray-200 pb-1 pl-32 text-xl font-semibold text-Neutral-Mild md:gap-6 lg:gap-9 lg:pl-36 2xl:pl-44 3xl:pl-56">
+        <div className="my-2 flex justify-between gap-3 border-b border-gray-200 pb-1 pl-32 text-xl font-semibold text-Neutral-Mild md:gap-6 lg:gap-9 lg:pl-36 2xl:pl-44 3xl:pl-56">
           <span>Average</span> <span>Rated</span> <span>Wants</span>
         </div>
         {medias.length > 0 ? (
           medias.map((media, index) => {
-            return <ListItem media={media} key={index}/>;
+            return <ListItem media={media} key={index} />;
           })
         ) : (
-          <EmptyMedias/>
+          <EmptyMedias />
         )}
       </div>
     </div>

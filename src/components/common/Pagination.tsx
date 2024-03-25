@@ -1,12 +1,11 @@
-import React, {useState} from "react";
-
+import React, { useState } from "react";
 
 export function Pagination({
-                             title,
-                             count,
-                             currentPage,
-                             setCurrentPage,
-                           }: {
+  title,
+  count,
+  currentPage,
+  setCurrentPage,
+}: {
   title: string;
   count: number;
   currentPage: number;

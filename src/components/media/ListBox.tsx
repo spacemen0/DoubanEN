@@ -1,21 +1,24 @@
-import React, {useEffect, useRef, useState} from "react";
-import {ListInfo, Media} from "../../utils/type.ts";
+import React, { useEffect, useRef, useState } from "react";
+import { ListInfo, Media } from "../../utils/type.ts";
 import Draggable from "react-draggable";
-import {useAuthContext} from "../../contexts/AuthContext.ts";
-import {addMediaToList, getUserLists,} from "../../utils/services/mediaListService.ts";
-import {NewListBox} from "./NewListBox.tsx";
+import { useAuthContext } from "../../contexts/AuthContext.ts";
+import {
+  addMediaToList,
+  getUserLists,
+} from "../../utils/services/mediaListService.ts";
+import { NewListBox } from "./NewListBox.tsx";
 
 export const ListBox = ({
-                          setShowListBox,
-                          media,
-                        }: {
+  setShowListBox,
+  media,
+}: {
   setShowListBox: (value: React.SetStateAction<boolean>) => void;
   media: Media;
 }) => {
   const [lists, setLists] = useState<ListInfo[]>([]);
   const [selectedList, setSelectedList] = useState<number>(-1);
   const [showNewListBox, setShowNewListBox] = useState<boolean>(false);
-  const {user, setMessage} = useAuthContext();
+  const { user, setMessage } = useAuthContext();
   const listBox = useRef(null);
   useEffect(() => {
     const fetchLists = async () => {
@@ -30,7 +33,7 @@ export const ListBox = ({
   return (
     <div className="fixed top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
       {/*<NewListBox setShowNewListBox={setShowNewListBox}/>*/}
-      {showNewListBox && <NewListBox setShowNewListBox={setShowNewListBox}/>}
+      {showNewListBox && <NewListBox setShowNewListBox={setShowNewListBox} />}
       <Draggable cancel=".need-interaction" nodeRef={listBox}>
         <div
           id="message"
@@ -87,8 +90,7 @@ export const ListBox = ({
               </button>
             </div>
           ) : (
-            <div
-              className="flex w-full justify-center border-b-2 py-2 font-semibold need-interaction border-Neutral-Mild">
+            <div className="flex w-full justify-center border-b-2 py-2 font-semibold need-interaction border-Neutral-Mild">
               <button
                 className="mr-2 rounded-md px-2 text-white py-0.5 bg-Neutral-Mild"
                 onClick={() => {

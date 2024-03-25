@@ -1,13 +1,12 @@
-import {Link} from "react-router-dom";
-import {Media} from "../../utils/type";
-import {MyImage} from "./MyImage";
+import { Link } from "react-router-dom";
+import { Media } from "../../utils/type";
+import { MyImage } from "./MyImage";
 
-
-export function ListItem({media}: { media: Media }) {
+export function ListItem({ media }: { media: Media }) {
   return (
     <div className="flex w-full">
       <div className="mt-2 mr-2 h-full max-h-32 w-full overflow-clip max-w-32 md:mr-4 lg:mr-6">
-        <MyImage src={media.imageUrl} alt={media.title} href={`/${media.id}`}/>
+        <MyImage src={media.imageUrl} alt={media.title} href={`/${media.id}`} />
       </div>
       <div className="flex w-full flex-col justify-between border-b border-gray-200 pb-1 align-top">
         <Link

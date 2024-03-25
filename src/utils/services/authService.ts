@@ -1,6 +1,6 @@
-import {AuthResponse, User} from "../type";
-import {apiUrl} from "../config";
-import {generateRandomData} from "../data";
+import { AuthResponse, User } from "../type";
+import { apiUrl } from "../config";
+import { generateRandomData } from "../data";
 
 export const register = async (
   username: string,

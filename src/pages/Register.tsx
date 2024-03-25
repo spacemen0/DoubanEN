@@ -1,10 +1,10 @@
-import {useNavigate} from "react-router-dom";
-import {PageHeader} from "../components/common/PageHeader";
-import {generateRandomData} from "../utils/data";
-import {useAuthContext} from "../contexts/AuthContext";
-import React, {useEffect, useState} from "react";
-import {MyImage} from "../components/common/MyImage";
-import {WelcomeInfo} from "../components/common/WelcomeInfo";
+import { useNavigate } from "react-router-dom";
+import { PageHeader } from "../components/common/PageHeader";
+import { generateRandomData } from "../utils/data";
+import { useAuthContext } from "../contexts/AuthContext";
+import React, { useEffect, useState } from "react";
+import { MyImage } from "../components/common/MyImage";
+import { WelcomeInfo } from "../components/common/WelcomeInfo";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -14,14 +14,14 @@ export default function Register() {
     password_repeat: "",
   });
   const navigate = useNavigate();
-  const {isLoggedIn, register} = useAuthContext();
+  const { isLoggedIn, register } = useAuthContext();
   useEffect(() => {
     if (isLoggedIn) navigate("/");
   }, [isLoggedIn, navigate]);
 
   const handleRegister = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const {username, password, email, password_repeat} = formData;
+    const { username, password, email, password_repeat } = formData;
     if (password_repeat !== password) return;
     await register(username, email, password);
     navigate("/");
@@ -34,7 +34,7 @@ export default function Register() {
   };
   return (
     <>
-      <PageHeader/>
+      <PageHeader />
       <RegisterForm
         onSubmit={handleRegister}
         formData={formData}
@@ -154,7 +154,7 @@ function RegisterForm(props: {
           </div>
         </div>
       </div>
-      <WelcomeInfo isLogin={false}/>
+      <WelcomeInfo isLogin={false} />
     </div>
   );
 }

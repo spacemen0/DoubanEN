@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from "react";
-import {useAuthContext} from "../contexts/AuthContext";
-import {PageHeader} from "../components/common/PageHeader";
-import {useNavigate} from "react-router-dom";
-import {generateRandomData} from "../utils/data";
-import {MyImage} from "../components/common/MyImage";
-import {WelcomeInfo} from "../components/common/WelcomeInfo";
-
+import React, { useEffect, useState } from "react";
+import { useAuthContext } from "../contexts/AuthContext";
+import { PageHeader } from "../components/common/PageHeader";
+import { useNavigate } from "react-router-dom";
+import { generateRandomData } from "../utils/data";
+import { MyImage } from "../components/common/MyImage";
+import { WelcomeInfo } from "../components/common/WelcomeInfo";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -13,14 +12,14 @@ export default function Login() {
     password: "",
   });
   const navigate = useNavigate();
-  const {isLoggedIn,user, login, setMessage} = useAuthContext();
+  const { isLoggedIn, user, login, setMessage } = useAuthContext();
   useEffect(() => {
     if (isLoggedIn) navigate(`/profile/${user?.id}`);
   });
 
   const handleLogin = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const {username, password} = formData;
+    const { username, password } = formData;
     try {
       await login(username, password);
       navigate("/");
@@ -38,14 +37,14 @@ export default function Login() {
   };
   return (
     <>
-      <PageHeader/>
+      <PageHeader />
       <div className="flex flex-col">
         <LoginForm
           onSubmit={handleLogin}
           formData={formData}
           onChange={handleInputChange}
         />
-        <WelcomeInfo isLogin={true}/>
+        <WelcomeInfo isLogin={true} />
       </div>
     </>
   );

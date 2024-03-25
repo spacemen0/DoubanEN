@@ -1,10 +1,9 @@
-import {Star, StarHalf} from "lucide-react";
-import {useState} from "react";
-import {Review} from "../../utils/type";
-import {Link} from "react-router-dom";
+import { Star, StarHalf } from "lucide-react";
+import { useState } from "react";
+import { Review } from "../../utils/type";
+import { Link } from "react-router-dom";
 
-
-export function ReviewDisplay({review}: { review: Review }) {
+export function ReviewDisplay({ review }: { review: Review }) {
   const [expanded, setExpanded] = useState(false);
   const renderStars = () => {
     const stars = Math.floor(review.score);
@@ -67,7 +66,7 @@ export function ReviewDisplay({review}: { review: Review }) {
         <div className="flex items-center">
           <div className="relative">
             <div className="flex gap-0.5 text-Neutral-Mild lg:gap-1">
-              {Array.from({length: 5}, (_, index) => (
+              {Array.from({ length: 5 }, (_, index) => (
                 <Star
                   key={index}
                   fill="rgb(209 213 219)"

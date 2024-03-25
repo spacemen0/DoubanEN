@@ -1,17 +1,16 @@
-import {useEffect, useState} from "react";
-import {Media} from "../../utils/type";
-import {ListItem} from "../common/ListItem";
-import {useAuthContext} from "../../contexts/AuthContext";
-import {getUserRatedAndReviewedMediasByType} from "../../utils/services/userMediasService";
-import {EmptyMedias} from "../common/EmptyMedias";
+import { useEffect, useState } from "react";
+import { Media } from "../../utils/type";
+import { ListItem } from "../common/ListItem";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { getUserRatedAndReviewedMediasByType } from "../../utils/services/userMediasService";
+import { EmptyMedias } from "../common/EmptyMedias";
 
-
-export function Collections({id}: { id: number }) {
+export function Collections({ id }: { id: number }) {
   const [selectedOption, setSelectedOption] = useState<
     "Music" | "Movie" | "Book"
   >("Music");
   const [myItems, setItems] = useState<Media[]>([]);
-  const {setMessage} = useAuthContext();
+  const { setMessage } = useAuthContext();
 
   const handleOptionClick = async (option: "Music" | "Movie" | "Book") => {
     setSelectedOption(option);
@@ -68,15 +67,18 @@ export function Collections({id}: { id: number }) {
           Book Collection
         </button>
       </div>
-      <div
-        className="flex justify-between border-b border-gray-200 py-2 pl-32 text-xl font-semibold text-Neutral-Mild xl:pr-2 2xl:pl-48 3xl:pr-4 3xl:pl-64">
+      <div className="flex justify-between border-b border-gray-200 py-2 pl-32 text-xl font-semibold text-Neutral-Mild xl:pr-2 2xl:pl-48 3xl:pr-4 3xl:pl-64">
         <span>Average</span> <span>Rated</span> <span>Wants</span>
       </div>
-      {myItems.length > 0 ? myItems.map((item) => (
-        <div key={item.id} className="mt-4 flex h-auto w-full">
-          <ListItem media={item}/>
-        </div>
-      )) : <EmptyMedias/>}
+      {myItems.length > 0 ? (
+        myItems.map((item) => (
+          <div key={item.id} className="mt-4 flex h-auto w-full">
+            <ListItem media={item} />
+          </div>
+        ))
+      ) : (
+        <EmptyMedias />
+      )}
     </div>
   );
 }

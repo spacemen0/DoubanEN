@@ -1,5 +1,5 @@
-import {infoPara1, infoPara2} from "../../utils/data";
-import {Link} from "react-router-dom";
+import { infoPara1, infoPara2 } from "../../utils/data";
+import { Link } from "react-router-dom";
 
 export function SideInfo() {
   return (

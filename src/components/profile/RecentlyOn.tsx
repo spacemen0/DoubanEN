@@ -1,12 +1,11 @@
-import {useEffect, useState} from "react";
-import {Media} from "../../utils/type";
-import {useAuthContext} from "../../contexts/AuthContext";
-import {MyImage} from "../common/MyImage";
-import {getUserCurrentOn} from "../../utils/services/userMediasService";
+import { useEffect, useState } from "react";
+import { Media } from "../../utils/type";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { MyImage } from "../common/MyImage";
+import { getUserCurrentOn } from "../../utils/services/userMediasService";
 
-
-export function RecentlyOn({id}: { id: number }) {
-  const {setMessage} = useAuthContext();
+export function RecentlyOn({ id }: { id: number }) {
+  const { setMessage } = useAuthContext();
   const [recentlyOn, SetRecentlyOn] = useState<Media[]>();
   useEffect(() => {
     const getCurrentOn = async () => {

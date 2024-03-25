@@ -1,6 +1,5 @@
 import loadable from "@loadable/component";
 
-
 const HeadLogoSection = loadable(
   () => import("./pageHeader/HeaderLogoSection"),
 );
@@ -18,12 +17,12 @@ export function PageHeader() {
   return (
     <div className="z-50 flex flex-col border-b bg-white shadow-md">
       <div className="flex h-12 items-center justify-center gap-1 md:h-14 lg:gap-2">
-        <HeadLogoSection/>
-        <HeaderNavBarSection forMedium={true}/>
-        <HeaderSearchBarSection/>
-        <HeaderUserSection/>
+        <HeadLogoSection />
+        <HeaderNavBarSection forMedium={true} />
+        <HeaderSearchBarSection />
+        <HeaderUserSection />
       </div>
-      <HeaderNavBarSection forMedium={false}/>
+      <HeaderNavBarSection forMedium={false} />
     </div>
   );
 }

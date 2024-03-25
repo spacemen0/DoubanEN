@@ -1,5 +1,5 @@
-import {Media, MediaType} from "../type";
-import {apiUrl} from "../config";
+import { Media, MediaType } from "../type";
+import { apiUrl } from "../config";
 
 export const getMedia = async (id: number): Promise<Media> => {
   let response = new Response();

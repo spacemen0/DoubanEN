@@ -1,6 +1,6 @@
-import {Media} from "../../utils/type";
+import { Media } from "../../utils/type";
 
-export function Additional({media}: { media: Media }) {
+export function Additional({ media }: { media: Media }) {
   if (!media.tracks && !media.chapters && !media.casts) return <></>;
 
   return (

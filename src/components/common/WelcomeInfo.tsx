@@ -1,6 +1,6 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export function WelcomeInfo({isLogin}: { isLogin: boolean }) {
+export function WelcomeInfo({ isLogin }: { isLogin: boolean }) {
   return (
     <div className="mx-auto mt-1 w-full bg-gray-100 p-12 lg:mt-10 lg:w-4/6 lg:p-24">
       <h1 className="text-center text-2xl">

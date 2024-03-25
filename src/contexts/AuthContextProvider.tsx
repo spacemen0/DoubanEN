@@ -1,8 +1,13 @@
-import React, {FC, useCallback, useEffect, useState} from "react";
-import {expiryTime} from "../utils/config.ts";
-import {AuthContext, AuthContextType} from "./AuthContext";
-import {User} from "../utils/type.ts";
-import {getUser, login, logout, register,} from "../utils/services/authService.ts";
+import React, { FC, useCallback, useEffect, useState } from "react";
+import { expiryTime } from "../utils/config.ts";
+import { AuthContext, AuthContextType } from "./AuthContext";
+import { User } from "../utils/type.ts";
+import {
+  getUser,
+  login,
+  logout,
+  register,
+} from "../utils/services/authService.ts";
 
 function setWithExpiry<T>(key: string, value: T, ttl: number): void {
   const now = new Date();
@@ -29,8 +34,8 @@ function getWithExpiry<T>(key: string): T | null {
 }
 
 export const AuthProvider: FC<{ children: React.ReactNode }> = ({
-                                                                  children,
-                                                                }) => {
+  children,
+}) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(() =>
     getWithExpiry<boolean>("isAuthenticated"),
   );
@@ -121,9 +126,9 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
 };
 
 const MessageBox = ({
-                      message,
-                      onHover,
-                    }: {
+  message,
+  onHover,
+}: {
   message: string | null;
   onHover: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }) => {

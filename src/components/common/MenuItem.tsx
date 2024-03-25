@@ -1,11 +1,11 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function MenuItem({
-                           link,
-                           text,
-                           isLast = false,
-                           onClick,
-                         }: {
+  link,
+  text,
+  isLast = false,
+  onClick,
+}: {
   link: string;
   text: string;
   isLast?: boolean;

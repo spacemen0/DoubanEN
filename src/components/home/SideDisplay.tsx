@@ -1,7 +1,6 @@
-import {Link} from "react-router-dom";
-import {MyImage} from "../common/MyImage";
-import {sideImages} from "../../utils/data";
-
+import { Link } from "react-router-dom";
+import { MyImage } from "../common/MyImage";
+import { sideImages } from "../../utils/data";
 
 export function SideDisplay() {
   return (
