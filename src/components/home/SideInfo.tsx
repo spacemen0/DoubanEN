@@ -8,7 +8,7 @@ export function SideInfo() {
         Douban EN
       </div>
       <div className="text-Neutral-Mild">
-        <p>{infoPara1}</p>
+        <p className="mb-2">{infoPara1}</p>
         <p>{infoPara2}</p>
       </div>
       <Link

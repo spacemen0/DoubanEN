@@ -253,14 +253,14 @@ export const sideImages: { listId: number; ImageProps: ImageProps }[] =
     };
   });
 
+export const homePageReviewIds: number[] = [1, 2, 3, 4];
+
 export const bannerText: string = `Douban EN is a website built with React, TypeScript and Tailwind CSS. 
 The primary features of the site is to mark, track and organize your favorite Musics, Movies, and Books. `;
 
-export const infoPara1: string =
-  faker.lorem.paragraphs() + faker.lorem.paragraphs();
+export const infoPara1: string = faker.lorem.paragraphs();
 
-export const infoPara2: string =
-  faker.lorem.paragraphs() + faker.lorem.paragraphs();
+export const infoPara2: string = faker.lorem.paragraphs();
 
 export const statusInfo: string[] = [
   "1,717,584",

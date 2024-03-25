@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { generateRandomData } from "../utils/data";
 import { MyImage } from "../components/common/MyImage";
 import { WelcomeInfo } from "../components/common/WelcomeInfo";
+import { LoaderCircle } from "lucide-react";
 
 export default function Login() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+  const [processing, setProcessing] = useState(false);
   const navigate = useNavigate();
   const { isLoggedIn, user, login, setMessage } = useAuthContext();
   useEffect(() => {
@@ -18,10 +20,12 @@ export default function Login() {
   });
 
   const handleLogin = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    setProcessing(true);
     e.preventDefault();
     const { username, password } = formData;
     try {
       await login(username, password);
+      setProcessing(false);
       navigate("/");
     } catch (e) {
       const error = e as Error;
@@ -43,6 +47,7 @@ export default function Login() {
           onSubmit={handleLogin}
           formData={formData}
           onChange={handleInputChange}
+          processing={processing}
         />
         <WelcomeInfo isLogin={true} />
       </div>
@@ -54,6 +59,7 @@ function LoginForm(props: {
   onSubmit: (e: React.ChangeEvent<HTMLFormElement>) => Promise<void>;
   formData: { password: string; username: string };
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  processing: boolean;
 }) {
   return (
     <div className="mx-auto mt-1 flex w-full justify-center lg:mt-10 lg:w-4/6">
@@ -109,8 +115,15 @@ function LoginForm(props: {
             <div>
               <button
                 type="submit"
-                className="w-full rounded-md p-2 text-white transition-colors duration-300 bg-Neutral-Strong hover:bg-Neutral focus:bg-Neutral-Strong focus:ring-Neutral-Strong focus:outline-none focus:ring-2 focus:ring-offset-2"
+                className="w-full flex justify-center rounded-md p-2 pr-8 text-white transition-colors duration-300 bg-Neutral-Strong hover:bg-Neutral focus:bg-Neutral-Strong focus:ring-Neutral-Strong focus:outline-none focus:ring-2 focus:ring-offset-2"
               >
+                {props.processing ? (
+                  <div className="animate-spin w-6 h-6 mr-2">
+                    <LoaderCircle />
+                  </div>
+                ) : (
+                  <div className="w-6 h-6 mr-2"></div>
+                )}
                 Login
               </button>
             </div>

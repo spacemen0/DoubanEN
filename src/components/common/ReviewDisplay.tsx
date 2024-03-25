@@ -83,7 +83,10 @@ export function ReviewDisplay({ review }: { review: Review }) {
       </div>
       <div className="pl-2">
         <p className="mt-2 text-2xl font-semibold">{review.title}</p>
-        <p className="mt-2 text-lg">{review.date}</p>
+        <p className="mt-2 text-lg text-Neutral-Mild font-semibold">
+          {" "}
+          Reviewed on: {review.date}
+        </p>
         <p className="mt-2 lg:text-xl">
           {truncateContent(review.content, 400)}
         </p>
