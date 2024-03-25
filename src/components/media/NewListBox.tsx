@@ -1,70 +1,46 @@
 import React, {useRef, useState} from "react";
-import {Media, MediaStatus, Score} from "../../utils/type";
 import {useAuthContext} from "../../contexts/AuthContext";
 import Draggable from "react-draggable";
-import {postReview} from "../../utils/services/reviewService";
+import {createList} from "../../utils/services/mediaListService";
 
-export function NewReviewBox({
-                               setShowReviewBox,
-                               setMediaStatus,
-                               media,
-                               score,
-                             }: {
-  setShowReviewBox: (value: React.SetStateAction<boolean>) => void;
-  setMediaStatus: React.Dispatch<React.SetStateAction<MediaStatus>>;
-  media: Media;
-  score: number;
-}) {
+
+export const NewListBox = ({
+                             setShowNewListBox,
+                           }: {
+  setShowNewListBox: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [description, setDescription] = useState("");
   const {user, setMessage} = useAuthContext();
-  const reviewBox = useRef(null);
+  const listBox = useRef(null);
 
   const handleReset = () => {
     setTitle("");
-    setContent("");
+    setDescription("");
   };
 
-  const handlePostReview = async () => {
-    if (score === 0) {
-      setMessage("Please rate before posting a review");
-      return;
-    }
-    const review = {
-      username: user!.username,
-      userId: user!.id,
-      mediaId: media.id,
-      date: new Date(Date.now()).toISOString().split("T")[0],
-      score: score as Score,
-      title: title,
-      content: content,
-    };
+  const handleCreateList = async () => {
     try {
-      await postReview(review, media.type);
-      setMediaStatus({
-        status: "Reviewed",
-        score: score,
-        date: new Date(Date.now()).toISOString().split("T")[0],
-      });
-      setShowReviewBox(false);
-    } catch (error) {
-      setMessage("Error processing Post Review request");
+      await createList(user!.id, title, description);
+      setShowNewListBox(false);
+      setMessage("You list has been created");
+    } catch (e) {
+      setMessage("Error creating list");
     }
   };
-
   return (
     <div className="fixed top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
-      <Draggable cancel=".need-interaction" nodeRef={reviewBox}>
+      <Draggable cancel=".need-interaction" nodeRef={listBox}>
         <div
           id="message"
           className="w-72 rounded-lg border-2 bg-white text-center border-Neutral-Mild md:w-96 lg:w-[480px]"
-          ref={reviewBox}
+          ref={listBox}
         >
           <label
             htmlFor="message"
             className="block rounded-t-lg border-b-2 bg-gray-100 px-4 py-2 text-xl font-semibold text-Neutral-Strong border-Neutral-Mild"
           >
-            Your Review
+            New List
           </label>
           <textarea
             rows={1}
@@ -78,18 +54,18 @@ export function NewReviewBox({
           ></textarea>
           <textarea
             rows={6}
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             className="hidden w-full bg-white need-interaction p-2.5 text-Neutral focus:outline-none lg:block"
-            placeholder="Write your review here..."
+            placeholder="Write your list description here..."
             onMouseDown={(event) => {
               event.stopPropagation();
             }}
           ></textarea>
           <textarea
             rows={4}
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             className="w-full bg-white need-interaction p-2.5 text-Neutral focus:outline-none lg:hidden"
             placeholder="Write your review here..."
             onMouseDown={(event) => {
@@ -107,15 +83,15 @@ export function NewReviewBox({
             <button
               className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild  border-Neutral-Mild
           focus:ring-1 focus:ring-Neutral transition-colors rounded-br-lg"
-              onClick={handlePostReview}
+              onClick={handleCreateList}
             >
-              Post
+              Create
             </button>
             <button
               className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild  border-Neutral-Mild
          focus:ring-1 focus:ring-Neutral transition-colors"
               onClick={() => {
-                setShowReviewBox(false);
+                setShowNewListBox(false);
               }}
             >
               Cancel
@@ -125,4 +101,4 @@ export function NewReviewBox({
       </Draggable>
     </div>
   );
-}
+};
