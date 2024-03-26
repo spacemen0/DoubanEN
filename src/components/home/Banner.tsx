@@ -12,7 +12,7 @@ export function Banner() {
         <div className="mr-2 flex flex-col max-w-[800px]">
           <div className="lg:text-4xl text-3xl flex !sm:flex-col font-bold text-Neutral-Mild">
             <h1>Welcome to &nbsp;</h1>
-            <span className="inline-block bg-gradient-to-r bg-clip-text text-transparent from-Music via-Movie to-Book">
+            <span className="inline-block bg-gradient-to-r bg-clip-text text-transparent dark:text-Neutral from-Music via-Movie to-Book">
               Douban EN
             </span>
           </div>
@@ -20,8 +20,7 @@ export function Banner() {
             <p className="text-Neutral-Mild">
               {bannerText + " "}
               <Link to="/login" className="text-Neutral-Strong">
-                Currently all data and images are generated randomly using
-                Faker-js.
+                Currently some images are generated randomly using Faker-js.
               </Link>
             </p>
           </div>

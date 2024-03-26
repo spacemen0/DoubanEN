@@ -1,9 +1,9 @@
 import { useAuthContext } from "../../../contexts/AuthContext";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { faker } from "@faker-js/faker";
 import { Menu } from "lucide-react";
-import { MenuItem } from "../MenuItem";
+import { MenuItem } from "./MenuItem.tsx";
 
 export default function HeaderUserSection() {
   const { isLoggedIn, user } = useAuthContext();
@@ -43,13 +43,19 @@ export default function HeaderUserSection() {
         >
           <Menu size="32" color="rgb(75 85 99)" />
         </button>
-        <DropDownMenu isOpen={isOpen} />
+        <DropDownMenu isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
     </div>
   );
 }
 
-function DropDownMenu({ isOpen }: { isOpen: boolean }) {
+function DropDownMenu({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const { isLoggedIn, logout, token, user } = useAuthContext();
 
   const handleLogout = async () => {
@@ -60,15 +66,48 @@ function DropDownMenu({ isOpen }: { isOpen: boolean }) {
       <div className="absolute top-10 right-0 w-36 bg-white font-bold shadow-lg ring-1 ring-opacity-5 text-Neutral ring-Neutral-Strong md:top-9">
         {isLoggedIn ? (
           <div>
-            <MenuItem link={`/profile/${user!.id}`} text="Profile" />
-            <MenuItem link="/collection/all" text="All Collections" />
-            <MenuItem link="/collection/book" text="Book Collection" />
-            <MenuItem link="/collection/music" text="Music Collection" />
-            <MenuItem link="/collection/movie" text="Movie Collection" />
+            <MenuItem
+              link={`/profile/${user!.id}`}
+              onClick={() => {
+                setIsOpen(false);
+              }}
+              text="Profile"
+            />
+            <MenuItem
+              link="/collection/all"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+              text="All Collections"
+            />
+            <MenuItem
+              link="/collection/book"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+              text="Book Collection"
+            />
+            <MenuItem
+              link="/collection/music"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+              text="Music Collection"
+            />
+            <MenuItem
+              link="/collection/movie"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+              text="Movie Collection"
+            />
             <MenuItem
               link="/"
               text="Log Out"
-              onClick={handleLogout}
+              onClick={async () => {
+                setIsOpen(false);
+                await handleLogout();
+              }}
               isLast={true}
             />
           </div>
