@@ -7,32 +7,30 @@ export function SideDisplay() {
     <div className="mt-6 flex flex-col md:mt-4 md:w-11/12 lg:w-10/12">
       <div className="mb-4">
         <Link to={`/list/${sideImages[0].listId}`}>
-          <MyImage {...sideImages[0].ImageProps} />
+          <div className="">
+            <MyImage {...sideImages[0].ImageProps} />
+          </div>
         </Link>
       </div>
 
       <div className="mb-4 flex justify-between">
-        <Link to={`/list/${sideImages[1].listId}`}>
-          <MyImage {...sideImages[1].ImageProps} />
-        </Link>
-        <Link to={`/list/${sideImages[2].listId}`}>
-          <MyImage {...sideImages[2].ImageProps} />
-        </Link>
-        <Link to={`/list/${sideImages[3].listId}`}>
-          <MyImage {...sideImages[3].ImageProps} />
-        </Link>
+        {sideImages.slice(1, 4).map((image, index) => (
+          <div className="flex-1">
+            <Link key={index} to={`/list/${image.listId}`}>
+              <MyImage {...image.ImageProps} />
+            </Link>
+          </div>
+        ))}
       </div>
 
       <div className="flex justify-between">
-        <Link to={`/list/${sideImages[4].listId}`}>
-          <MyImage {...sideImages[4].ImageProps} />
-        </Link>
-        <Link to={`/list/${sideImages[5].listId}`}>
-          <MyImage {...sideImages[5].ImageProps} />
-        </Link>
-        <Link to={`/list/${sideImages[6].listId}`}>
-          <MyImage {...sideImages[6].ImageProps} />
-        </Link>
+        {sideImages.slice(4, 7).map((image, index) => (
+          <div className="flex-1">
+            <Link key={index} to={`/list/${image.listId}`}>
+              <MyImage {...image.ImageProps} />
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
   );

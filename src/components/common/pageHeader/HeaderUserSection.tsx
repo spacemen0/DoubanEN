@@ -1,9 +1,10 @@
 import { useAuthContext } from "../../../contexts/AuthContext";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { faker } from "@faker-js/faker";
 import { Menu } from "lucide-react";
 import { MenuItem } from "./MenuItem.tsx";
+import { MyImage } from "../MyImage.tsx";
+import { generateRandomData } from "../../../utils/data.ts";
 
 export default function HeaderUserSection() {
   const { isLoggedIn, user } = useAuthContext();
@@ -11,13 +12,12 @@ export default function HeaderUserSection() {
   return (
     <div className="flex flex-shrink-0 items-center md:gap-1.5">
       {isLoggedIn && (
-        <div className="transition-colors hover:bg-gray-100">
-          <Link className="transition-colors hover:bg-gray-100" to={"/profile"}>
-            <img
-              src={faker.image.url({ width: 64, height: 64 })}
-              alt="Profile Image "
-              className="h-10"
-            />
+        <div className="transition-colors hover:bg-gray-100 h-10">
+          <Link
+            className="transition-colors hover:bg-gray-100"
+            to={`/profile/${user!.id}`}
+          >
+            <MyImage {...generateRandomData()} />
           </Link>
         </div>
       )}

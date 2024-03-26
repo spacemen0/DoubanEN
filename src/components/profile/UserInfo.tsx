@@ -4,6 +4,7 @@ import { MyImage } from "../common/MyImage";
 import { User } from "../../utils/type";
 
 import { getUser } from "../../utils/services/authService";
+import { Link } from "react-router-dom";
 
 export function UserInfo({
   id,
@@ -38,11 +39,12 @@ export function UserInfo({
       {user && (
         <div className="mb-4 flex items-center">
           <div className="mr-4 !md:max-w-32">
-            <MyImage
-              src={user.profileImage}
-              alt={"Profile Image of " + user.username}
-              href={`/profile/${user.id}`}
-            />
+            <Link to={`/profile/${user.id}`}>
+              <MyImage
+                src={user.profileImage}
+                alt={"Profile Image of " + user.username}
+              />
+            </Link>
           </div>
           <div>
             <h1 className="mb-1 text-xl font-semibold lg:text-2xl">

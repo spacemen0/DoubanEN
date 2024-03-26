@@ -3,6 +3,7 @@ import { Media } from "../../utils/type";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { MyImage } from "../common/MyImage";
 import { getUserCurrentOn } from "../../utils/services/userMediasService";
+import { Link } from "react-router-dom";
 
 export function RecentlyOn({ id }: { id: number }) {
   const { setMessage } = useAuthContext();
@@ -30,11 +31,12 @@ export function RecentlyOn({ id }: { id: number }) {
           {recentlyOn.length >= 1 ? (
             <>
               <div className="h-32 w-32">
-                <MyImage
-                  src={recentlyOn[0].imageUrl}
-                  alt={recentlyOn[0].title}
-                  href={`/media/${recentlyOn[0].type}/${recentlyOn[0].id}`}
-                />
+                <Link to={`/media/${recentlyOn[0].type}/${recentlyOn[0].id}`}>
+                  <MyImage
+                    src={recentlyOn[0].imageUrl}
+                    alt={recentlyOn[0].title}
+                  />
+                </Link>
               </div>
               <div className="flex w-3/4 flex-col justify-center">
                 {" "}
@@ -58,15 +60,15 @@ export function RecentlyOn({ id }: { id: number }) {
           {recentlyOn.length >= 2 ? (
             <>
               <div className="h-32 w-32">
-                <MyImage
-                  src={recentlyOn[1].imageUrl}
-                  alt={recentlyOn[1].title}
-                  href={`/media/${recentlyOn[1].type}/${recentlyOn[1].id}`}
-                />
+                <Link to={`/media/${recentlyOn[1].type}/${recentlyOn[1].id}`}>
+                  <MyImage
+                    src={recentlyOn[1].imageUrl}
+                    alt={recentlyOn[1].title}
+                  />
+                </Link>
               </div>
 
               <div className="ml-4 flex w-3/4 flex-col justify-center">
-                {" "}
                 <h1 className="w-full text-center font-bold">
                   {recentlyOn[1].title}
                 </h1>
@@ -87,11 +89,12 @@ export function RecentlyOn({ id }: { id: number }) {
           {recentlyOn.length >= 3 ? (
             <>
               <div className="h-32 w-32">
-                <MyImage
-                  src={recentlyOn[2].imageUrl}
-                  alt={recentlyOn[2].title}
-                  href={`/media/${recentlyOn[2].type}/${recentlyOn[2].id}`}
-                />
+                <Link to={`/media/${recentlyOn[2].type}/${recentlyOn[2].id}`}>
+                  <MyImage
+                    src={recentlyOn[2].imageUrl}
+                    alt={recentlyOn[2].title}
+                  />
+                </Link>
               </div>
 
               <div className="ml-4 flex w-3/4 flex-col justify-center">

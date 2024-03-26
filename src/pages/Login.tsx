@@ -115,14 +115,14 @@ function LoginForm(props: {
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center rounded-md p-2 pr-8 text-white transition-colors duration-300 bg-Neutral-Strong hover:bg-Neutral focus:bg-Neutral-Strong focus:ring-Neutral-Strong focus:outline-none focus:ring-2 focus:ring-offset-2"
+                className="flex w-full justify-center rounded-md p-2 pr-8 text-white transition-colors duration-300 bg-Neutral-Strong hover:bg-Neutral focus:bg-Neutral-Strong focus:ring-Neutral-Strong focus:outline-none focus:ring-2 focus:ring-offset-2"
               >
                 {props.processing ? (
-                  <div className="animate-spin w-6 h-6 mr-2">
+                  <div className="mr-2 h-6 w-6 animate-spin">
                     <LoaderCircle />
                   </div>
                 ) : (
-                  <div className="w-6 h-6 mr-2"></div>
+                  <div className="mr-2 h-6 w-6"></div>
                 )}
                 Login
               </button>

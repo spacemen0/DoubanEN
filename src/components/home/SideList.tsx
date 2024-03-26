@@ -77,7 +77,7 @@ export function SideList() {
       {(selectedOption === "Editor" ||
         (selectedOption === "My" && isLoggedIn)) &&
         items.map((item, index) => (
-          <div key={index} className="mt-4 flex h-auto w-full">
+          <div key={index} className="mt-4 flex h-auto w-full overflow-clip">
             <ListItem media={item} />
           </div>
         ))}

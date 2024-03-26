@@ -46,11 +46,7 @@ export default function MediaPage() {
       {media ? (
         <div className="flex !lg:flex-col items-center lg:items-start justify-center ml-10 mr-10 mt-6 ">
           <div className="flex w-full flex-1 flex-col lg:flex-[0.3]">
-            <MyImage
-              src={media.imageUrl}
-              alt={media.title}
-              href={media.imageUrl}
-            />
+            <MyImage src={media.imageUrl} alt={media.title} />
             <div className="hidden lg:block">
               <Additional media={media} />
             </div>

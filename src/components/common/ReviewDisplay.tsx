@@ -83,7 +83,7 @@ export function ReviewDisplay({ review }: { review: Review }) {
       </div>
       <div className="pl-2">
         <p className="mt-2 text-2xl font-semibold">{review.title}</p>
-        <p className="mt-2 text-lg text-Neutral-Mild font-semibold">
+        <p className="mt-2 text-lg font-semibold text-Neutral-Mild">
           {" "}
           Reviewed on: {review.date}
         </p>

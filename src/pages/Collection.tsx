@@ -71,7 +71,7 @@ export default function Collection() {
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
       <div className="mt-2 overflow-y-scroll px-2 lg:px-4">
-        <div className="mt-4 flex justify-start gap-4 lg:gap-10 text-lg font-semibold text-Neutral-Mild md:py-0.5 md:text-2xl lg:text-3xl">
+        <div className="mt-4 flex justify-start gap-4 text-lg font-semibold text-Neutral-Mild md:py-0.5 md:text-2xl lg:gap-10 lg:text-3xl">
           <button
             className={`border-b-2  ${
               selectedOption == "Rated" ? " font-bold" : ""

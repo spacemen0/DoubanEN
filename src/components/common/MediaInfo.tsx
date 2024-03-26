@@ -61,7 +61,7 @@ export function MediaInfo({ media, home }: { media: Media; home: boolean }) {
           <tr>
             <td className="pr-4 font-semibold pb-1.5 lg:pb-3">Wishlists:</td>
             <td>
-              <span className="text-xl font-semibold lg:text-2xl pb-1.5 lg:pb-3">
+              <span className="text-xl font-semibold pb-1.5 lg:pb-3 lg:text-2xl">
                 {media.wants}
               </span>
             </td>
