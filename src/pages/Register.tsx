@@ -5,6 +5,7 @@ import { useAuthContext } from "../contexts/AuthContext";
 import React, { useEffect, useState } from "react";
 import { MyImage } from "../components/common/MyImage";
 import { WelcomeInfo } from "../components/common/WelcomeInfo";
+import { LoaderCircle } from "lucide-react";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -14,17 +15,27 @@ export default function Register() {
     password_repeat: "",
   });
   const navigate = useNavigate();
-  const { isLoggedIn, register } = useAuthContext();
+  const [processing, setProcessing] = useState(false);
+  const { isLoggedIn, register, setMessage } = useAuthContext();
   useEffect(() => {
     if (isLoggedIn) navigate("/");
   }, [isLoggedIn, navigate]);
 
   const handleRegister = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setProcessing(true);
     const { username, password, email, password_repeat } = formData;
     if (password_repeat !== password) return;
-    await register(username, email, password);
-    navigate("/");
+    try {
+      await register(username, email, password);
+      setProcessing(false);
+      navigate("/");
+    } catch (e) {
+      setProcessing(false);
+      const error = e as Error;
+      if (error.message === "Conflict")
+        setMessage("Username or email already be taken");
+    }
   };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -39,6 +50,7 @@ export default function Register() {
         onSubmit={handleRegister}
         formData={formData}
         onChange={handleInputChange}
+        processing={processing}
       />
     </>
   );
@@ -53,6 +65,7 @@ function RegisterForm(props: {
     username: string;
   };
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  processing: boolean;
 }) {
   return (
     <div className="flex flex-col">
@@ -143,12 +156,21 @@ function RegisterForm(props: {
                 />
               </div>
               <div>
-                <button
-                  type="submit"
-                  className="w-full rounded-md p-2 text-white transition-colors duration-300 bg-Neutral-Strong hover:bg-Neutral focus:bg-Neutral-Strong focus:ring-Neutral-Strong focus:outline-none focus:ring-2 focus:ring-offset-2"
-                >
-                  Register
-                </button>
+                <div>
+                  <button
+                    type="submit"
+                    className="flex w-full justify-center rounded-md p-2 pr-8 text-white transition-colors duration-300 bg-Neutral-Strong hover:bg-Neutral focus:bg-Neutral-Strong focus:ring-Neutral-Strong focus:outline-none focus:ring-2 focus:ring-offset-2"
+                  >
+                    {props.processing ? (
+                      <div className="mr-2 h-6 w-6 animate-spin">
+                        <LoaderCircle />
+                      </div>
+                    ) : (
+                      <div className="mr-2 h-6 w-6"></div>
+                    )}
+                    Register
+                  </button>
+                </div>
               </div>
             </form>
           </div>

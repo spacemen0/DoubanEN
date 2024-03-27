@@ -22,13 +22,14 @@ export const register = async (
       body: JSON.stringify(requestBody),
     });
   } catch (error) {
-    console.error("Login error:", error);
+    console.error("Register error:", error);
     throw error;
   }
-  if (!response.ok) {
-    throw new Error("Failed to log in");
-  }
-  return await response.json();
+  const data = await response.json();
+  if (data["message"] === "User already exist") throw new Error("Conflict");
+  if (!response.ok) throw new Error("Failed to register");
+
+  return data;
 };
 export const login = async (
   username: string,
@@ -68,7 +69,7 @@ export const logout = async (token: string): Promise<void> => {
     });
   } catch (error) {
     console.error("Logout error:", error);
-    throw new Error("Failed to log out. Please try again later."); // Throw a different error message or handle it accordingly
+    throw new Error("Failed to log out. Please try again later.");
   }
   if (!response.ok) {
     throw new Error("Failed to log out");

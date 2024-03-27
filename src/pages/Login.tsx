@@ -29,6 +29,7 @@ export default function Login() {
       navigate("/");
     } catch (e) {
       const error = e as Error;
+      setProcessing(false);
       setMessage(error.message);
     }
   };

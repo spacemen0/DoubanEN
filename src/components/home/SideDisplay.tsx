@@ -15,8 +15,8 @@ export function SideDisplay() {
 
       <div className="mb-4 flex justify-between">
         {sideImages.slice(1, 4).map((image, index) => (
-          <div className="flex-1">
-            <Link key={index} to={`/list/${image.listId}`}>
+          <div className="flex-1" key={index}>
+            <Link to={`/list/${image.listId}`}>
               <MyImage {...image.ImageProps} />
             </Link>
           </div>
@@ -25,8 +25,8 @@ export function SideDisplay() {
 
       <div className="flex justify-between">
         {sideImages.slice(4, 7).map((image, index) => (
-          <div className="flex-1">
-            <Link key={index} to={`/list/${image.listId}`}>
+          <div className="flex-1" key={index}>
+            <Link to={`/list/${image.listId}`}>
               <MyImage {...image.ImageProps} />
             </Link>
           </div>

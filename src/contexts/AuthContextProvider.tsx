@@ -51,48 +51,68 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
   );
 
   useEffect(() => {
-    setWithExpiry("isAuthenticated", isLoggedIn, expiryTime);
-    setWithExpiry("user", user, expiryTime);
-    setWithExpiry("token", token, expiryTime);
-    setWithExpiry("message", message, expiryTime);
+    isLoggedIn && setWithExpiry("isAuthenticated", isLoggedIn, expiryTime);
+    user && setWithExpiry("user", user, expiryTime);
+    token && setWithExpiry("token", token, expiryTime);
+    message && setWithExpiry("message", message, expiryTime);
   }, [isLoggedIn, user, token, message]);
 
   const handleLogin = useCallback(
     async (username: string, password: string) => {
-      const response = await login(username, password);
+      let response;
+      try {
+        response = await login(username, password);
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
       if (response.userId) {
         const currentUser = await getUser(response.userId);
         setIsLoggedIn(true);
         setToken(response.token);
         setUser(currentUser);
-      } else setMessage("Error logging you in");
+      } else {
+        throw new Error("Error logging you in");
+      }
     },
     [],
   );
 
   const handleLogout = useCallback(async (token: string) => {
-    await logout(token);
-    setIsLoggedIn(false);
-    setUser(null);
-    setToken(null);
-    setMessage(null);
+    try {
+      await logout(token);
+      setIsLoggedIn(false);
+      setUser(null);
+      setToken(null);
+      setMessage(null);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }, []);
 
   const handleRegister = useCallback(
     async (username: string, email: string, password: string) => {
-      const response = await register(username, email, password);
+      let response;
+      try {
+        response = await register(username, email, password);
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
       if (response.userId) {
         const newUser = await getUser(response.userId);
         setIsLoggedIn(true);
         setToken(response.token);
         setUser(newUser);
-      } else setMessage("Error registering your new account");
+      } else {
+        throw new Error("Error registering your new account");
+      }
     },
     [],
   );
 
   const handleSetMessage = useCallback((message: string) => {
-    console.log(message);
     setMessage(message);
   }, []);
 
