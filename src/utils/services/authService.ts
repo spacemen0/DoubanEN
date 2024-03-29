@@ -52,6 +52,7 @@ export const login = async (
     console.error("Login error:", error);
     throw new Error("Failed to log in. Please try again later.");
   }
+  if (response.status === 401) throw new Error("Unauthorized");
   if (!response.ok) {
     throw new Error("Failed to log in");
   }

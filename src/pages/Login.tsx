@@ -29,8 +29,10 @@ export default function Login() {
       navigate("/");
     } catch (e) {
       const error = e as Error;
+      if (error.message === "Unauthorized")
+        setMessage("Incorrect username or password");
+      else setMessage(error.message);
       setProcessing(false);
-      setMessage(error.message);
     }
   };
 
