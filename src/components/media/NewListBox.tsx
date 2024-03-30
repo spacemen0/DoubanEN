@@ -2,15 +2,20 @@ import React, { useRef, useState } from "react";
 import { useAuthContext } from "../../contexts/AuthContext";
 import Draggable from "react-draggable";
 import { createList } from "../../utils/services/mediaListService";
+import { ListInfo } from "../../utils/type.ts";
 
 export const NewListBox = ({
   setShowNewListBox,
+  setSelectedList,
+  setLists,
 }: {
   setShowNewListBox: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedList: React.Dispatch<React.SetStateAction<number>>;
+  setLists: React.Dispatch<React.SetStateAction<ListInfo[]>>;
 }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const { user, setMessage } = useAuthContext();
+  const { user, setMessage, token } = useAuthContext();
   const listBox = useRef(null);
 
   const handleReset = () => {
@@ -20,8 +25,10 @@ export const NewListBox = ({
 
   const handleCreateList = async () => {
     try {
-      await createList(user!.id, title, description);
+      const newList = await createList(user!.id, title, description, token!);
       setShowNewListBox(false);
+      setSelectedList(newList.id);
+      setLists((prevLists) => [...prevLists, newList]);
       setMessage("You list has been created");
     } catch (e) {
       setMessage("Error creating list");

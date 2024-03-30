@@ -14,8 +14,8 @@ export const getMediaStatus = async (
       },
     );
   } catch (error) {
-    console.error("Error fetching Medias:", error);
-    throw new Error("Failed to fetch Medias. Please try again later.");
+    console.error("Error fetching Medias Status:", error);
+    throw new Error("Failed to fetch Medias Status. Please try again later.");
   }
   if (response.status == 404) return { score: 0, status: "None" };
   if (!response.ok) {
@@ -27,6 +27,7 @@ export const setWishlist = async (
   userId: number,
   mediaId: number,
   type: MediaType,
+  token: string,
 ) => {
   const requestBody = {
     userId: userId,
@@ -40,6 +41,7 @@ export const setWishlist = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(requestBody),
     });
@@ -51,11 +53,15 @@ export const setWishlist = async (
     throw new Error("Failed to set wishlist");
   }
 };
-export const cancelWishlist = async (id: number) => {
+export const cancelWishlist = async (id: number, token: string) => {
   let response = new Response();
   try {
     response = await fetch(`${apiUrl}/media-statuses/${id}`, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
   } catch (error) {
     console.error("Failed to set wishlist:", error);
@@ -69,6 +75,7 @@ export const setDoing = async (
   userId: number,
   mediaId: number,
   type: MediaType,
+  token: string,
 ) => {
   const requestBody = {
     userId: userId,
@@ -82,6 +89,7 @@ export const setDoing = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(requestBody),
     });
@@ -93,11 +101,15 @@ export const setDoing = async (
     throw new Error("Failed to set wishlist");
   }
 };
-export const cancelDoing = async (id: number) => {
+export const cancelDoing = async (id: number, token: string) => {
   let response = new Response();
   try {
     response = await fetch(`${apiUrl}/media-statuses/${id}`, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
   } catch (error) {
     console.error("Failed to set wishlist:", error);
@@ -112,6 +124,7 @@ export const submitRating = async (
   score: number,
   mediaId: number,
   type: MediaType,
+  token: string,
 ): Promise<void> => {
   const requestBody = {
     userId: userId,
@@ -126,6 +139,7 @@ export const submitRating = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(requestBody),
     });
@@ -138,11 +152,15 @@ export const submitRating = async (
     throw new Error("Failed to submit Rating");
   }
 };
-export const deleteRating = async (id: number) => {
+export const deleteRating = async (id: number, token: string) => {
   let response = new Response();
   try {
     response = await fetch(`${apiUrl}/media-statuses/${id}`, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
   } catch (error) {
     console.error("Failed to set wishlist:", error);

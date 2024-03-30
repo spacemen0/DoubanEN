@@ -17,7 +17,7 @@ export function NewReviewBox({
 }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const { user, setMessage } = useAuthContext();
+  const { user, setMessage, token } = useAuthContext();
   const reviewBox = useRef(null);
 
   const handleReset = () => {
@@ -40,7 +40,7 @@ export function NewReviewBox({
       content: content,
     };
     try {
-      await postReview(review, media.type);
+      await postReview(review, media.type, token!);
       await onSuccessAndRender();
       setShowReviewBox(false);
     } catch (error) {

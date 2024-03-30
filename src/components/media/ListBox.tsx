@@ -18,7 +18,7 @@ export const ListBox = ({
   const [lists, setLists] = useState<ListInfo[]>([]);
   const [selectedList, setSelectedList] = useState<number>(-1);
   const [showNewListBox, setShowNewListBox] = useState<boolean>(false);
-  const { user, setMessage } = useAuthContext();
+  const { user, setMessage, token } = useAuthContext();
   const listBox = useRef(null);
   useEffect(() => {
     const fetchLists = async () => {
@@ -32,8 +32,13 @@ export const ListBox = ({
   }, [setMessage, user]);
   return (
     <div className="fixed top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
-      {/*<NewListBox setShowNewListBox={setShowNewListBox}/>*/}
-      {showNewListBox && <NewListBox setShowNewListBox={setShowNewListBox} />}
+      {showNewListBox && (
+        <NewListBox
+          setShowNewListBox={setShowNewListBox}
+          setSelectedList={setSelectedList}
+          setLists={setLists}
+        />
+      )}
       <Draggable cancel=".need-interaction" nodeRef={listBox}>
         <div
           id="message"
@@ -57,7 +62,7 @@ export const ListBox = ({
                   setSelectedList(parseInt(event.target.value));
                 }}
                 value={selectedList}
-                className="w-full border-b-2 border-gray-400 py-1 text-center align-middle font-semibold need-interaction focus:outline-0"
+                className="w-full border-b-2 border-gray-400 py-1 text-center text-xl align-middle font-semibold need-interaction focus:outline-0"
               >
                 {lists.map((list) => (
                   <option value={list.id} key={list.id}>
@@ -109,7 +114,9 @@ export const ListBox = ({
               onClick={async () => {
                 if (selectedList > -1)
                   try {
-                    await addMediaToList(selectedList, media.id);
+                    await addMediaToList(selectedList, media.id, token!);
+                    setShowListBox(false);
+                    setMessage("Add to list successfully");
                   } catch (e) {
                     const error = e as Error;
                     setMessage(error.message);

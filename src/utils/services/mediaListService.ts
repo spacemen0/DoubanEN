@@ -77,7 +77,8 @@ export const createList = async (
   userId: number,
   title: string,
   description: string,
-) => {
+  token: string,
+): Promise<ListInfo> => {
   const requestBody = {
     user: {
       id: userId,
@@ -91,6 +92,7 @@ export const createList = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(requestBody),
     });
@@ -101,15 +103,23 @@ export const createList = async (
   if (!response.ok) {
     throw new Error("Failed to create new list");
   }
+  return await response.json();
 };
 
-export const addMediaToList = async (listId: number, mediaId: number) => {
+export const addMediaToList = async (
+  listId: number,
+  mediaId: number,
+  token: string,
+) => {
   let response = new Response();
   try {
     response = await fetch(
       `${apiUrl}/media-lists/${listId}/add-media?mediaId=${mediaId}`,
       {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
     );
   } catch (error) {

@@ -32,7 +32,7 @@ export function MediaOperationSection({
     status: "None",
     score: 0,
   });
-  const { isLoggedIn, user, setMessage } = useAuthContext();
+  const { isLoggedIn, user, setMessage, token } = useAuthContext();
 
   useEffect(() => {
     const stars = Math.floor(mediaStatus.score);
@@ -198,14 +198,20 @@ export function MediaOperationSection({
               if (user) {
                 try {
                   if (mediaStatus.status === "Rated") {
-                    await deleteRating(mediaStatus.id!);
+                    await deleteRating(mediaStatus.id!, token!);
                     setMessage("Rating deleted");
                     await handleSuccess();
                   } else {
                     if (mediaStatus.score !== 0) {
                       const score = mediaStatus.score as Score;
                       // const newDate = new Date(Date.now());
-                      await submitRating(user.id, score, media.id, media.type);
+                      await submitRating(
+                        user.id,
+                        score,
+                        media.id,
+                        media.type,
+                        token!,
+                      );
 
                       // setMediaStatus({
                       //   ...mediaStatus,
@@ -225,18 +231,26 @@ export function MediaOperationSection({
               }
             }}
             className={`mt-4 lg:ml-2 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
-         focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors ${mediaStatus.status === "Rated" ? "bg-Neutral-Strong" : "bg-Neutral-Mild"}`}
+         focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors disabled:cursor-not-allowed
+         ${mediaStatus.status === "Rated" ? "bg-Neutral-Strong" : "bg-Neutral-Mild"}`}
+            disabled={
+              mediaStatus.status !== "Rated" && mediaStatus.status !== "None"
+            }
           >
             {mediaStatus.status === "Rated" ? "Delete" : "Submit"} Rating
           </button>
           <button
             className={`md:mt-4 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
-         focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors ${mediaStatus.status === "Doing" ? "bg-Neutral-Strong" : "bg-Neutral-Mild"}`}
+         focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors disabled:cursor-not-allowed
+         ${mediaStatus.status === "Doing" ? "bg-Neutral-Strong" : "bg-Neutral-Mild"}`}
+            disabled={
+              mediaStatus.status !== "Doing" && mediaStatus.status !== "None"
+            }
             onClick={async () => {
               if (user) {
                 try {
                   if (mediaStatus.status === "Doing") {
-                    await cancelDoing(mediaStatus.id!);
+                    await cancelDoing(mediaStatus.id!, token!);
                     setMessage(
                       `${
                         media.type === "Music"
@@ -253,7 +267,7 @@ export function MediaOperationSection({
                     //   status: "None",
                     // });
                   } else {
-                    await setDoing(user.id, media.id, media.type);
+                    await setDoing(user.id, media.id, media.type, token!);
                     setMessage(
                       `Set ${
                         media.type === "Music"
@@ -289,7 +303,7 @@ export function MediaOperationSection({
           >
             {mediaStatus.status === "Doing" ? "Cancel " : "Set "}
             {media.type === "Music"
-              ? "Listing"
+              ? "Listening"
               : media.type === "Movie"
                 ? "Watching"
                 : "Reading"}
@@ -297,12 +311,16 @@ export function MediaOperationSection({
 
           <button
             className={`  lg:mt-4 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
-                            focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors ${mediaStatus.status === "Wishlist" ? "bg-Neutral-Strong" : "bg-Neutral-Mild"}`}
+                            focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors disabled:cursor-not-allowed
+                             ${mediaStatus.status === "Wishlist" ? "bg-Neutral-Strong" : "bg-Neutral-Mild"}`}
+            disabled={
+              mediaStatus.status !== "Wishlist" && mediaStatus.status !== "None"
+            }
             onClick={async () => {
               if (user) {
                 try {
                   if (mediaStatus.status === "Wishlist") {
-                    await cancelWishlist(mediaStatus.id!);
+                    await cancelWishlist(mediaStatus.id!, token!);
                     setMessage("Removed from wishlist");
                     await handleSuccess();
                     // setMediaStatus({
@@ -311,7 +329,7 @@ export function MediaOperationSection({
                     //   status: "None",
                     // });
                   } else {
-                    await setWishlist(user.id, media.id, media.type);
+                    await setWishlist(user.id, media.id, media.type, token!);
                     setMessage("Added to wishlist");
                     // setMediaStatus({
                     //   ...mediaStatus,
@@ -333,12 +351,21 @@ export function MediaOperationSection({
           </button>
           <button
             className={`  lg:mt-4 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
-                            focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors ${mediaStatus.status === "Reviewed" ? "bg-Neutral-Strong" : "bg-Neutral-Mild"}`}
+                            focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors disabled:cursor-not-allowed
+                             ${mediaStatus.status === "Reviewed" ? "bg-Neutral-Strong" : "bg-Neutral-Mild"}`}
+            disabled={
+              mediaStatus.status !== "Reviewed" && mediaStatus.status !== "None"
+            }
             onClick={async () => {
               if (user) {
                 try {
                   if (mediaStatus.status === "Reviewed") {
-                    await deleteReview(user.id, media.id, mediaStatus.id!);
+                    await deleteReview(
+                      user.id,
+                      media.id,
+                      mediaStatus.id!,
+                      token!,
+                    );
                     setMessage("Review deleted");
                     await handleOnSuccessAndRender();
                     // setMediaStatus({

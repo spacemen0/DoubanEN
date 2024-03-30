@@ -49,7 +49,11 @@ export const getMediaReviews = async (
     return review;
   });
 };
-export const postReview = async (review: Review, type: MediaType) => {
+export const postReview = async (
+  review: Review,
+  type: MediaType,
+  token: string,
+) => {
   let response = new Response();
   const ReviewRequestBody = {
     ...review,
@@ -62,6 +66,7 @@ export const postReview = async (review: Review, type: MediaType) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(ReviewRequestBody),
     });
@@ -85,6 +90,7 @@ export const postReview = async (review: Review, type: MediaType) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(statusRequestBody),
     });
@@ -100,11 +106,16 @@ export const deleteReview = async (
   userId: number,
   mediaId: number,
   statusId: number,
+  token: string,
 ) => {
   let response = new Response();
   try {
     response = await fetch(`${apiUrl}/media-statuses/${statusId}`, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
   } catch (error) {
     console.error("Failed to cancel reviewed status:", error);
@@ -118,6 +129,10 @@ export const deleteReview = async (
       `${apiUrl}/reviews?userId=${userId}&mediaId=${mediaId}`,
       {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       },
     );
   } catch (error) {
