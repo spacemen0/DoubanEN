@@ -15,13 +15,12 @@ This project serves as an exercise for full-stack development as well as an expl
 **Back-end:**
 
 - **Spring Boot**
-- **PostgresSQL**
+- **PostgreSQL**
 
 **To-do**
-- view own list
+- view own lists
 - change bio, image, etc
-- fix warnings
-- fix text prompts
+- more info gave to user about errors
 
 
 <br>
@@ -30,18 +29,19 @@ This project serves as an exercise for full-stack development as well as an expl
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-TypeScript                      57            195             38           4135
-XML                              7              0              0            484
-JavaScript                      30              3             99            154
-JSON                             4              2              0             78
+TypeScript                      56            192             41           4018
+XML                              7              0              0            564
+JavaScript                      30              0             99            151
+JSON                             4              2              0             76
 YAML                             1              3              3             40
-Markdown                         1             13              0             33
+Markdown                         1             14              0             33
 HTML                             2              6              0             28
 INI                              1              1              0              7
 CSS                              2              0              0              4
 -------------------------------------------------------------------------------
-SUM:                           105            223            140           4963
+SUM:                           104            218            143           4921
 -------------------------------------------------------------------------------
+
 
 
 ```

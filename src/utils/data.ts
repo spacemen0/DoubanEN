@@ -60,4 +60,5 @@ export const infoPara2: string = `Douban EN is a website built with React, TypeS
   Douban EN is a website built with React, TypeScript and Tailwind CSS. 
   The primary features of the site is to mark, track and organize your favorite Musics, Movies, and Books.`;
 
-export const statusInfo: string[] = ["11", "11", "6", "9", "4", "0"];
+//music movie book rating review list
+export const statusInfo: string[] = ["11", "11", "6", "39", "6", "3"];
