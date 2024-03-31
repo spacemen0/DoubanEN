@@ -1,6 +1,6 @@
 import { useAuthContext } from "../../../contexts/AuthContext";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { MenuItem } from "./MenuItem.tsx";
 import { MyImage } from "../MyImage.tsx";
@@ -57,9 +57,13 @@ function DropDownMenu({
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const { isLoggedIn, logout, token, user, setMessage } = useAuthContext();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
-    if (token) await logout(token);
+    if (token) {
+      await logout(token);
+      navigate("/");
+    }
   };
   return (
     isOpen && (
@@ -102,7 +106,6 @@ function DropDownMenu({
               text="Movie Collection"
             />
             <MenuItem
-              link="/"
               text="Log Out"
               onClick={async () => {
                 try {
