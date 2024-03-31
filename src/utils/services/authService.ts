@@ -22,8 +22,7 @@ export const register = async (
       body: JSON.stringify(requestBody),
     });
   } catch (error) {
-    console.error("Register error:", error);
-    throw error;
+    throw new Error("Register error");
   }
   const data = await response.json();
   if (data["message"] === "User already exist") throw new Error("Conflict");
@@ -49,12 +48,11 @@ export const login = async (
       body: JSON.stringify(requestBody),
     });
   } catch (error) {
-    console.error("Login error:", error);
-    throw new Error("Failed to log in. Please try again later.");
+    throw new Error("Login error");
   }
   if (response.status === 401) throw new Error("Unauthorized");
   if (!response.ok) {
-    throw new Error("Failed to log in");
+    throw new Error("Response error");
   }
 
   return await response.json();
@@ -69,26 +67,24 @@ export const logout = async (token: string): Promise<void> => {
       },
     });
   } catch (error) {
-    console.error("Logout error:", error);
-    throw new Error("Failed to log out. Please try again later.");
+    throw new Error("Logout error");
   }
   if (!response.ok) {
-    throw new Error("Failed to log out");
+    throw new Error("Response error");
   }
 };
-export const getUser = async (id: number): Promise<User> => {
+export const fetchUser = async (id: number): Promise<User> => {
   let response = new Response();
   try {
     response = await fetch(`${apiUrl}/users/${id}`, {
       method: "GET",
     });
   } catch (error) {
-    console.error("Error fetching user data:", error);
-    throw new Error("Failed to fetch user data. Please try again later.");
+    throw new Error("Fetch user error");
   }
   if (response.status === 404) throw new Error("Not Exist");
   if (!response.ok) {
-    throw new Error("Failed to fetch user data");
+    throw new Error("Response error");
   }
   const data = (await response.json()) as User;
   if (!data.profileImage) data.profileImage = generateRandomData().src;

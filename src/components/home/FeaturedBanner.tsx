@@ -5,7 +5,7 @@ import { bannerImage } from "../../utils/data";
 export function FeaturedBanner() {
   return (
     <Link to={`/list/${bannerImage.listId}`}>
-      <div className="mt-6 mb-6 flex items-center justify-start transition-colors hover:bg-gray-100 lg:hidden">
+      <div className="mt-6 mb-6 ml-2 flex items-center justify-start transition-colors hover:bg-gray-100 lg:hidden">
         <div className="w-32">
           <MyImage {...bannerImage.imageProps} />
         </div>

@@ -12,7 +12,7 @@ export default function HeaderUserSection() {
   return (
     <div className="flex flex-shrink-0 items-center md:gap-1.5">
       {isLoggedIn && (
-        <div className="transition-colors hover:bg-gray-100 h-10">
+        <div className="transition-colors hover:bg-gray-100 h-10 w-10">
           <Link
             className="transition-colors hover:bg-gray-100"
             to={`/profile/${user!.id}`}
@@ -56,7 +56,7 @@ function DropDownMenu({
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { isLoggedIn, logout, token, user } = useAuthContext();
+  const { isLoggedIn, logout, token, user, setMessage } = useAuthContext();
 
   const handleLogout = async () => {
     if (token) await logout(token);
@@ -105,8 +105,15 @@ function DropDownMenu({
               link="/"
               text="Log Out"
               onClick={async () => {
-                setIsOpen(false);
-                await handleLogout();
+                try {
+                  setIsOpen(false);
+                  await handleLogout();
+                } catch (e) {
+                  const error = e as Error;
+                  if (error.message === "Logout error")
+                    setMessage("Logout request error");
+                  else setMessage("Error processing logout request");
+                }
               }}
               isLast={true}
             />

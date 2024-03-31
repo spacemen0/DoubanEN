@@ -88,7 +88,7 @@ export function ListItem({ media }: { media: Media }) {
                   : "text-Book")
             }
           >
-            {media.average}
+            {media.average.toFixed(2)}
           </p>
           <p
             className={

@@ -31,6 +31,7 @@ export function Featured() {
           ]);
         }
       } catch (error) {
+        console.log(error);
         setMessage("Error fetching featured items");
       }
     };

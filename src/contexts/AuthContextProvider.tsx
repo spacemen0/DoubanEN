@@ -3,7 +3,7 @@ import { expiryTime } from "../utils/config.ts";
 import { AuthContext, AuthContextType } from "./AuthContext";
 import { User } from "../utils/type.ts";
 import {
-  getUser,
+  fetchUser,
   login,
   logout,
   register,
@@ -59,15 +59,9 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
 
   const handleLogin = useCallback(
     async (username: string, password: string) => {
-      let response;
-      try {
-        response = await login(username, password);
-      } catch (error) {
-        console.log(error);
-        throw error;
-      }
+      const response = await login(username, password);
       if (response.userId) {
-        const currentUser = await getUser(response.userId);
+        const currentUser = await fetchUser(response.userId);
         setIsLoggedIn(true);
         setToken(response.token);
         setUser(currentUser);
@@ -79,29 +73,19 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
   );
 
   const handleLogout = useCallback(async (token: string) => {
-    try {
-      await logout(token);
-      setIsLoggedIn(false);
-      setUser(null);
-      setToken(null);
-      setMessage(null);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
+    await logout(token);
+    setIsLoggedIn(false);
+    setUser(null);
+    setToken(null);
+    setMessage(null);
   }, []);
 
   const handleRegister = useCallback(
     async (username: string, email: string, password: string) => {
-      let response;
-      try {
-        response = await register(username, email, password);
-      } catch (error) {
-        console.log(error);
-        throw error;
-      }
+      const response = await register(username, email, password);
+
       if (response.userId) {
-        const newUser = await getUser(response.userId);
+        const newUser = await fetchUser(response.userId);
         setIsLoggedIn(true);
         setToken(response.token);
         setUser(newUser);
@@ -157,7 +141,7 @@ const MessageBox = ({
       {message && (
         <div
           className="z-50 fixed top-1/4 left-1/2 transform -translate-x-1/2
-          px-4 py-4 rounded-md bg-Neutral border text-white transition-opacity duration-1000 opacity-100"
+          px-4 py-4 rounded-md bg-Neutral-Mild border text-white transition-opacity duration-1000 opacity-100"
           onMouseEnter={(e) => {
             onHover(e);
           }}

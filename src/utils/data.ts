@@ -40,12 +40,15 @@ export const sideImages: { listId: number; ImageProps: ImageProps }[] =
     };
   });
 
-export const homePageReviewIds: number[] = [1, 2, 3, 4];
+export const homePageReviewIds: number[] = [2, 4, 3, 252, 402];
 
-export const homePageEditorMediaIds: number[] = [758, 757, 761, 702, 754];
+export const homePageEditorMediaIds: number[] = [
+  758, 809, 761, 702, 754, 805, 804, 813, 814,
+];
 
-export const bannerText: string = `Douban EN is a website built with React, TypeScript and Tailwind CSS. 
-The primary features of the site is to mark, track and organize your favorite Musics, Movies, and Books. `;
+export const bannerText: string = `Douban EN is a website crafted with React, TypeScript, and Tailwind CSS for the front-end, 
+and Spring Boot and PostgreSQL for the back-end. 
+Its core functionality revolves around marking, tracking, and organizing your beloved music, movies, and books.`;
 
 export const infoPara1: string = `Douban EN is a website built with React, TypeScript and Tailwind CSS. 
   The primary features of the site is to mark, track and organize your favorite Musics, Movies, and Books.

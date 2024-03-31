@@ -3,7 +3,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import { MyImage } from "../common/MyImage";
 import { User } from "../../utils/type";
 
-import { getUser } from "../../utils/services/authService";
+import { fetchUser } from "../../utils/services/authService";
 import { Link } from "react-router-dom";
 
 export function UserInfo({
@@ -18,9 +18,9 @@ export function UserInfo({
   const { setMessage } = useAuthContext();
 
   useEffect(() => {
-    const fetchUser = async (id: number) => {
+    const fetchUserData = async (id: number) => {
       try {
-        const userData = await getUser(id);
+        const userData = await fetchUser(id);
         setUser(userData);
       } catch (e) {
         const error = e as Error;
@@ -28,7 +28,7 @@ export function UserInfo({
         else setMessage("Error fetching user info");
       }
     };
-    fetchUser(id).then();
+    fetchUserData(id).then();
   }, [id, setExist, setMessage]);
   const toggleBioVisibility = () => {
     setShowFullBio(!showFullBio);
