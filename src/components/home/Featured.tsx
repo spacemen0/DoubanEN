@@ -4,23 +4,32 @@ import { SideInfo } from "./SideInfo";
 import { FeaturedBanner } from "./FeaturedBanner";
 import { homePageReviewIds } from "../../utils/data";
 import { FeaturedItem } from "./FeaturedItem";
-import { fetchFeaturedItems } from "../../utils/services/homePageService.ts";
 import { useEffect, useState } from "react";
 import { Media, Review } from "../../utils/type.ts";
 import { useAuthContext } from "../../contexts/AuthContext.ts";
+import { getMedia } from "../../utils/services/mediaService.ts";
+import { fetchSingleReview } from "../../utils/services/reviewService.ts";
 
 export function Featured() {
-  const [featuredItems, setFeaturedItems] = useState<{
-    medias: Media[];
-    reviews: Review[];
-  }>({ medias: [], reviews: [] });
+  const [featuredItems, setFeaturedItems] = useState<
+    {
+      media: Media;
+      review: Review;
+    }[]
+  >([]);
   const { setMessage } = useAuthContext();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchFeaturedItems(homePageReviewIds);
-        setFeaturedItems(data);
+        for (const id of homePageReviewIds) {
+          const review = await fetchSingleReview(id);
+          const media = await getMedia(review.mediaId);
+          setFeaturedItems((prevState) => [
+            ...prevState,
+            { media: media, review: review },
+          ]);
+        }
       } catch (error) {
         setMessage("Error fetching featured items");
       }
@@ -34,9 +43,9 @@ export function Featured() {
       <div className="mr-4 flex flex-1 flex-col lg:flex-[0.65]">
         <FeaturedBanner />
 
-        {featuredItems.medias.map((media, index) => (
+        {featuredItems.map((item, index) => (
           <div key={index} className="mt-4 flex h-auto w-full justify-start">
-            <FeaturedItem media={media} review={featuredItems.reviews[index]} />
+            <FeaturedItem media={item.media} review={item.review} />
           </div>
         ))}
 

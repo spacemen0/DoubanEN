@@ -3,8 +3,8 @@ import { Media } from "../../utils/type";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { ListItem } from "../common/ListItem";
 import { getUserMediasByTypeWithPagination } from "../../utils/services/userMediasService";
-import { fetchEditorMedias } from "../../utils/services/homePageService.ts";
 import { homePageEditorMediaIds } from "../../utils/data.ts";
+import { getMedia } from "../../utils/services/mediaService.ts";
 
 export function SideList() {
   const [selectedOption, setSelectedOption] = useState<"Editor" | "My">(
@@ -33,8 +33,10 @@ export function SideList() {
           );
           setItems(itemsRated.concat(itemsReviewed));
         } else if (selectedOption === "Editor" && items.length === 0) {
-          const editorItems = await fetchEditorMedias(homePageEditorMediaIds);
-          setItems(editorItems);
+          for (const homePageEditorMediaId of homePageEditorMediaIds) {
+            const editorItem = await getMedia(homePageEditorMediaId);
+            setItems((prevState) => [...prevState, editorItem]);
+          }
         }
       } catch (error) {
         setMessage("Error fetching items");

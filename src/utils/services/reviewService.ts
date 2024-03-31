@@ -143,3 +143,27 @@ export const deleteReview = async (
     throw new Error("Failed to delete reviewed status");
   }
 };
+export const fetchSingleReview = async (id: number): Promise<Review> => {
+  let response = new Response();
+  try {
+    response = await fetch(`${apiUrl}/reviews/${id}`, {
+      method: "GET",
+    });
+  } catch (error) {
+    console.error("Error fetching Review:", error);
+    throw new Error("Failed to fetch Review. Please try again later.");
+  }
+  if (!response.ok) {
+    throw new Error("Failed to fetch Media Reviews");
+  }
+  const data = await response.json();
+  const review = data as Review & {
+    user: {
+      username: string;
+      id: number;
+    };
+  };
+  review.username = review.user.username;
+  review.userId = review.user.id;
+  return review;
+};
