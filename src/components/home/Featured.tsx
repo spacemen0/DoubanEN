@@ -31,8 +31,10 @@ export function Featured() {
           ]);
         }
       } catch (error) {
-        console.log(error);
-        setMessage("Error fetching featured items");
+        const e = error as Error;
+        if (e.message === "Response error")
+          setMessage("Error processing request");
+        else setMessage("Error fetch media");
       }
     };
 

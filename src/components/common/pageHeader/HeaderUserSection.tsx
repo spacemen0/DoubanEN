@@ -78,6 +78,13 @@ function DropDownMenu({
               text="Profile"
             />
             <MenuItem
+              link={`/lists/${user!.id}`}
+              onClick={() => {
+                setIsOpen(false);
+              }}
+              text="My Lists"
+            />
+            <MenuItem
               link="/collection/all"
               onClick={() => {
                 setIsOpen(false);

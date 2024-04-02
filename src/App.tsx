@@ -12,6 +12,7 @@ const Media = lazy(() => import("./pages/Media"));
 const Medias = lazy(() => import("./pages/Medias"));
 const Author = lazy(() => import("./pages/Author"));
 const Collection = lazy(() => import("./pages/Collection.tsx"));
+const Lists = lazy(() => import("./pages/Lists.tsx"));
 export default function App() {
   return (
     <Suspense fallback={<Loading />}>
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/medias/:type" element={<Medias />} />
         <Route path="/collection/:type" element={<Collection />} />
         <Route path="/author/:id" element={<Author />} />
+        <Route path="/lists/:userId" element={<Lists />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </Suspense>

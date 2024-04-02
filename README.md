@@ -1,6 +1,8 @@
 # Douban EN
 
-This project serves as an exercise for full-stack development as well as an exploration of my personal interest. The style of the site mainly follows [RYM](https://rateyourmusic.com), while the functionality reference [Douban](https://www.douban.com) at the same time.
+This project serves as an exercise for full-stack development as well as an exploration of my personal interest. The
+style of the site mainly follows [RYM](https://rateyourmusic.com), while the functionality
+reference [Douban](https://www.douban.com) at the same time.
 
 ## Tech Stack
 
@@ -18,10 +20,9 @@ This project serves as an exercise for full-stack development as well as an expl
 - **PostgreSQL**
 
 **To-do**
+
 - view own lists
 - change bio, image, etc
-- more info gave to user about errors
-
 
 <br>
 

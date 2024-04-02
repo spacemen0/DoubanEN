@@ -25,7 +25,9 @@ export default function MediaPage() {
     } catch (e) {
       const error = e as Error;
       if (error.message === "Not Exist") setExist(false);
-      else setMessage("Error fetching media information");
+      else if (error.message === "Response error")
+        setMessage("Error processing request");
+      else setMessage("Error fetching media");
     }
   }, [id, setMessage]);
 

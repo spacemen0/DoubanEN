@@ -19,7 +19,7 @@ export const getMediaStatus = async (
   }
   if (response.status == 404) return { score: 0, status: "None" };
   if (!response.ok) {
-    throw new Error("Failed to fetch Medias");
+    throw new Error("Response error");
   }
   return await response.json();
 };
@@ -50,7 +50,7 @@ export const setWishlist = async (
     throw error;
   }
   if (!response.ok) {
-    throw new Error("Failed to set wishlist");
+    throw new Error("Response error");
   }
 };
 export const cancelWishlist = async (id: number, token: string) => {
@@ -68,7 +68,7 @@ export const cancelWishlist = async (id: number, token: string) => {
     throw error;
   }
   if (!response.ok) {
-    throw new Error("Failed to set wishlist");
+    throw new Error("Response error");
   }
 };
 export const setDoing = async (
@@ -98,7 +98,7 @@ export const setDoing = async (
     throw error;
   }
   if (!response.ok) {
-    throw new Error("Failed to set wishlist");
+    throw new Error("Response error");
   }
 };
 export const cancelDoing = async (id: number, token: string) => {
@@ -116,7 +116,7 @@ export const cancelDoing = async (id: number, token: string) => {
     throw error;
   }
   if (!response.ok) {
-    throw new Error("Failed to set wishlist");
+    throw new Error("Response error");
   }
 };
 export const submitRating = async (
@@ -149,7 +149,7 @@ export const submitRating = async (
   }
   await response.json();
   if (!response.ok) {
-    throw new Error("Failed to submit Rating");
+    throw new Error("Response error");
   }
 };
 export const deleteRating = async (id: number, token: string) => {
@@ -167,6 +167,6 @@ export const deleteRating = async (id: number, token: string) => {
     throw error;
   }
   if (!response.ok) {
-    throw new Error("Failed to set wishlist");
+    throw new Error("Response error");
   }
 };

@@ -8,12 +8,11 @@ export const getMedia = async (id: number): Promise<Media> => {
       method: "GET",
     });
   } catch (error) {
-    console.error("Error fetching Media:", error);
-    throw new Error("Failed to fetch Media. Please try again later.");
+    throw new Error("Fetch media error");
   }
   if (response.status === 404) throw new Error("Not Exist");
   if (!response.ok) {
-    throw new Error("Failed to fetch Media");
+    throw new Error("Response error");
   }
   const data = await response.json();
   if (data.type === "Music") data.tracks = data.additional.split("\n");
@@ -46,11 +45,10 @@ export const getAllMediasByType = async (
       },
     );
   } catch (error) {
-    console.error("Error fetching Medias:", error);
-    throw new Error("Failed to fetch Medias. Please try again later.");
+    throw new Error("Fetch Medias error");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Medias");
+    throw new Error("Response error");
   }
   const res = await response.json();
   return res["content"];
@@ -64,8 +62,7 @@ export const getAllMediasCountByType = async (
       method: "GET",
     });
   } catch (error) {
-    console.error("Error fetching Medias Count:", error);
-    throw new Error("Failed to fetch Medias Count. Please try again later.");
+    throw new Error("Fetch Medias Count error");
   }
 
   return await response.json();

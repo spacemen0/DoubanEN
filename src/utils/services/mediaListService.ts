@@ -8,11 +8,10 @@ export const getListItemsCount = async (id: number): Promise<number> => {
       method: "GET",
     });
   } catch (error) {
-    console.error("Error fetching Reviews Count:", error);
-    throw new Error("Failed to fetch Reviews Count. Please try again later.");
+    throw new Error("Fetch reviews count error");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Reviews Count");
+    throw new Error("Response error");
   }
   return await response.json();
 };
@@ -26,13 +25,13 @@ export const getAllListItems = async (
       method: "GET",
     });
   } catch (error) {
-    console.error("Error fetching Reviews Count:", error);
+    console.error("Error fetching Reviews Count");
     throw new Error("Failed to fetch Reviews Count. Please try again later.");
   }
   if (response.status === 404) throw new Error("Not Exist");
 
   if (!response.ok) {
-    throw new Error("Failed to fetch Reviews Count");
+    throw new Error("Response error");
   }
   return await response.json();
 };
@@ -43,12 +42,11 @@ export const getListInfo = async (id: number): Promise<ListInfo> => {
       method: "GET",
     });
   } catch (error) {
-    console.error("Error fetching Reviews Count:", error);
-    throw new Error("Failed to fetch Reviews Count. Please try again later.");
+    throw new Error("Get list info error");
   }
   if (response.status === 404) throw new Error("Not Exist");
   if (!response.ok) {
-    throw new Error("Failed to fetch Reviews Count");
+    throw new Error("Response error");
   }
   const data = await response.json();
   data.username = data["user"]["username"];
@@ -63,12 +61,11 @@ export const getUserLists = async (userId: number): Promise<ListInfo[]> => {
       method: "GET",
     });
   } catch (error) {
-    console.error("Error fetching Reviews Count:", error);
-    throw new Error("Failed to fetch Reviews Count. Please try again later.");
+    throw new Error("Get user lists error");
   }
   if (response.status === 404) return [];
   if (!response.ok) {
-    throw new Error("Failed to fetch Reviews Count");
+    throw new Error("Response error");
   }
   return (await response.json()) as ListInfo[];
 };
@@ -97,11 +94,11 @@ export const createList = async (
       body: JSON.stringify(requestBody),
     });
   } catch (error) {
-    console.error("Failed to create new list:", error);
+    console.error("create new list error", error);
     throw error;
   }
   if (!response.ok) {
-    throw new Error("Failed to create new list");
+    throw new Error("Response error");
   }
   return await response.json();
 };
@@ -123,10 +120,10 @@ export const addMediaToList = async (
       },
     );
   } catch (error) {
-    console.error("Failed to create new list:", error);
+    console.error("Add media to list error");
     throw error;
   }
   if (!response.ok) {
-    throw new Error("Failed to create new list");
+    throw new Error("Response error");
   }
 };

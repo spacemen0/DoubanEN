@@ -28,7 +28,10 @@ export default function List() {
         const fetchedCount = await getListItemsCount(id);
         setCount(fetchedCount);
       } catch (error) {
-        setMessage("Error fetching list items count");
+        const e = error as Error;
+        if (e.message === "Response error")
+          setMessage("Error fetching list items count");
+        else setMessage("Error processing request");
       }
     };
     fetchListCount(parseInt(id!)).then();
@@ -41,7 +44,9 @@ export default function List() {
       } catch (e) {
         const error = e as Error;
         if (error.message === "Not Exist") setExist(false);
-        else setMessage("Error fetching list items");
+        else if (error.message === "Response error")
+          setMessage("Error fetching list items");
+        else setMessage("Error processing request");
       }
     };
     fetchAllListItems().then();
@@ -54,7 +59,9 @@ export default function List() {
       } catch (e) {
         const error = e as Error;
         if (error.message === "Not Exist") setExist(false);
-        else setMessage("Error fetching list info");
+        else if (error.message === "Response error")
+          setMessage("Error fetching list info");
+        else setMessage("Error processing request");
       }
     };
     fetchListInfo().then();
