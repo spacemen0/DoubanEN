@@ -14,7 +14,7 @@ export function ListItem({ media }: { media: Media }) {
         <Link
           to={`/media/${media.id}`}
           className={
-            " text-xl font-bold " +
+            "text-xl font-bold mr-12 w-fit " +
             (media.type === "Music"
               ? "text-Music"
               : media.type === "Movie"
@@ -27,7 +27,7 @@ export function ListItem({ media }: { media: Media }) {
         <Link
           to={`/media/${media.id}`}
           className={
-            "text-xl " +
+            "text-xl mr-12 w-fit " +
             (media.type === "Music"
               ? "text-Music"
               : media.type === "Movie"

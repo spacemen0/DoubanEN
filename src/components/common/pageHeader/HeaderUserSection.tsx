@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { MenuItem } from "./MenuItem.tsx";
 import { MyImage } from "../MyImage.tsx";
-import { generateRandomData } from "../../../utils/data.ts";
+import { generateRandomImage } from "../../../utils/data.ts";
 
 export default function HeaderUserSection() {
   const { isLoggedIn, user } = useAuthContext();
@@ -17,7 +17,7 @@ export default function HeaderUserSection() {
             className="transition-colors hover:bg-gray-100"
             to={`/profile/${user!.id}`}
           >
-            <MyImage {...generateRandomData()} />
+            <MyImage {...generateRandomImage()} />
           </Link>
         </div>
       )}

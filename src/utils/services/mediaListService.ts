@@ -120,7 +120,49 @@ export const addMediaToList = async (
       },
     );
   } catch (error) {
-    console.error("Add media to list error");
+    throw new Error("Error add media to list");
+  }
+  if (response.status === 400) throw new Error("List or media not exist");
+  if (response.status === 409) throw new Error("Duplicated list item");
+  if (!response.ok) throw new Error("Response error");
+};
+
+export const removeMediaFromList = async (
+  listId: number,
+  mediaId: number,
+  token: string,
+) => {
+  let response = new Response();
+  try {
+    response = await fetch(
+      `${apiUrl}/media-lists/${listId}/delete-media?mediaId=${mediaId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+  } catch (error) {
+    console.error("Remove media to list error");
+    throw error;
+  }
+  if (!response.ok) {
+    throw new Error("Response error");
+  }
+};
+
+export const deleteList = async (listId: number, token: string) => {
+  let response = new Response();
+  try {
+    response = await fetch(`${apiUrl}/media-lists/${listId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.error("Delete list error");
     throw error;
   }
   if (!response.ok) {

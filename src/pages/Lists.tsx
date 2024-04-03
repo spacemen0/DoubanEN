@@ -5,15 +5,18 @@ import { useAuthContext } from "../contexts/AuthContext.ts";
 import Loading from "../components/common/Loading.tsx";
 import { NotFound } from "../components/common/NotFound.tsx";
 import {
+  deleteList,
   getAllListItems,
   getListItemsCount,
   getUserLists,
+  removeMediaFromList,
 } from "../utils/services/mediaListService.ts";
 import { ListInfo, Media } from "../utils/type.ts";
 import { PageHeader } from "../components/common/PageHeader.tsx";
 import { Pagination } from "../components/common/Pagination.tsx";
 import { ListItem } from "../components/common/ListItem.tsx";
 import { EmptyMedias } from "../components/common/EmptyMedias.tsx";
+import { X } from "lucide-react";
 
 export default function Lists() {
   const { userId } = useParams();
@@ -24,7 +27,7 @@ export default function Lists() {
   const [medias, setMedias] = useState<Media[]>([]);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const { setMessage, user } = useAuthContext();
+  const { setMessage, user, token } = useAuthContext();
   useEffect(() => {
     const fetchUsername = async () => {
       try {
@@ -58,7 +61,7 @@ export default function Lists() {
           else setMessage("Error fetching lists for this user");
         }
     };
-    fetchLists().then();
+    if (exist) fetchLists().then();
   }, [exist, setMessage, userId]);
   useEffect(() => {
     const fetchListCount = async (id: number) => {
@@ -90,6 +93,32 @@ export default function Lists() {
     };
     if (selectedList) fetchAllListItems(selectedList).then();
   }, [currentPage, selectedList, setMessage]);
+
+  async function handleDeleteList() {
+    try {
+      if (selectedList && token) await deleteList(selectedList, token);
+      setMedias([]);
+      setCount(0);
+      const newLists = lists.filter((list) => list.id !== selectedList);
+      setLists(newLists);
+      setSelectedList(newLists[0].id);
+    } catch (e) {
+      const error = e as Error;
+      setMessage(error.message);
+    }
+  }
+
+  const handleRemoveListItem = async (mediaId: number) => {
+    try {
+      if (selectedList && token)
+        await removeMediaFromList(selectedList, mediaId, token);
+      setMedias(medias.filter((media) => media.id !== mediaId));
+      setCount(count - 1);
+    } catch (e) {
+      const error = e as Error;
+      setMessage(error.message);
+    }
+  };
   if (exist === undefined) return <Loading />;
   if (exist && username)
     return (
@@ -127,15 +156,26 @@ export default function Lists() {
           </div>
           {selectedList ? (
             <div className="mx-2">
-              <p className="my-4 text-3xl font-bold text-Neutral">
-                {lists.filter((list) => list.id === selectedList)[0].title}
-              </p>
-              <p className="my-4 text-xl font-semibold">
-                {
-                  lists.filter((list) => list.id === selectedList)[0]
-                    .description
-                }
-              </p>
+              <div className="bg-gray-200 p-2 rounded-md md:mt-4 mt-2 w-fit">
+                <p className="my-2 text-3xl font-bold text-Neutral">
+                  {lists.filter((list) => list.id === selectedList)[0].title}
+                </p>
+                <p className="my-4 text-xl font-semibold">
+                  {
+                    lists.filter((list) => list.id === selectedList)[0]
+                      .description
+                  }
+                </p>
+                {user?.id === parseInt(userId!) && (
+                  <button
+                    className="rounded-md p-1.5 font-semibold text-white bg-Neutral-Mild hover:bg-Neutral mb-4 text-lg"
+                    onClick={handleDeleteList}
+                  >
+                    Delete this list
+                  </button>
+                )}
+              </div>
+
               <Pagination
                 title={`${count} List Items`}
                 count={count}
@@ -147,7 +187,30 @@ export default function Lists() {
               </div>
               {medias.length > 0 ? (
                 medias.map((media, index) => {
-                  return <ListItem media={media} key={index} />;
+                  return (
+                    <div className="relative" key={index}>
+                      <ListItem media={media} />
+                      {user?.id === parseInt(userId!) && (
+                        <button
+                          className="absolute right-2 top-0"
+                          onClick={async () => {
+                            await handleRemoveListItem(media.id);
+                          }}
+                        >
+                          <X
+                            color={
+                              media.type === "Music"
+                                ? "#0A8F08"
+                                : media.type === "Movie"
+                                  ? "#039BE5"
+                                  : "#B0120A"
+                            }
+                            size="28px"
+                          />
+                        </button>
+                      )}
+                    </div>
+                  );
                 })
               ) : (
                 <EmptyMedias />

@@ -9,7 +9,7 @@ function getRandomInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export const generateRandomData = () => ({
+export const generateRandomImage = () => ({
   src: images[getRandomInt(0, 10)],
   alt: "List Image",
 });
@@ -29,14 +29,14 @@ const images: string[] = [
 ];
 export const bannerImage: { listId: number; imageProps: ImageProps } = {
   listId: 0,
-  imageProps: generateRandomData(),
+  imageProps: generateRandomImage(),
 };
 
 export const sideImages: { listId: number; ImageProps: ImageProps }[] =
   Array.from({ length: 7 }, () => {
     return {
       listId: getRandomInt(0, 18),
-      ImageProps: generateRandomData(),
+      ImageProps: generateRandomImage(),
     };
   });
 

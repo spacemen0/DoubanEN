@@ -46,16 +46,13 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     getWithExpiry<string>("token"),
   );
 
-  const [message, setMessage] = useState<string | null>(() =>
-    getWithExpiry<string>("message"),
-  );
+  const [message, setMessage] = useState<string | null>("");
 
   useEffect(() => {
     isLoggedIn && setWithExpiry("isAuthenticated", isLoggedIn, expiryTime);
     user && setWithExpiry("user", user, expiryTime);
     token && setWithExpiry("token", token, expiryTime);
-    message && setWithExpiry("message", message, expiryTime);
-  }, [isLoggedIn, user, token, message]);
+  }, [isLoggedIn, user, token]);
 
   const handleLogin = useCallback(
     async (username: string, password: string) => {

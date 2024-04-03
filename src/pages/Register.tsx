@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { PageHeader } from "../components/common/PageHeader";
-import { generateRandomData } from "../utils/data";
+import { generateRandomImage } from "../utils/data";
 import { useAuthContext } from "../contexts/AuthContext";
 import React, { useEffect, useState } from "react";
 import { MyImage } from "../components/common/MyImage";
@@ -71,7 +71,7 @@ function RegisterForm(props: {
     <div className="flex flex-col">
       <div className="mx-auto mt-1 flex w-full justify-center lg:mt-10 lg:w-4/6">
         <div className="hidden flex-1 items-center justify-center bg-gray-100 px-6 py-2 lg:flex lg:py-6">
-          <MyImage {...generateRandomData()} />
+          <MyImage {...generateRandomImage()} />
         </div>
         <div className="flex w-full items-center justify-center bg-gray-100 lg:w-1/2">
           <div className="w-full max-w-md p-3 lg:p-6">
