@@ -96,7 +96,7 @@ export default function Lists() {
       <div className="flex max-h-screen flex-col overflow-hidden">
         <PageHeader />
         <div className="overflow-y-scroll text-Neutral">
-          <div className="flex justify-center mx-2 md:gap-4 items-center mt-4 md:mt-8 font-semibold lg:font-bold text-xl md:text-3xl">
+          <div className="mx-2 mt-4 flex items-center justify-center text-xl font-semibold md:mt-8 md:gap-4 md:text-3xl lg:font-bold">
             <h1>{username}'s Lists:</h1>
             {lists.length > 0 ? (
               <select
@@ -108,7 +108,7 @@ export default function Lists() {
                   setSelectedList(parseInt(event.target.value));
                 }}
                 value={selectedList}
-                className=" border-b-2 border-gray-400 py-1 mx-2 text-center align-middle  focus:outline-0"
+                className="mx-2 border-b-2 border-gray-400 py-1 text-center align-middle focus:outline-0"
               >
                 {lists.map((list) => (
                   <option value={list.id} key={list.id}>

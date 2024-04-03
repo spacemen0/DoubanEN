@@ -65,7 +65,7 @@ export const ListBox = ({
                   setSelectedList(parseInt(event.target.value));
                 }}
                 value={selectedList}
-                className="w-full border-b-2 border-gray-400 py-1 text-center text-xl align-middle font-semibold need-interaction focus:outline-0"
+                className="w-full border-b-2 border-gray-400 py-1 text-center align-middle text-xl font-semibold need-interaction focus:outline-0"
               >
                 {lists.map((list) => (
                   <option value={list.id} key={list.id}>

@@ -74,7 +74,7 @@ export default function List() {
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
 
-      <div className="overflow-y-scroll px-2 text-Neutral lg:px-4 mb-4 lg:mb-8">
+      <div className="mb-4 overflow-y-scroll px-2 text-Neutral lg:mb-8 lg:px-4">
         <p className="my-4 text-3xl font-bold text-Neutral">
           {listInfo?.title}
         </p>

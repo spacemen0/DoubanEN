@@ -12,7 +12,7 @@ export default function HeaderUserSection() {
   return (
     <div className="flex flex-shrink-0 items-center md:gap-1.5">
       {isLoggedIn && (
-        <div className="transition-colors hover:bg-gray-100 h-10 w-10">
+        <div className="h-10 w-10 transition-colors hover:bg-gray-100">
           <Link
             className="transition-colors hover:bg-gray-100"
             to={`/profile/${user!.id}`}
