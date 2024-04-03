@@ -25,7 +25,10 @@ export const ListBox = ({
       try {
         setLists(await getUserLists(user!.id));
       } catch (e) {
-        setMessage("Error fetching your lists");
+        const error = e as Error;
+        if (error.message === "Response Error")
+          setMessage("Error processing request");
+        else setMessage("Error fetching your lists");
       }
     };
     fetchLists().then();

@@ -13,11 +13,12 @@ import {
 } from "../utils/services/mediaListService";
 import { NotFound } from "../components/common/NotFound";
 import { EmptyMedias } from "../components/common/EmptyMedias";
+import Loading from "../components/common/Loading.tsx";
 
 export default function List() {
   const { id } = useParams();
   const [medias, setMedias] = useState<Media[]>([]);
-  const [exist, setExist] = useState(true);
+  const [exist, setExist] = useState<boolean>();
   const [listInfo, setListInfo] = useState<ListInfo>();
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,6 +42,7 @@ export default function List() {
     const fetchAllListItems = async () => {
       try {
         setMedias(await getAllListItems(parseInt(id!), currentPage));
+        setExist(true);
       } catch (e) {
         const error = e as Error;
         if (error.message === "Not Exist") setExist(false);
@@ -66,12 +68,13 @@ export default function List() {
     };
     fetchListInfo().then();
   }, [currentPage, id, setMessage]);
-  if (!exist) return <NotFound />;
+  if (exist === undefined) return <Loading />;
+  else if (!exist) return <NotFound />;
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
 
-      <div className="overflow-y-scroll px-2 text-Neutral lg:px-4">
+      <div className="overflow-y-scroll px-2 text-Neutral lg:px-4 mb-4 lg:mb-8">
         <p className="my-4 text-3xl font-bold text-Neutral">
           {listInfo?.title}
         </p>

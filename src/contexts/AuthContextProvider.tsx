@@ -141,7 +141,7 @@ const MessageBox = ({
       {message && (
         <div
           className="z-50 fixed top-1/4 left-1/2 transform -translate-x-1/2
-          px-4 py-4 rounded-md bg-Neutral-Mild border text-white transition-opacity duration-1000 opacity-100"
+          px-4 py-2 md:py-4 rounded-md bg-gray-800  text-white transition-opacity duration-1000 opacity-100"
           onMouseEnter={(e) => {
             onHover(e);
           }}

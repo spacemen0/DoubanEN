@@ -1,12 +1,17 @@
+import { LoaderCircle } from "lucide-react";
+
 export default function Loading() {
   return (
-    <div
-      className="inline-block h-8 w-8 rounded-full bg-current opacity-0 animate-[spinner-grow_0.75s_linear_infinite] align-[-0.125em] text-surface motion-reduce:animate-[spinner-grow_1.5s_linear_infinite] dark:text-white"
-      role="status"
-    >
-      <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-        Loading...
-      </span>
+    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <button
+        type="submit"
+        className="flex w-full justify-center rounded-md p-2 pr-8  font-bold text-4xl transition-colors duration-300 "
+      >
+        <div className="mr-2 h-12 w-12 animate-spin">
+          <LoaderCircle size={"48px"} />
+        </div>
+        Loading
+      </button>
     </div>
   );
 }
