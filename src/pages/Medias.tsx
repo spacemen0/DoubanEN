@@ -11,15 +11,18 @@ import {
   getAllMediasCountByType,
 } from "../utils/services/mediaService";
 import { EmptyMedias } from "../components/common/EmptyMedias";
+import Loading from "../components/common/Loading.tsx";
 
 export default function Medias() {
   const { type } = useParams();
   const [medias, setMedias] = useState<Media[]>([]);
+  const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const { setMessage } = useAuthContext();
   useEffect(() => {
     const fetchReviewsCount = async (type: "Music" | "Movie" | "Book") => {
+      setLoading(true);
       try {
         const fetchedCount = await getAllMediasCountByType(type);
         setCount(fetchedCount);
@@ -35,18 +38,26 @@ export default function Medias() {
 
   useEffect(() => {
     const fetchAllMedias = async () => {
-      setMedias(
-        await getAllMediasByType(
-          (type!.charAt(0).toUpperCase() + type!.slice(1)) as MediaType,
-          currentPage,
-        ),
-      );
+      setLoading(true);
+      try {
+        setMedias(
+          await getAllMediasByType(
+            (type!.charAt(0).toUpperCase() + type!.slice(1)) as MediaType,
+            currentPage,
+          ),
+        );
+        setLoading(false);
+      } catch (e) {
+        const error = e as Error;
+        setMessage(error.message);
+      }
     };
     fetchAllMedias().then();
-  }, [currentPage, type]);
+  }, [currentPage, setMessage, type]);
   if (!["music", "movie", "book"].includes(type!)) {
     return <NotFound />;
   }
+  if (loading) return <Loading />;
 
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">

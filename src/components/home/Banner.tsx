@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { bannerText, statusInfo } from "../../utils/data";
+import { bannerLinkText, bannerText, statusInfo } from "../../utils/data";
 import Logo from "../../assets/Logo.jpg";
 
 export function Banner() {
@@ -20,7 +20,7 @@ export function Banner() {
             <p className="text-Neutral-Mild">
               {bannerText + " "}
               <Link to="/login" className="text-Neutral-Strong">
-                List Browsing and Searching are not implemented yet.
+                {bannerLinkText}
               </Link>
             </p>
           </div>

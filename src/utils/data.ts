@@ -49,6 +49,8 @@ export const homePageEditorMediaIds: number[] = [
 export const bannerText: string = `Douban EN is a website crafted with React, TypeScript, and Tailwind CSS for the front-end, 
 and Spring Boot and PostgreSQL for the back-end. 
 Its core functionality revolves around marking, tracking, and organizing your beloved music, movies, and books.`;
+export const bannerLinkText: string =
+  "Some extra functionalities are still under development. More media data will also be added.";
 
 export const infoPara1: string = `Douban EN is a website built with React, TypeScript and Tailwind CSS. 
   The primary features of the site is to mark, track and organize your favorite Musics, Movies, and Books.
