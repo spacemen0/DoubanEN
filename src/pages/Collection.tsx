@@ -11,11 +11,13 @@ import {
 import { Pagination } from "../components/common/Pagination";
 import { ListItem } from "../components/common/ListItem";
 import { EmptyMedias } from "../components/common/EmptyMedias";
+import Loading from "../components/common/Loading.tsx";
 
 export default function Collection() {
   const { type } = useParams();
   const [medias, setMedias] = useState<Media[]>([]);
   const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedOption, setSelectedOption] = useState<
     "Rated" | "Wishlist" | "Doing" | "Reviewed"
@@ -25,6 +27,7 @@ export default function Collection() {
     const fetchReviewsCount = async (type: MediaType | "All") => {
       if (user)
         try {
+          setLoading(true);
           const fetchedCount = await getUserMediaCountByType(
             user.id,
             type,
@@ -43,29 +46,37 @@ export default function Collection() {
   useEffect(() => {
     const fetchAllMedias = async () => {
       if (user)
-        setMedias(
-          await getUserMediasByTypeWithPagination(
-            user.id,
-            (type!.charAt(0).toUpperCase() + type!.slice(1)) as
-              | MediaType
-              | "All",
-            currentPage,
-            selectedOption,
-          ),
-        );
+        try {
+          setLoading(true);
+          setMedias(
+            await getUserMediasByTypeWithPagination(
+              user.id,
+              (type!.charAt(0).toUpperCase() + type!.slice(1)) as
+                | MediaType
+                | "All",
+              currentPage,
+              selectedOption,
+            ),
+          );
+          setLoading(false);
+        } catch (e) {
+          const error = e as Error;
+          setMessage(error.message);
+        }
     };
     fetchAllMedias().then();
-  }, [currentPage, selectedOption, type, user]);
-
-  if (!["music", "movie", "book", "all"].includes(type!)) {
-    return <NotFound />;
-  }
+  }, [currentPage, selectedOption, setMessage, type, user]);
 
   function handleOptionClick(
     status: "Rated" | "Wishlist" | "Doing" | "Reviewed",
   ) {
     setSelectedOption(status);
   }
+
+  if (!["music", "movie", "book", "all"].includes(type!)) {
+    return <NotFound />;
+  }
+  if (loading) return <Loading />;
 
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
