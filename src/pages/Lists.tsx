@@ -21,7 +21,7 @@ import { X } from "lucide-react";
 export default function Lists() {
   const { userId } = useParams();
   const [username, setUsername] = useState<string>();
-  const [exist, setExist] = useState<boolean>();
+  const [loading, setLoading] = useState<boolean>();
   const [selectedList, setSelectedList] = useState<number>();
   const [lists, setLists] = useState<ListInfo[]>([]);
   const [medias, setMedias] = useState<Media[]>([]);
@@ -31,13 +31,14 @@ export default function Lists() {
   useEffect(() => {
     const fetchUsername = async () => {
       try {
+        setLoading(true);
         const user = await fetchUser(parseInt(userId!));
         setUsername(user.username);
-        setExist(true);
+        setLoading(true);
       } catch (e) {
         const error = e as Error;
         if (error.message === "Not exist") {
-          setExist(false);
+          setLoading(false);
           setMessage("This user does not exist");
         } else if (error.message === "Response error")
           setMessage("Error processing request");
@@ -49,20 +50,21 @@ export default function Lists() {
   }, [user, userId, setMessage]);
   useEffect(() => {
     const fetchLists = async () => {
-      if (exist)
-        try {
-          const userLists = await getUserLists(parseInt(userId!));
-          setLists(userLists);
-          if (userLists.length > 0) setSelectedList(userLists[0].id);
-        } catch (e) {
-          const error = e as Error;
-          if (error.message === "Response Error")
-            setMessage("Error processing request");
-          else setMessage("Error fetching lists for this user");
-        }
+      try {
+        setLoading(true);
+        const userLists = await getUserLists(parseInt(userId!));
+        setLists(userLists);
+        setLoading(false);
+        if (userLists.length > 0) setSelectedList(userLists[0].id);
+      } catch (e) {
+        const error = e as Error;
+        if (error.message === "Response Error")
+          setMessage("Error processing request");
+        else setMessage("Error fetching lists for this user");
+      }
     };
-    if (exist) fetchLists().then();
-  }, [exist, setMessage, userId]);
+    if (loading) fetchLists().then();
+  }, [loading, setMessage, userId]);
   useEffect(() => {
     const fetchListCount = async (id: number) => {
       try {
@@ -82,10 +84,9 @@ export default function Lists() {
     const fetchAllListItems = async (id: number) => {
       try {
         setMedias(await getAllListItems(id, currentPage));
-        setExist(true);
       } catch (e) {
         const error = e as Error;
-        if (error.message === "Not Exist") setExist(false);
+        if (error.message === "Not Exist") setLoading(false);
         else if (error.message === "Response error")
           setMessage("Error fetching list items");
         else setMessage("Error processing request");
@@ -119,8 +120,8 @@ export default function Lists() {
       setMessage(error.message);
     }
   };
-  if (exist === undefined) return <Loading />;
-  if (exist && username)
+  if (loading) return <Loading />;
+  if (username)
     return (
       <div className="flex max-h-screen flex-col overflow-hidden">
         <PageHeader />
@@ -156,7 +157,7 @@ export default function Lists() {
           </div>
           {selectedList ? (
             <div className="mx-2">
-              <div className="bg-gray-200 p-2 rounded-md md:mt-4 mt-2 w-fit">
+              <div className="p-2 rounded-md md:mt-4 mt-2 w-fit">
                 <p className="my-2 text-3xl font-bold text-Neutral">
                   {lists.filter((list) => list.id === selectedList)[0].title}
                 </p>
@@ -222,5 +223,5 @@ export default function Lists() {
         </div>
       </div>
     );
-  else if (!exist) return <NotFound />;
+  else if (!loading) return <NotFound />;
 }

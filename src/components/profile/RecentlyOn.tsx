@@ -31,7 +31,7 @@ export function RecentlyOn({ id }: { id: number }) {
           {recentlyOn.length >= 1 ? (
             <>
               <div className="h-32 w-32">
-                <Link to={`/media/${recentlyOn[0].type}/${recentlyOn[0].id}`}>
+                <Link to={`/media/${recentlyOn[0].id}`}>
                   <MyImage
                     src={recentlyOn[0].imageUrl}
                     alt={recentlyOn[0].title}
@@ -40,9 +40,11 @@ export function RecentlyOn({ id }: { id: number }) {
               </div>
               <div className="flex w-3/4 flex-col justify-center">
                 {" "}
-                <h1 className="w-full text-center font-bold">
-                  {recentlyOn[0].title}
-                </h1>
+                <Link to={`/media/${recentlyOn[0].id}`}>
+                  <h1 className="w-full text-center font-bold hover:text-Neutral-Strong">
+                    {recentlyOn[0].title}
+                  </h1>
+                </Link>
                 <h1 className="w-full text-center">{recentlyOn[0].author}</h1>
               </div>
             </>
@@ -60,7 +62,7 @@ export function RecentlyOn({ id }: { id: number }) {
           {recentlyOn.length >= 2 ? (
             <>
               <div className="h-32 w-32">
-                <Link to={`/media/${recentlyOn[1].type}/${recentlyOn[1].id}`}>
+                <Link to={`/media/${recentlyOn[1].id}`}>
                   <MyImage
                     src={recentlyOn[1].imageUrl}
                     alt={recentlyOn[1].title}
@@ -69,9 +71,11 @@ export function RecentlyOn({ id }: { id: number }) {
               </div>
 
               <div className="ml-4 flex w-3/4 flex-col justify-center">
-                <h1 className="w-full text-center font-bold">
-                  {recentlyOn[1].title}
-                </h1>
+                <Link to={`/media/${recentlyOn[1].id}`}>
+                  <h1 className="w-full text-center font-bold hover:text-Neutral-Strong">
+                    {recentlyOn[1].title}
+                  </h1>
+                </Link>
                 <h1 className="w-full text-center">{recentlyOn[1].author}</h1>
               </div>
             </>
@@ -89,7 +93,7 @@ export function RecentlyOn({ id }: { id: number }) {
           {recentlyOn.length >= 3 ? (
             <>
               <div className="h-32 w-32">
-                <Link to={`/media/${recentlyOn[2].type}/${recentlyOn[2].id}`}>
+                <Link to={`/media/${recentlyOn[2].id}`}>
                   <MyImage
                     src={recentlyOn[2].imageUrl}
                     alt={recentlyOn[2].title}
@@ -99,9 +103,11 @@ export function RecentlyOn({ id }: { id: number }) {
 
               <div className="ml-4 flex w-3/4 flex-col justify-center">
                 {" "}
-                <h1 className="w-full text-center font-bold">
-                  {recentlyOn[2].title}
-                </h1>
+                <Link to={`/media/${recentlyOn[2].id}`}>
+                  <h1 className="w-full text-center font-bold hover:text-Neutral-Strong">
+                    {recentlyOn[2].title}
+                  </h1>
+                </Link>
                 <h1 className="w-full text-center">{recentlyOn[2].author}</h1>
               </div>
             </>

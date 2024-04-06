@@ -9,9 +9,11 @@ import { Link } from "react-router-dom";
 export function UserInfo({
   id,
   setExist,
+  setUsername,
 }: {
   id: number;
   setExist: React.Dispatch<React.SetStateAction<boolean>>;
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const [showFullBio, setShowFullBio] = useState(false);
   const [user, setUser] = useState<User>();
@@ -22,6 +24,7 @@ export function UserInfo({
       try {
         const userData = await fetchUser(id);
         setUser(userData);
+        setUsername(userData.username);
       } catch (e) {
         const error = e as Error;
         if (error.message === "Not Exist") setExist(false);
@@ -29,7 +32,7 @@ export function UserInfo({
       }
     };
     fetchUserData(id).then();
-  }, [id, setExist, setMessage]);
+  }, [id, setExist, setMessage, setUsername]);
   const toggleBioVisibility = () => {
     setShowFullBio(!showFullBio);
   };
@@ -50,18 +53,24 @@ export function UserInfo({
             <h1 className="mb-1 text-xl font-semibold lg:text-2xl">
               {user.username}
             </h1>
-            <p className="text-gray-600">{user?.role}</p>
-            <p className="text-gray-600">
+            <p className="text-Neutral">{user?.role}</p>
+            <p className="text-Neutral">
               <span className="font-semibold">Member Since:</span> {user?.date}
             </p>
           </div>
         </div>
       )}
-
+      <div>
+        <Link to={`/lists/${user?.id}`}>
+          <button className="text-xl text-Neutral font-semibold py-1 mb-2 border-b-2 border-Neutral hover:text-Neutral-Strong">
+            Browse {user?.username}'s lists
+          </button>
+        </Link>
+      </div>
       {user && (
         <div className="mb-4 border-b pb-4">
           <p className="mb-2 text-lg font-semibold lg:text-xl">Bio</p>
-          <div className="text-gray-600">
+          <div className="text-Neutral">
             {user.bio
               ? showFullBio
                 ? user.bio
