@@ -25,25 +25,31 @@ export function ListsWall({ id, username }: { id: number; username: string }) {
   return (
     <div className="w-96 flex-col items-center justify-center gap-2 pb-6 text-lg text-gray-600 md:w-[420px] md:pl-4">
       <div className="mb-2 flex w-full flex-col rounded-md bg-white shadow-md">
-        <h2 className="text-Neutral-Strong font-semibold text-2xl px-2 py-4 border-b border-gray-200">
+        <h2 className="text-Neutral-Strong font-semibold text-2xl px-4 py-4 border-b border-gray-200">
           {username}'s Lists Wall
         </h2>
-        {lists.map((list) => {
-          return (
-            <div
-              className="flex w-full flex-col justify-between border-b border-gray-200 pb-1 align-top"
-              key={list.id}
-            >
-              <Link
-                to={`/list/${list.id}`}
-                className="font-semibold text-Neutral text-xl p-2 hover:text-Neutral-Strong"
+        {lists.length > 0 ? (
+          lists.map((list) => {
+            return (
+              <div
+                className="flex w-full flex-col justify-between border-b border-gray-200 pb-1 align-top"
+                key={list.id}
               >
-                {list.title}
-              </Link>
-              <p className="p-2 text-Neutral-Mild">{list.description}</p>
-            </div>
-          );
-        })}
+                <Link
+                  to={`/list/${list.id}`}
+                  className="font-semibold text-Neutral text-xl p-4 hover:text-Neutral-Strong"
+                >
+                  {list.title}
+                </Link>
+                <p className="p-4 text-Neutral-Mild">{list.description}</p>
+              </div>
+            );
+          })
+        ) : (
+          <div className="text-Neutral-Strong font-semibold text-2xl px-4 py-4">
+            Nothing here for now
+          </div>
+        )}
       </div>
     </div>
   );

@@ -85,6 +85,13 @@ function DropDownMenu({
               text="My Lists"
             />
             <MenuItem
+              link="/edit"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+              text="Edit Profile"
+            />
+            <MenuItem
               link="/collection/all"
               onClick={() => {
                 setIsOpen(false);

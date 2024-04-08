@@ -43,9 +43,9 @@ export default function Login() {
     });
   };
   return (
-    <>
+    <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
-      <div className="flex flex-col">
+      <div className="flex flex-col overflow-y-scroll">
         <LoginForm
           onSubmit={handleLogin}
           formData={formData}
@@ -54,7 +54,7 @@ export default function Login() {
         />
         <WelcomeInfo isLogin={true} />
       </div>
-    </>
+    </div>
   );
 }
 

@@ -66,6 +66,7 @@ export type User = {
   profileImage: string;
   bio: string;
   id: number;
+  email?: string;
 };
 
 export type ListInfo = {

@@ -10,6 +10,7 @@ export function Collections({ id }: { id: number }) {
     "Music" | "Movie" | "Book"
   >("Music");
   const [myItems, setItems] = useState<Media[]>([]);
+  const [loading, setLoading] = useState(true);
   const { setMessage } = useAuthContext();
 
   const handleOptionClick = async (option: "Music" | "Movie" | "Book") => {
@@ -19,10 +20,12 @@ export function Collections({ id }: { id: number }) {
   useEffect(() => {
     const fetchCollection = async () => {
       try {
+        setLoading(true);
         const items = await getUserRatedAndReviewedMediasByType(
           id,
           selectedOption,
         );
+        setLoading(false);
         setItems(items);
       } catch (error) {
         console.log("Error: ", error);
@@ -70,15 +73,13 @@ export function Collections({ id }: { id: number }) {
       <div className="flex justify-between border-b border-gray-200 py-2 pl-32 text-xl font-semibold text-Neutral-Mild xl:pr-2 2xl:pl-48 3xl:pr-4 3xl:pl-64">
         <span>Average</span> <span>Rated</span> <span>Wants</span>
       </div>
-      {myItems.length > 0 ? (
-        myItems.map((item) => (
-          <div key={item.id} className="mt-4 flex h-auto w-full">
-            <ListItem media={item} />
-          </div>
-        ))
-      ) : (
-        <EmptyMedias />
-      )}
+      {myItems.length > 0
+        ? myItems.map((item) => (
+            <div key={item.id} className="mt-4 flex h-auto w-full">
+              <ListItem media={item} />
+            </div>
+          ))
+        : !loading && <EmptyMedias />}
     </div>
   );
 }

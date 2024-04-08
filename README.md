@@ -25,8 +25,6 @@ complete, and the project has been successfully deployed. You can access the pro
 - **PostgreSQL**
 
 **To-do**
-
-- browse other user's lists
 - change bio, image, etc
 - search
 - admin page(to be decided)
@@ -42,18 +40,19 @@ complete, and the project has been successfully deployed. You can access the pro
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-TypeScript                      57            200             42           4306
-XML                              8              0              0            627
+TypeScript                      59            205             46           4535
+XML                              8              0              0            698
 JavaScript                      30              0             94            156
 JSON                             4              2              0             76
+Markdown                         1             19              0             54
 YAML                             1              3              3             40
-Markdown                         1             13              0             34
 HTML                             2              6              0             28
 INI                              1              1              0              7
 CSS                              2              0              0              4
 -------------------------------------------------------------------------------
-SUM:                           106            225            139           5278
+SUM:                           108            236            143           5598
 -------------------------------------------------------------------------------
+
 
 
 ```
