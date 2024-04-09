@@ -7,7 +7,7 @@ import {
   login,
   logout,
   register,
-} from "../utils/services/authService.ts";
+} from "../utils/services/userService.ts";
 
 function setWithExpiry<T>(key: string, value: T, ttl: number): void {
   const now = new Date();

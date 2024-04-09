@@ -3,7 +3,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import { MyImage } from "../common/MyImage";
 import { User } from "../../utils/type";
 
-import { fetchUser } from "../../utils/services/authService";
+import { fetchUser } from "../../utils/services/userService.ts";
 import { Link } from "react-router-dom";
 
 export function UserInfo({

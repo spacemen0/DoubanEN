@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchUser } from "../utils/services/authService.ts";
+import { fetchUser } from "../utils/services/userService.ts";
 import { useAuthContext } from "../contexts/AuthContext.ts";
 import Loading from "../components/common/Loading.tsx";
 import { NotFound } from "../components/common/NotFound.tsx";

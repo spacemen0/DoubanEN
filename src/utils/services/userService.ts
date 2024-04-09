@@ -90,3 +90,37 @@ export const fetchUser = async (id: number): Promise<User> => {
   if (!data.profileImage) data.profileImage = generateRandomImage().src;
   return data;
 };
+
+export const updateProfile = async (
+  id: number,
+  oldPassword: string,
+  token: string,
+  bio?: string,
+  email?: string,
+  password?: string,
+  image?: File,
+): Promise<void> => {
+  let response = new Response();
+  const requestBody = new FormData();
+  bio && requestBody.append("bio", bio);
+  email && requestBody.append("email", email);
+  console.log("check old password: ", oldPassword);
+  password && requestBody.append("password", password);
+  image && requestBody.append("image", image);
+
+  try {
+    response = await fetch(`${apiUrl}/users/${id}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: requestBody,
+    });
+  } catch (error) {
+    throw new Error("Fetch user error");
+  }
+  if (response.status === 404) throw new Error("Not Exist");
+  if (!response.ok) {
+    throw new Error("Response error");
+  }
+};
