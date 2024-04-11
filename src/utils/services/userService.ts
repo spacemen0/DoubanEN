@@ -1,4 +1,4 @@
-import { AuthResponse, User } from "../type";
+import { AuthResponse, ProfileFormData, User } from "../type";
 import { apiUrl } from "../config";
 import { generateRandomImage } from "../data";
 
@@ -93,21 +93,37 @@ export const fetchUser = async (id: number): Promise<User> => {
 
 export const updateProfile = async (
   id: number,
-  oldPassword: string,
   token: string,
-  bio?: string,
-  email?: string,
-  password?: string,
-  image?: File,
+  formData: ProfileFormData,
 ): Promise<void> => {
   let response = new Response();
   const requestBody = new FormData();
-  bio && requestBody.append("bio", bio);
-  email && requestBody.append("email", email);
-  console.log("check old password: ", oldPassword);
-  password && requestBody.append("password", password);
-  image && requestBody.append("image", image);
+  formData.bio && requestBody.append("bio", formData.bio);
+  formData.email && requestBody.append("email", formData.email);
+  formData.password && requestBody.append("password", formData.password);
+  formData.image && requestBody.append("image", formData.image);
+  const checkPassword = {
+    id: id,
+    password: formData.oldPassword,
+  };
+  if (formData.oldPassword && formData.password)
+    try {
+      response = await fetch(`${apiUrl}/users/check-password`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(checkPassword),
+      });
+    } catch (error) {
+      throw new Error("Send check password request error");
+    }
 
+  if (response.status === 403) throw new Error("Wrong password");
+  if (!response.ok) {
+    throw new Error("Check Password Response error");
+  }
   try {
     response = await fetch(`${apiUrl}/users/${id}`, {
       method: "PATCH",
@@ -117,7 +133,7 @@ export const updateProfile = async (
       body: requestBody,
     });
   } catch (error) {
-    throw new Error("Fetch user error");
+    throw new Error("Update profile error");
   }
   if (response.status === 404) throw new Error("Not Exist");
   if (!response.ok) {

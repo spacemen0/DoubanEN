@@ -3,26 +3,41 @@ import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { PageHeader } from "../components/common/PageHeader.tsx";
 import { LoaderCircle } from "lucide-react";
+import { updateProfile } from "../utils/services/userService.ts";
+import { ProfileFormData } from "../utils/type.ts";
 
 export default function Edit() {
   const navigate = useNavigate();
-  const { isLoggedIn, setMessage, user } = useAuthContext();
+  const { isLoggedIn, setMessage, user, token } = useAuthContext();
   const [processing, setProcessing] = useState(false);
-  const [formData, setFormData] = useState({
-    bio: user?.bio ? user?.bio : "",
-    profileImage: user?.profileImage,
-    email: user?.email,
-    password: "",
-    oldPassword: "",
+  const [formData, setFormData] = useState<ProfileFormData>({
+    bio: user?.bio ? user?.bio : null,
+    email: null,
+    password: null,
+    oldPassword: null,
     image: null,
   });
 
   // Function to handle form submission
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // Call API to update user info
-    setProcessing(true);
-    setMessage("Success");
+    if (Object.values(formData).some((value) => value !== null))
+      try {
+        setProcessing(true);
+        await updateProfile(user!.id, token!, formData);
+        setMessage("Update profile success");
+        setProcessing(false);
+      } catch (e) {
+        setProcessing(false);
+        const error = e as Error;
+        if (error.message === "Send check password request error")
+          setMessage("Error checking your old password");
+        else if (error.message === "Check Password Response error")
+          setMessage("Response Error");
+        else if (error.message === "Wrong password")
+          setMessage("Wrong password");
+        else setMessage("Error updating your profile");
+      }
   };
 
   // Function to handle input changes
@@ -36,6 +51,12 @@ export default function Edit() {
   const handleBioChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const bio = event.target.value;
     setFormData((prevState) => ({ ...prevState, bio: bio }));
+  };
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const fileList = event.target.files; // Retrieve the FileList object
+    if (fileList && fileList.length > 0) {
+      setFormData((prevState) => ({ ...prevState, image: fileList.item(0) }));
+    }
   };
   useEffect(() => {
     if (!isLoggedIn) navigate("/login");
@@ -52,28 +73,10 @@ export default function Edit() {
                 Update Your Info
               </h1>
               <h1 className="mb-6 text-center text-sm font-semibold text-Neutral-Mild">
-                Update your info
+                Fill in the fields you want to change
               </h1>
 
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-Neutral"
-                  >
-                    password
-                  </label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    required={true}
-                    autoComplete="new-password"
-                    className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
-                  />
-                </div>
                 <div>
                   <label
                     htmlFor="oldPassword"
@@ -85,13 +88,30 @@ export default function Edit() {
                     type="password"
                     id="oldPassword"
                     name="oldPassword"
-                    value={formData.oldPassword}
+                    value={formData.oldPassword ? formData.oldPassword : ""}
                     onChange={handleInputChange}
-                    required={true}
                     autoComplete="current-password"
                     className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                   />
                 </div>
+                <div>
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium text-Neutral"
+                  >
+                    password
+                  </label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={formData.password ? formData.password : ""}
+                    onChange={handleInputChange}
+                    autoComplete="new-password"
+                    className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                  />
+                </div>
+
                 <div>
                   <label
                     htmlFor="email"
@@ -103,10 +123,8 @@ export default function Edit() {
                     type="email"
                     id="email"
                     name="email"
-                    value={formData.email}
+                    value={formData.email ? formData.email : ""}
                     onChange={handleInputChange}
-                    required={true}
-                    autoComplete="email"
                     className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                   />
                 </div>
@@ -139,8 +157,7 @@ export default function Edit() {
                 type="file"
                 id="image"
                 name="image"
-                onChange={handleInputChange}
-                required={true}
+                onChange={handleImageChange}
                 accept="image/jpeg"
                 className="cursor-pointer file:border-0 file:bg-Neutral-Strong file:text-white file:rounded-sm file:h-full placeholder:text-l mt-1 h-12 w-full bg-white rounded-md border-2  transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
               />
@@ -148,7 +165,7 @@ export default function Edit() {
             <textarea
               className="mt-2 ml-0.5 w-full h-60 p-2 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent"
               name="bio"
-              value={formData.bio}
+              value={formData.bio ? formData.bio : ""}
               onChange={handleBioChange}
               placeholder="Update your bio here"
             />

@@ -74,7 +74,7 @@ export function UserInfo({
             {user.bio
               ? showFullBio
                 ? user.bio
-                : `${user.bio.slice(0, 100)}...`
+                : `${user.bio.length > 100 ? user.bio.slice(0, 100) + "..." : user.bio}`
               : "This user hasn't written anything on their bio."}
           </div>
           {user.bio && user.bio.length > 100 && (

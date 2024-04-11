@@ -34,7 +34,6 @@ export default function Lists() {
         setLoading(true);
         const user = await fetchUser(parseInt(userId!));
         setUsername(user.username);
-        setLoading(true);
       } catch (e) {
         const error = e as Error;
         if (error.message === "Not exist") {
@@ -86,8 +85,7 @@ export default function Lists() {
         setMedias(await getAllListItems(id, currentPage));
       } catch (e) {
         const error = e as Error;
-        if (error.message === "Not Exist") setLoading(false);
-        else if (error.message === "Response error")
+        if (error.message === "Response error")
           setMessage("Error fetching list items");
         else setMessage("Error processing request");
       }

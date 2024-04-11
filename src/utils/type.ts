@@ -77,3 +77,11 @@ export type ListInfo = {
   updatedAt: string;
   title: string;
 };
+
+export type ProfileFormData = {
+  bio: string | null;
+  email: string | null;
+  password: string | null;
+  oldPassword: string | null;
+  image: File | null;
+};
