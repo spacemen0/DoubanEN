@@ -25,7 +25,7 @@ export function ListsWall({ id, username }: { id: number; username: string }) {
   return (
     <div className="w-96 flex-col items-center justify-center gap-2 pb-6 text-lg text-gray-600 md:w-[420px] md:pl-4">
       <div className="mb-2 flex w-full flex-col rounded-md bg-white shadow-md">
-        <h2 className="text-Neutral-Strong font-semibold text-2xl px-4 py-4 border-b border-gray-200">
+        <h2 className="border-b border-gray-200 px-4 py-4 text-2xl font-semibold text-Neutral-Strong">
           {username}'s Lists Wall
         </h2>
         {lists.length > 0 ? (
@@ -37,7 +37,7 @@ export function ListsWall({ id, username }: { id: number; username: string }) {
               >
                 <Link
                   to={`/list/${list.id}`}
-                  className="font-semibold text-Neutral text-xl p-4 hover:text-Neutral-Strong"
+                  className="p-4 text-xl font-semibold text-Neutral hover:text-Neutral-Strong"
                 >
                   {list.title}
                 </Link>
@@ -46,7 +46,7 @@ export function ListsWall({ id, username }: { id: number; username: string }) {
             );
           })
         ) : (
-          <div className="text-Neutral-Strong font-semibold text-2xl px-4 py-4">
+          <div className="px-4 py-4 text-2xl font-semibold text-Neutral-Strong">
             Nothing here for now
           </div>
         )}

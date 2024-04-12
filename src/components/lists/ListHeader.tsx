@@ -14,7 +14,7 @@ export function ListHeader({
   user: User | null;
 }) {
   return (
-    <div className="py-2 rounded-md md:mt-4 mt-2 w-fit">
+    <div className="mt-2 w-fit rounded-md py-2 md:mt-4">
       <p className="my-2 text-3xl font-bold text-Neutral">
         {lists.filter((list) => list.id === selectedList)[0].title}
       </p>
@@ -23,7 +23,7 @@ export function ListHeader({
       </p>
       {user?.id === parseInt(userId!) && (
         <button
-          className="rounded-md p-1.5 font-semibold text-white bg-Neutral-Mild hover:bg-Neutral mb-4 text-lg"
+          className="mb-4 rounded-md text-lg font-semibold text-white p-1.5 bg-Neutral-Mild hover:bg-Neutral"
           onClick={handleDeleteList}
         >
           Delete this list

@@ -42,7 +42,7 @@ export function ListMediasDisplay({
               <ListItem media={media} />
               {user?.id === parseInt(userId!) && (
                 <button
-                  className="absolute right-2 top-0"
+                  className="absolute top-0 right-2"
                   onClick={async () => {
                     handleRemoveListItem(media.id);
                   }}

@@ -62,7 +62,7 @@ export function UserInfo({
       )}
       <div>
         <Link to={`/lists/${user?.id}`}>
-          <button className="text-xl text-Neutral font-semibold py-1 mb-2 border-b-2 border-Neutral hover:text-Neutral-Strong">
+          <button className="mb-2 border-b-2 py-1 text-xl font-semibold text-Neutral border-Neutral hover:text-Neutral-Strong">
             Browse {user?.username}'s lists
           </button>
         </Link>

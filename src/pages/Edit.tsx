@@ -145,11 +145,11 @@ export default function Edit() {
               </form>
             </div>
           </div>
-          <div className="flex-col flex-1 items-center justify-center bg-gray-100 px-4 py-2 flex lg:py-6">
+          <div className="flex flex-1 flex-col items-center justify-center bg-gray-100 px-4 py-2 lg:py-6">
             <div className="w-full">
               <label
                 htmlFor="image"
-                className="block text-xl font-semibold mb-1 text-Neutral"
+                className="mb-1 block text-xl font-semibold text-Neutral"
               >
                 Profile Image
               </label>
@@ -159,11 +159,11 @@ export default function Edit() {
                 name="image"
                 onChange={handleImageChange}
                 accept="image/jpeg"
-                className="cursor-pointer file:border-0 file:bg-Neutral-Strong file:text-white file:rounded-sm file:h-full placeholder:text-l mt-1 h-12 w-full bg-white rounded-md border-2  transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                className="mt-1 h-12 file:h-full w-full cursor-pointer file:rounded-sm rounded-md file:border-0 border-2 bg-white file:text-white transition-colors duration-300 file:bg-Neutral-Strong placeholder:text-l focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
               />
             </div>
             <textarea
-              className="mt-2 ml-0.5 w-full h-60 p-2 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent"
+              className="mt-2 h-60 w-full resize-none rounded-lg border border-gray-300 p-2 ml-0.5 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-300"
               name="bio"
               value={formData.bio ? formData.bio : ""}
               onChange={handleBioChange}

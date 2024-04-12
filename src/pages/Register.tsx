@@ -46,7 +46,7 @@ export default function Register() {
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
-      <div className="overflow-y-scroll flex flex-col">
+      <div className="flex flex-col overflow-y-scroll">
         <RegisterForm
           onSubmit={handleRegister}
           formData={formData}
