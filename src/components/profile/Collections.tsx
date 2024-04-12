@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Media } from "../../utils/type";
 import { ListItem } from "../common/ListItem";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { getUserRatedAndReviewedMediasByType } from "../../utils/services/userMediasService";
+import { getUserRatedAndReviewedMediasByType } from "../../apiUtils/userMediasApiUtil.ts";
 import { EmptyMedias } from "../common/EmptyMedias";
 
 export function Collections({ id }: { id: number }) {

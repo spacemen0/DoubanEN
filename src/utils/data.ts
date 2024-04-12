@@ -1,4 +1,5 @@
 import { ImageProps } from "./type";
+import { apiUrl } from "./config.ts";
 
 function getRandomInt(min: number, max: number): number {
   // Ensure that min and max are integers
@@ -10,22 +11,12 @@ function getRandomInt(min: number, max: number): number {
 }
 
 export const generateRandomImage = () => ({
-  src: images[getRandomInt(0, 10)],
+  src: `${apiUrl}/images/${imageIds[getRandomInt(0, 10)]}`,
   alt: "List Image",
 });
 
-const images: string[] = [
-  "https://doubanenserver.azurewebsites.net/loveless.jpg",
-  "https://doubanenserver.azurewebsites.net/sonic-nurse.jpg",
-  "https://doubanenserver.azurewebsites.net/murry-street.jpg",
-  "https://doubanenserver.azurewebsites.net/dirty.jpg",
-  "https://doubanenserver.azurewebsites.net/evol.jpg",
-  "https://doubanenserver.azurewebsites.net/uchu-nippon-setagaya.jpg",
-  "https://doubanenserver.azurewebsites.net/goo.jpg",
-  "https://doubanenserver.azurewebsites.net/washing-machine.jpg",
-  "https://doubanenserver.azurewebsites.net/daydream-nation.jpg",
-  "https://doubanenserver.azurewebsites.net/Something-in-the-Air.jpg",
-  "https://doubanenserver.azurewebsites.net/long-season.jpg",
+const imageIds: number[] = [
+  202, 152, 252, 302, 303, 304, 305, 306, 307, 308, 309,
 ];
 export const bannerImage: { listId: number; imageProps: ImageProps } = {
   listId: 0,

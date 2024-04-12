@@ -1,5 +1,5 @@
-import { Media, MediaType, StatusType } from "../type";
-import { apiUrl } from "../config";
+import { Media, MediaType, StatusType } from "../utils/type";
+import { apiUrl } from "../utils/config";
 
 export const getUserRatedAndReviewedMediasByType = async (
   userId: number,

@@ -1,10 +1,5 @@
 export type SearchOption = "Music" | "Movie" | "Book";
 
-export type DropDownSearchOptionProps = {
-  selectedOption: SearchOption;
-  onOptionClick: (option: SearchOption) => void;
-};
-
 export type AuthResponse = {
   userId: number | null;
   token: string | null;
@@ -63,7 +58,7 @@ export type User = {
   username: string;
   role: "Admin" | "Contributor" | "Standard";
   date: string;
-  profileImage: string;
+  profileImageUrl: string;
   bio: string;
   id: number;
   email?: string;

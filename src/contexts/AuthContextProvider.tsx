@@ -2,12 +2,7 @@ import React, { FC, useCallback, useEffect, useState } from "react";
 import { expiryTime } from "../utils/config.ts";
 import { AuthContext, AuthContextType } from "./AuthContext";
 import { User } from "../utils/type.ts";
-import {
-  fetchUser,
-  login,
-  logout,
-  register,
-} from "../utils/services/userService.ts";
+import { fetchUser, login, logout, register } from "../apiUtils/userApiUtil.ts";
 
 function setWithExpiry<T>(key: string, value: T, ttl: number): void {
   const now = new Date();

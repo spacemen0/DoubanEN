@@ -1,5 +1,5 @@
-import { apiUrl } from "../config";
-import { ListInfo, Media } from "../type";
+import { apiUrl } from "../utils/config";
+import { ListInfo, Media } from "../utils/type.ts";
 
 export const getListItemsCount = async (id: number): Promise<number> => {
   let response = new Response();

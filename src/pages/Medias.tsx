@@ -9,7 +9,7 @@ import { Pagination } from "../components/common/Pagination";
 import {
   getAllMediasByType,
   getAllMediasCountByType,
-} from "../utils/services/mediaService";
+} from "../apiUtils/mediaApiUtil.ts";
 import { EmptyMedias } from "../components/common/EmptyMedias";
 import Loading from "../components/common/Loading.tsx";
 

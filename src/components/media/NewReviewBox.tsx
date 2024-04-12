@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Media, Score } from "../../utils/type";
 import { useAuthContext } from "../../contexts/AuthContext";
 import Draggable from "react-draggable";
-import { postReview } from "../../utils/services/reviewService";
+import { postReview } from "../../apiUtils/reviewApiUtil.ts";
 
 export function NewReviewBox({
   setShowReviewBox,

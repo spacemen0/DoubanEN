@@ -3,7 +3,7 @@ import React, { ReactNode, useCallback, useEffect, useState } from "react";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { ChevronDown, ChevronUp, Star, StarHalf } from "lucide-react";
 import { NewReviewBox } from "./NewReviewBox";
-import { deleteReview } from "../../utils/services/reviewService";
+import { deleteReview } from "../../apiUtils/reviewApiUtil.ts";
 import {
   cancelDoing,
   cancelWishlist,
@@ -12,7 +12,7 @@ import {
   setDoing,
   setWishlist,
   submitRating,
-} from "../../utils/services/mediaStatusService";
+} from "../../apiUtils/mediaStatusApiUtil.ts";
 import { ListBox } from "./ListBox";
 
 export function MediaOperationSection({

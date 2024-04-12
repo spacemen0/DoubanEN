@@ -10,7 +10,8 @@ import { MediaOperationSection } from "../components/media/MediaOperationSection
 import { ReviewSection } from "../components/media/ReviewSection";
 import Loading from "../components/common/Loading";
 import { NotFound } from "../components/common/NotFound";
-import { getMedia } from "../utils/services/mediaService";
+import { getMedia } from "../apiUtils/mediaApiUtil.ts";
+import { apiUrl } from "../utils/config.ts";
 
 export default function MediaPage() {
   const { setMessage } = useAuthContext();
@@ -48,7 +49,7 @@ export default function MediaPage() {
       {media ? (
         <div className="flex !lg:flex-col items-center lg:items-start justify-center ml-10 mr-10 mt-6 ">
           <div className="flex w-full flex-1 flex-col lg:flex-[0.3]">
-            <MyImage src={media.imageUrl} alt={media.title} />
+            <MyImage src={apiUrl + media.imageUrl} alt={media.title} />
             <div className="hidden lg:block">
               <Additional media={media} />
             </div>

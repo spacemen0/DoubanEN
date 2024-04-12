@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Media } from "../../utils/type";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { ListItem } from "../common/ListItem";
-import { getUserMediasByTypeWithPagination } from "../../utils/services/userMediasService";
+import { getUserMediasByTypeWithPagination } from "../../apiUtils/userMediasApiUtil.ts";
 import { homePageEditorMediaIds } from "../../utils/data.ts";
-import { getMedia } from "../../utils/services/mediaService.ts";
+import { getMedia } from "../../apiUtils/mediaApiUtil.ts";
 
 export function SideList() {
   const [selectedOption, setSelectedOption] = useState<"Editor" | "My">(

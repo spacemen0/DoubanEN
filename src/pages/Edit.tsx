@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { PageHeader } from "../components/common/PageHeader.tsx";
 import { LoaderCircle } from "lucide-react";
-import { updateProfile } from "../utils/services/userService.ts";
 import { ProfileFormData } from "../utils/type.ts";
+import { updateProfile } from "../apiUtils/userApiUtil.ts";
 
 export default function Edit() {
   const navigate = useNavigate();

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Media } from "../../utils/type";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { MyImage } from "../common/MyImage";
-import { getUserCurrentOn } from "../../utils/services/userMediasService";
+import { getUserCurrentOn } from "../../apiUtils/userMediasApiUtil.ts";
 import { Link } from "react-router-dom";
 
 export function RecentlyOn({ id }: { id: number }) {

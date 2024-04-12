@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getUserLists } from "../../utils/services/mediaListService.ts";
 import { ListInfo } from "../../utils/type.ts";
 import { useAuthContext } from "../../contexts/AuthContext.ts";
 import { Link } from "react-router-dom";
+import { getUserLists } from "../../apiUtils/mediaListApiUtil.ts";
 
 export function ListsWall({ id, username }: { id: number; username: string }) {
   const { setMessage } = useAuthContext();

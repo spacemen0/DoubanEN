@@ -1,5 +1,5 @@
-import { apiUrl } from "../config";
-import { MediaStatus, MediaType } from "../type";
+import { apiUrl } from "../utils/config";
+import { MediaStatus, MediaType } from "../utils/type";
 
 export const getMediaStatus = async (
   userId: number,

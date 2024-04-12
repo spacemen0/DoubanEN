@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { DropDownSearchOptionProps, SearchOption } from "../../../utils/type";
+import { SearchOption } from "../../../utils/type";
 import { Search, X } from "lucide-react";
 
 export default function HeaderSearchBarSection() {
@@ -72,7 +72,10 @@ export default function HeaderSearchBarSection() {
 function DropDownSearchOption({
   selectedOption,
   onOptionClick,
-}: DropDownSearchOptionProps) {
+}: {
+  selectedOption: SearchOption;
+  onOptionClick: (option: SearchOption) => void;
+}) {
   const musicColor: string = "text-Music border-b-2 font-bold border-Music";
   const movieColor: string = "text-Movie border-b-2 font-bold border-Movie";
   const bookColor: string = "text-Book border-b-2 font-bold border-Book";

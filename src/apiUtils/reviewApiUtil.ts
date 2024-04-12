@@ -1,5 +1,5 @@
-import { MediaType, Review } from "../type.ts";
-import { apiUrl } from "../config.ts";
+import { MediaType, Review } from "../utils/type.ts";
+import { apiUrl } from "../utils/config.ts";
 
 export const getMediaReviewCount = async (id: number): Promise<number> => {
   let response = new Response();

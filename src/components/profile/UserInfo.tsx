@@ -3,7 +3,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import { MyImage } from "../common/MyImage";
 import { User } from "../../utils/type";
 
-import { fetchUser } from "../../utils/services/userService.ts";
+import { fetchUser } from "../../apiUtils/userApiUtil.ts";
 import { Link } from "react-router-dom";
 
 export function UserInfo({
@@ -44,7 +44,7 @@ export function UserInfo({
           <div className="mr-4 !md:max-w-32">
             <Link to={`/profile/${user.id}`}>
               <MyImage
-                src={user.profileImage}
+                src={user.profileImageUrl}
                 alt={"Profile Image of " + user.username}
               />
             </Link>

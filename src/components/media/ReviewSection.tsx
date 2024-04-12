@@ -6,7 +6,7 @@ import { Pagination } from "../common/Pagination";
 import {
   getMediaReviewCount,
   getMediaReviews,
-} from "../../utils/services/reviewService";
+} from "../../apiUtils/reviewApiUtil.ts";
 
 export function ReviewSection({
   media,

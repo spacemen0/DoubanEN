@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchUser } from "../utils/services/userService.ts";
+import { fetchUser } from "../apiUtils/userApiUtil.ts";
 import { useAuthContext } from "../contexts/AuthContext.ts";
 import Loading from "../components/common/Loading.tsx";
 import { NotFound } from "../components/common/NotFound.tsx";
@@ -10,13 +10,13 @@ import {
   getListItemsCount,
   getUserLists,
   removeMediaFromList,
-} from "../utils/services/mediaListService.ts";
+} from "../apiUtils/mediaListApiUtil.ts";
 import { ListInfo, Media } from "../utils/type.ts";
 import { PageHeader } from "../components/common/PageHeader.tsx";
-import { Pagination } from "../components/common/Pagination.tsx";
-import { ListItem } from "../components/common/ListItem.tsx";
 import { EmptyMedias } from "../components/common/EmptyMedias.tsx";
-import { X } from "lucide-react";
+import { SelectUserList } from "../components/lists/SelectUserList.tsx";
+import { ListHeader } from "../components/lists/ListHeader.tsx";
+import { ListMediasDisplay } from "../components/lists/ListMediasDisplay.tsx";
 
 export default function Lists() {
   const { userId } = useParams();
@@ -124,96 +124,31 @@ export default function Lists() {
       <div className="flex max-h-screen flex-col overflow-hidden">
         <PageHeader />
         <div className="overflow-y-scroll text-Neutral">
-          <div className="mx-2 mt-4 flex items-center justify-center text-xl font-semibold md:mt-8 md:gap-4 md:text-3xl lg:font-bold">
-            <h1>{username}'s Lists:</h1>
-            {lists.length > 0 ? (
-              <select
-                id="chooseList"
-                onChange={(event) => {
-                  setSelectedList(parseInt(event.target.value));
-                }}
-                onFocus={(event) => {
-                  setSelectedList(parseInt(event.target.value));
-                }}
-                value={selectedList}
-                className="mx-2 border-b-2 border-gray-400 py-1 text-center align-middle focus:outline-0"
-              >
-                {lists.map((list) => (
-                  <option value={list.id} key={list.id}>
-                    {list.title}
-                  </option>
-                ))}
-                {lists.length === 1 && (
-                  <option value={lists[0].id} key={lists[0].id} hidden>
-                    {lists[0].title}
-                  </option>
-                )}
-              </select>
-            ) : (
-              <p className="">No lists were found.</p>
-            )}
-          </div>
+          <SelectUserList
+            username={username}
+            lists={lists}
+            setSelectedList={setSelectedList}
+            selectedList={selectedList}
+          />
           {selectedList ? (
             <div className="mx-2">
-              <div className="p-2 rounded-md md:mt-4 mt-2 w-fit">
-                <p className="my-2 text-3xl font-bold text-Neutral">
-                  {lists.filter((list) => list.id === selectedList)[0].title}
-                </p>
-                <p className="my-4 text-xl font-semibold">
-                  {
-                    lists.filter((list) => list.id === selectedList)[0]
-                      .description
-                  }
-                </p>
-                {user?.id === parseInt(userId!) && (
-                  <button
-                    className="rounded-md p-1.5 font-semibold text-white bg-Neutral-Mild hover:bg-Neutral mb-4 text-lg"
-                    onClick={handleDeleteList}
-                  >
-                    Delete this list
-                  </button>
-                )}
-              </div>
-
-              <Pagination
-                title={`${count} List Items`}
+              <ListHeader
+                lists={lists}
+                selectedList={selectedList}
+                userId={userId}
+                handleDeleteList={handleDeleteList}
+                user={user}
+              />
+              <ListMediasDisplay
+                medias={medias}
                 count={count}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
+                selectedList={selectedList}
+                handleRemoveListItem={handleRemoveListItem}
+                userId={userId}
+                user={user}
               />
-              <div className="my-2 flex justify-between gap-3 border-b border-gray-200 pb-1 pl-32 text-xl font-semibold text-Neutral-Mild md:gap-6 lg:gap-9 lg:pl-36 2xl:pl-44 3xl:pl-56">
-                <span>Average</span> <span>Rated</span> <span>Wants</span>
-              </div>
-              {medias.length > 0 ? (
-                medias.map((media, index) => {
-                  return (
-                    <div className="relative" key={index}>
-                      <ListItem media={media} />
-                      {user?.id === parseInt(userId!) && (
-                        <button
-                          className="absolute right-2 top-0"
-                          onClick={async () => {
-                            await handleRemoveListItem(media.id);
-                          }}
-                        >
-                          <X
-                            color={
-                              media.type === "Music"
-                                ? "#0A8F08"
-                                : media.type === "Movie"
-                                  ? "#039BE5"
-                                  : "#B0120A"
-                            }
-                            size="28px"
-                          />
-                        </button>
-                      )}
-                    </div>
-                  );
-                })
-              ) : (
-                <EmptyMedias />
-              )}
             </div>
           ) : (
             <EmptyMedias />

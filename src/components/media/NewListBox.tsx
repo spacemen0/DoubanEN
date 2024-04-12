@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useAuthContext } from "../../contexts/AuthContext";
 import Draggable from "react-draggable";
-import { createList } from "../../utils/services/mediaListService";
+import { createList } from "../../apiUtils/mediaListApiUtil.ts";
 import { ListInfo } from "../../utils/type.ts";
 
 export const NewListBox = ({

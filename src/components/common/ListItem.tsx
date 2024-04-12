@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { Media } from "../../utils/type";
 import { MyImage } from "./MyImage";
+import { apiUrl } from "../../utils/config.ts";
 
 export function ListItem({ media }: { media: Media }) {
   return (
     <div className="flex w-full">
       <div className="mt-2 mr-2 h-full max-h-32 w-full overflow-clip max-w-32 md:mr-4 lg:mr-6">
         <Link to={`/media/${media.id}`}>
-          <MyImage src={media.imageUrl} alt={media.title} />
+          <MyImage src={apiUrl + media.imageUrl} alt={media.title} />
         </Link>
       </div>
       <div className="flex w-full flex-col justify-between border-b border-gray-200 pb-1 align-top">

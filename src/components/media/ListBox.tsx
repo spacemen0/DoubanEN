@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { ListInfo, Media } from "../../utils/type.ts";
 import Draggable from "react-draggable";
 import { useAuthContext } from "../../contexts/AuthContext.ts";
+import { NewListBox } from "./NewListBox.tsx";
 import {
   addMediaToList,
   getUserLists,
-} from "../../utils/services/mediaListService.ts";
-import { NewListBox } from "./NewListBox.tsx";
+} from "../../apiUtils/mediaListApiUtil.ts";
 
 export const ListBox = ({
   setShowListBox,

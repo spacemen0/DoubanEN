@@ -7,8 +7,8 @@ import { FeaturedItem } from "./FeaturedItem";
 import { useEffect, useState } from "react";
 import { Media, Review } from "../../utils/type.ts";
 import { useAuthContext } from "../../contexts/AuthContext.ts";
-import { getMedia } from "../../utils/services/mediaService.ts";
-import { fetchSingleReview } from "../../utils/services/reviewService.ts";
+import { fetchSingleReview } from "../../apiUtils/reviewApiUtil.ts";
+import { getMedia } from "../../apiUtils/mediaApiUtil.ts";
 
 export function Featured() {
   const [featuredItems, setFeaturedItems] = useState<
