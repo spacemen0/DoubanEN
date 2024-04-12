@@ -23,7 +23,9 @@ export const ListBox = ({
   useEffect(() => {
     const fetchLists = async () => {
       try {
-        setLists(await getUserLists(user!.id));
+        const userLists = await getUserLists(user!.id);
+        setLists(userLists);
+        if (userLists.length > 0) setSelectedList(userLists[0].id);
       } catch (e) {
         const error = e as Error;
         if (error.message === "Response Error")
@@ -59,9 +61,6 @@ export const ListBox = ({
               <select
                 id="chooseList"
                 onChange={(event) => {
-                  setSelectedList(parseInt(event.target.value));
-                }}
-                onFocus={(event) => {
                   setSelectedList(parseInt(event.target.value));
                 }}
                 value={selectedList}

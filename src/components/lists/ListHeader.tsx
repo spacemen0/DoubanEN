@@ -1,4 +1,6 @@
 import { ListInfo, User } from "../../utils/type.ts";
+import { Link } from "react-router-dom";
+import { MyImage } from "../common/MyImage.tsx";
 
 export function ListHeader({
   lists,
@@ -13,22 +15,29 @@ export function ListHeader({
   handleDeleteList: () => void;
   user: User | null;
 }) {
+  const list = lists.filter((list) => list.id === selectedList)[0];
   return (
-    <div className="mt-2 w-fit rounded-md py-2 md:mt-4">
-      <p className="my-2 text-3xl font-bold text-Neutral">
-        {lists.filter((list) => list.id === selectedList)[0].title}
-      </p>
-      <p className="my-4 text-xl font-semibold">
-        {lists.filter((list) => list.id === selectedList)[0].description}
-      </p>
-      {user?.id === parseInt(userId!) && (
-        <button
-          className="mb-4 rounded-md text-lg font-semibold text-white p-1.5 bg-Neutral-Mild hover:bg-Neutral"
-          onClick={handleDeleteList}
+    <div className="flex !md:flex-col justify-start lg:max-w-[75%] mt-4">
+      <div className="h-48 w-48 mr-2 my-6 flex-shrink-0">
+        <MyImage src={list.imageUrl} alt={list.title} />
+      </div>
+      <div className="mt-2 w-fit rounded-md py-2 md:mt-4">
+        <Link
+          to={`/list/${list.id}`}
+          className="my-2 text-3xl font-bold text-Neutral"
         >
-          Delete this list
-        </button>
-      )}
+          {list.title}
+        </Link>
+        <p className="my-4 text-xl font-semibold">{list.description}</p>
+        {user?.id === parseInt(userId!) && (
+          <button
+            className="mb-4 rounded-md text-lg font-semibold text-white p-1.5 bg-Neutral-Mild hover:bg-Neutral"
+            onClick={handleDeleteList}
+          >
+            Delete this list
+          </button>
+        )}
+      </div>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { PageHeader } from "../components/common/PageHeader";
 import { NotFound } from "../components/common/NotFound";
 import { useEffect, useState } from "react";
 import { Media, MediaType } from "../utils/type";
-import { ListItem } from "../components/common/ListItem";
+import { MediaItem } from "../components/common/MediaItem.tsx";
 import { useAuthContext } from "../contexts/AuthContext";
 import { Pagination } from "../components/common/Pagination";
 import {
@@ -76,7 +76,7 @@ export default function Medias() {
         </div>
         {medias.length > 0 ? (
           medias.map((media, index) => {
-            return <ListItem media={media} key={index} />;
+            return <MediaItem media={media} key={index} />;
           })
         ) : (
           <EmptyMedias />

@@ -26,7 +26,7 @@ export default function HeaderUserSection() {
         <div className="pb-1">
           <Link
             className="hidden h-10 text-lg font-bold text-Neutral-Mild md:inline"
-            to={"/profile"}
+            to={`/profile/${user?.id}`}
           >
             {user?.username}
           </Link>

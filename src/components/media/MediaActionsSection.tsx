@@ -15,7 +15,7 @@ import {
 } from "../../apiUtils/mediaStatusApiUtil.ts";
 import { ListBox } from "./ListBox";
 
-export function MediaOperationSection({
+export function MediaActionsSection({
   media,
   onSuccess,
   onSuccessAndRender,

@@ -4,6 +4,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import { MyImage } from "../common/MyImage";
 import { getUserCurrentOn } from "../../apiUtils/userMediasApiUtil.ts";
 import { Link } from "react-router-dom";
+import { apiUrl } from "../../utils/config.ts";
 
 export function RecentlyOn({ id }: { id: number }) {
   const { setMessage } = useAuthContext();
@@ -33,7 +34,7 @@ export function RecentlyOn({ id }: { id: number }) {
               <div className="h-32 w-32">
                 <Link to={`/media/${recentlyOn[0].id}`}>
                   <MyImage
-                    src={recentlyOn[0].imageUrl}
+                    src={apiUrl + recentlyOn[0].imageUrl}
                     alt={recentlyOn[0].title}
                   />
                 </Link>
@@ -64,7 +65,7 @@ export function RecentlyOn({ id }: { id: number }) {
               <div className="h-32 w-32">
                 <Link to={`/media/${recentlyOn[1].id}`}>
                   <MyImage
-                    src={recentlyOn[1].imageUrl}
+                    src={apiUrl + recentlyOn[1].imageUrl}
                     alt={recentlyOn[1].title}
                   />
                 </Link>
@@ -95,7 +96,7 @@ export function RecentlyOn({ id }: { id: number }) {
               <div className="h-32 w-32">
                 <Link to={`/media/${recentlyOn[2].id}`}>
                   <MyImage
-                    src={recentlyOn[2].imageUrl}
+                    src={apiUrl + recentlyOn[2].imageUrl}
                     alt={recentlyOn[2].title}
                   />
                 </Link>

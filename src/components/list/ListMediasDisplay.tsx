@@ -1,7 +1,7 @@
 import React from "react";
 import { Media } from "../../utils/type.ts";
 import { Pagination } from "../common/Pagination.tsx";
-import { ListItem } from "../common/ListItem.tsx";
+import { MediaItem } from "../common/MediaItem.tsx";
 import { EmptyMedias } from "../common/EmptyMedias.tsx";
 
 export function ListMediasDisplay({
@@ -28,7 +28,7 @@ export function ListMediasDisplay({
       </div>
       {medias.length > 0 ? (
         medias.map((media, index) => {
-          return <ListItem media={media} key={index} />;
+          return <MediaItem media={media} key={index} />;
         })
       ) : (
         <EmptyMedias />

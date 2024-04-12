@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Media } from "../../utils/type";
-import { ListItem } from "../common/ListItem";
+import { MediaItem } from "../common/MediaItem.tsx";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { getUserRatedAndReviewedMediasByType } from "../../apiUtils/userMediasApiUtil.ts";
 import { EmptyMedias } from "../common/EmptyMedias";
@@ -76,7 +76,7 @@ export function Collections({ id }: { id: number }) {
       {myItems.length > 0
         ? myItems.map((item) => (
             <div key={item.id} className="mt-4 flex h-auto w-full">
-              <ListItem media={item} />
+              <MediaItem media={item} />
             </div>
           ))
         : !loading && <EmptyMedias />}

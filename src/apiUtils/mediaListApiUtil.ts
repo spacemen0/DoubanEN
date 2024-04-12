@@ -1,5 +1,6 @@
 import { apiUrl } from "../utils/config";
 import { ListInfo, Media } from "../utils/type.ts";
+import { generateRandomImage } from "../utils/data.ts";
 
 export const getListItemsCount = async (id: number): Promise<number> => {
   let response = new Response();
@@ -51,6 +52,7 @@ export const getListInfo = async (id: number): Promise<ListInfo> => {
   const data = await response.json();
   data.username = data["user"]["username"];
   data.userId = data["user"]["id"];
+  data.imageUrl = generateRandomImage().src;
   return data as ListInfo;
 };
 
@@ -67,7 +69,12 @@ export const getUserLists = async (userId: number): Promise<ListInfo[]> => {
   if (!response.ok) {
     throw new Error("Response error");
   }
-  return (await response.json()) as ListInfo[];
+  const listInfos = (await response.json()) as ListInfo[];
+  listInfos.map((listInfo) => {
+    if (!listInfo.imageUrl) listInfo.imageUrl = generateRandomImage().src;
+    return listInfo;
+  });
+  return listInfos;
 };
 
 export const createList = async (

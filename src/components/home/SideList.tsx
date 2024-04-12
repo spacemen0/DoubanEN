@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Media } from "../../utils/type";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { ListItem } from "../common/ListItem";
+import { MediaItem } from "../common/MediaItem.tsx";
 import { getUserMediasByTypeWithPagination } from "../../apiUtils/userMediasApiUtil.ts";
 import { homePageEditorMediaIds } from "../../utils/data.ts";
 import { getMedia } from "../../apiUtils/mediaApiUtil.ts";
@@ -83,7 +83,7 @@ export function SideList() {
         (selectedOption === "My" && isLoggedIn)) &&
         items.map((item, index) => (
           <div key={index} className="mt-4 flex h-auto w-full overflow-clip">
-            <ListItem media={item} />
+            <MediaItem media={item} />
           </div>
         ))}
       {selectedOption === "My" && !isLoggedIn && (

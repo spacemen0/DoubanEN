@@ -1,6 +1,6 @@
 import { Media, User } from "../../utils/type.ts";
 import { Pagination } from "../common/Pagination.tsx";
-import { ListItem } from "../common/ListItem.tsx";
+import { MediaItem } from "../common/MediaItem.tsx";
 import { X } from "lucide-react";
 import { EmptyMedias } from "../common/EmptyMedias.tsx";
 import React from "react";
@@ -39,7 +39,7 @@ export function ListMediasDisplay({
         medias.map((media, index) => {
           return (
             <div className="relative" key={index}>
-              <ListItem media={media} />
+              <MediaItem media={media} />
               {user?.id === parseInt(userId!) && (
                 <button
                   className="absolute top-0 right-2"

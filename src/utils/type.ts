@@ -71,6 +71,7 @@ export type ListInfo = {
   description: string;
   updatedAt: string;
   title: string;
+  imageUrl: string;
 };
 
 export type ProfileFormData = {

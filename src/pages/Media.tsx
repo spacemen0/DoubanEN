@@ -6,7 +6,7 @@ import { MyImage } from "../components/common/MyImage";
 import { MediaInfo } from "../components/common/MediaInfo";
 import { useAuthContext } from "../contexts/AuthContext";
 import { Additional } from "../components/media/Additional";
-import { MediaOperationSection } from "../components/media/MediaOperationSection";
+import { MediaActionsSection } from "../components/media/MediaActionsSection.tsx";
 import { ReviewSection } from "../components/media/ReviewSection";
 import Loading from "../components/common/Loading";
 import { NotFound } from "../components/common/NotFound";
@@ -60,7 +60,7 @@ export default function MediaPage() {
               <h3 className="pb-2 text-2xl font-semibold">Description:</h3>
               {media.description}
             </div>
-            <MediaOperationSection
+            <MediaActionsSection
               media={media}
               onSuccess={fetchMedia}
               onSuccessAndRender={handleOnSuccessAndRender}
