@@ -8,7 +8,7 @@ import { updateProfile } from "../apiUtils/userApiUtil.ts";
 
 export default function Edit() {
   const navigate = useNavigate();
-  const { isLoggedIn, setMessage, user, token } = useAuthContext();
+  const { setMessage, user, token } = useAuthContext();
   const [processing, setProcessing] = useState(false);
   const [formData, setFormData] = useState<ProfileFormData>({
     bio: user?.bio ? user?.bio : null,
@@ -59,11 +59,11 @@ export default function Edit() {
     }
   };
   useEffect(() => {
-    if (!isLoggedIn) navigate("/login");
-  }, [isLoggedIn, navigate]);
+    if (!user) navigate("/login");
+  }, [user, navigate]);
 
   return (
-    <div className="max-h-screen flex flex-col overflow-hidden">
+    <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
       <div className="overflow-y-scroll">
         <div className="mx-auto mt-1 flex !md:flex-col w-full justify-center lg:mt-10 lg:w-4/6">

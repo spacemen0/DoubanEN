@@ -1,9 +1,51 @@
 import { Link } from "react-router-dom";
-import { Media } from "../../utils/type";
+import { Media, Score } from "../../utils/type";
 import { MyImage } from "./MyImage";
 import { apiUrl } from "../../utils/config.ts";
+import { Star, StarHalf } from "lucide-react";
+import { JSX } from "react";
 
-export function MediaItem({ media }: { media: Media }) {
+export function MediaItem({
+  media,
+  score,
+  text,
+}: {
+  media: Media;
+  score?: Score;
+  text?: string;
+}) {
+  const renderStars = () => {
+    if (score) {
+      const stars = Math.floor(score);
+      const hasHalfStar = score % 1 !== 0;
+      const starElements: JSX.Element[] = [];
+
+      for (let i = 0; i < stars; i++) {
+        starElements.push(
+          <Star
+            strokeWidth={0}
+            size={28}
+            key={`full-star-${i}`}
+            color="rgb(234 179 8)"
+            fill="rgb(234 179 8)"
+          />,
+        );
+      }
+
+      if (hasHalfStar) {
+        starElements.push(
+          <StarHalf
+            strokeWidth={0}
+            size={28}
+            key="half-star"
+            color="rgb(234 179 8)"
+            fill="rgb(234 179 8)"
+          />,
+        );
+      }
+      return starElements;
+    }
+  };
   return (
     <div className="flex w-full">
       <div className="mt-2 mr-2 h-full max-h-32 w-full overflow-clip max-w-32 md:mr-4 lg:mr-6">
@@ -114,6 +156,20 @@ export function MediaItem({ media }: { media: Media }) {
             {media.wants}
           </p>
         </div>
+        {score && (
+          <div
+            className={`flex mt-2 justify-between lg:justify-start items-center text-xl font-semibold ${
+              media.type === "Music"
+                ? "text-Music"
+                : media.type === "Movie"
+                  ? "text-Movie"
+                  : "text-Book"
+            }`}
+          >
+            {text}&nbsp;
+            <div className="flex">{renderStars()}</div>
+          </div>
+        )}
       </div>
     </div>
   );

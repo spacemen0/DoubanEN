@@ -56,7 +56,7 @@ function DropDownMenu({
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { isLoggedIn, logout, token, user, setMessage } = useAuthContext();
+  const { logout, token, user, setMessage } = useAuthContext();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -68,17 +68,17 @@ function DropDownMenu({
   return (
     isOpen && (
       <div className="absolute top-10 right-0 w-36 bg-white font-bold shadow-lg ring-1 ring-opacity-5 text-Neutral ring-Neutral-Strong md:top-9">
-        {isLoggedIn ? (
+        {user ? (
           <div>
             <MenuItem
-              link={`/profile/${user!.id}`}
+              link={`/profile/${user.id}`}
               onClick={() => {
                 setIsOpen(false);
               }}
               text="Profile"
             />
             <MenuItem
-              link={`/lists/${user!.id}`}
+              link={`/lists/${user.id}`}
               onClick={() => {
                 setIsOpen(false);
               }}

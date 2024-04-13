@@ -16,10 +16,10 @@ export default function Register() {
   });
   const navigate = useNavigate();
   const [processing, setProcessing] = useState(false);
-  const { isLoggedIn, register, setMessage } = useAuthContext();
+  const { user, register, setMessage } = useAuthContext();
   useEffect(() => {
-    if (isLoggedIn) navigate("/");
-  }, [isLoggedIn, navigate]);
+    if (user) navigate("/");
+  }, [user, navigate]);
 
   const handleRegister = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();

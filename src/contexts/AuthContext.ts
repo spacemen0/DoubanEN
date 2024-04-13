@@ -2,7 +2,6 @@ import { User } from "../utils/type";
 import React, { useContext } from "react";
 
 export interface AuthContextType {
-  isLoggedIn: boolean | null;
   user: User | null;
   token: string | null;
   message: string | null;

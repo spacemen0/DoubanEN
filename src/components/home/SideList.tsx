@@ -11,7 +11,7 @@ export function SideList() {
     "Editor",
   );
   const [items, setItems] = useState<Media[]>([]);
-  const { isLoggedIn, user, setMessage } = useAuthContext();
+  const { user, setMessage } = useAuthContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,14 +79,13 @@ export function SideList() {
       <div className="flex justify-between gap-3 border-b border-gray-200 pb-1 pl-32 text-xl font-semibold text-Neutral-Mild md:gap-6 lg:justify-end lg:gap-9 lg:pl-0">
         <span>Average</span> <span>Rated</span> <span>Wants</span>
       </div>
-      {(selectedOption === "Editor" ||
-        (selectedOption === "My" && isLoggedIn)) &&
+      {(selectedOption === "Editor" || (selectedOption === "My" && user)) &&
         items.map((item, index) => (
           <div key={index} className="mt-4 flex h-auto w-full overflow-clip">
             <MediaItem media={item} />
           </div>
         ))}
-      {selectedOption === "My" && !isLoggedIn && (
+      {selectedOption === "My" && !user && (
         <p className="mt-2 text-xl">
           Create a new account or sign in to keep track of your favorites
         </p>

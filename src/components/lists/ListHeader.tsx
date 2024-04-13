@@ -18,7 +18,7 @@ export function ListHeader({
   const list = lists.filter((list) => list.id === selectedList)[0];
   return (
     <div className="flex !md:flex-col justify-start lg:max-w-[75%] mt-4">
-      <div className="h-48 w-48 mr-2 my-6 flex-shrink-0">
+      <div className="my-6 mr-2 h-48 w-48 flex-shrink-0">
         <MyImage src={list.imageUrl} alt={list.title} />
       </div>
       <div className="mt-2 w-fit rounded-md py-2 md:mt-4">

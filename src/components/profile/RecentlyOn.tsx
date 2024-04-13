@@ -20,6 +20,15 @@ export function RecentlyOn({ id }: { id: number }) {
     };
     getCurrentOn().then();
   }, [id, setMessage]);
+  const music = recentlyOn?.filter((item) => {
+    return item.type === "Music";
+  })[0];
+  const movie = recentlyOn?.filter((item) => {
+    return item.type === "Movie";
+  })[0];
+  const book = recentlyOn?.filter((item) => {
+    return item.type === "Book";
+  })[0];
   if (!recentlyOn) {
     return <></>;
   }
@@ -29,24 +38,21 @@ export function RecentlyOn({ id }: { id: number }) {
         {" "}
         <h1 className="m-2 text-center font-bold">Listening</h1>
         <div className="flex p-2 text-center">
-          {recentlyOn.length >= 1 ? (
+          {music ? (
             <>
               <div className="h-32 w-32">
-                <Link to={`/media/${recentlyOn[0].id}`}>
-                  <MyImage
-                    src={apiUrl + recentlyOn[0].imageUrl}
-                    alt={recentlyOn[0].title}
-                  />
+                <Link to={`/media/${music.id}`}>
+                  <MyImage src={apiUrl + music.imageUrl} alt={music.title} />
                 </Link>
               </div>
               <div className="flex w-3/4 flex-col justify-center">
                 {" "}
-                <Link to={`/media/${recentlyOn[0].id}`}>
+                <Link to={`/media/${music.id}`}>
                   <h1 className="w-full text-center font-bold hover:text-Neutral-Strong">
-                    {recentlyOn[0].title}
+                    {music.title}
                   </h1>
                 </Link>
-                <h1 className="w-full text-center">{recentlyOn[0].author}</h1>
+                <h1 className="w-full text-center">{music.author}</h1>
               </div>
             </>
           ) : (
@@ -60,24 +66,21 @@ export function RecentlyOn({ id }: { id: number }) {
         {" "}
         <h1 className="m-2 text-center font-bold">Watching</h1>
         <div className="flex p-2 text-center">
-          {recentlyOn.length >= 2 ? (
+          {movie ? (
             <>
               <div className="h-32 w-32">
-                <Link to={`/media/${recentlyOn[1].id}`}>
-                  <MyImage
-                    src={apiUrl + recentlyOn[1].imageUrl}
-                    alt={recentlyOn[1].title}
-                  />
+                <Link to={`/media/${movie.id}`}>
+                  <MyImage src={apiUrl + movie.imageUrl} alt={movie.title} />
                 </Link>
               </div>
 
               <div className="ml-4 flex w-3/4 flex-col justify-center">
-                <Link to={`/media/${recentlyOn[1].id}`}>
+                <Link to={`/media/${movie.id}`}>
                   <h1 className="w-full text-center font-bold hover:text-Neutral-Strong">
-                    {recentlyOn[1].title}
+                    {movie.title}
                   </h1>
                 </Link>
-                <h1 className="w-full text-center">{recentlyOn[1].author}</h1>
+                <h1 className="w-full text-center">{movie.author}</h1>
               </div>
             </>
           ) : (
@@ -91,25 +94,22 @@ export function RecentlyOn({ id }: { id: number }) {
         {" "}
         <h1 className="m-2 text-center font-bold">Reading</h1>
         <div className="flex p-2 text-center">
-          {recentlyOn.length >= 3 ? (
+          {book ? (
             <>
               <div className="h-32 w-32">
-                <Link to={`/media/${recentlyOn[2].id}`}>
-                  <MyImage
-                    src={apiUrl + recentlyOn[2].imageUrl}
-                    alt={recentlyOn[2].title}
-                  />
+                <Link to={`/media/${book.id}`}>
+                  <MyImage src={apiUrl + book.imageUrl} alt={book.title} />
                 </Link>
               </div>
 
               <div className="ml-4 flex w-3/4 flex-col justify-center">
                 {" "}
-                <Link to={`/media/${recentlyOn[2].id}`}>
+                <Link to={`/media/${book.id}`}>
                   <h1 className="w-full text-center font-bold hover:text-Neutral-Strong">
-                    {recentlyOn[2].title}
+                    {book.title}
                   </h1>
                 </Link>
-                <h1 className="w-full text-center">{recentlyOn[2].author}</h1>
+                <h1 className="w-full text-center">{book.author}</h1>
               </div>
             </>
           ) : (

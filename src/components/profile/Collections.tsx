@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
-import { Media } from "../../utils/type";
+import { Media, MediaStatus, Score } from "../../utils/type";
 import { MediaItem } from "../common/MediaItem.tsx";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { getUserRatedAndReviewedMediasByType } from "../../apiUtils/userMediasApiUtil.ts";
+import {
+  getUserRatedAndReviewedMediasByType,
+  getUserRatedAndReviewedMediaStatusesByType,
+} from "../../apiUtils/userMediasApiUtil.ts";
 import { EmptyMedias } from "../common/EmptyMedias";
 
 export function Collections({ id }: { id: number }) {
   const [selectedOption, setSelectedOption] = useState<
     "Music" | "Movie" | "Book"
   >("Music");
-  const [myItems, setItems] = useState<Media[]>([]);
+  const [items, setItems] = useState<Media[]>([]);
+  const [statuses, setStatuses] = useState<MediaStatus[]>([]);
   const [loading, setLoading] = useState(true);
   const { setMessage } = useAuthContext();
 
@@ -28,12 +32,29 @@ export function Collections({ id }: { id: number }) {
         setLoading(false);
         setItems(items);
       } catch (error) {
-        console.log("Error: ", error);
         setMessage(`Error fetching Music Collection items`);
       }
     };
 
     fetchCollection().then();
+  }, [id, selectedOption, setMessage]);
+
+  useEffect(() => {
+    const fetchStatuses = async () => {
+      try {
+        setLoading(true);
+        const mediaStatuses = await getUserRatedAndReviewedMediaStatusesByType(
+          id,
+          selectedOption,
+        );
+        setLoading(false);
+        setStatuses(mediaStatuses);
+      } catch (error) {
+        setMessage(`Error fetching Music Collection items`);
+      }
+    };
+
+    fetchStatuses().then();
   }, [id, selectedOption, setMessage]);
 
   return (
@@ -73,10 +94,21 @@ export function Collections({ id }: { id: number }) {
       <div className="flex justify-between border-b border-gray-200 py-2 pl-32 text-xl font-semibold text-Neutral-Mild xl:pr-2 2xl:pl-48 3xl:pr-4 3xl:pl-64">
         <span>Average</span> <span>Rated</span> <span>Wants</span>
       </div>
-      {myItems.length > 0
-        ? myItems.map((item) => (
+      {items.length > 0
+        ? items.map((item) => (
             <div key={item.id} className="mt-4 flex h-auto w-full">
-              <MediaItem media={item} />
+              <MediaItem
+                media={item}
+                score={
+                  statuses.filter((status) => status.mediaId === item.id)
+                    .length > 0
+                    ? (statuses.filter(
+                        (status) => status.mediaId === item.id,
+                      )[0].score as Score)
+                    : undefined
+                }
+                text="Their Rating: "
+              />
             </div>
           ))
         : !loading && <EmptyMedias />}

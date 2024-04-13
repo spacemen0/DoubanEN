@@ -31,9 +31,6 @@ function getWithExpiry<T>(key: string): T | null {
 export const AuthProvider: FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(() =>
-    getWithExpiry<boolean>("isAuthenticated"),
-  );
   const [user, setUser] = useState<User | null>(() =>
     getWithExpiry<User>("user"),
   );
@@ -44,17 +41,15 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
   const [message, setMessage] = useState<string | null>("");
 
   useEffect(() => {
-    isLoggedIn && setWithExpiry("isAuthenticated", isLoggedIn, expiryTime);
     user && setWithExpiry("user", user, expiryTime);
     token && setWithExpiry("token", token, expiryTime);
-  }, [isLoggedIn, user, token]);
+  }, [user, token]);
 
   const handleLogin = useCallback(
     async (username: string, password: string) => {
       const response = await login(username, password);
       if (response.userId) {
         const currentUser = await fetchUser(response.userId);
-        setIsLoggedIn(true);
         setToken(response.token);
         setUser(currentUser);
       } else {
@@ -66,7 +61,6 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
 
   const handleLogout = useCallback(async (token: string) => {
     await logout(token);
-    setIsLoggedIn(false);
     setUser(null);
     setToken(null);
     setMessage(null);
@@ -78,7 +72,6 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
 
       if (response.userId) {
         const newUser = await fetchUser(response.userId);
-        setIsLoggedIn(true);
         setToken(response.token);
         setUser(newUser);
       } else {
@@ -93,7 +86,6 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
   }, []);
 
   const contextValue: AuthContextType = {
-    isLoggedIn,
     user,
     token,
     message: message,

@@ -11,7 +11,7 @@ export default function Profile() {
   const { id } = useParams();
   const [exist, setExist] = useState(true);
   const [username, setUsername] = useState<string>("");
-  if (!exist) return <NotFound />;
+  if (!exist && id) return <NotFound />;
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />

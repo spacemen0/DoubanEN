@@ -14,9 +14,9 @@ export default function Login() {
   });
   const [processing, setProcessing] = useState(false);
   const navigate = useNavigate();
-  const { isLoggedIn, user, login, setMessage } = useAuthContext();
+  const { user, login, setMessage } = useAuthContext();
   useEffect(() => {
-    if (isLoggedIn) navigate(`/profile/${user?.id}`);
+    if (user) navigate(`/profile/${user.id}`);
   });
 
   const handleLogin = async (e: React.ChangeEvent<HTMLFormElement>) => {

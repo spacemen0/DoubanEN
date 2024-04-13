@@ -32,7 +32,7 @@ export function MediaActionsSection({
     status: "None",
     score: 0,
   });
-  const { isLoggedIn, user, setMessage, token } = useAuthContext();
+  const { user, setMessage, token } = useAuthContext();
 
   useEffect(() => {
     const stars = Math.floor(mediaStatus.score);
@@ -79,8 +79,8 @@ export function MediaActionsSection({
     }
   }, [media.id, setMessage, user]);
   useEffect(() => {
-    if (isLoggedIn) fetchStatus().then();
-  }, [fetchStatus, isLoggedIn]);
+    if (user) fetchStatus().then();
+  }, [fetchStatus, user]);
 
   const handleSuccess = async () => {
     await fetchStatus();
@@ -96,6 +96,110 @@ export function MediaActionsSection({
     setMediaStatus({ ...mediaStatus, score: MyScore });
   };
 
+  const handleRatingButtonClick = async () => {
+    if (user) {
+      try {
+        if (mediaStatus.status === "Rated") {
+          await deleteRating(mediaStatus.id!, token!);
+          setMessage("Rating deleted");
+          await handleSuccess();
+        } else {
+          if (mediaStatus.score !== 0) {
+            const score = mediaStatus.score as Score;
+            // const newDate = new Date(Date.now());
+            await submitRating(user.id, score, media.id, media.type, token!);
+            setMessage("Rating submitted");
+            await handleSuccess();
+          } else setMessage("Please rate before submitting");
+        }
+      } catch (error) {
+        setMessage("Error processing Submit Rating request");
+      }
+    } else {
+      setMessage("Please log in to take action");
+    }
+  };
+
+  const handleDoingButtonClick = async () => {
+    if (user) {
+      try {
+        if (mediaStatus.status === "Doing") {
+          await cancelDoing(mediaStatus.id!, token!);
+          setMessage(
+            `${
+              media.type === "Music"
+                ? "Listing"
+                : media.type === "Movie"
+                  ? "Watching"
+                  : "Reading"
+            } status canceled`,
+          );
+          await handleSuccess();
+        } else {
+          await setDoing(user.id, media.id, media.type, token!);
+          setMessage(
+            `Set ${
+              media.type === "Music"
+                ? "listing"
+                : media.type === "Movie"
+                  ? "watching"
+                  : "reading"
+            } status successfully`,
+          );
+          await handleSuccess();
+        }
+      } catch (error) {
+        setMessage(
+          `Error processing Set ${
+            media.type === "Music"
+              ? "Listing"
+              : media.type === "Movie"
+                ? "Watching"
+                : "Reading"
+          }request`,
+        );
+      }
+    } else {
+      setMessage("Please log in to take action");
+    }
+  };
+  const handleWishlistButtonClick = async () => {
+    if (user) {
+      try {
+        if (mediaStatus.status === "Wishlist") {
+          await cancelWishlist(mediaStatus.id!, token!);
+          setMessage("Removed from wishlist");
+          await handleSuccess();
+        } else {
+          await setWishlist(user.id, media.id, media.type, token!);
+          setMessage("Added to wishlist");
+          await handleSuccess();
+        }
+      } catch (error) {
+        setMessage("Error processing Set On Wishlist request");
+      }
+    } else {
+      setMessage("Please log in to take action");
+    }
+  };
+
+  const handleReviewButtonClick = async () => {
+    if (user) {
+      try {
+        if (mediaStatus.status === "Reviewed") {
+          await deleteReview(user.id, media.id, mediaStatus.id!, token!);
+          setMessage("Review deleted");
+          await handleOnSuccessAndRender();
+        } else {
+          if (mediaStatus.score !== 0) setShowReviewBox(!showReviewBox);
+          else setMessage("Please rate before posting a review");
+        }
+      } catch (error) {
+        setMessage("Error processing Set On Wishlist request");
+      }
+    } else setMessage("Please log in to take action");
+  };
+
   return (
     <div className="mt-4 border-t-2 border-b-2 py-4">
       {showReviewBox && (
@@ -107,38 +211,7 @@ export function MediaActionsSection({
         />
       )}
       {showListBox && <ListBox setShowListBox={setShowListBox} media={media} />}
-      <div className="flex !md:flex-col justify-center items-start md:justify-start md:items-center">
-        <p className="text-2xl font-bold">Rating/Catalog</p>
-
-        {mediaStatus.status === "Rated" && (
-          <div className="text-xl md:pl-4">
-            <span>Rated at: {mediaStatus.date}</span>
-          </div>
-        )}
-        {mediaStatus.status === "Reviewed" && (
-          <div className="text-xl md:pl-4">
-            <span>Reviewed at: {mediaStatus.date}</span>
-          </div>
-        )}
-        {mediaStatus.status === "Wishlist" && (
-          <div className="text-xl md:pl-4">
-            <span>Added to wishlist at: {mediaStatus.date}</span>
-          </div>
-        )}
-        {mediaStatus.status === "Doing" && (
-          <div className="text-xl md:pl-4">
-            <span>
-              Set{" "}
-              {media.type === "Music"
-                ? "listening"
-                : media.type === "Movie"
-                  ? "watching"
-                  : "reading"}{" "}
-              at: {mediaStatus.date}
-            </span>
-          </div>
-        )}
-      </div>
+      <StatusInfo mediaStatus={mediaStatus} media={media} />
       <button
         className="md:pl-4 mt-4 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
          focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors"
@@ -194,41 +267,13 @@ export function MediaActionsSection({
         </div>
         <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4">
           <button
-            onClick={async () => {
-              if (user) {
-                try {
-                  if (mediaStatus.status === "Rated") {
-                    await deleteRating(mediaStatus.id!, token!);
-                    setMessage("Rating deleted");
-                    await handleSuccess();
-                  } else {
-                    if (mediaStatus.score !== 0) {
-                      const score = mediaStatus.score as Score;
-                      // const newDate = new Date(Date.now());
-                      await submitRating(
-                        user.id,
-                        score,
-                        media.id,
-                        media.type,
-                        token!,
-                      );
-                      setMessage("Rating submitted");
-                      await handleSuccess();
-                    } else setMessage("Please rate before submitting");
-                  }
-                } catch (error) {
-                  setMessage("Error processing Submit Rating request");
-                }
-              } else {
-                setMessage("Please log in to take action");
-              }
-            }}
+            onClick={handleRatingButtonClick}
             className={`mt-4 lg:ml-2 text-white font-semibold py-2 px-4 rounded-md transition-colors disabled:cursor-not-allowed 
          ${mediaStatus.status === "Rated" ? "bg-Neutral-Strong " : "bg-Neutral-Mild "}${
            mediaStatus.status !== "Rated" && mediaStatus.status !== "None"
              ? ""
-             : "hover:bg-gray-400 focus:outline-none\n" +
-               "         focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
+             : "hover:bg-gray-400 focus:outline-none " +
+               "focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
          }`}
             disabled={
               mediaStatus.status !== "Rated" && mediaStatus.status !== "None"
@@ -241,55 +286,13 @@ export function MediaActionsSection({
          ${mediaStatus.status === "Doing" ? "bg-Neutral-Strong " : "bg-Neutral-Mild "}${
            mediaStatus.status !== "Doing" && mediaStatus.status !== "None"
              ? ""
-             : "hover:bg-gray-400 focus:outline-none\n" +
-               "         focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
+             : "hover:bg-gray-400 focus:outline-none " +
+               "focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
          }`}
             disabled={
               mediaStatus.status !== "Doing" && mediaStatus.status !== "None"
             }
-            onClick={async () => {
-              if (user) {
-                try {
-                  if (mediaStatus.status === "Doing") {
-                    await cancelDoing(mediaStatus.id!, token!);
-                    setMessage(
-                      `${
-                        media.type === "Music"
-                          ? "Listing"
-                          : media.type === "Movie"
-                            ? "Watching"
-                            : "Reading"
-                      } status canceled`,
-                    );
-                    await handleSuccess();
-                  } else {
-                    await setDoing(user.id, media.id, media.type, token!);
-                    setMessage(
-                      `Set ${
-                        media.type === "Music"
-                          ? "listing"
-                          : media.type === "Movie"
-                            ? "watching"
-                            : "reading"
-                      } status successfully`,
-                    );
-                    await handleSuccess();
-                  }
-                } catch (error) {
-                  setMessage(
-                    `Error processing Set ${
-                      media.type === "Music"
-                        ? "Listing"
-                        : media.type === "Movie"
-                          ? "Watching"
-                          : "Reading"
-                    }request`,
-                  );
-                }
-              } else {
-                setMessage("Please log in to take action");
-              }
-            }}
+            onClick={handleDoingButtonClick}
           >
             {mediaStatus.status === "Doing" ? "Cancel " : "Set "}
             {media.type === "Music"
@@ -305,31 +308,13 @@ export function MediaActionsSection({
                                mediaStatus.status !== "Wishlist" &&
                                mediaStatus.status !== "None"
                                  ? ""
-                                 : "hover:bg-gray-400 focus:outline-none\n" +
-                                   "         focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
+                                 : "hover:bg-gray-400 focus:outline-none " +
+                                   "focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
                              }`}
             disabled={
               mediaStatus.status !== "Wishlist" && mediaStatus.status !== "None"
             }
-            onClick={async () => {
-              if (user) {
-                try {
-                  if (mediaStatus.status === "Wishlist") {
-                    await cancelWishlist(mediaStatus.id!, token!);
-                    setMessage("Removed from wishlist");
-                    await handleSuccess();
-                  } else {
-                    await setWishlist(user.id, media.id, media.type, token!);
-                    setMessage("Added to wishlist");
-                    await handleSuccess();
-                  }
-                } catch (error) {
-                  setMessage("Error processing Set On Wishlist request");
-                }
-              } else {
-                setMessage("Please log in to take action");
-              }
-            }}
+            onClick={handleWishlistButtonClick}
           >
             {mediaStatus.status === "Wishlist" ? "Cancel" : "On"} Wishlist
           </button>
@@ -339,39 +324,61 @@ export function MediaActionsSection({
                                mediaStatus.status !== "Reviewed" &&
                                mediaStatus.status !== "None"
                                  ? ""
-                                 : "hover:bg-gray-400 focus:outline-none\n" +
-                                   "         focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
+                                 : "hover:bg-gray-400 focus:outline-none " +
+                                   "focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
                              }`}
             disabled={
               mediaStatus.status !== "Reviewed" && mediaStatus.status !== "None"
             }
-            onClick={async () => {
-              if (user) {
-                try {
-                  if (mediaStatus.status === "Reviewed") {
-                    await deleteReview(
-                      user.id,
-                      media.id,
-                      mediaStatus.id!,
-                      token!,
-                    );
-                    setMessage("Review deleted");
-                    await handleOnSuccessAndRender();
-                  } else {
-                    if (mediaStatus.score !== 0)
-                      setShowReviewBox(!showReviewBox);
-                    else setMessage("Please rate before posting a review");
-                  }
-                } catch (error) {
-                  setMessage("Error processing Set On Wishlist request");
-                }
-              } else setMessage("Please log in to take action");
-            }}
+            onClick={handleReviewButtonClick}
           >
             {mediaStatus.status === "Reviewed" ? "Delete" : "New"} Review
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+function StatusInfo({
+  mediaStatus,
+  media,
+}: {
+  mediaStatus: MediaStatus;
+  media: Media;
+}) {
+  return (
+    <div className="flex !md:flex-col justify-center items-start md:justify-start md:items-center">
+      <p className="text-2xl font-bold">Rating/Catalog</p>
+
+      {mediaStatus.status === "Rated" && (
+        <div className="text-xl md:pl-4">
+          <span>Rated at: {mediaStatus.date}</span>
+        </div>
+      )}
+      {mediaStatus.status === "Reviewed" && (
+        <div className="text-xl md:pl-4">
+          <span>Reviewed at: {mediaStatus.date}</span>
+        </div>
+      )}
+      {mediaStatus.status === "Wishlist" && (
+        <div className="text-xl md:pl-4">
+          <span>Added to wishlist at: {mediaStatus.date}</span>
+        </div>
+      )}
+      {mediaStatus.status === "Doing" && (
+        <div className="text-xl md:pl-4">
+          <span>
+            Set{" "}
+            {media.type === "Music"
+              ? "listening"
+              : media.type === "Movie"
+                ? "watching"
+                : "reading"}{" "}
+            at: {mediaStatus.date}
+          </span>
+        </div>
+      )}
     </div>
   );
 }
