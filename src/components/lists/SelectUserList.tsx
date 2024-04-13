@@ -6,19 +6,22 @@ export function SelectUserList({
   lists,
   setSelectedList,
   selectedList,
+  setCurrentPage,
 }: {
   username: string | undefined;
   lists: ListInfo[];
   setSelectedList: React.Dispatch<React.SetStateAction<number | undefined>>;
   selectedList: number | undefined;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }) {
   return (
-    <div className="mx-2 mt-4 flex items-center justify-center text-xl font-semibold md:mt-8 md:gap-4 md:text-3xl lg:font-bold">
+    <div className="mx-2 mt-4 flex !md:flex-col !md:gap-2 items-center justify-center text-xl font-semibold md:mt-8 md:gap-4 md:text-3xl lg:font-bold">
       <h1>{username}'s Lists:</h1>
       {lists.length > 0 ? (
         <select
           id="chooseList"
           onChange={(event) => {
+            setCurrentPage(1);
             setSelectedList(parseInt(event.target.value));
           }}
           onFocus={(event) => {

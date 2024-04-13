@@ -212,13 +212,6 @@ export function MediaActionsSection({
                         media.type,
                         token!,
                       );
-
-                      // setMediaStatus({
-                      //   ...mediaStatus,
-                      //   score: score,
-                      //   status: "Rated",
-                      //   date: newDate.toISOString().split("T")[0],
-                      // });
                       setMessage("Rating submitted");
                       await handleSuccess();
                     } else setMessage("Please rate before submitting");
@@ -230,9 +223,13 @@ export function MediaActionsSection({
                 setMessage("Please log in to take action");
               }
             }}
-            className={`mt-4 lg:ml-2 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
-         focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors disabled:cursor-not-allowed
-         ${mediaStatus.status === "Rated" ? "bg-Neutral-Strong" : "bg-Neutral-Mild"}`}
+            className={`mt-4 lg:ml-2 text-white font-semibold py-2 px-4 rounded-md transition-colors disabled:cursor-not-allowed 
+         ${mediaStatus.status === "Rated" ? "bg-Neutral-Strong " : "bg-Neutral-Mild "}${
+           mediaStatus.status !== "Rated" && mediaStatus.status !== "None"
+             ? ""
+             : "hover:bg-gray-400 focus:outline-none\n" +
+               "         focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
+         }`}
             disabled={
               mediaStatus.status !== "Rated" && mediaStatus.status !== "None"
             }
@@ -240,9 +237,13 @@ export function MediaActionsSection({
             {mediaStatus.status === "Rated" ? "Delete" : "Submit"} Rating
           </button>
           <button
-            className={`md:mt-4 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
-         focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors disabled:cursor-not-allowed
-         ${mediaStatus.status === "Doing" ? "bg-Neutral-Strong" : "bg-Neutral-Mild"}`}
+            className={`md:mt-4 text-white font-semibold py-2 px-4 rounded-md transition-colors disabled:cursor-not-allowed 
+         ${mediaStatus.status === "Doing" ? "bg-Neutral-Strong " : "bg-Neutral-Mild "}${
+           mediaStatus.status !== "Doing" && mediaStatus.status !== "None"
+             ? ""
+             : "hover:bg-gray-400 focus:outline-none\n" +
+               "         focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
+         }`}
             disabled={
               mediaStatus.status !== "Doing" && mediaStatus.status !== "None"
             }
@@ -261,11 +262,6 @@ export function MediaActionsSection({
                       } status canceled`,
                     );
                     await handleSuccess();
-                    // setMediaStatus({
-                    //   ...mediaStatus,
-                    //   score: 0,
-                    //   status: "None",
-                    // });
                   } else {
                     await setDoing(user.id, media.id, media.type, token!);
                     setMessage(
@@ -278,12 +274,6 @@ export function MediaActionsSection({
                       } status successfully`,
                     );
                     await handleSuccess();
-                    // setMediaStatus({
-                    //   ...mediaStatus,
-                    //   score: 0,
-                    //   status: "Doing",
-                    //   date: new Date(Date.now()).toISOString().split("T")[0],
-                    // });
                   }
                 } catch (error) {
                   setMessage(
@@ -310,9 +300,14 @@ export function MediaActionsSection({
           </button>
 
           <button
-            className={`  lg:mt-4 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
-                            focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors disabled:cursor-not-allowed
-                             ${mediaStatus.status === "Wishlist" ? "bg-Neutral-Strong" : "bg-Neutral-Mild"}`}
+            className={`  lg:mt-4 text-white font-semibold py-2 px-4 rounded-md transition-colors disabled:cursor-not-allowed 
+                             ${mediaStatus.status === "Wishlist" ? "bg-Neutral-Strong " : "bg-Neutral-Mild "}${
+                               mediaStatus.status !== "Wishlist" &&
+                               mediaStatus.status !== "None"
+                                 ? ""
+                                 : "hover:bg-gray-400 focus:outline-none\n" +
+                                   "         focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
+                             }`}
             disabled={
               mediaStatus.status !== "Wishlist" && mediaStatus.status !== "None"
             }
@@ -323,20 +318,9 @@ export function MediaActionsSection({
                     await cancelWishlist(mediaStatus.id!, token!);
                     setMessage("Removed from wishlist");
                     await handleSuccess();
-                    // setMediaStatus({
-                    //   ...mediaStatus,
-                    //   score: 0,
-                    //   status: "None",
-                    // });
                   } else {
                     await setWishlist(user.id, media.id, media.type, token!);
                     setMessage("Added to wishlist");
-                    // setMediaStatus({
-                    //   ...mediaStatus,
-                    //   score: 0,
-                    //   status: "Wishlist",
-                    //   date: new Date(Date.now()).toISOString().split("T")[0],
-                    // });
                     await handleSuccess();
                   }
                 } catch (error) {
@@ -350,9 +334,14 @@ export function MediaActionsSection({
             {mediaStatus.status === "Wishlist" ? "Cancel" : "On"} Wishlist
           </button>
           <button
-            className={`  lg:mt-4 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
-                            focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors disabled:cursor-not-allowed
-                             ${mediaStatus.status === "Reviewed" ? "bg-Neutral-Strong" : "bg-Neutral-Mild"}`}
+            className={`  lg:mt-4 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md transition-colors disabled:cursor-not-allowed 
+                             ${mediaStatus.status === "Reviewed" ? "bg-Neutral-Strong " : "bg-Neutral-Mild "}${
+                               mediaStatus.status !== "Reviewed" &&
+                               mediaStatus.status !== "None"
+                                 ? ""
+                                 : "hover:bg-gray-400 focus:outline-none\n" +
+                                   "         focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
+                             }`}
             disabled={
               mediaStatus.status !== "Reviewed" && mediaStatus.status !== "None"
             }
@@ -368,11 +357,6 @@ export function MediaActionsSection({
                     );
                     setMessage("Review deleted");
                     await handleOnSuccessAndRender();
-                    // setMediaStatus({
-                    //   ...mediaStatus,
-                    //   score: 0,
-                    //   status: "None",
-                    // });
                   } else {
                     if (mediaStatus.score !== 0)
                       setShowReviewBox(!showReviewBox);

@@ -80,10 +80,11 @@ export default function Collection() {
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
-      <div className="mt-2 overflow-y-scroll px-2 lg:px-4">
+      <div className="overflow-y-scroll px-2 lg:px-4">
         <OptionSelect
           selectedOption={selectedOption}
           handleOptionClick={handleOptionClick}
+          setCurrentPage={setCurrentPage}
         />
         <CollectionMediasDisplay
           medias={medias}

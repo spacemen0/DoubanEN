@@ -129,6 +129,7 @@ export default function Lists() {
             lists={lists}
             setSelectedList={setSelectedList}
             selectedList={selectedList}
+            setCurrentPage={setCurrentPage}
           />
           {selectedList ? (
             <div className="mx-2">

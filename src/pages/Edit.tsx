@@ -63,7 +63,7 @@ export default function Edit() {
   }, [isLoggedIn, navigate]);
 
   return (
-    <div className="max-h-screen overflow-hidden">
+    <div className="max-h-screen flex flex-col overflow-hidden">
       <PageHeader />
       <div className="overflow-y-scroll">
         <div className="mx-auto mt-1 flex !md:flex-col w-full justify-center lg:mt-10 lg:w-4/6">

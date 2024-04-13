@@ -5,6 +5,7 @@ import { User } from "../../utils/type";
 
 import { fetchUser } from "../../apiUtils/userApiUtil.ts";
 import { Link } from "react-router-dom";
+import { apiUrl } from "../../utils/config.ts";
 
 export function UserInfo({
   id,
@@ -44,7 +45,7 @@ export function UserInfo({
           <div className="mr-4 !md:max-w-32">
             <Link to={`/profile/${user.id}`}>
               <MyImage
-                src={user.profileImageUrl}
+                src={apiUrl + user.profileImageUrl}
                 alt={"Profile Image of " + user.username}
               />
             </Link>

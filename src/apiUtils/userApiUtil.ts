@@ -1,6 +1,5 @@
 import { AuthResponse, ProfileFormData, User } from "../utils/type";
 import { apiUrl } from "../utils/config";
-import { generateRandomImage } from "../utils/data";
 
 export const register = async (
   username: string,
@@ -87,7 +86,7 @@ export const fetchUser = async (id: number): Promise<User> => {
     throw new Error("Response error");
   }
   const data = (await response.json()) as User;
-  if (!data.profileImageUrl) data.profileImageUrl = generateRandomImage().src;
+  if (!data.profileImageUrl) data.profileImageUrl = "/images/303";
   return data;
 };
 

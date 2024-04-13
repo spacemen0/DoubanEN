@@ -4,31 +4,31 @@ import { Link, useNavigate } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { MenuItem } from "./MenuItem.tsx";
 import { MyImage } from "../MyImage.tsx";
-import { generateRandomImage } from "../../../utils/data.ts";
+import { apiUrl } from "../../../utils/config.ts";
 
 export default function HeaderUserSection() {
-  const { isLoggedIn, user } = useAuthContext();
+  const { user } = useAuthContext();
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="flex flex-shrink-0 items-center md:gap-1.5">
-      {isLoggedIn && (
+      {user && (
         <div className="h-10 w-10 transition-colors hover:bg-gray-100">
           <Link
             className="transition-colors hover:bg-gray-100"
-            to={`/profile/${user!.id}`}
+            to={`/profile/${user.id}`}
           >
-            <MyImage {...generateRandomImage()} />
+            <MyImage src={apiUrl + user.profileImageUrl} alt={user.username} />
           </Link>
         </div>
       )}
 
-      {isLoggedIn && (
+      {user && (
         <div className="pb-1">
           <Link
             className="hidden h-10 text-lg font-bold text-Neutral-Mild md:inline"
-            to={`/profile/${user?.id}`}
+            to={`/profile/${user.id}`}
           >
-            {user?.username}
+            {user.username}
           </Link>
         </div>
       )}
