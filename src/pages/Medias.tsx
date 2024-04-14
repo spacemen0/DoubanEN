@@ -10,7 +10,7 @@ import {
   getAllMediasByType,
   getAllMediasCountByType,
 } from "../apiUtils/mediaApiUtil.ts";
-import { EmptyMedias } from "../components/common/EmptyMedias";
+import { EmptyContent } from "../components/common/EmptyContent.tsx";
 import Loading from "../components/common/Loading.tsx";
 
 export default function Medias() {
@@ -79,7 +79,7 @@ export default function Medias() {
             return <MediaItem media={media} key={index} />;
           })
         ) : (
-          <EmptyMedias />
+          <EmptyContent />
         )}
       </div>
     </div>

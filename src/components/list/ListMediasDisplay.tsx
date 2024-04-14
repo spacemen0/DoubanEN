@@ -2,7 +2,7 @@ import React from "react";
 import { Media } from "../../utils/type.ts";
 import { Pagination } from "../common/Pagination.tsx";
 import { MediaItem } from "../common/MediaItem.tsx";
-import { EmptyMedias } from "../common/EmptyMedias.tsx";
+import { EmptyContent } from "../common/EmptyContent.tsx";
 
 export function ListMediasDisplay({
   count,
@@ -31,7 +31,7 @@ export function ListMediasDisplay({
           return <MediaItem media={media} key={index} />;
         })
       ) : (
-        <EmptyMedias />
+        <EmptyContent />
       )}
     </>
   );

@@ -11,7 +11,7 @@ export default function Edit() {
   const { setMessage, user, token } = useAuthContext();
   const [processing, setProcessing] = useState(false);
   const [formData, setFormData] = useState<ProfileFormData>({
-    bio: user?.bio ? user?.bio : null,
+    bio: null,
     email: null,
     password: null,
     oldPassword: null,
@@ -99,7 +99,7 @@ export default function Edit() {
                     htmlFor="password"
                     className="block text-sm font-medium text-Neutral"
                   >
-                    password
+                    New password
                   </label>
                   <input
                     type="password"

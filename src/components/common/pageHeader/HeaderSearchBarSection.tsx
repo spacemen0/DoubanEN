@@ -44,7 +44,7 @@ export default function HeaderSearchBarSection() {
       </button>
       <input
         type="search"
-        placeholder="Not yet implemented..."
+        placeholder="Not implemented..."
         className="my-1 w-full rounded-full border py-1 pr-10 pl-8 text-lg text-gray-600 shadow-inner outline-none md:pl-10"
         onClick={handleInputClick}
       />

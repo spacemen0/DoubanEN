@@ -7,6 +7,7 @@ import {
   getMediaReviewCount,
   getMediaReviews,
 } from "../../apiUtils/reviewApiUtil.ts";
+import { EmptyContent } from "../common/EmptyContent.tsx";
 
 export function ReviewSection({
   media,
@@ -58,7 +59,7 @@ export function ReviewSection({
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
-      {reviews.length >= 0 && (
+      {reviews.length > 0 ? (
         <ul>
           {reviews.map((review, index) => (
             <li key={index} className="mb-4 border-b pb-2">
@@ -66,6 +67,8 @@ export function ReviewSection({
             </li>
           ))}
         </ul>
+      ) : (
+        <EmptyContent />
       )}
     </div>
   );

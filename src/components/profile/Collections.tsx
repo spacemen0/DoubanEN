@@ -6,7 +6,7 @@ import {
   getUserRatedAndReviewedMediasByType,
   getUserRatedAndReviewedMediaStatusesByType,
 } from "../../apiUtils/userMediasApiUtil.ts";
-import { EmptyMedias } from "../common/EmptyMedias";
+import { EmptyContent } from "../common/EmptyContent.tsx";
 
 export function Collections({ id }: { id: number }) {
   const [selectedOption, setSelectedOption] = useState<
@@ -111,7 +111,7 @@ export function Collections({ id }: { id: number }) {
               />
             </div>
           ))
-        : !loading && <EmptyMedias />}
+        : !loading && <EmptyContent />}
     </div>
   );
 }

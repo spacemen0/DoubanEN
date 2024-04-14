@@ -13,7 +13,7 @@ import {
 } from "../apiUtils/mediaListApiUtil.ts";
 import { ListInfo, Media } from "../utils/type.ts";
 import { PageHeader } from "../components/common/PageHeader.tsx";
-import { EmptyMedias } from "../components/common/EmptyMedias.tsx";
+import { EmptyContent } from "../components/common/EmptyContent.tsx";
 import { SelectUserList } from "../components/lists/SelectUserList.tsx";
 import { ListHeader } from "../components/lists/ListHeader.tsx";
 import { ListMediasDisplay } from "../components/lists/ListMediasDisplay.tsx";
@@ -152,7 +152,7 @@ export default function Lists() {
               />
             </div>
           ) : (
-            <EmptyMedias />
+            <EmptyContent />
           )}
         </div>
       </div>

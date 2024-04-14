@@ -2,7 +2,7 @@ import { Media, User } from "../../utils/type.ts";
 import { Pagination } from "../common/Pagination.tsx";
 import { MediaItem } from "../common/MediaItem.tsx";
 import { X } from "lucide-react";
-import { EmptyMedias } from "../common/EmptyMedias.tsx";
+import { EmptyContent } from "../common/EmptyContent.tsx";
 import React from "react";
 
 export function ListMediasDisplay({
@@ -63,7 +63,7 @@ export function ListMediasDisplay({
           );
         })
       ) : (
-        <EmptyMedias />
+        <EmptyContent />
       )}
     </>
   );
