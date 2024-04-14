@@ -3,6 +3,7 @@ import { ListInfo } from "../../utils/type.ts";
 import { useAuthContext } from "../../contexts/AuthContext.ts";
 import { Link } from "react-router-dom";
 import { getUserLists } from "../../apiUtils/mediaListApiUtil.ts";
+import { MyImage } from "../common/MyImage.tsx";
 
 export function ListsWall({ id, username }: { id: number; username: string }) {
   const { setMessage } = useAuthContext();
@@ -29,19 +30,31 @@ export function ListsWall({ id, username }: { id: number; username: string }) {
           {username}'s Lists Wall
         </h2>
         {lists.length > 0 ? (
-          lists.map((list) => {
+          lists.map((list, index) => {
             return (
-              <div
-                className="flex w-full flex-col justify-between border-b border-gray-200 pb-1 align-top"
-                key={list.id}
-              >
-                <Link
-                  to={`/list/${list.id}`}
-                  className="p-4 text-xl font-semibold text-Neutral hover:text-Neutral-Strong"
+              <div key={list.id} className="flex items-center justify-center">
+                <div className="ml-2 w-32 h-32 shrink-0">
+                  <MyImage src={list.imageUrl} alt={list.title} />
+                </div>
+                <div
+                  className={`flex w-full flex-col justify-between p-1 border-gray-200 align-top ${index !== 2 && "border-b"}`}
                 >
-                  {list.title}
-                </Link>
-                <p className="p-4 text-Neutral-Mild">{list.description}</p>
+                  <Link
+                    to={`/list/${list.id}`}
+                    className="p-4 text-xl font-semibold text-Neutral hover:text-Neutral-Strong"
+                  >
+                    {list.title}
+                  </Link>
+                  <p className="p-4 text-Neutral-Mild">
+                    {list.description.slice(0, 80)}
+                    {list.description.length > 80 && (
+                      <span className="text-Neutral-Strong text-center">
+                        {" "}
+                        ...
+                      </span>
+                    )}
+                  </p>
+                </div>
               </div>
             );
           })

@@ -118,6 +118,7 @@ export default function Lists() {
       setMessage(error.message);
     }
   };
+
   if (loading) return <Loading />;
   if (username)
     return (

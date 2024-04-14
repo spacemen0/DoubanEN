@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { PageHeader } from "../components/common/PageHeader";
-import { generateRandomImage } from "../utils/data";
 import { useAuthContext } from "../contexts/AuthContext";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MyImage } from "../components/common/MyImage";
 import { WelcomeInfo } from "../components/common/WelcomeInfo";
 import { LoaderCircle } from "lucide-react";
+import { apiUrl } from "../utils/config.ts";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -17,6 +17,7 @@ export default function Register() {
   const navigate = useNavigate();
   const [processing, setProcessing] = useState(false);
   const { user, register, setMessage } = useAuthContext();
+
   useEffect(() => {
     if (user) navigate("/");
   }, [user, navigate]);
@@ -70,10 +71,25 @@ function RegisterForm(props: {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   processing: boolean;
 }) {
+  const password = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (password.current) {
+      password.current.addEventListener("input", function () {
+        if (password.current)
+          if (password.current.validity.patternMismatch) {
+            password.current.setCustomValidity(
+              "Password must contain at least one number, one uppercase and lowercase letter, and be at least 8 characters long",
+            );
+          } else {
+            password.current.setCustomValidity("");
+          }
+      });
+    }
+  });
   return (
     <div className="mx-auto mt-1 flex w-full justify-center lg:mt-10 lg:w-4/6">
       <div className="hidden flex-1 items-center justify-center bg-gray-100 px-6 py-2 lg:flex lg:py-6">
-        <MyImage {...generateRandomImage()} />
+        <MyImage src={apiUrl + "/images/102"} alt={"pageImage"} />
       </div>
       <div className="flex w-full items-center justify-center bg-gray-100 lg:w-1/2">
         <div className="w-full max-w-md p-3 lg:p-6">
@@ -129,12 +145,14 @@ function RegisterForm(props: {
                 Password
               </label>
               <input
+                ref={password}
                 type="password"
                 id="password"
                 name="password"
                 value={props.formData.password}
                 onChange={props.onChange}
                 required={true}
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 autoComplete="new-password"
                 className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
               />
@@ -152,6 +170,7 @@ function RegisterForm(props: {
                 name="password_repeat"
                 value={props.formData.password_repeat}
                 onChange={props.onChange}
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 required={true}
                 autoComplete="new-password"
                 className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"

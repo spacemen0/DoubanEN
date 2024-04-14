@@ -1,6 +1,7 @@
 import { ListInfo, User } from "../../utils/type.ts";
 import { Link } from "react-router-dom";
 import { MyImage } from "../common/MyImage.tsx";
+import { useState } from "react";
 
 export function ListHeader({
   lists,
@@ -15,7 +16,20 @@ export function ListHeader({
   handleDeleteList: () => void;
   user: User | null;
 }) {
+  const [expanded, setExpanded] = useState(false);
   const list = lists.filter((list) => list.id === selectedList)[0];
+  const toggleExpand = () => {
+    setExpanded(!expanded);
+  };
+
+  const truncateContent = (content: string, maxLength: number) => {
+    if (expanded) {
+      return content;
+    }
+    return content.length > maxLength
+      ? `${content.slice(0, maxLength)}...`
+      : content;
+  };
   return (
     <div className="flex !md:flex-col justify-start lg:max-w-[75%] mt-4">
       <div className="my-6 mr-2 h-48 w-48 flex-shrink-0">
@@ -28,7 +42,18 @@ export function ListHeader({
         >
           {list.title}
         </Link>
-        <p className="my-4 text-xl font-semibold">{list.description}</p>
+        <p className="my-3 text-xl font-semibold">
+          {truncateContent(list.description, 400)}
+          {list.description.length > 400 && (
+            <button
+              onClick={toggleExpand}
+              className="block text-Neutral-Strong rounded-md font-semibold lg:font-bold"
+            >
+              {expanded ? "Show Less" : "Show More"}
+            </button>
+          )}
+        </p>
+
         {user?.id === parseInt(userId!) && (
           <button
             className="mb-4 rounded-md text-lg font-semibold text-white p-1.5 bg-Neutral-Mild hover:bg-Neutral"
