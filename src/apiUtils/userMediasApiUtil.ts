@@ -1,16 +1,18 @@
 import { Media, MediaStatus, MediaType, StatusType } from "../utils/type";
 import { apiUrl } from "../utils/config";
 
-export const getUserRatedAndReviewedMediasByType = async (
+export const getMediasByTypeAndUserStatusWithPagination = async (
   userId: number,
   type: MediaType | "All",
+  status: StatusType,
+  page: number,
+  size: number = 5,
 ): Promise<Media[]> => {
   let ratedMedias: Media[] = [];
-  let reviewedMedias: Media[] = [];
   let response = new Response();
   try {
     response = await fetch(
-      `${apiUrl}/medias?mediaType=${type}&userId=${userId}&mediaStatus=Rated`,
+      `${apiUrl}/medias?mediaType=${type}&userId=${userId}&mediaStatus=${status}&page=${page}&size=${size}`,
       {
         method: "GET",
       },
@@ -21,34 +23,23 @@ export const getUserRatedAndReviewedMediasByType = async (
   if (!response.ok) {
     throw new Error("Failed to fetch Medias");
   }
-  ratedMedias = await response.json();
-  try {
-    response = await fetch(
-      `${apiUrl}/medias?mediaType=${type}&userId=${userId}&mediaStatus=Reviewed`,
-      {
-        method: "GET",
-      },
-    );
-  } catch (error) {
-    throw new Error("Failed to fetch Medias. Please try again later.");
-  }
-  if (!response.ok) {
-    throw new Error("Failed to fetch Medias");
-  }
-  reviewedMedias = await response.json();
-  return ratedMedias.concat(reviewedMedias);
+  const data = await response.json();
+  ratedMedias = data["content"] as Media[];
+  return ratedMedias;
 };
 
-export const getUserRatedAndReviewedMediaStatusesByType = async (
+export const getMediaStatusesByTypeAndUserIdWithPagination = async (
   userId: number,
   type: MediaType | "All",
+  status: StatusType,
+  page: number,
+  size: number = 5,
 ): Promise<MediaStatus[]> => {
   let ratedMediaStatuses: MediaStatus[] = [];
-  let reviewedMediaStatuses: MediaStatus[] = [];
   let response = new Response();
   try {
     response = await fetch(
-      `${apiUrl}/media-statuses?mediaType=${type}&userId=${userId}&mediaStatus=Rated`,
+      `${apiUrl}/media-statuses?mediaType=${type}&userId=${userId}&mediaStatus=${status}&page=${page}&size=${size}`,
       {
         method: "GET",
       },
@@ -59,22 +50,9 @@ export const getUserRatedAndReviewedMediaStatusesByType = async (
   if (!response.ok) {
     throw new Error("Failed to fetch Media Statuses");
   }
-  ratedMediaStatuses = await response.json();
-  try {
-    response = await fetch(
-      `${apiUrl}/media-statuses?mediaType=${type}&userId=${userId}&mediaStatus=Reviewed`,
-      {
-        method: "GET",
-      },
-    );
-  } catch (error) {
-    throw new Error("Failed to fetch Medias. Please try again later.");
-  }
-  if (!response.ok) {
-    throw new Error("Failed to fetch Media Statuses");
-  }
-  reviewedMediaStatuses = await response.json();
-  return ratedMediaStatuses.concat(reviewedMediaStatuses);
+  const data = await response.json();
+  ratedMediaStatuses = data["content"] as MediaStatus[];
+  return ratedMediaStatuses;
 };
 
 export const getUserMediasByTypeWithPagination = async (

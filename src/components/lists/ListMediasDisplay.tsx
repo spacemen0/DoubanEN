@@ -36,9 +36,9 @@ export function ListMediasDisplay({
         <span>Average</span> <span>Rated</span> <span>Wants</span>
       </div>
       {medias.length > 0 ? (
-        medias.map((media, index) => {
-          return (
-            <div className="relative" key={index}>
+        <ul>
+          {medias.map((media, index) => (
+            <li className="relative" key={index}>
               <MediaItem media={media} />
               {user?.id === parseInt(userId!) && (
                 <button
@@ -59,9 +59,9 @@ export function ListMediasDisplay({
                   />
                 </button>
               )}
-            </div>
-          );
-        })
+            </li>
+          ))}
+        </ul>
       ) : (
         <EmptyContent />
       )}

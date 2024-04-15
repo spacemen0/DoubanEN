@@ -5,7 +5,7 @@ import { Media } from "../utils/type";
 import { MyImage } from "../components/common/MyImage";
 import { MediaInfo } from "../components/common/MediaInfo";
 import { useAuthContext } from "../contexts/AuthContext";
-import { Additional } from "../components/media/Additional";
+import { DomainSection } from "../components/media/DomainSection.tsx";
 import { MediaActionsSection } from "../components/media/MediaActionsSection.tsx";
 import { ReviewSection } from "../components/media/ReviewSection";
 import Loading from "../components/common/Loading";
@@ -51,7 +51,7 @@ export default function MediaPage() {
           <div className="flex w-full flex-1 flex-col lg:flex-[0.3]">
             <MyImage src={apiUrl + media.imageUrl} alt={media.title} />
             <div className="hidden lg:block">
-              <Additional media={media} />
+              <DomainSection media={media} />
             </div>
           </div>
           <div className="mb-4 flex w-full flex-1 flex-col border-gray-300 pt-2 text-Neutral lg:flex-[0.7] lg:ml-6 lg:border-t lg:border-l lg:pl-2">
@@ -66,7 +66,7 @@ export default function MediaPage() {
               onSuccessAndRender={handleOnSuccessAndRender}
             />
             <div className="lg:hidden">
-              <Additional media={media} />
+              <DomainSection media={media} />
             </div>
             <ReviewSection
               media={media}

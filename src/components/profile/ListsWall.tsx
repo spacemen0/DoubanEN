@@ -33,7 +33,7 @@ export function ListsWall({ id, username }: { id: number; username: string }) {
           lists.map((list, index) => {
             return (
               <div key={list.id} className="flex items-center justify-center">
-                <div className="ml-2 w-32 h-32 shrink-0">
+                <div className="ml-2 h-32 w-32 shrink-0">
                   <MyImage src={list.imageUrl} alt={list.title} />
                 </div>
                 <div
@@ -48,7 +48,7 @@ export function ListsWall({ id, username }: { id: number; username: string }) {
                   <p className="p-4 text-Neutral-Mild">
                     {list.description.slice(0, 80)}
                     {list.description.length > 80 && (
-                      <span className="text-Neutral-Strong text-center">
+                      <span className="text-center text-Neutral-Strong">
                         {" "}
                         ...
                       </span>

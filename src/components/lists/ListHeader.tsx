@@ -47,7 +47,7 @@ export function ListHeader({
           {list.description.length > 400 && (
             <button
               onClick={toggleExpand}
-              className="block text-Neutral-Strong rounded-md font-semibold lg:font-bold"
+              className="block rounded-md font-semibold text-Neutral-Strong lg:font-bold"
             >
               {expanded ? "Show Less" : "Show More"}
             </button>

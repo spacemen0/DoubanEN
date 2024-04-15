@@ -38,6 +38,7 @@ export type Review = {
   username: string;
   userId: number;
   mediaId: number;
+  mediaType: MediaType;
   date: string;
   score: Score;
   title: string;

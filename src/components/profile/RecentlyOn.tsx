@@ -33,7 +33,7 @@ export function RecentlyOn({ id }: { id: number }) {
     return <></>;
   }
   return (
-    <div className="w-96 flex-col items-center justify-center gap-2 pb-6 text-lg text-gray-600 md:w-[420px] md:pl-4">
+    <div className="w-96 flex-col items-center justify-center gap-2 pb-6 text-lg text-Neutral md:w-[420px] md:pl-4">
       <div className="mb-2 flex w-full flex-col rounded-md bg-white shadow-md">
         {" "}
         <h1 className="m-2 text-center font-bold">Listening</h1>
@@ -41,9 +41,7 @@ export function RecentlyOn({ id }: { id: number }) {
           {music ? (
             <>
               <div className="h-32 w-32">
-                <Link to={`/media/${music.id}`}>
-                  <MyImage src={apiUrl + music.imageUrl} alt={music.title} />
-                </Link>
+                <MyImage src={apiUrl + music.imageUrl} alt={music.title} />
               </div>
               <div className="flex w-3/4 flex-col justify-center">
                 {" "}
@@ -69,9 +67,7 @@ export function RecentlyOn({ id }: { id: number }) {
           {movie ? (
             <>
               <div className="h-32 w-32">
-                <Link to={`/media/${movie.id}`}>
-                  <MyImage src={apiUrl + movie.imageUrl} alt={movie.title} />
-                </Link>
+                <MyImage src={apiUrl + movie.imageUrl} alt={movie.title} />
               </div>
 
               <div className="ml-4 flex w-3/4 flex-col justify-center">
@@ -97,9 +93,7 @@ export function RecentlyOn({ id }: { id: number }) {
           {book ? (
             <>
               <div className="h-32 w-32">
-                <Link to={`/media/${book.id}`}>
-                  <MyImage src={apiUrl + book.imageUrl} alt={book.title} />
-                </Link>
+                <MyImage src={apiUrl + book.imageUrl} alt={book.title} />
               </div>
 
               <div className="ml-4 flex w-3/4 flex-col justify-center">

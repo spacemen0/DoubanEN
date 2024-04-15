@@ -11,15 +11,15 @@ export function ListHeader({ listInfo }: { listInfo: ListInfo | undefined }) {
         </div>
         <div className="my-4">
           <p className="text-3xl font-bold text-Neutral">{listInfo.title}</p>
-          <span className="text-2xl text-Neutral">
+          <p className="mt-2 text-2xl text-Neutral">
             Created by:{" "}
             <Link
-              className="border-b-2 pb-1 font-semibold text-Neutral-Strong border-Neutral-Strong"
+              className="border-b-2 pb-1 font-semibold text-Neutral border-Neutral-Strong"
               to={`/profile/${listInfo.userId}`}
             >
               {listInfo.username}
             </Link>
-          </span>
+          </p>
           <p className="my-4 text-xl">{listInfo.description}</p>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Media, Score } from "../../utils/type";
+import { Media, Review, Score } from "../../utils/type";
 import { useAuthContext } from "../../contexts/AuthContext";
 import Draggable from "react-draggable";
 import { postReview } from "../../apiUtils/reviewApiUtil.ts";
@@ -30,7 +30,8 @@ export function NewReviewBox({
       setMessage("Please rate before posting a review");
       return;
     }
-    const review = {
+    const review: Review = {
+      mediaType: media.type,
       username: user!.username,
       userId: user!.id,
       mediaId: media.id,

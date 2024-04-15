@@ -7,7 +7,7 @@ import { fetchUser } from "../../apiUtils/userApiUtil.ts";
 import { Link } from "react-router-dom";
 import { apiUrl } from "../../utils/config.ts";
 
-export function UserInfo({
+export function InfoCard({
   id,
   setExist,
   setUsername,

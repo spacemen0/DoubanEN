@@ -1,9 +1,15 @@
 import { Star, StarHalf } from "lucide-react";
 import { useState } from "react";
-import { Review } from "../../utils/type";
+import { Media, Review } from "../../utils/type";
 import { Link } from "react-router-dom";
 
-export function ReviewDisplay({ review }: { review: Review }) {
+export function ReviewDisplay({
+  review,
+  media,
+}: {
+  review: Review;
+  media?: Media;
+}) {
   const [expanded, setExpanded] = useState(false);
   const renderStars = () => {
     const stars = Math.floor(review.score);
@@ -83,6 +89,14 @@ export function ReviewDisplay({ review }: { review: Review }) {
       </div>
       <div className="pl-2">
         <p className="mt-2 text-2xl font-semibold">{review.title}</p>
+        {media && (
+          <p className="mt-2 text-lg font-semibold text-Neutral-Mild">
+            Reviewed for:{" "}
+            <Link to={`/medias/${media.id}`}>
+              <span className="text-2xl">{media.title}</span>
+            </Link>
+          </p>
+        )}
         <p className="mt-2 text-lg font-semibold text-Neutral-Mild">
           {" "}
           Reviewed on: {review.date}

@@ -27,9 +27,13 @@ export function ListMediasDisplay({
         <span>Average</span> <span>Rated</span> <span>Wants</span>
       </div>
       {medias.length > 0 ? (
-        medias.map((media, index) => {
-          return <MediaItem media={media} key={index} />;
-        })
+        <ul>
+          {medias.map((media, index) => (
+            <li key={index}>
+              <MediaItem media={media} />
+            </li>
+          ))}
+        </ul>
       ) : (
         <EmptyContent />
       )}

@@ -167,3 +167,56 @@ export const fetchSingleReview = async (id: number): Promise<Review> => {
   review.userId = review.user.id;
   return review;
 };
+
+export const getUserReviewsCountByMediaType = async (
+  userId: number,
+  type: MediaType,
+): Promise<number> => {
+  let response = new Response();
+  const url = `${apiUrl}/reviews/count?type=${type}&userId=${userId}`;
+  try {
+    response = await fetch(url, {
+      method: "GET",
+    });
+  } catch (error) {
+    console.error("Error fetching Review count:", error);
+    throw new Error("Failed to fetch Media count. Please try again later.");
+  }
+  if (!response.ok) {
+    throw new Error("Failed to fetch Media count");
+  }
+  return await response.json();
+};
+
+export const getReviewsByTypeAndUserIdWithPagination = async (
+  userId: number,
+  type: MediaType,
+  page: number,
+  size: number = 5,
+): Promise<Review[]> => {
+  let response = new Response();
+  const url = `${apiUrl}/reviews?type=${type}&userId=${userId}&page=${page}&size=${size}`;
+  try {
+    response = await fetch(url, {
+      method: "GET",
+    });
+  } catch (error) {
+    console.error("Error fetching Reviews", error);
+    throw new Error("Failed to fetch Reviews. Please try again later.");
+  }
+  if (!response.ok) {
+    throw new Error("Failed to fetch Media count");
+  }
+  const data = await response.json();
+  const reviewsFromServer = data["content"] as (Review & {
+    user: {
+      username: string;
+      id: number;
+    };
+  })[];
+  return reviewsFromServer.map((review) => {
+    review.username = review.user.username;
+    review.userId = review.user.id;
+    return review;
+  });
+};

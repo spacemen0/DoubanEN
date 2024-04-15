@@ -9,10 +9,12 @@ export function MediaItem({
   media,
   score,
   text,
+  date,
 }: {
   media: Media;
   score?: Score;
   text?: string;
+  date?: string;
 }) {
   const renderStars = () => {
     if (score) {
@@ -156,18 +158,31 @@ export function MediaItem({
             {media.wants}
           </p>
         </div>
-        {score && (
-          <div
-            className={`flex mt-2 justify-between lg:justify-start items-center text-xl font-semibold ${
-              media.type === "Music"
-                ? "text-Music"
-                : media.type === "Movie"
-                  ? "text-Movie"
-                  : "text-Book"
-            }`}
-          >
-            {text}&nbsp;
-            <div className="flex">{renderStars()}</div>
+        {score && date && (
+          <div className="flex !md:flex-col">
+            <div
+              className={`flex mt-2 justify-between lg:justify-start items-center text-xl font-semibold ${
+                media.type === "Music"
+                  ? "text-Music"
+                  : media.type === "Movie"
+                    ? "text-Movie"
+                    : "text-Book"
+              }`}
+            >
+              {text}&nbsp;
+              <div className="flex">{renderStars()}</div>
+            </div>
+            <p
+              className={`mt-2 md:ml-2 items-center text-xl font-semibold ${
+                media.type === "Music"
+                  ? "text-Music"
+                  : media.type === "Movie"
+                    ? "text-Movie"
+                    : "text-Book"
+              }`}
+            >
+              Rated on: {date}
+            </p>
           </div>
         )}
       </div>
