@@ -21,6 +21,9 @@ export default function Medias() {
   const [currentPage, setCurrentPage] = useState(1);
   const { setMessage } = useAuthContext();
   useEffect(() => {
+    setCurrentPage(1);
+  }, [type]);
+  useEffect(() => {
     const fetchReviewsCount = async (type: "Music" | "Movie" | "Book") => {
       setLoading(true);
       try {

@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SearchOption } from "../../../utils/type";
 import { Search, X } from "lucide-react";
+import { searchMedia } from "../../../apiUtils/searchApiUtil.ts";
 
 export default function HeaderSearchBarSection() {
   const [selectedOption, setSelectedOption] = useState<SearchOption>("Music");
   const [isDropdownVisible, setDropdownVisibility] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   const searchBarRef = useRef<HTMLDivElement | null>(null);
 
   const handleInputClick = () => {
@@ -17,6 +19,26 @@ export default function HeaderSearchBarSection() {
 
   const handleOptionClick = (option: SearchOption) => {
     setSelectedOption(option);
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+  };
+
+  const handleSearch = async () => {
+    try {
+      console.log(await searchMedia(selectedOption, 5, searchValue));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleKeyDown = async (
+    event: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (event.key === "Enter") {
+      await handleSearch();
+    }
   };
 
   useEffect(() => {
@@ -44,9 +66,12 @@ export default function HeaderSearchBarSection() {
       </button>
       <input
         type="search"
-        placeholder="Not implemented..."
+        placeholder="Search..."
         className="my-1 w-full rounded-full border py-1 pr-10 pl-8 text-lg text-gray-600 shadow-inner outline-none md:pl-10"
         onClick={handleInputClick}
+        onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
+        value={searchValue}
       />
       {isDropdownVisible && (
         <>
