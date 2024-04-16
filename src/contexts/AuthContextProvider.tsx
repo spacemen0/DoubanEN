@@ -59,6 +59,12 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     [],
   );
 
+  const refreshUser = useCallback(async () => {
+    if (user) {
+      setUser(await fetchUser(user.id));
+    }
+  }, [user]);
+
   const handleLogout = useCallback(async (token: string) => {
     await logout(token);
     setUser(null);
@@ -92,6 +98,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     login: handleLogin,
     logout: handleLogout,
     register: handleRegister,
+    refresh: refreshUser,
     setMessage: handleSetMessage,
   };
 

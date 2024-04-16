@@ -5,10 +5,12 @@ export function OptionSelect({
   selectedOption,
   handleOptionClick,
   setCurrentPage,
+  type,
 }: {
   selectedOption: StatusType;
   handleOptionClick: (status: StatusType) => void;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  type: string;
 }) {
   return (
     <div className="mt-2 flex justify-start gap-4 text-xl font-semibold text-Neutral-Mild md:py-0.5 md:text-2xl lg:gap-10 lg:text-3xl">
@@ -32,7 +34,13 @@ export function OptionSelect({
           setCurrentPage(1);
         }}
       >
-        Engaging
+        {type === "music"
+          ? "Listening"
+          : type === "movie"
+            ? "Watching"
+            : type === "book"
+              ? "Reading"
+              : "Engaging"}
       </button>
       <button
         className={`border-b-2  ${

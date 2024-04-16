@@ -37,9 +37,10 @@ export default function Collection() {
           setMessage(`Error fetching total number of ${type}s`);
         }
     };
-    fetchMediasCount(
-      (type!.charAt(0).toUpperCase() + type!.slice(1)) as MediaType,
-    ).then();
+    if (type)
+      fetchMediasCount(
+        (type.charAt(0).toUpperCase() + type.slice(1)) as MediaType,
+      ).then();
   }, [selectedOption, setMessage, type, user]);
 
   useEffect(() => {
@@ -76,7 +77,7 @@ export default function Collection() {
     return <NotFound />;
   }
   if (loading) return <Loading />;
-
+  if (!type) return <NotFound />;
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
@@ -85,6 +86,7 @@ export default function Collection() {
           selectedOption={selectedOption}
           handleOptionClick={handleOptionClick}
           setCurrentPage={setCurrentPage}
+          type={type}
         />
         <CollectionMediasDisplay
           medias={medias}

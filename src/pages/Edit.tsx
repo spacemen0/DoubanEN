@@ -8,7 +8,7 @@ import { updateProfile } from "../apiUtils/userApiUtil.ts";
 
 export default function Edit() {
   const navigate = useNavigate();
-  const { setMessage, user, token } = useAuthContext();
+  const { setMessage, user, token, refresh } = useAuthContext();
   const [processing, setProcessing] = useState(false);
   const [formData, setFormData] = useState<ProfileFormData>({
     bio: null,
@@ -17,16 +17,19 @@ export default function Edit() {
     oldPassword: null,
     image: null,
   });
-
-  // Function to handle form submission
+  useEffect(() => {
+    if (!user) navigate("/login");
+  }, [user, navigate]);
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (Object.values(formData).some((value) => value !== null))
+    if (Object.values(formData).some((value) => value !== null) && user)
       try {
         setProcessing(true);
-        await updateProfile(user!.id, token!, formData);
-        setMessage("Update profile success");
+        await updateProfile(user.id, token!, formData);
+        setMessage("Update profile successfully");
         setProcessing(false);
+        refresh();
+        navigate(`/profile/${user.id}`);
       } catch (e) {
         setProcessing(false);
         const error = e as Error;
@@ -38,6 +41,9 @@ export default function Edit() {
           setMessage("Wrong password");
         else setMessage("Error updating your profile");
       }
+    else {
+      setMessage("Fill in some fields before submitting");
+    }
   };
 
   // Function to handle input changes
@@ -58,9 +64,6 @@ export default function Edit() {
       setFormData((prevState) => ({ ...prevState, image: fileList.item(0) }));
     }
   };
-  useEffect(() => {
-    if (!user) navigate("/login");
-  }, [user, navigate]);
 
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">

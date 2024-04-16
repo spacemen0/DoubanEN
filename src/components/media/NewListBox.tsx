@@ -10,8 +10,8 @@ export const NewListBox = ({
   setLists,
 }: {
   setShowNewListBox: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedList: React.Dispatch<React.SetStateAction<number>>;
-  setLists: React.Dispatch<React.SetStateAction<ListInfo[]>>;
+  setSelectedList?: React.Dispatch<React.SetStateAction<number>>;
+  setLists?: React.Dispatch<React.SetStateAction<ListInfo[]>>;
 }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -27,8 +27,8 @@ export const NewListBox = ({
     try {
       const newList = await createList(user!.id, title, description, token!);
       setShowNewListBox(false);
-      setSelectedList(newList.id);
-      setLists((prevLists) => [...prevLists, newList]);
+      setSelectedList && setSelectedList(newList.id);
+      setLists && setLists((prevLists) => [...prevLists, newList]);
       setMessage("You list has been created");
     } catch (e) {
       setMessage("Error creating list");
@@ -53,7 +53,7 @@ export const NewListBox = ({
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="block w-full border-b-2 bg-white font-semibold need-interaction p-2.5 text-Neutral-Strong border-Neutral-Mild focus:ring-Neutral-Mild focus:outline-none"
-            placeholder="Title"
+            placeholder="List Title"
             onMouseDown={(event) => {
               event.stopPropagation();
             }}
@@ -73,7 +73,7 @@ export const NewListBox = ({
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="w-full bg-white need-interaction p-2.5 text-Neutral focus:outline-none lg:hidden"
-            placeholder="Write your review here..."
+            placeholder="Write your list description here..."
             onMouseDown={(event) => {
               event.stopPropagation();
             }}
@@ -88,14 +88,14 @@ export const NewListBox = ({
             </button>
             <button
               className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild  border-Neutral-Mild
-          focus:ring-1 focus:ring-Neutral transition-colors rounded-br-lg"
+          focus:ring-1 focus:ring-Neutral transition-colors "
               onClick={handleCreateList}
             >
               Create
             </button>
             <button
               className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild  border-Neutral-Mild
-         focus:ring-1 focus:ring-Neutral transition-colors"
+         focus:ring-1 focus:ring-Neutral transition-colors rounded-br-lg"
               onClick={() => {
                 setShowNewListBox(false);
               }}

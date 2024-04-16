@@ -22,7 +22,7 @@ export default function Lists() {
   const { userId } = useParams();
   const [username, setUsername] = useState<string>();
   const [loading, setLoading] = useState<boolean>();
-  const [selectedList, setSelectedList] = useState<number>();
+  const [selectedList, setSelectedList] = useState<number>(-1);
   const [lists, setLists] = useState<ListInfo[]>([]);
   const [medias, setMedias] = useState<Media[]>([]);
   const [count, setCount] = useState(0);
@@ -44,7 +44,8 @@ export default function Lists() {
         else setMessage("Error fetching username for this user");
       }
     };
-    if (user?.id === userId) setUsername(user!.username);
+    if (user && userId && user.id === parseInt(userId))
+      setUsername(user.username);
     else fetchUsername().then();
   }, [user, userId, setMessage]);
   useEffect(() => {
@@ -76,7 +77,7 @@ export default function Lists() {
         else setMessage("Error processing request");
       }
     };
-    if (selectedList) fetchListCount(selectedList).then();
+    if (selectedList !== -1) fetchListCount(selectedList).then();
   }, [selectedList, setMessage]);
 
   useEffect(() => {
@@ -90,7 +91,7 @@ export default function Lists() {
         else setMessage("Error processing request");
       }
     };
-    if (selectedList) fetchAllListItems(selectedList).then();
+    if (selectedList !== -1) fetchAllListItems(selectedList).then();
   }, [currentPage, selectedList, setMessage]);
 
   async function handleDeleteList() {
@@ -137,6 +138,8 @@ export default function Lists() {
               <ListHeader
                 lists={lists}
                 selectedList={selectedList}
+                setLists={setLists}
+                setSelectedList={setSelectedList}
                 userId={userId}
                 handleDeleteList={handleDeleteList}
                 user={user}

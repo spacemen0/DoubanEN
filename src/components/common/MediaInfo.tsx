@@ -12,7 +12,10 @@ export function MediaInfo({ media, home }: { media: Media; home: boolean }) {
           home && "border-Neutral-Mild"
         }`}
       >
-        <Link to={`/media/${media.id}`} className="text-4xl font-semibold">
+        <Link
+          to={`/media/${media.id}`}
+          className={`text-4xl font-semibold ${home && "hover:text-Neutral-Strong"}`}
+        >
           {media.title}
         </Link>
         {!home && <span className="pt-2">{`[${media.type}${media.id}]`}</span>}
@@ -24,9 +27,7 @@ export function MediaInfo({ media, home }: { media: Media; home: boolean }) {
             <td className="pb-1.5 lg:pb-3">{media.type}</td>
           </tr>
           <tr>
-            <td className="pr-4 font-semibold pb-1.5 lg:pb-3">
-              Released Date:
-            </td>
+            <td className="pr-4 font-semibold pb-1.5 lg:pb-3">Released:</td>
             <td className="pb-1.5 lg:pb-3">{media.releaseDate}</td>
           </tr>
           <tr>

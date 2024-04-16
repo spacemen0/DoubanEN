@@ -93,7 +93,7 @@ export function ReviewDisplay({
           <p className="mt-2 text-lg font-semibold text-Neutral-Mild">
             Reviewed for:{" "}
             <Link to={`/medias/${media.id}`}>
-              <span className="text-2xl">{media.title}</span>
+              <span className="text-2xl hover:text-Neutral">{media.title}</span>
             </Link>
           </p>
         )}

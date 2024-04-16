@@ -10,8 +10,8 @@ export function SelectUserList({
 }: {
   username: string | undefined;
   lists: ListInfo[];
-  setSelectedList: React.Dispatch<React.SetStateAction<number | undefined>>;
-  selectedList: number | undefined;
+  setSelectedList: React.Dispatch<React.SetStateAction<number>>;
+  selectedList: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }) {
   return (

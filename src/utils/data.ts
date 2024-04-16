@@ -19,7 +19,7 @@ const imageIds: number[] = [
   202, 152, 252, 302, 303, 304, 305, 306, 307, 308, 309,
 ];
 export const bannerImage: { listId: number; imageProps: ImageProps } = {
-  listId: 0,
+  listId: 153,
   imageProps: generateRandomImage(),
 };
 const sideListIds: number[] = [154, 152, 153, 3, 52, 2, 153];

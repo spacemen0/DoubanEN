@@ -96,7 +96,7 @@ function DropDownMenu({
               onClick={() => {
                 setIsOpen(false);
               }}
-              text="All Ratings"
+              text="All Collections"
             />
             <MenuItem
               link="/collection/book"
