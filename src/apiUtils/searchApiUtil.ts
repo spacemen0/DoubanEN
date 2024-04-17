@@ -6,11 +6,10 @@ export const searchMedia = async (
   limit: number,
   text: string,
 ): Promise<Media[]> => {
-  console.log(type);
   let response = new Response();
   try {
     response = await fetch(
-      `${apiUrl}/medias/search?limit=${limit}&text=${text}`,
+      `${apiUrl}/medias/search?limit=${limit}&text=${text}&type=${type}`,
       {
         method: "GET",
       },
