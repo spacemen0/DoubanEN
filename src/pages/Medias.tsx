@@ -24,7 +24,7 @@ export default function Medias() {
     setCurrentPage(1);
   }, [type]);
   useEffect(() => {
-    const fetchReviewsCount = async (type: "Music" | "Movie" | "Book") => {
+    const fetchMediasCount = async (type: "Music" | "Movie" | "Book") => {
       setLoading(true);
       try {
         const fetchedCount = await getAllMediasCountByType(type);
@@ -34,7 +34,7 @@ export default function Medias() {
       }
     };
     console.log(type!.charAt(0).toUpperCase() + type!.slice(1));
-    fetchReviewsCount(
+    fetchMediasCount(
       (type!.charAt(0).toUpperCase() + type!.slice(1)) as MediaType,
     ).then();
   }, [setMessage, type]);

@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { SearchOption } from "../../../utils/type";
 import { Search, X } from "lucide-react";
 import { searchMedia } from "../../../apiUtils/searchApiUtil.ts";
+import { useNavigate } from "react-router-dom";
 
 export default function HeaderSearchBarSection() {
   const [selectedOption, setSelectedOption] = useState<SearchOption>("Music");
   const [isDropdownVisible, setDropdownVisibility] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const searchBarRef = useRef<HTMLDivElement | null>(null);
+  const navigate = useNavigate();
 
   const handleInputClick = () => {
     setDropdownVisibility(true);
@@ -27,7 +29,12 @@ export default function HeaderSearchBarSection() {
 
   const handleSearch = async () => {
     try {
-      console.log(await searchMedia(selectedOption, 5, searchValue));
+      const medias = await searchMedia(selectedOption, 10, searchValue);
+      navigate("/result", {
+        state: {
+          medias: medias,
+        },
+      });
     } catch (e) {
       console.log(e);
     }
