@@ -1,6 +1,5 @@
 import { apiUrl } from "../utils/config";
 import { ListInfo, Media } from "../utils/type.ts";
-import { generateRandomImage } from "../utils/data.ts";
 
 export const getListItemsCount = async (id: number): Promise<number> => {
   let response = new Response();
@@ -52,7 +51,7 @@ export const getListInfo = async (id: number): Promise<ListInfo> => {
   const data = await response.json();
   data.username = data["user"]["username"];
   data.userId = data["user"]["id"];
-  data.imageUrl = generateRandomImage().src;
+  if (!data.imageUrl) data.imageUrl = "/images/753";
   return data as ListInfo;
 };
 
@@ -71,7 +70,7 @@ export const getUserLists = async (userId: number): Promise<ListInfo[]> => {
   }
   const listInfos = (await response.json()) as ListInfo[];
   listInfos.map((listInfo) => {
-    if (!listInfo.imageUrl) listInfo.imageUrl = generateRandomImage().src;
+    if (!listInfo.imageUrl) listInfo.imageUrl = "/images/753";
     return listInfo;
   });
   return listInfos;
@@ -82,26 +81,56 @@ export const createList = async (
   title: string,
   description: string,
   token: string,
+  image: File,
 ): Promise<ListInfo> => {
-  const requestBody = {
-    user: {
-      id: userId,
-    },
-    title: title,
-    description: description,
-  };
+  const requestBody = new FormData();
+  requestBody.append("title", title);
+  requestBody.append("description", description);
+  requestBody.append("userId", userId.toString());
+  requestBody.append("image", image);
   let response = new Response();
   try {
     response = await fetch(`${apiUrl}/media-lists`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(requestBody),
+      body: requestBody,
     });
   } catch (error) {
     console.error("create new list error", error);
+    throw error;
+  }
+  if (!response.ok) {
+    throw new Error("Response error");
+  }
+  return await response.json();
+};
+
+export const editList = async (
+  userId: number,
+  id: number,
+  title: string,
+  description: string,
+  token: string,
+  image?: File,
+): Promise<ListInfo> => {
+  const requestBody = new FormData();
+  requestBody.append("title", title);
+  requestBody.append("description", description);
+  requestBody.append("userId", userId.toString());
+  image && requestBody.append("image", image);
+  let response = new Response();
+  try {
+    response = await fetch(`${apiUrl}/media-lists/${id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: requestBody,
+    });
+  } catch (error) {
+    console.error("edit list error", error);
     throw error;
   }
   if (!response.ok) {

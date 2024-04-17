@@ -27,6 +27,7 @@ export default function Lists() {
   const [medias, setMedias] = useState<Media[]>([]);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [changed, setChanged] = useState(false);
   const { setMessage, user, token } = useAuthContext();
   useEffect(() => {
     const fetchUsername = async () => {
@@ -52,6 +53,7 @@ export default function Lists() {
     const fetchLists = async () => {
       try {
         setLoading(true);
+        setChanged(false);
         const userLists = await getUserLists(parseInt(userId!));
         setLists(userLists);
         setLoading(false);
@@ -63,8 +65,8 @@ export default function Lists() {
         else setMessage("Error fetching lists for this user");
       }
     };
-    if (loading) fetchLists().then();
-  }, [loading, setMessage, userId]);
+    fetchLists().then();
+  }, [setMessage, userId, changed]);
   useEffect(() => {
     const fetchListCount = async (id: number) => {
       try {
@@ -126,14 +128,16 @@ export default function Lists() {
       <div className="flex max-h-screen flex-col overflow-hidden">
         <PageHeader />
         <div className="overflow-y-scroll text-Neutral">
-          <SelectUserList
-            username={username}
-            lists={lists}
-            setSelectedList={setSelectedList}
-            selectedList={selectedList}
-            setCurrentPage={setCurrentPage}
-          />
-          {selectedList ? (
+          {selectedList !== 1 && (
+            <SelectUserList
+              username={username}
+              lists={lists}
+              setSelectedList={setSelectedList}
+              selectedList={selectedList}
+              setCurrentPage={setCurrentPage}
+            />
+          )}
+          {selectedList !== 1 ? (
             <div className="mx-2">
               <ListHeader
                 lists={lists}
@@ -142,6 +146,7 @@ export default function Lists() {
                 setSelectedList={setSelectedList}
                 userId={userId}
                 handleDeleteList={handleDeleteList}
+                setChanged={setChanged}
                 user={user}
               />
               <ListMediasDisplay

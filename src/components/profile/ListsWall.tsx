@@ -4,6 +4,7 @@ import { useAuthContext } from "../../contexts/AuthContext.ts";
 import { Link } from "react-router-dom";
 import { getUserLists } from "../../apiUtils/mediaListApiUtil.ts";
 import { MyImage } from "../common/MyImage.tsx";
+import { apiUrl } from "../../utils/config.ts";
 
 export function ListsWall({ id, username }: { id: number; username: string }) {
   const { setMessage } = useAuthContext();
@@ -34,7 +35,7 @@ export function ListsWall({ id, username }: { id: number; username: string }) {
             return (
               <div key={list.id} className="flex items-center justify-center">
                 <div className="ml-2 h-32 w-32 shrink-0">
-                  <MyImage src={list.imageUrl} alt={list.title} />
+                  <MyImage src={apiUrl + list.imageUrl} alt={list.title} />
                 </div>
                 <div
                   className={`flex w-full flex-col justify-between p-1 border-gray-200 align-top ${index !== 2 && "border-b"}`}

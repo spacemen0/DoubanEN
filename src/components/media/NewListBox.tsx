@@ -1,38 +1,81 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../../contexts/AuthContext";
 import Draggable from "react-draggable";
-import { createList } from "../../apiUtils/mediaListApiUtil.ts";
+import { createList, editList } from "../../apiUtils/mediaListApiUtil.ts";
 import { ListInfo } from "../../utils/type.ts";
 
 export const NewListBox = ({
   setShowNewListBox,
   setSelectedList,
   setLists,
+  setChanged,
+  listToBeUpdated,
 }: {
   setShowNewListBox: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedList?: React.Dispatch<React.SetStateAction<number>>;
   setLists?: React.Dispatch<React.SetStateAction<ListInfo[]>>;
+  setChanged?: React.Dispatch<React.SetStateAction<boolean>>;
+  listToBeUpdated?: ListInfo;
 }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const { user, setMessage, token } = useAuthContext();
+  const [file, setFile] = useState<File | null>(null);
   const listBox = useRef(null);
+
+  useEffect(() => {
+    if (listToBeUpdated) {
+      setTitle(listToBeUpdated.title);
+      setDescription(listToBeUpdated.description);
+    }
+  }, [listToBeUpdated]);
 
   const handleReset = () => {
     setTitle("");
     setDescription("");
   };
 
-  const handleCreateList = async () => {
-    try {
-      const newList = await createList(user!.id, title, description, token!);
-      setShowNewListBox(false);
-      setSelectedList && setSelectedList(newList.id);
-      setLists && setLists((prevLists) => [...prevLists, newList]);
-      setMessage("You list has been created");
-    } catch (e) {
-      setMessage("Error creating list");
-    }
+  const handleSubmitList = async () => {
+    if (user && token && title !== "" && description !== "")
+      try {
+        let newList: ListInfo;
+        if (listToBeUpdated)
+          if (file)
+            newList = await editList(
+              user.id,
+              listToBeUpdated.id,
+              title,
+              description,
+              token,
+              file,
+            );
+          else {
+            newList = await editList(
+              user.id,
+              listToBeUpdated.id,
+              title,
+              description,
+              token,
+            );
+          }
+        else if (file)
+          newList = await createList(user.id, title, description, token, file);
+        else {
+          setMessage("Must choose a cover image when creating new lists");
+          return;
+        }
+        setShowNewListBox(false);
+        setChanged && setChanged(true);
+        setSelectedList && listToBeUpdated && setSelectedList(newList.id);
+        setLists &&
+          listToBeUpdated &&
+          setLists((prevLists) => [...prevLists, newList]);
+        setMessage(
+          `You list has been ${listToBeUpdated ? "Updated" : "Created"}`,
+        );
+      } catch (e) {
+        setMessage("Error creating list");
+      }
   };
   return (
     <div className="fixed top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
@@ -46,8 +89,21 @@ export const NewListBox = ({
             htmlFor="message"
             className="block rounded-t-lg border-b-2 bg-gray-100 px-4 py-2 text-xl font-semibold text-Neutral-Strong border-Neutral-Mild"
           >
-            New List
+            {listToBeUpdated ? "Update your list" : "New list"}
           </label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            onChange={(event) => {
+              const fileList = event.target.files; // Retrieve the FileList object
+              if (fileList && fileList.length > 0) {
+                setFile(fileList.item(0));
+              }
+            }}
+            accept="image/jpeg"
+            className="h-12 file:h-full w-full cursor-pointer file:before:content-['Select'] file:rounded-sm border-Neutral-Mild file:border-0 border-b-2 bg-white file:text-white transition-colors duration-300 file:bg-Neutral-Strong placeholder:text-l focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+          />
           <textarea
             rows={1}
             value={title}
@@ -89,9 +145,9 @@ export const NewListBox = ({
             <button
               className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild  border-Neutral-Mild
           focus:ring-1 focus:ring-Neutral transition-colors "
-              onClick={handleCreateList}
+              onClick={handleSubmitList}
             >
-              Create
+              {listToBeUpdated ? "Update" : "Create"}
             </button>
             <button
               className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild  border-Neutral-Mild
