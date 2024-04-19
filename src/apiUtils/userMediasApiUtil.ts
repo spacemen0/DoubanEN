@@ -3,7 +3,7 @@ import { apiUrl } from "../utils/config";
 
 export const getMediasByTypeAndUserStatusWithPagination = async (
   userId: number,
-  type: MediaType | "All",
+  type: MediaType,
   status: StatusType,
   page: number,
   size: number = 5,
@@ -30,7 +30,7 @@ export const getMediasByTypeAndUserStatusWithPagination = async (
 
 export const getMediaStatusesByTypeAndUserIdWithPagination = async (
   userId: number,
-  type: MediaType | "All",
+  type: MediaType,
   status: StatusType,
   page: number,
   size: number = 5,
@@ -57,7 +57,7 @@ export const getMediaStatusesByTypeAndUserIdWithPagination = async (
 
 export const getUserMediasByTypeWithPagination = async (
   userId: number,
-  type: MediaType | "All",
+  type: MediaType,
   page: number,
   status: StatusType,
   size: number = 5,
@@ -84,7 +84,7 @@ export const getUserMediasByTypeWithPagination = async (
 
 export const getUserMediaCountByType = async (
   userId: number,
-  type: MediaType | "All",
+  type: MediaType,
   status: StatusType,
 ): Promise<number> => {
   let response = new Response();

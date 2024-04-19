@@ -7,9 +7,9 @@ export function Banner() {
     <div className="flex flex-col">
       <div className="mt-12 flex items-center justify-center max-w-screen md:mt-16">
         <div className="flex-shrink-0 px-3 md:px-6">
-          <img src={Logo} alt="Logo" className="h-14 sm:h-20 md:h-28 lg:h-36" />
+          <img src={Logo} alt="Logo" className="h-20 md:h-28 lg:h-36" />
         </div>
-        <div className="mr-2 flex flex-col max-w-[800px]">
+        <div className="mr-2 flex flex-col xl:max-w-screen-lg md:max-w-screen-sm lg:max-w-screen-md ">
           <div className="lg:text-4xl text-3xl flex !sm:flex-col font-bold text-Neutral-Mild">
             <h1>Welcome to &nbsp;</h1>
             <span className="inline-block bg-gradient-to-r bg-clip-text text-transparent from-Music via-Movie to-Book dark:text-Neutral">
@@ -33,7 +33,7 @@ export function Banner() {
 
 function SiteStatus() {
   return (
-    <div className="mx-auto mt-12 max-w-screen-lg px-4">
+    <div className="mx-auto mt-6 lg:mt-12  px-4">
       <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-4 lg:grid-cols-6">
         <StatusItem title="Musics" count={statusInfo[0]} />
         <StatusItem title="Movies" count={statusInfo[1]} />

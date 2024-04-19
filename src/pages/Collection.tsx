@@ -23,7 +23,7 @@ export default function Collection() {
   >("Rated");
   const { setMessage, user } = useAuthContext();
   useEffect(() => {
-    const fetchMediasCount = async (type: MediaType | "All") => {
+    const fetchMediasCount = async (type: MediaType) => {
       if (user)
         try {
           setLoading(true);

@@ -24,7 +24,7 @@ export default function Medias() {
     setCurrentPage(1);
   }, [type]);
   useEffect(() => {
-    const fetchMediasCount = async (type: "Music" | "Movie" | "Book") => {
+    const fetchMediasCount = async (type: MediaType) => {
       setLoading(true);
       try {
         const fetchedCount = await getAllMediasCountByType(type);

@@ -19,15 +19,13 @@ export default function Result() {
         </h2>
 
         <div className="flex items-center justify-end rounded-md bg-gray-200 text-lg font-semibold text-Neutral my-2">
-          <div className="flex items-center font-semibold text-Neutral-Mild justify-center my-0.5 text-2xl">
-            <p className="  lg:mr-4 !md:mx-2">
-              Didn't find what are you looking at?
-            </p>
+          <div className="flex items-center font-semibold text-Neutral-Mild justify-between my-0.5 text-2xl w-full">
+            <p className="self-start  lg:mr-4 !md:mx-2">Didn't find?</p>
             <Link
-              className="mb-1 mr-2 text-Neutral-Strong hover:text-Neutral-Mild border-b-2 border-Neutral-Strong hover:border-Neutral-Mild"
+              className="p-1 rounded-md lg:mr-2 text-white bg-Neutral-Mild text-center hover:bg-Neutral text-xl"
               to="/add-media"
             >
-              Add media
+              Add
             </Link>
           </div>
         </div>

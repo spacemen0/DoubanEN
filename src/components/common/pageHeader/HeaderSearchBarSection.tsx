@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { SearchOption } from "../../../utils/type";
 import { Search, X } from "lucide-react";
 import { searchMedia } from "../../../apiUtils/searchApiUtil.ts";
 import { useNavigate } from "react-router-dom";
+import { MediaType } from "../../../utils/type.ts";
 
 export default function HeaderSearchBarSection() {
-  const [selectedOption, setSelectedOption] = useState<SearchOption>("Music");
+  const [selectedOption, setSelectedOption] = useState<MediaType>("All");
   const [isDropdownVisible, setDropdownVisibility] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const searchBarRef = useRef<HTMLDivElement | null>(null);
@@ -19,7 +19,7 @@ export default function HeaderSearchBarSection() {
     setDropdownVisibility(false);
   };
 
-  const handleOptionClick = (option: SearchOption) => {
+  const handleOptionClick = (option: MediaType) => {
     setSelectedOption(option);
   };
 
@@ -105,12 +105,14 @@ function DropDownSearchOption({
   selectedOption,
   onOptionClick,
 }: {
-  selectedOption: SearchOption;
-  onOptionClick: (option: SearchOption) => void;
+  selectedOption: MediaType;
+  onOptionClick: (option: MediaType) => void;
 }) {
   const musicColor: string = "text-Music border-b-2 font-bold border-Music";
   const movieColor: string = "text-Movie border-b-2 font-bold border-Movie";
   const bookColor: string = "text-Book border-b-2 font-bold border-Book";
+  const allColor: string =
+    "text-Neutral-Mild border-b-2 font-bold border-Neutral-Mild";
 
   return (
     <div
@@ -119,6 +121,14 @@ function DropDownSearchOption({
          md:left-3   top-[42px] md:top-[52px] md:shadow-sm shadow-gray-700"
     >
       <span className="mx-3 block">Search for: </span>
+      <button
+        className={`px-0.5 mx-1.5  hover:text-Neutral-Mild ${
+          selectedOption === "All" ? allColor : ""
+        }`}
+        onClick={() => onOptionClick("All")}
+      >
+        All
+      </button>
       <button
         className={`px-0.5 mx-1.5  hover:text-Music ${
           selectedOption === "Music" ? musicColor : ""
