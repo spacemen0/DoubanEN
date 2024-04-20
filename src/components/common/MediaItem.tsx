@@ -70,7 +70,7 @@ export function MediaItem({
           {media.title}
         </Link>
         <Link
-          to={`/media/${media.id}`}
+          to={`/author/${media.author}`}
           className={
             "text-xl mr-12 w-fit " +
             (media.type === "Music"

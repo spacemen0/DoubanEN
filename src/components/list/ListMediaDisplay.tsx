@@ -4,7 +4,7 @@ import { Pagination } from "../common/Pagination.tsx";
 import { MediaItem } from "../common/MediaItem.tsx";
 import { EmptyContent } from "../common/EmptyContent.tsx";
 
-export function ListMediasDisplay({
+export function ListMediaDisplay({
   count,
   currentPage,
   setCurrentPage,

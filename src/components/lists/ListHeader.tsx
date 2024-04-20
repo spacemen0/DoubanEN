@@ -2,7 +2,7 @@ import { ListInfo, User } from "../../utils/type.ts";
 import { Link } from "react-router-dom";
 import { MyImage } from "../common/MyImage.tsx";
 import React, { useState } from "react";
-import { NewListBox } from "../media/NewListBox.tsx";
+import { NewListBox } from "../common/NewListBox.tsx";
 import { apiUrl } from "../../utils/config.ts";
 
 export function ListHeader({

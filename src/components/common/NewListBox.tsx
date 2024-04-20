@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useAuthContext } from "../../contexts/AuthContext";
+import { useAuthContext } from "../../contexts/AuthContext.ts";
 import Draggable from "react-draggable";
 import { createList, editList } from "../../apiUtils/mediaListApiUtil.ts";
 import { ListInfo } from "../../utils/type.ts";

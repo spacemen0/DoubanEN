@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Media } from "../../utils/type";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { MediaItem } from "../common/MediaItem.tsx";
-import { getUserMediasByTypeWithPagination } from "../../apiUtils/userMediasApiUtil.ts";
+import { getUserMediaByTypeWithPagination } from "../../apiUtils/userMediaApiUtil.ts";
 import { homePageEditorMediaIds } from "../../utils/data.ts";
 import { getMedia } from "../../apiUtils/mediaApiUtil.ts";
 
@@ -17,14 +17,14 @@ export function SideList() {
     const fetchData = async () => {
       try {
         if (selectedOption === "My" && user) {
-          const itemsRated = await getUserMediasByTypeWithPagination(
+          const itemsRated = await getUserMediaByTypeWithPagination(
             user.id,
             "All",
             1,
             "Rated",
             5,
           );
-          const itemsReviewed = await getUserMediasByTypeWithPagination(
+          const itemsReviewed = await getUserMediaByTypeWithPagination(
             user.id,
             "All",
             1,

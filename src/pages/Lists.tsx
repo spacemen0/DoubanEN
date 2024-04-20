@@ -16,7 +16,7 @@ import { PageHeader } from "../components/common/PageHeader.tsx";
 import { EmptyContent } from "../components/common/EmptyContent.tsx";
 import { SelectUserList } from "../components/lists/SelectUserList.tsx";
 import { ListHeader } from "../components/lists/ListHeader.tsx";
-import { ListMediasDisplay } from "../components/lists/ListMediasDisplay.tsx";
+import { ListMediaDisplay } from "../components/lists/ListMediaDisplay.tsx";
 
 export default function Lists() {
   const { userId } = useParams();
@@ -24,7 +24,7 @@ export default function Lists() {
   const [loading, setLoading] = useState<boolean>();
   const [selectedList, setSelectedList] = useState<number>(-1);
   const [lists, setLists] = useState<ListInfo[]>([]);
-  const [medias, setMedias] = useState<Media[]>([]);
+  const [media, setMedia] = useState<Media[]>([]);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [changed, setChanged] = useState(false);
@@ -85,7 +85,7 @@ export default function Lists() {
   useEffect(() => {
     const fetchAllListItems = async (id: number) => {
       try {
-        setMedias(await getAllListItems(id, currentPage));
+        setMedia(await getAllListItems(id, currentPage));
       } catch (e) {
         const error = e as Error;
         if (error.message === "Response error")
@@ -99,7 +99,7 @@ export default function Lists() {
   async function handleDeleteList() {
     try {
       if (selectedList && token) await deleteList(selectedList, token);
-      setMedias([]);
+      setMedia([]);
       setCount(0);
       const newLists = lists.filter((list) => list.id !== selectedList);
       setLists(newLists);
@@ -114,7 +114,7 @@ export default function Lists() {
     try {
       if (selectedList && token)
         await removeMediaFromList(selectedList, mediaId, token);
-      setMedias(medias.filter((media) => media.id !== mediaId));
+      setMedia(media.filter((media) => media.id !== mediaId));
       setCount(count - 1);
     } catch (e) {
       const error = e as Error;
@@ -128,7 +128,7 @@ export default function Lists() {
       <div className="flex max-h-screen flex-col overflow-hidden">
         <PageHeader />
         <div className="overflow-y-scroll text-Neutral">
-          {selectedList !== 1 && (
+          {selectedList !== -1 && (
             <SelectUserList
               username={username}
               lists={lists}
@@ -137,7 +137,7 @@ export default function Lists() {
               setCurrentPage={setCurrentPage}
             />
           )}
-          {selectedList !== 1 ? (
+          {selectedList !== -1 ? (
             <div className="mx-2">
               <ListHeader
                 lists={lists}
@@ -149,8 +149,8 @@ export default function Lists() {
                 setChanged={setChanged}
                 user={user}
               />
-              <ListMediasDisplay
-                medias={medias}
+              <ListMediaDisplay
+                media={media}
                 count={count}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}

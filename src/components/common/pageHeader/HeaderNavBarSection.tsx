@@ -17,7 +17,7 @@ export default function HeaderNavBarSection({
     >
       <button
         onClick={() => {
-          navigate("/medias/music");
+          navigate("/media?type=Music");
         }}
         className={`${style}text-Music`}
       >
@@ -25,7 +25,7 @@ export default function HeaderNavBarSection({
       </button>
       <button
         onClick={() => {
-          navigate("/medias/movie");
+          navigate("/media?type=Movie");
         }}
         className={`${style}text-Movie`}
       >
@@ -33,7 +33,7 @@ export default function HeaderNavBarSection({
       </button>
       <button
         onClick={() => {
-          navigate("/medias/book");
+          navigate("/media?type=Book");
         }}
         className={`${style}text-Book`}
       >

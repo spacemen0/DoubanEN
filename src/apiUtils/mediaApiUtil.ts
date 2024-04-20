@@ -32,7 +32,7 @@ export const getMedia = async (id: number): Promise<Media> => {
   }
   return data;
 };
-export const getAllMediasByType = async (
+export const getAllMediaByType = async (
   type: MediaType,
   page: number,
 ): Promise<Media[]> => {
@@ -53,7 +53,7 @@ export const getAllMediasByType = async (
   const res = await response.json();
   return res["content"];
 };
-export const getAllMediasCountByType = async (
+export const getAllMediaCountByType = async (
   type: MediaType,
 ): Promise<number> => {
   let response = new Response();

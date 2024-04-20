@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Media } from "../../utils/type";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { MyImage } from "../common/MyImage";
-import { getUserCurrentOn } from "../../apiUtils/userMediasApiUtil.ts";
+import { getUserCurrentOn } from "../../apiUtils/userMediaApiUtil.ts";
 import { Link } from "react-router-dom";
 import { apiUrl } from "../../utils/config.ts";
 
@@ -50,7 +50,9 @@ export function RecentlyOn({ id }: { id: number }) {
                     {music.title}
                   </h1>
                 </Link>
-                <h1 className="w-full text-center">{music.author}</h1>
+                <Link to={`/author/${music.author}`}>
+                  <h1 className="w-full text-center">{music.author_name}</h1>
+                </Link>
               </div>
             </>
           ) : (
@@ -76,7 +78,9 @@ export function RecentlyOn({ id }: { id: number }) {
                     {movie.title}
                   </h1>
                 </Link>
-                <h1 className="w-full text-center">{movie.author}</h1>
+                <Link to={`/author/${movie.author}`}>
+                  <h1 className="w-full text-center">{movie.author_name}</h1>
+                </Link>
               </div>
             </>
           ) : (
@@ -103,7 +107,10 @@ export function RecentlyOn({ id }: { id: number }) {
                     {book.title}
                   </h1>
                 </Link>
-                <h1 className="w-full text-center">{book.author}</h1>
+                <Link to={`/author/${book.author}`}>
+                  {" "}
+                  <h1 className="w-full text-center">{book.author_name}</h1>
+                </Link>
               </div>
             </>
           ) : (

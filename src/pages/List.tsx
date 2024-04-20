@@ -12,7 +12,7 @@ import {
 import { NotFound } from "../components/common/NotFound";
 import Loading from "../components/common/Loading.tsx";
 import { ListHeader } from "../components/list/ListHeader.tsx";
-import { ListMediasDisplay } from "../components/list/ListMediasDisplay.tsx";
+import { ListMediaDisplay } from "../components/list/ListMediaDisplay.tsx";
 
 export default function List() {
   const { id } = useParams();
@@ -74,7 +74,7 @@ export default function List() {
       <PageHeader />
       <div className="mb-4 overflow-y-scroll px-2 text-Neutral lg:mb-8 lg:px-4">
         <ListHeader listInfo={listInfo} />
-        <ListMediasDisplay
+        <ListMediaDisplay
           count={count}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}

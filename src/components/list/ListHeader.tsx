@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { ListInfo } from "../../utils/type.ts";
 import { MyImage } from "../common/MyImage.tsx";
+import { apiUrl } from "../../utils/config.ts";
 
 export function ListHeader({ listInfo }: { listInfo: ListInfo | undefined }) {
   if (listInfo)
     return (
       <div className="flex !md:flex-col justify-start lg:max-w-[75%] mt-4">
         <div className="my-4 mr-2 h-48 w-48 flex-shrink-0">
-          <MyImage src={listInfo.imageUrl} alt={listInfo.title} />
+          <MyImage src={apiUrl + listInfo.imageUrl} alt={listInfo.title} />
         </div>
         <div className="my-4">
           <p className="text-3xl font-bold text-Neutral">{listInfo.title}</p>

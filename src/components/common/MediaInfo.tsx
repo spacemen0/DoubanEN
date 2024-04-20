@@ -39,7 +39,10 @@ export function MediaInfo({ media, home }: { media: Media; home: boolean }) {
                   : "Director"}
               :
             </td>
-            <td className="pb-1.5 lg:pb-3">{media.author_name}</td>
+            <Link to={`/author/${media.author}`}>
+              {" "}
+              <td className="pb-1.5 lg:pb-3">{media.author_name}</td>
+            </Link>
           </tr>
           <tr>
             <td className="pr-4 font-semibold pb-1.5 lg:pb-3">Genre:</td>

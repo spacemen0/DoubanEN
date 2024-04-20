@@ -14,8 +14,8 @@ export const getMediaStatus = async (
       },
     );
   } catch (error) {
-    console.error("Error fetching Medias Status:", error);
-    throw new Error("Failed to fetch Medias Status. Please try again later.");
+    console.error("Error fetching Media Status:", error);
+    throw new Error("Failed to fetch Media Status. Please try again later.");
   }
   if (response.status == 404) return { score: 0, status: "None" };
   if (!response.ok) {

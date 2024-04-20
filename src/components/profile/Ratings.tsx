@@ -3,10 +3,10 @@ import { Media, MediaStatus, Score } from "../../utils/type";
 import { MediaItem } from "../common/MediaItem.tsx";
 import { useAuthContext } from "../../contexts/AuthContext";
 import {
-  getMediasByTypeAndUserStatusWithPagination,
+  getMediaByTypeAndUserStatusWithPagination,
   getMediaStatusesByTypeAndUserIdWithPagination,
   getUserMediaCountByType,
-} from "../../apiUtils/userMediasApiUtil.ts";
+} from "../../apiUtils/userMediaApiUtil.ts";
 import { EmptyContent } from "../common/EmptyContent.tsx";
 import { Pagination } from "../common/Pagination.tsx";
 
@@ -42,7 +42,7 @@ export function Ratings({ id, username }: { id: number; username: string }) {
     const fetchRatings = async () => {
       try {
         setLoading(true);
-        const items = await getMediasByTypeAndUserStatusWithPagination(
+        const items = await getMediaByTypeAndUserStatusWithPagination(
           id,
           selectedOption,
           "Rated",

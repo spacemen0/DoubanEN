@@ -23,9 +23,15 @@ export const bannerImage: { listId: number; imageProps: ImageProps } = {
   imageProps: generateRandomImage(),
 };
 const sideListIds: number[] = [154, 152, 153, 3, 52, 2, 153];
-const sideListImages: ImageProps[] = Array.from({ length: 7 }, () => {
-  return generateRandomImage();
-});
+
+const sideListImages: ImageProps[] = [];
+
+while (sideListImages.length < 7) {
+  const randomImage = generateRandomImage();
+  if (!sideListImages.some((image) => image.src === randomImage.src)) {
+    sideListImages.push(randomImage);
+  }
+}
 
 export const sideLists: { listId: number; ImageProps: ImageProps }[] =
   Array.from({ length: 7 }, (_, index) => {

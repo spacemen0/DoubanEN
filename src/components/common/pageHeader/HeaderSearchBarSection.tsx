@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Search, X } from "lucide-react";
-import { searchMedia } from "../../../apiUtils/searchApiUtil.ts";
 import { useNavigate } from "react-router-dom";
 import { MediaType } from "../../../utils/type.ts";
 
@@ -29,12 +28,7 @@ export default function HeaderSearchBarSection() {
 
   const handleSearch = async () => {
     try {
-      const medias = await searchMedia(selectedOption, 10, searchValue);
-      navigate("/result", {
-        state: {
-          medias: medias,
-        },
-      });
+      navigate(`/search?value=${searchValue}&option=${selectedOption}`);
     } catch (e) {
       console.log(e);
     }
@@ -72,7 +66,7 @@ export default function HeaderSearchBarSection() {
         <Search size="20" color="#4E5464" />
       </button>
       <input
-        type="search"
+        type="text"
         placeholder="Search..."
         className="my-1 w-full rounded-full border py-1 pr-10 pl-8 text-lg text-gray-600 shadow-inner outline-none md:pl-10"
         onClick={handleInputClick}

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ListInfo, Media } from "../../utils/type.ts";
 import Draggable from "react-draggable";
 import { useAuthContext } from "../../contexts/AuthContext.ts";
-import { NewListBox } from "./NewListBox.tsx";
+import { NewListBox } from "../common/NewListBox.tsx";
 import {
   addMediaToList,
   getUserLists,
@@ -87,7 +87,7 @@ export const ListBox = ({
             <div className="flex w-full justify-end border-b-2 py-2 font-semibold need-interaction border-Neutral-Mild">
               <span className="mr-4 font-bold py-0.5"> Or:</span>
               <button
-                className="mr-2 rounded-md px-1 text-white py-0.5 bg-Neutral-Mild"
+                className="mr-2 rounded-md px-1  py-0.5 bg-gray-200   hover:bg-Neutral-Mild hover:text-white"
                 onClick={() => {
                   setShowNewListBox(true);
                 }}
@@ -99,7 +99,7 @@ export const ListBox = ({
           ) : (
             <div className="flex w-full justify-center border-b-2 py-2 font-semibold need-interaction border-Neutral-Mild">
               <button
-                className="mr-2 rounded-md px-2 text-white py-0.5 bg-Neutral-Mild"
+                className="mr-2 rounded-md px-2  py-0.5 bg-gray-200   hover:bg-Neutral-Mild hover:text-white"
                 onClick={() => {
                   setShowNewListBox(true);
                 }}
@@ -111,8 +111,8 @@ export const ListBox = ({
           )}
           <div className="flex w-full justify-end rounded-br-lg need-interaction border-Neutral-Mild">
             <button
-              className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild  border-Neutral-Mild
-          focus:ring-1 focus:ring-Neutral transition-colors rounded-br-lg"
+              className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild hover:text-white  border-Neutral-Mild
+          focus:ring-1 focus:ring-Neutral transition-colors"
               onClick={async () => {
                 if (selectedList > -1)
                   try {
@@ -134,8 +134,8 @@ export const ListBox = ({
               onClick={() => {
                 setShowListBox(false);
               }}
-              className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild  border-Neutral-Mild
-          focus:ring-1 focus:ring-Neutral transition-colors rounded-br-lg"
+              className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild hover:text-white border-Neutral-Mild
+          focus:ring-1 focus:ring-Neutral transition-colors rounded-br-md"
             >
               Cancel
             </button>

@@ -6,10 +6,10 @@ import { NotFound } from "../components/common/NotFound";
 import { PageHeader } from "../components/common/PageHeader";
 import {
   getUserMediaCountByType,
-  getUserMediasByTypeWithPagination,
-} from "../apiUtils/userMediasApiUtil.ts";
+  getUserMediaByTypeWithPagination,
+} from "../apiUtils/userMediaApiUtil.ts";
 import Loading from "../components/common/Loading.tsx";
-import { CollectionMediasDisplay } from "../components/collection/ColectionMediasDisplay.tsx";
+import { CollectionMediasDisplay } from "../components/collection/ColectionMediaDisplay.tsx";
 import { OptionSelect } from "../components/collection/OptionSelect.tsx";
 
 export default function Collection() {
@@ -49,7 +49,7 @@ export default function Collection() {
         try {
           setLoading(true);
           setMedias(
-            await getUserMediasByTypeWithPagination(
+            await getUserMediaByTypeWithPagination(
               user.id,
               (type!.charAt(0).toUpperCase() + type!.slice(1)) as
                 | MediaType

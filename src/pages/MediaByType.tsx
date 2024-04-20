@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { PageHeader } from "../components/common/PageHeader";
 import { NotFound } from "../components/common/NotFound";
 import { useEffect, useState } from "react";
@@ -7,14 +7,15 @@ import { MediaItem } from "../components/common/MediaItem.tsx";
 import { useAuthContext } from "../contexts/AuthContext";
 import { Pagination } from "../components/common/Pagination";
 import {
-  getAllMediasByType,
-  getAllMediasCountByType,
+  getAllMediaByType,
+  getAllMediaCountByType,
 } from "../apiUtils/mediaApiUtil.ts";
 import { EmptyContent } from "../components/common/EmptyContent.tsx";
 import Loading from "../components/common/Loading.tsx";
 
-export default function Medias() {
-  const { type } = useParams();
+export default function MediaByType() {
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
   const [medias, setMedias] = useState<Media[]>([]);
   const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(0);
@@ -27,28 +28,20 @@ export default function Medias() {
     const fetchMediasCount = async (type: MediaType) => {
       setLoading(true);
       try {
-        const fetchedCount = await getAllMediasCountByType(type);
+        const fetchedCount = await getAllMediaCountByType(type);
         setCount(fetchedCount);
       } catch (error) {
         setMessage(`Error fetching total number of ${type}s`);
       }
     };
-    console.log(type!.charAt(0).toUpperCase() + type!.slice(1));
-    fetchMediasCount(
-      (type!.charAt(0).toUpperCase() + type!.slice(1)) as MediaType,
-    ).then();
+    fetchMediasCount(type as MediaType).then();
   }, [setMessage, type]);
 
   useEffect(() => {
     const fetchAllMedias = async () => {
       setLoading(true);
       try {
-        setMedias(
-          await getAllMediasByType(
-            (type!.charAt(0).toUpperCase() + type!.slice(1)) as MediaType,
-            currentPage,
-          ),
-        );
+        setMedias(await getAllMediaByType(type as MediaType, currentPage));
         setLoading(false);
       } catch (e) {
         const error = e as Error;
@@ -57,7 +50,7 @@ export default function Medias() {
     };
     fetchAllMedias().then();
   }, [currentPage, setMessage, type]);
-  if (!["music", "movie", "book"].includes(type!)) {
+  if (!type || !["Music", "Movie", "Book", "All"].includes(type)) {
     return <NotFound />;
   }
   if (loading) return <Loading />;
@@ -67,9 +60,7 @@ export default function Medias() {
       <PageHeader />
       <div className="mt-2 overflow-y-scroll px-2 lg:px-4">
         <Pagination
-          title={`${count} ${
-            (type!.charAt(0).toUpperCase() + type!.slice(1)) as MediaType
-          }s`}
+          title={count + " " + (type === "Music" ? type : type + "s")}
           count={count}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}

@@ -1,7 +1,7 @@
 import { Media, MediaStatus, MediaType, StatusType } from "../utils/type";
 import { apiUrl } from "../utils/config";
 
-export const getMediasByTypeAndUserStatusWithPagination = async (
+export const getMediaByTypeAndUserStatusWithPagination = async (
   userId: number,
   type: MediaType,
   status: StatusType,
@@ -55,7 +55,7 @@ export const getMediaStatusesByTypeAndUserIdWithPagination = async (
   return ratedMediaStatuses;
 };
 
-export const getUserMediasByTypeWithPagination = async (
+export const getUserMediaByTypeWithPagination = async (
   userId: number,
   type: MediaType,
   page: number,
