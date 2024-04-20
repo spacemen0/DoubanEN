@@ -35,7 +35,7 @@ function SiteStatus() {
   return (
     <div className="mx-auto mt-6 lg:mt-12  px-4">
       <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-4 lg:grid-cols-6">
-        <StatusItem title="Musics" count={statusInfo[0]} />
+        <StatusItem title="Music" count={statusInfo[0]} />
         <StatusItem title="Movies" count={statusInfo[1]} />
         <StatusItem title="Books" count={statusInfo[2]} />
         <StatusItem title="Ratings" count={statusInfo[3]} />

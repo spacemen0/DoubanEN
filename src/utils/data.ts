@@ -11,12 +11,12 @@ function getRandomInt(min: number, max: number): number {
 }
 
 export const generateRandomImage = () => ({
-  src: `${apiUrl}/images/${imageIds[getRandomInt(0, 10)]}`,
+  src: `${apiUrl}/images/${imageIds[getRandomInt(0, 14)]}`,
   alt: "List Image",
 });
 
 const imageIds: number[] = [
-  202, 152, 252, 302, 303, 304, 305, 306, 307, 308, 309,
+  202, 152, 252, 302, 303, 304, 305, 306, 307, 308, 309, 602, 652, 802, 852,
 ];
 export const bannerImage: { listId: number; imageProps: ImageProps } = {
   listId: 153,
@@ -35,10 +35,10 @@ export const sideLists: { listId: number; ImageProps: ImageProps }[] =
     };
   });
 
-export const homePageReviewIds: number[] = [2, 4, 3, 252, 402];
+export const homePageReviewIds: number[] = [4, 3, 252, 2, 402];
 
 export const homePageEditorMediaIds: number[] = [
-  758, 809, 761, 702, 754, 805, 804, 813, 814,
+  761, 702, 754, 805, 804, 813, 814, 758, 809,
 ];
 
 export const bannerText: string = `Douban EN is a website crafted with React, TypeScript, and Tailwind CSS for the front-end, 
@@ -48,14 +48,14 @@ export const bannerLinkText: string =
   "Some extra functionalities are still under development. More media data will also be added.";
 
 export const infoPara1: string = `Douban EN is a website built with React, TypeScript and Tailwind CSS. 
-  The primary features of the site is to mark, track and organize your favorite Musics, Movies, and Books.
+  The primary features of the site is to mark, track and organize your favorite Music, Movies, and Books.
   Douban EN is a website built with React, TypeScript and Tailwind CSS. 
-  The primary features of the site is to mark, track and organize your favorite Musics, Movies, and Books.`;
+  The primary features of the site is to mark, track and organize your favorite Music, Movies, and Books.`;
 
 export const infoPara2: string = `Douban EN is a website built with React, TypeScript and Tailwind CSS. 
-  The primary features of the site is to mark, track and organize your favorite Musics, Movies, and Books.
+  The primary features of the site is to mark, track and organize your favorite Music, Movies, and Books.
   Douban EN is a website built with React, TypeScript and Tailwind CSS. 
-  The primary features of the site is to mark, track and organize your favorite Musics, Movies, and Books.`;
+  The primary features of the site is to mark, track and organize your favorite Music, Movies, and Books.`;
 
 //music movie book rating review list
 export const statusInfo: string[] = ["11", "11", "6", "39", "6", "3"];

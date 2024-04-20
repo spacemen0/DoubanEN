@@ -80,7 +80,7 @@ export function MediaItem({
                 : "text-Book")
           }
         >
-          {media.author}
+          {media.author_name}
         </Link>
         <p
           className={

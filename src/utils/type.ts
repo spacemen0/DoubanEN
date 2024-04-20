@@ -18,7 +18,8 @@ export type Media = {
   type: "Music" | "Movie" | "Book";
   description: string;
   title: string;
-  author: string;
+  author_name: string;
+  author: number;
   releaseDate: string;
   genre: string;
   average: number;
