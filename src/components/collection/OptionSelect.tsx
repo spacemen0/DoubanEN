@@ -34,11 +34,11 @@ export function OptionSelect({
           setCurrentPage(1);
         }}
       >
-        {type === "music"
+        {type === "Music"
           ? "Listening"
-          : type === "movie"
+          : type === "Movie"
             ? "Watching"
-            : type === "book"
+            : type === "Book"
               ? "Reading"
               : "Engaging"}
       </button>

@@ -20,7 +20,7 @@ export function CollectionMediasDisplay({
   return (
     <>
       <Pagination
-        title={`${count} ${type === "all" ? "Media" : type!.charAt(0).toUpperCase() + type!.slice(1)}s`}
+        title={`${count} ${type === "All" ? "Item" : type}s`}
         count={count}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

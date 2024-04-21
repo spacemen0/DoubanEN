@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Media, MediaType } from "../utils/type";
 import { useAuthContext } from "../contexts/AuthContext";
@@ -13,7 +13,8 @@ import { CollectionMediasDisplay } from "../components/collection/ColectionMedia
 import { OptionSelect } from "../components/collection/OptionSelect.tsx";
 
 export default function Collection() {
-  const { type } = useParams();
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
   const [medias, setMedias] = useState<Media[]>([]);
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -37,10 +38,7 @@ export default function Collection() {
           setMessage(`Error fetching total number of ${type}s`);
         }
     };
-    if (type)
-      fetchMediasCount(
-        (type.charAt(0).toUpperCase() + type.slice(1)) as MediaType,
-      ).then();
+    if (type) fetchMediasCount(type as MediaType).then();
   }, [selectedOption, setMessage, type, user]);
 
   useEffect(() => {
@@ -51,9 +49,7 @@ export default function Collection() {
           setMedias(
             await getUserMediaByTypeWithPagination(
               user.id,
-              (type!.charAt(0).toUpperCase() + type!.slice(1)) as
-                | MediaType
-                | "All",
+              type as MediaType,
               currentPage,
               selectedOption,
             ),
@@ -73,7 +69,7 @@ export default function Collection() {
     setSelectedOption(status);
   }
 
-  if (!["music", "movie", "book", "all"].includes(type!)) {
+  if (!["Music", "Movie", "Book", "All"].includes(type!)) {
     return <NotFound />;
   }
   if (loading) return <Loading />;

@@ -27,7 +27,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/media/:id" element={<Media />} />
         <Route path="/media" element={<MediaByType />} />
-        <Route path="/collection/:type" element={<Collection />} />
+        <Route path="/collection" element={<Collection />} />
         <Route path="/author/:id" element={<Author />} />
         <Route path="/lists/:userId" element={<Lists />} />
         <Route path="/edit" element={<Edit />} />

@@ -92,28 +92,28 @@ function DropDownMenu({
               text="Edit Profile"
             />
             <MenuItem
-              link="/collection/all"
+              link="/collection?type=All"
               onClick={() => {
                 setIsOpen(false);
               }}
               text="All Collections"
             />
             <MenuItem
-              link="/collection/book"
+              link="/collection?type=Book"
               onClick={() => {
                 setIsOpen(false);
               }}
               text="Book Collection"
             />
             <MenuItem
-              link="/collection/music"
+              link="/collection?type=Music"
               onClick={() => {
                 setIsOpen(false);
               }}
               text="Music Collection"
             />
             <MenuItem
-              link="/collection/movie"
+              link="/collection?type=Movie"
               onClick={() => {
                 setIsOpen(false);
               }}
