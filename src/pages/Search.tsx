@@ -35,13 +35,15 @@ export default function Search() {
         </h2>
 
         <div className="flex items-center justify-end rounded-md bg-gray-200 text-lg font-semibold text-Neutral my-2">
-          <div className="flex items-center font-semibold text-Neutral-Mild justify-between my-0.5 text-2xl w-full">
-            <p className="self-start  lg:ml-4 !md:mx-2">Didn't find?</p>
+          <div className="flex items-center font-semibold text-Neutral-Mild justify-end text-2xl w-full">
+            <p className="md:mr-4 !md:mx-2">
+              Didn't find what's you looking for?
+            </p>
             <Link
-              className="p-1 rounded-md  text-white bg-Neutral-Mild text-center hover:bg-Neutral text-xl"
+              className="p-1 rounded-md !sm:h-16 !sm:px-4 flex items-center text-white bg-Neutral-Mild text-center hover:bg-Neutral text-xl"
               to="/add-media"
             >
-              Add
+              Add New
             </Link>
           </div>
         </div>

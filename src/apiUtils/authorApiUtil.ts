@@ -58,3 +58,18 @@ export const getAllMediaCountFromAuthor = async (
   }
   return await response.json();
 };
+
+export const getAllAuthors = async (): Promise<Author[]> => {
+  let response = new Response();
+  try {
+    response = await fetch(`${apiUrl}/authors`, {
+      method: "GET",
+    });
+  } catch (error) {
+    throw new Error("Fetch Author error");
+  }
+  if (!response.ok) {
+    throw new Error("Author");
+  }
+  return await response.json();
+};
