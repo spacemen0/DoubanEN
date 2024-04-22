@@ -5,6 +5,8 @@ export type AuthResponse = {
 
 export type MediaType = "Music" | "Movie" | "Book" | "All";
 
+export type AuthorType = "Artist" | "Director" | "Author" | "All";
+
 export type Score = 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | 3.5 | 4.0 | 4.5 | 5.0;
 
 export type ImageProps = {
@@ -30,6 +32,13 @@ export type Media = {
   tracks?: string[];
   chapters?: string[];
   casts?: { character: string; actor: string }[];
+};
+
+export type Author = {
+  id: number;
+  name: string;
+  type: "Artist" | "Director" | "Author";
+  genres: string[];
 };
 
 export type Review = {

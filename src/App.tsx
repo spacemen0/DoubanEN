@@ -10,7 +10,7 @@ const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const Media = lazy(() => import("./pages/Media"));
 const MediaByType = lazy(() => import("./pages/MediaByType.tsx"));
-const Author = lazy(() => import("./pages/Author"));
+const Author = lazy(() => import("./pages/AuthorPage.tsx"));
 const Collection = lazy(() => import("./pages/Collection.tsx"));
 const Lists = lazy(() => import("./pages/Lists.tsx"));
 const Edit = lazy(() => import("./pages/Edit.tsx"));

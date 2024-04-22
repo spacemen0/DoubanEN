@@ -18,9 +18,11 @@ export function DomainSection({ media }: { media: Media }) {
             {media.tracks.map((item, index) => (
               <p
                 key={index}
-                className={`border-b py-2 ${index % 2 === 0 && "bg-gray-100"}`}
+                className={`border-b py-2 pl-4 ${index % 2 === 0 && "bg-gray-100"}`}
               >
-                <span className="inline-block w-12 px-4 font-semibold">
+                <span
+                  className={`inline-block text-start font-semibold ${media.tracks!.length >= 10 ? "w-8" : "w-4"}`}
+                >
                   {index + 1}
                 </span>{" "}
                 {item}
@@ -33,9 +35,14 @@ export function DomainSection({ media }: { media: Media }) {
             {media.chapters.map((item, index) => (
               <p
                 key={index}
-                className={`border-b py-2 ${index % 2 === 0 && "bg-gray-100"}`}
+                className={`border-b py-2 pl-4 ${index % 2 === 0 && "bg-gray-100"}`}
               >
-                <span className="px-4 font-semibold">{index + 1}</span> {item}
+                <span
+                  className={`inline-block text-start font-semibold ${media.chapters!.length >= 10 ? "w-8" : "w-4"}`}
+                >
+                  {index + 1}
+                </span>{" "}
+                {item}
               </p>
             ))}
           </>

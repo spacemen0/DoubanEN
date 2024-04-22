@@ -1,5 +1,6 @@
 import { Media, MediaType } from "../utils/type";
 import { apiUrl } from "../utils/config";
+import { processMediaJson } from "../utils/helper.ts";
 
 export const getMedia = async (id: number): Promise<Media> => {
   let response = new Response();
@@ -15,22 +16,7 @@ export const getMedia = async (id: number): Promise<Media> => {
     throw new Error("Response error");
   }
   const data = await response.json();
-  if (data.type === "Music") data.tracks = data.additional.split("\n");
-  if (data.type === "Book") data.chapters = data.additional.split("\n");
-  if (data.type === "Movie") {
-    const lines = data.additional.split("\n");
-    const result: { character: string; actor: string }[] = [];
-
-    for (let i = 0; i < lines.length; i += 2) {
-      const obj: { character: string; actor: string } = {
-        character: lines[i],
-        actor: lines[i + 1] || "", // Handle case when there are an odd number of lines
-      };
-      result.push(obj);
-    }
-    data.casts = result;
-  }
-  return data;
+  return processMediaJson(data as Media);
 };
 export const getAllMediaByType = async (
   type: MediaType,
