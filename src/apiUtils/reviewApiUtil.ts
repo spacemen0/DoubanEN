@@ -61,6 +61,8 @@ export const postReview = async (
       id: review.userId,
     },
   };
+  const { id, ...requestBodyWithoutId } = ReviewRequestBody;
+  console.log(id);
   try {
     response = await fetch(`${apiUrl}/reviews`, {
       method: "POST",
@@ -68,7 +70,7 @@ export const postReview = async (
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(ReviewRequestBody),
+      body: JSON.stringify(requestBodyWithoutId),
     });
   } catch (error) {
     console.error("Error posting Review:", error);
@@ -219,4 +221,72 @@ export const getReviewsByTypeAndUserIdWithPagination = async (
     review.userId = review.user.id;
     return review;
   });
+};
+
+export const likeReview = async (
+  reviewId: number,
+  userId: number,
+  token: string,
+): Promise<void> => {
+  let response = new Response();
+  const url = `${apiUrl}/reviews/${reviewId}/like?userId=${userId}`;
+  try {
+    response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.error("Error liking Review", error);
+    throw new Error("Failed to like Review. Please try again later.");
+  }
+  if (!response.ok) {
+    throw new Error("Response error");
+  }
+  return;
+};
+
+export const unlikeReview = async (
+  reviewId: number,
+  userId: number,
+  token: string,
+): Promise<void> => {
+  let response = new Response();
+  const url = `${apiUrl}/reviews/${reviewId}/unlike?userId=${userId}`;
+  try {
+    response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.error("Error liking Review", error);
+    throw new Error("Failed to like Review. Please try again later.");
+  }
+  if (!response.ok) {
+    throw new Error("Response error");
+  }
+  return;
+};
+
+export const isReviewLiked = async (
+  reviewId: number,
+  userId: number,
+): Promise<boolean> => {
+  let response = new Response();
+  const url = `${apiUrl}/reviews/${reviewId}/is-liked?userId=${userId}`;
+  try {
+    response = await fetch(url, {
+      method: "GET",
+    });
+  } catch (error) {
+    console.error("Error liking Review", error);
+    throw new Error("Failed to like Review. Please try again later.");
+  }
+  if (!response.ok) {
+    throw new Error("Response error");
+  }
+  return await response.json();
 };

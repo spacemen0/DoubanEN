@@ -31,6 +31,8 @@ export function NewReviewBox({
       return;
     }
     const review: Review = {
+      id: 0,
+      likes: 0,
       mediaType: media.type,
       username: user!.username,
       userId: user!.id,

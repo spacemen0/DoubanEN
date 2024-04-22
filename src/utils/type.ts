@@ -37,12 +37,12 @@ export type Media = {
 export type Author = {
   id: number;
   name: string;
-  type: "Artist" | "Director" | "Author";
+  type: AuthorType;
   genres: string[];
 };
 
 export type Review = {
-  id?: number;
+  id: number;
   username: string;
   userId: number;
   mediaId: number;
@@ -51,6 +51,7 @@ export type Review = {
   score: Score;
   title: string;
   content: string;
+  likes: number;
 };
 
 export type MediaStatus = {

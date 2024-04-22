@@ -1,7 +1,13 @@
-import { Star, StarHalf } from "lucide-react";
-import { useState } from "react";
+import { Star, StarHalf, ThumbsUp } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Media, Review } from "../../utils/type";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../../contexts/AuthContext.ts";
+import {
+  isReviewLiked,
+  likeReview,
+  unlikeReview,
+} from "../../apiUtils/reviewApiUtil.ts";
 
 export function ReviewDisplay({
   review,
@@ -11,6 +17,19 @@ export function ReviewDisplay({
   media?: Media;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const { user, setMessage, token } = useAuthContext();
+
+  useEffect(() => {
+    const checkLiked = async () => {
+      try {
+        if (user) setLiked(await isReviewLiked(review.id, user.id));
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    checkLiked().then();
+  }, [review.id, user]);
   const renderStars = () => {
     const stars = Math.floor(review.score);
     const hasHalfStar = review.score % 1 !== 0;
@@ -54,10 +73,28 @@ export function ReviewDisplay({
       ? `${content.slice(0, maxLength)}...`
       : content;
   };
+
+  async function handleClickLikeButton() {
+    if (user && token) {
+      try {
+        if (!liked) {
+          await likeReview(review.id, user.id, token);
+        } else {
+          await unlikeReview(review.id, user.id, token);
+        }
+        setLiked(!liked);
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      setMessage("Please log in");
+    }
+  }
+
   return (
     <div>
       <div className="mt-2 flex items-center justify-between rounded-md bg-gray-200 py-2 pr-2 pl-2 lg:pr-4">
-        <p className="lg:text-xl">
+        <p className="text-xl flex justify-center items-center">
           <Link
             to={
               review.userId
@@ -68,7 +105,17 @@ export function ReviewDisplay({
           >
             {review.username}
           </Link>
+          <button
+            className="ml-2 md:ml-6 py-0.5"
+            onClick={handleClickLikeButton}
+          >
+            <ThumbsUp
+              fill={liked ? "rgb(234 179 8)" : "rgb(0, 0, 0, 0)"}
+              color={"rgb(234 179 8)"}
+            />
+          </button>
         </p>
+
         <div className="flex items-center">
           <div className="relative">
             <div className="flex gap-0.5 text-Neutral-Mild lg:gap-1">
@@ -99,7 +146,8 @@ export function ReviewDisplay({
         )}
         <p className="mt-2 text-lg font-semibold text-Neutral-Mild">
           {" "}
-          Reviewed on: {review.date}
+          Reviewed on: {review.date},{" "}
+          <span className="text-xl text-Neutral">{review.likes}</span> Likes
         </p>
         <p className="mt-2 lg:text-xl">
           {truncateContent(review.content, 400)}
