@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Media, Review, Score } from "../../utils/type";
+import { Media, RatingScore, Review } from "../../utils/type";
 import { useAuthContext } from "../../contexts/AuthContext";
 import Draggable from "react-draggable";
 import { postReview } from "../../apiUtils/reviewApiUtil.ts";
@@ -38,7 +38,7 @@ export function NewReviewBox({
       userId: user!.id,
       mediaId: media.id,
       date: new Date(Date.now()).toISOString().split("T")[0],
-      score: score as Score,
+      score: score as RatingScore,
       title: title,
       content: content,
     };

@@ -66,7 +66,7 @@ export function ListHeader({
         <div className="flex !md:flex-col !md:pr-40 justify-start md:gap-2">
           {user?.id === parseInt(userId!) && (
             <button
-              className="mb-2 rounded-md text-lg  font-semibold text-white p-1.5 bg-Neutral-Mild hover:bg-Neutral"
+              className="mb-2 rounded-md text-lg font-semibold text-white p-1.5 bg-Neutral-Mild hover:bg-Neutral"
               onClick={handleDeleteList}
             >
               Delete this list
@@ -74,7 +74,7 @@ export function ListHeader({
           )}
           {user?.id === parseInt(userId!) && (
             <button
-              className="mb-2 rounded-md text-lg  font-semibold text-white p-1.5 bg-Neutral-Mild hover:bg-Neutral"
+              className="mb-2 rounded-md text-lg font-semibold text-white p-1.5 bg-Neutral-Mild hover:bg-Neutral"
               onClick={() => {
                 setShowNewListBox(!showNewListBox);
                 setEdit(true);
@@ -85,7 +85,7 @@ export function ListHeader({
           )}
           {user?.id === parseInt(userId!) && (
             <button
-              className="mb-2 rounded-md text-lg  font-semibold text-white p-1.5 bg-Neutral-Mild hover:bg-Neutral"
+              className="mb-2 rounded-md text-lg font-semibold text-white p-1.5 bg-Neutral-Mild hover:bg-Neutral"
               onClick={() => {
                 setShowNewListBox(!showNewListBox);
               }}

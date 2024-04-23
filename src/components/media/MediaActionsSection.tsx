@@ -1,4 +1,4 @@
-import { Media, MediaStatus, Score } from "../../utils/type";
+import { Media, MediaStatus, RatingScore } from "../../utils/type";
 import React, { ReactNode, useCallback, useEffect, useState } from "react";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { ChevronDown, ChevronUp, Star, StarHalf } from "lucide-react";
@@ -67,7 +67,6 @@ export function MediaActionsSection({
   const fetchStatus = useCallback(async () => {
     try {
       const status = await getMediaStatus(user!.id, media.id);
-      console.log("MyStatus: ", status);
       setMediaStatus({
         id: status.id,
         score: status.score,
@@ -105,8 +104,7 @@ export function MediaActionsSection({
           await handleSuccess();
         } else {
           if (mediaStatus.score !== 0) {
-            const score = mediaStatus.score as Score;
-            // const newDate = new Date(Date.now());
+            const score = mediaStatus.score as RatingScore;
             await submitRating(user.id, score, media.id, media.type, token!);
             setMessage("Rating submitted");
             await handleSuccess();

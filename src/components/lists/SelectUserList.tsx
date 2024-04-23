@@ -28,7 +28,7 @@ export function SelectUserList({
             setSelectedList(parseInt(event.target.value));
           }}
           value={selectedList}
-          className="mx-2 border-b-2 border-gray-400 py-1 text-center align-middle  focus:outline-0"
+          className="mx-2 border-b-2 border-gray-400 py-1 text-center align-middle focus:outline-0"
         >
           {lists.map((list) => (
             <option value={list.id} key={list.id}>

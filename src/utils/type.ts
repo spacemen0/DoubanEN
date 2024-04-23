@@ -7,7 +7,23 @@ export type MediaType = "Music" | "Movie" | "Book" | "All";
 
 export type AuthorType = "Artist" | "Director" | "Author" | "All";
 
-export type Score = 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | 3.5 | 4.0 | 4.5 | 5.0;
+export type StatusType = "Rated" | "Wishlist" | "Doing" | "Reviewed";
+
+export type UserRole = "Admin" | "Contributor" | "Standard";
+
+export type CommentArea = "Media" | "User" | "Media-List" | "Review";
+
+export type RatingScore =
+  | 0.5
+  | 1.0
+  | 1.5
+  | 2.0
+  | 2.5
+  | 3.0
+  | 3.5
+  | 4.0
+  | 4.5
+  | 5.0;
 
 export type ImageProps = {
   src: string;
@@ -48,7 +64,7 @@ export type Review = {
   mediaId: number;
   mediaType: MediaType;
   date: string;
-  score: Score;
+  score: RatingScore;
   title: string;
   content: string;
   likes: number;
@@ -62,11 +78,9 @@ export type MediaStatus = {
   mediaId?: number;
 };
 
-export type StatusType = "Rated" | "Wishlist" | "Doing" | "Reviewed";
-
 export type User = {
   username: string;
-  role: "Admin" | "Contributor" | "Standard";
+  role: UserRole;
   date: string;
   profileImageUrl: string;
   bio: string;
@@ -90,4 +104,13 @@ export type ProfileFormData = {
   password: string | null;
   oldPassword: string | null;
   image: File | null;
+};
+
+export type Comment = {
+  id: number;
+  commentArea: CommentArea;
+  areaId: number;
+  content: string;
+  userId: number;
+  date: string;
 };

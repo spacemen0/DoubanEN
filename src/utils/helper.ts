@@ -33,3 +33,8 @@ export const processMediaJson = (data: Media): Media => {
 
   return processedData;
 };
+
+export function getCurrentLocalDate(): string {
+  const date = new Date(Date.now());
+  return date.toISOString().split("T")[0];
+}

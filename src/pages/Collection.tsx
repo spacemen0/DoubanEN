@@ -5,8 +5,8 @@ import { useAuthContext } from "../contexts/AuthContext";
 import { NotFound } from "../components/common/NotFound";
 import { PageHeader } from "../components/common/PageHeader";
 import {
-  getUserMediaCountByType,
   getUserMediaByTypeWithPagination,
+  getUserMediaCountByType,
 } from "../apiUtils/userMediaApiUtil.ts";
 import Loading from "../components/common/Loading.tsx";
 import { CollectionMediasDisplay } from "../components/collection/ColectionMediaDisplay.tsx";

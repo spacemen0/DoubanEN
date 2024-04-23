@@ -40,7 +40,7 @@ export function MediaInfo({ media, home }: { media: Media; home: boolean }) {
               :
             </td>
 
-            <td className="pb-1.5 lg:pb-3">
+            <td className="pb-1.5 hover:text-Neutral-Strong lg:pb-3">
               <Link to={`/author/${media.author}`}> {media.author_name}</Link>
             </td>
           </tr>

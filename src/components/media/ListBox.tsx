@@ -87,7 +87,7 @@ export const ListBox = ({
             <div className="flex w-full justify-end border-b-2 py-2 font-semibold need-interaction border-Neutral-Mild">
               <span className="mr-4 font-bold py-0.5"> Or:</span>
               <button
-                className="mr-2 rounded-md px-1  py-0.5 bg-gray-200   hover:bg-Neutral-Mild hover:text-white"
+                className="mr-2 rounded-md bg-gray-200 px-1 py-0.5 hover:bg-Neutral-Mild hover:text-white"
                 onClick={() => {
                   setShowNewListBox(true);
                 }}
@@ -99,7 +99,7 @@ export const ListBox = ({
           ) : (
             <div className="flex w-full justify-center border-b-2 py-2 font-semibold need-interaction border-Neutral-Mild">
               <button
-                className="mr-2 rounded-md px-2  py-0.5 bg-gray-200   hover:bg-Neutral-Mild hover:text-white"
+                className="mr-2 rounded-md bg-gray-200 px-2 py-0.5 hover:bg-Neutral-Mild hover:text-white"
                 onClick={() => {
                   setShowNewListBox(true);
                 }}

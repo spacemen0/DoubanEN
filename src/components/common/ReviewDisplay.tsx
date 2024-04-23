@@ -79,8 +79,10 @@ export function ReviewDisplay({
       try {
         if (!liked) {
           await likeReview(review.id, user.id, token);
+          review.likes += 1;
         } else {
           await unlikeReview(review.id, user.id, token);
+          review.likes -= 1;
         }
         setLiked(!liked);
       } catch (e) {
@@ -94,7 +96,7 @@ export function ReviewDisplay({
   return (
     <div>
       <div className="mt-2 flex items-center justify-between rounded-md bg-gray-200 py-2 pr-2 pl-2 lg:pr-4">
-        <p className="text-xl flex justify-center items-center">
+        <p className="flex items-center justify-center text-xl">
           <Link
             to={
               review.userId
@@ -106,7 +108,7 @@ export function ReviewDisplay({
             {review.username}
           </Link>
           <button
-            className="ml-2 md:ml-6 py-0.5"
+            className="ml-2 py-0.5 md:ml-6"
             onClick={handleClickLikeButton}
           >
             <ThumbsUp

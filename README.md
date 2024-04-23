@@ -25,11 +25,11 @@ complete, and the project has been successfully deployed. You can access the pro
 - **PostgreSQL**
 
 **To-do**
-- search
+- comments
 - admin page(to be decided)
 - follow user
-- add own medias
 - refactor
+- footer
 - add logs
 - oauth
 
@@ -41,15 +41,15 @@ complete, and the project has been successfully deployed. You can access the pro
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-TypeScript                      70            243             10           5524
-JavaScript                      35              0             94            157
+TypeScript                      73            280             11           6231
+JavaScript                      37              0             99            159
 JSON                             4              2              0             77
-Markdown                         1             15              0             55
+Markdown                         1             15              0             52
 HTML                             2              6              0             28
 INI                              1              1              0              7
 CSS                              2              0              0              4
 -------------------------------------------------------------------------------
-SUM:                           115            267            104           5852
+SUM:                           120            304            110           6558
 -------------------------------------------------------------------------------
 ```
 
@@ -59,10 +59,10 @@ SUM:                           115            267            104           5852
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Java                            90            755             11           4221
+Java                            98            848             11           4796
 Text                             1              0              0             11
 Properties                       1              0              0              9
 -------------------------------------------------------------------------------
-SUM:                            92            755             11           4241
+SUM:                           100            848             11           4816
 -------------------------------------------------------------------------------
 ```

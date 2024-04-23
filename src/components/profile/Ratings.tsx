@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Media, MediaStatus, Score } from "../../utils/type";
+import { Media, MediaStatus, RatingScore } from "../../utils/type";
 import { MediaItem } from "../common/MediaItem.tsx";
 import { useAuthContext } from "../../contexts/AuthContext";
 import {
@@ -135,7 +135,7 @@ export function Ratings({ id, username }: { id: number; username: string }) {
                     .length > 0
                     ? (statuses.filter(
                         (status) => status.mediaId === item.id,
-                      )[0].score as Score)
+                      )[0].score as RatingScore)
                     : undefined
                 }
                 text="Their Rating: "

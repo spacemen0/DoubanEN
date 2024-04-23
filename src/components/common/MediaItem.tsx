@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Media, Score } from "../../utils/type";
+import { Media, RatingScore } from "../../utils/type";
 import { MyImage } from "./MyImage";
 import { apiUrl } from "../../utils/config.ts";
 import { Star, StarHalf } from "lucide-react";
@@ -12,7 +12,7 @@ export function MediaItem({
   date,
 }: {
   media: Media;
-  score?: Score;
+  score?: RatingScore;
   text?: string;
   date?: string;
 }) {

@@ -30,12 +30,12 @@ export default function Search() {
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
       <div className="mt-2 overflow-y-scroll px-2 lg:px-4">
-        <h2 className="font-bold text-Neutral text-3xl mx-1 mt-4 ">
+        <h2 className="mx-1 mt-4 text-3xl font-bold text-Neutral">
           {AllMedia.length + " Results"}
         </h2>
 
-        <div className="flex items-center justify-end rounded-md bg-gray-200 text-lg font-semibold text-Neutral my-2">
-          <div className="flex items-center font-semibold text-Neutral-Mild justify-end text-2xl w-full">
+        <div className="my-2 flex items-center justify-end rounded-md bg-gray-200 text-lg font-semibold text-Neutral">
+          <div className="flex w-full items-center justify-end text-2xl font-semibold text-Neutral-Mild">
             <p className="md:mr-4 !md:mx-2">
               Didn't find what's you looking for?
             </p>

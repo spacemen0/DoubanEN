@@ -16,6 +16,7 @@ const Lists = lazy(() => import("./pages/Lists.tsx"));
 const Edit = lazy(() => import("./pages/Edit.tsx"));
 const Search = lazy(() => import("./pages/Search.tsx"));
 const AddMedia = lazy(() => import("./pages/AddMedia.tsx"));
+const Admin = lazy(() => import("./pages/Admin.tsx"));
 export default function App() {
   return (
     <Suspense fallback={<Loading />}>
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="/edit" element={<Edit />} />
         <Route path="/search" element={<Search />} />
         <Route path="/add-media" element={<AddMedia />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </Suspense>

@@ -12,6 +12,7 @@ import Loading from "../components/common/Loading";
 import { NotFound } from "../components/common/NotFound";
 import { getMedia } from "../apiUtils/mediaApiUtil.ts";
 import { apiUrl } from "../utils/config.ts";
+import { CommentSection } from "../components/common/CommentSection.tsx";
 
 export default function MediaPage() {
   const { setMessage } = useAuthContext();
@@ -42,7 +43,7 @@ export default function MediaPage() {
   };
 
   // Render NotFound component if specific error is caught
-  if (!exist) return <NotFound />;
+  if (!exist || !id) return <NotFound />;
   return (
     <>
       <PageHeader />
@@ -52,6 +53,9 @@ export default function MediaPage() {
             <MyImage src={apiUrl + media.imageUrl} alt={media.title} />
             <div className="hidden lg:block">
               <DomainSection media={media} />
+            </div>
+            <div className="hidden lg:block">
+              <CommentSection area={"Media"} areaId={parseInt(id)} />
             </div>
           </div>
           <div className="mb-4 flex w-full flex-1 flex-col border-gray-300 pt-2 text-Neutral lg:flex-[0.7] lg:ml-6 lg:border-t lg:border-l lg:pl-2">
