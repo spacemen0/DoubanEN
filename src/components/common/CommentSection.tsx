@@ -86,23 +86,30 @@ export const CommentSection = ({
     <>
       <h2 className="my-4 text-2xl font-bold">Comments</h2>
       <div className="rounded-md border px-2">
-        {comments.length > 0 &&
+        {comments.length > 0 ? (
           comments.map((comment) => (
             <CommentEntry key={comment.id} comment={comment} />
-          ))}
+          ))
+        ) : (
+          <p className="font-semibold text-center mt-6 text-xl">
+            Nothing to show here
+          </p>
+        )}
         <div className="p-4">
-          <button
-            onClick={handleLoadMore}
-            className={`flex w-full justify-center mt-2  rounded-md p-2 text-white transition-colors duration-300
+          {comments.length > 0 && (
+            <button
+              onClick={handleLoadMore}
+              className={`flex w-full justify-center mt-2  rounded-md p-2 text-white transition-colors duration-300
               bg-Neutral-Mild ${
                 count <= comments.length
                   ? "cursor-not-allowed"
                   : `hover:bg-Neutral focus:bg-Neutral-Mild focus:ring-Neutral-Mild
               focus:outline-none focus:ring-2 focus:ring-offset-2`
               }`}
-          >
-            Load More ({count - comments.length})
-          </button>
+            >
+              Load More ({count - comments.length})
+            </button>
+          )}
           {showNewCommentBox && (
             <div>
               <label

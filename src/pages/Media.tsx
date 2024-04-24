@@ -72,6 +72,9 @@ export default function MediaPage() {
             <div className="lg:hidden">
               <DomainSection media={media} />
             </div>
+            <div className="lg:hidden">
+              <CommentSection area={"Media"} areaId={parseInt(id)} />
+            </div>
             <ReviewSection
               media={media}
               render={render}
