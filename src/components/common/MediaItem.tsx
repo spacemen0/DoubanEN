@@ -10,11 +10,13 @@ export function MediaItem({
   score,
   text,
   date,
+  side = false,
 }: {
   media: Media;
   score?: RatingScore;
   text?: string;
   date?: string;
+  side?: boolean;
 }) {
   const renderStars = () => {
     if (score) {
@@ -50,7 +52,9 @@ export function MediaItem({
   };
   return (
     <div className="flex w-full">
-      <div className="mt-2 mr-2 h-full max-h-32 w-full overflow-clip max-w-32 md:mr-4 lg:mr-6">
+      <div
+        className={`mt-2 mr-2 h-full  w-full overflow-clip  md:mr-4 lg:mr-6 flex-shrink-0 ${side ? "max-w-24 max-h-24" : "max-w-32 max-h-32"}`}
+      >
         <Link to={`/media/${media.id}`}>
           <MyImage src={apiUrl + media.imageUrl} alt={media.title} />
         </Link>

@@ -4,7 +4,7 @@ import { sideLists } from "../../utils/data";
 
 export function SideDisplay() {
   return (
-    <div className="mt-6 flex flex-col md:mt-4 md:w-11/12 lg:w-10/12">
+    <div className="mt-6 flex flex-col md:mt-4 lg:w-10/12">
       <div className="mb-4">
         <Link to={`/list/${sideLists[0].listId}`}>
           <div className="">

@@ -43,7 +43,7 @@ export function Featured() {
 
   return (
     <div className="mb-4 flex bg-white pl-3 md:pl-6 lg:pl-12">
-      <div className="mr-4 flex flex-1 flex-col lg:flex-[0.65]">
+      <div className="mr-4 flex flex-1 flex-col lg:flex-[0.65] ">
         <FeaturedBanner />
 
         {featuredItems.map((item, index) => (
@@ -54,13 +54,13 @@ export function Featured() {
 
         <div className="mr-4 flex flex-col lg:hidden">
           <SideDisplay />
-          <SideList></SideList>
+          <SideList />
           <SideInfo />
         </div>
       </div>
       <div className="flex flex-col flex-[0.35]  items-center !lg:hidden">
         <SideDisplay />
-        <SideList></SideList>
+        <SideList />
         <SideInfo />
       </div>
     </div>

@@ -7,6 +7,7 @@ export default {
         "!sm": { raw: "(max-width: 640px)" },
         "!md": { raw: "(max-width: 768px)" },
         "!lg": { raw: "(max-width: 1024px)" },
+        "!xl": { raw: "(max-width: 1280px)" },
         "3xl": { raw: "(min-width: 1780px)" },
       },
       colors: {
