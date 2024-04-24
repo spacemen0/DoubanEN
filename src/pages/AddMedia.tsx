@@ -92,8 +92,10 @@ export default function AddMedia() {
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = event.target.files;
-    if (fileList && fileList.length > 0) {
-      setImage(fileList.item(0));
+    const file = fileList && fileList.item(0);
+    if (file) {
+      if (file.size < 1024 * 1024) setImage(fileList.item(0));
+      else setMessage("File size exceeds the limit (1MB)");
     }
   };
 

@@ -33,13 +33,14 @@ export function ListsWall({ id, username }: { id: number; username: string }) {
         {lists.length > 0 ? (
           lists.map((list, index) => {
             return (
-              <div key={list.id} className="flex items-center justify-center">
+              <div
+                key={list.id}
+                className={`flex items-center justify-center py-2 border-gray-200 align-top ${index !== lists.length - 1 && "border-b"}`}
+              >
                 <div className="ml-2 h-32 w-32 shrink-0">
                   <MyImage src={apiUrl + list.imageUrl} alt={list.title} />
                 </div>
-                <div
-                  className={`flex w-full flex-col justify-between p-1 border-gray-200 align-top ${index !== 2 && "border-b"}`}
-                >
+                <div className={`flex w-full flex-col justify-between p-1 `}>
                   <Link
                     to={`/list/${list.id}`}
                     className="p-4 text-xl font-semibold text-Neutral hover:text-Neutral-Strong"
@@ -60,7 +61,7 @@ export function ListsWall({ id, username }: { id: number; username: string }) {
             );
           })
         ) : (
-          <div className="px-4 py-4 text-2xl font-semibold text-Neutral-Strong">
+          <div className="px-4 py-4 text-2xl font-semibold text-Neutral-Mild">
             Nothing here for now
           </div>
         )}

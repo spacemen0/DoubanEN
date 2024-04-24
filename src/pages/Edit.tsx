@@ -59,9 +59,15 @@ export default function Edit() {
     setFormData((prevState) => ({ ...prevState, bio: bio }));
   };
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const fileList = event.target.files; // Retrieve the FileList object
-    if (fileList && fileList.length > 0) {
-      setFormData((prevState) => ({ ...prevState, image: fileList.item(0) }));
+    const fileList = event.target.files;
+    const file = fileList && fileList.item(0);
+    if (file) {
+      if (file.size > 1024 * 1024) {
+        setFormData((prevState) => ({ ...prevState, image: file }));
+      }
+      {
+        setMessage("File size exceeds the limit (1MB)");
+      }
     }
   };
 
@@ -69,7 +75,7 @@ export default function Edit() {
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
       <div className="overflow-y-scroll">
-        <div className="mx-auto mt-1 flex !md:flex-col w-full justify-center lg:mt-10 lg:w-4/6">
+        <div className="mx-auto mt-1 flex !lg:flex-col w-full justify-center lg:mt-10 lg:w-4/6">
           <div className="flex w-full items-center justify-center bg-gray-100 lg:w-1/2">
             <div className="w-full max-w-md p-3 lg:p-6">
               <h1 className="mb-6 text-center text-3xl font-semibold text-Neutral-Strong">
@@ -148,7 +154,7 @@ export default function Edit() {
               </form>
             </div>
           </div>
-          <div className="flex flex-1 flex-col items-center justify-center bg-gray-100 px-4 py-2 lg:py-6">
+          <div className="flex flex-1 md:px-40 lg:px-4 flex-col items-center justify-center bg-gray-100 px-4 py-2 lg:py-6">
             <div className="w-full">
               <label
                 htmlFor="image"

@@ -39,9 +39,9 @@ export function InfoCard({
   };
 
   return (
-    <div className="w-96 rounded-md bg-white p-4 shadow-md md:max-w-sm lg:max-w-md xl:max-w-lg">
+    <div className="w-96 rounded-md bg-white p-4 shadow-md md:max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg">
       {user && (
-        <div className="mb-4 flex items-center">
+        <div className="mb-4 flex items-center lg:flex-row md:flex-col">
           <div className="mr-4 !md:max-w-32">
             <Link to={`/profile/${user.id}`}>
               <MyImage
@@ -81,7 +81,7 @@ export function InfoCard({
           {user.bio && user.bio.length > 100 && (
             <button
               onClick={toggleBioVisibility}
-              className="pt-2 font-semibold text-blue-500 hover:underline focus:outline-none"
+              className="pt-2 font-semibold text-Neutral hover:underline focus:outline-none"
             >
               {showFullBio ? "Hide Bio" : "Show Full Bio"}
             </button>

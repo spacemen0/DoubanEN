@@ -11,7 +11,7 @@ export type StatusType = "Rated" | "Wishlist" | "Doing" | "Reviewed";
 
 export type UserRole = "Admin" | "Contributor" | "Standard";
 
-export type CommentArea = "Media" | "User" | "Media-List" | "Review";
+export type CommentArea = "Media" | "User" | "MediaList" | "Review";
 
 export type RatingScore =
   | 0.5

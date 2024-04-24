@@ -13,6 +13,7 @@ import { NotFound } from "../components/common/NotFound";
 import Loading from "../components/common/Loading.tsx";
 import { ListHeader } from "../components/list/ListHeader.tsx";
 import { ListMediaDisplay } from "../components/list/ListMediaDisplay.tsx";
+import { CommentSection } from "../components/common/CommentSection.tsx";
 
 export default function List() {
   const { id } = useParams();
@@ -67,7 +68,7 @@ export default function List() {
     };
     fetchListInfo().then();
   }, [currentPage, id, setMessage]);
-  if (exist === undefined) return <Loading />;
+  if (exist === undefined || !id) return <Loading />;
   else if (!exist) return <NotFound />;
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
@@ -80,6 +81,7 @@ export default function List() {
           setCurrentPage={setCurrentPage}
           medias={medias}
         />
+        <CommentSection area={"MediaList"} areaId={parseInt(id)} />
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { MyImage } from "./MyImage.tsx";
 import { apiUrl } from "../../utils/config.ts";
 import { useEffect, useState } from "react";
 import { fetchUser } from "../../apiUtils/userApiUtil.ts";
+import { Link } from "react-router-dom";
 
 export const CommentEntry = ({ comment }: { comment: Comment }) => {
   const [user, setUser] = useState<User>();
@@ -29,8 +30,8 @@ export const CommentEntry = ({ comment }: { comment: Comment }) => {
               />
             </div>
 
-            <span className="ml-1 flex items-center justify-center text-lg font-semibold">
-              {user.username}
+            <span className="ml-1 flex items-center justify-center text-lg font-semibold hover:text-Neutral-Strong">
+              <Link to={`/profile/${user.id}`}>{user.username}</Link>
             </span>
           </div>
           <p>{comment.date}</p>

@@ -9,6 +9,7 @@ import { Media, Review } from "../../utils/type.ts";
 import { useAuthContext } from "../../contexts/AuthContext.ts";
 import { fetchSingleReview } from "../../apiUtils/reviewApiUtil.ts";
 import { getMedia } from "../../apiUtils/mediaApiUtil.ts";
+import { ActiveUsers } from "./ActiveUsers.tsx";
 
 export function Featured() {
   const [featuredItems, setFeaturedItems] = useState<
@@ -55,12 +56,14 @@ export function Featured() {
         <div className="mr-4 flex flex-col lg:hidden">
           <SideDisplay />
           <SideList />
+          <ActiveUsers />
           <SideInfo />
         </div>
       </div>
-      <div className="flex flex-col flex-[0.35]  items-center !lg:hidden">
+      <div className="flex flex-col flex-[0.35]  items-center justify-start !lg:hidden">
         <SideDisplay />
         <SideList />
+        <ActiveUsers />
         <SideInfo />
       </div>
     </div>

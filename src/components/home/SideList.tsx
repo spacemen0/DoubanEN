@@ -54,7 +54,7 @@ export function SideList() {
   };
 
   return (
-    <div className="mt-6 flex flex-col text-Neutral-Mild  lg:mt-12">
+    <div className="mt-6 flex flex-col text-Neutral-Mild lg:w-10/12  lg:mt-12">
       <div className="text-2xl font-bold text-Neutral-Mild xl:text-3xl">
         Featured Collection
       </div>

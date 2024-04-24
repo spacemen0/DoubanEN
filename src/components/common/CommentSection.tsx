@@ -12,9 +12,11 @@ import { getCurrentLocalDate } from "../../utils/helper.ts";
 export const CommentSection = ({
   area,
   areaId,
+  message = false,
 }: {
   area: CommentArea;
   areaId: number;
+  message?: boolean;
 }) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [count, setCount] = useState(0);
@@ -84,7 +86,9 @@ export const CommentSection = ({
 
   return (
     <>
-      <h2 className="my-4 text-2xl font-bold">Comments</h2>
+      <h2 className="my-4 text-2xl font-bold">
+        {message ? "Message Wall" : "Comments"}
+      </h2>
       <div className="rounded-md border px-2">
         {comments.length > 0 ? (
           comments.map((comment) => (
@@ -116,7 +120,7 @@ export const CommentSection = ({
                 htmlFor="content"
                 className="ml-2 block text-lg font-medium text-Neutral-Strong"
               >
-                Write your comments
+                {message ? "Write your message" : "Write your comment"}
               </label>
               <input
                 className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200
@@ -148,7 +152,11 @@ export const CommentSection = ({
               } else setShowNewCommentBox(!showNewCommentBox);
             }}
           >
-            {showNewCommentBox ? "Cancel" : "Post Comment"}
+            {showNewCommentBox
+              ? "Cancel"
+              : message
+                ? "Post Message"
+                : "Post Comment"}
           </button>
         </div>
       </div>
