@@ -7,21 +7,41 @@ import { useEffect, useState } from "react";
 import { searchMedia } from "../apiUtils/searchApiUtil.ts";
 import { NotFound } from "../components/common/NotFound.tsx";
 import Loading from "../components/common/Loading.tsx";
+import { useAuthContext } from "../contexts/AuthContext.ts";
 
 export default function Search() {
   const [searchParams] = useSearchParams();
   const [AllMedia, setAllMedia] = useState<Media[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isEnd, setIsEnd] = useState(false);
+  const { setMessage } = useAuthContext();
   const value = searchParams.get("value");
   const option = searchParams.get("option");
   useEffect(() => {
     const fetchSearchResult = async () => {
       if (option && value && ["Music", "Movie", "Book", "All"].includes(option))
-        setAllMedia(await searchMedia(option as MediaType, 10, value));
+        try {
+          const results = await searchMedia(
+            option as MediaType,
+            currentPage,
+            5,
+            value,
+          );
+          if (results.length > 0)
+            setAllMedia((prevState) => [...prevState, ...results]);
+          else {
+            setIsEnd(true);
+            setMessage("You reach the end of the search results");
+          }
+        } catch (e) {
+          const error = e as Error;
+          setMessage(error.message);
+        }
       setLoading(false);
     };
     fetchSearchResult().then();
-  }, [option, value]);
+  }, [currentPage, option, setMessage, value]);
   if (option && value && !["Music", "Movie", "Book", "All"].includes(option)) {
     return <NotFound />;
   }
@@ -30,9 +50,7 @@ export default function Search() {
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
       <div className="mt-2 overflow-y-scroll px-2 lg:px-4">
-        <h2 className="mx-1 mt-4 text-3xl font-bold text-Neutral">
-          {AllMedia.length + " Results"}
-        </h2>
+        <h2 className="mx-1 mt-4 text-3xl font-bold text-Neutral">Results</h2>
 
         <div className="my-2 flex items-center justify-end rounded-md bg-gray-200 text-lg font-semibold text-Neutral">
           <div className="flex w-full items-center justify-end text-2xl font-semibold text-Neutral-Mild">
@@ -61,6 +79,19 @@ export default function Search() {
         ) : (
           <EmptyContent />
         )}
+      </div>
+      <div className="flex w-full justify-center items-center bg-transparent">
+        <button
+          className="flex w-36 md:w-48 lg:w-96 justify-center rounded-md p-2 text-white font-semibold md:font-bold text-xl md:text-2xl transition-colors duration-300 bg-Neutral-Mild hover:bg-Neutral focus:bg-Neutral-Mild focus:ring-Neutral-Mild focus:outline-none"
+          onClick={() => {
+            if (isEnd) setMessage("You reach the end of the search results");
+            else {
+              setCurrentPage(currentPage + 1);
+            }
+          }}
+        >
+          Load More
+        </button>
       </div>
     </div>
   );

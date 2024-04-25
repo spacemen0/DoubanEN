@@ -11,7 +11,7 @@ export const UserItem = ({ user }: { user: User }) => {
         <MyImage src={apiUrl + user.profileImageUrl} alt={user.username} />
       </div>
 
-      <span className="ml-1 flex items-center justify-center text-2xl font-semibold hover:text-Neutral-Strong">
+      <span className="ml-3 flex items-center justify-center text-2xl font-semibold hover:text-Neutral-Strong">
         <Link to={`/profile/${user.id}`}>{user.username}</Link>
       </span>
     </div>
