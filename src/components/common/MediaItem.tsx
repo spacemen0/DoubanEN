@@ -55,7 +55,7 @@ export function MediaItem({
       <div
         className={`mt-2 mr-2 h-full  w-full overflow-clip  md:mr-4 lg:mr-6 flex-shrink-0 ${side ? "max-w-24 max-h-24" : "max-w-32 max-h-32"}`}
       >
-        <Link to={`/media/${media.id}`}>
+        <Link to={apiUrl + media.imageUrl}>
           <MyImage src={apiUrl + media.imageUrl} alt={media.title} />
         </Link>
       </div>

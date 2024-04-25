@@ -98,21 +98,21 @@ export function NewReviewBox({
           <div className="flex w-full justify-end rounded-br-lg border-t-2 need-interaction border-Neutral-Mild">
             <button
               className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild  border-Neutral-Mild
-         focus:ring-1 focus:ring-Neutral transition-colors"
+         focus:ring-1 focus:ring-Neutral transition-colors hover:text-white"
               onClick={handleReset}
             >
               Reset
             </button>
             <button
               className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild  border-Neutral-Mild
-          focus:ring-1 focus:ring-Neutral transition-colors rounded-br-lg"
+         focus:ring-1 focus:ring-Neutral transition-colors hover:text-white"
               onClick={handlePostReview}
             >
               Post
             </button>
             <button
               className="w-1/8 bg-gray-100 px-2 border-l-2 py-1 hover:bg-Neutral-Mild  border-Neutral-Mild
-         focus:ring-1 focus:ring-Neutral transition-colors"
+         focus:ring-1 focus:ring-Neutral transition-colors rounded-br-md hover:text-white"
               onClick={() => {
                 setShowReviewBox(false);
               }}

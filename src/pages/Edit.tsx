@@ -1,6 +1,6 @@
 import { useAuthContext } from "../contexts/AuthContext.ts";
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { PageHeader } from "../components/common/PageHeader.tsx";
 import { LoaderCircle } from "lucide-react";
 import { ProfileFormData } from "../utils/type.ts";
@@ -8,6 +8,7 @@ import { updateProfile } from "../apiUtils/userApiUtil.ts";
 
 export default function Edit() {
   const navigate = useNavigate();
+  const fileInputRef = useRef<HTMLFormElement>(null);
   const { setMessage, user, token, refresh } = useAuthContext();
   const [processing, setProcessing] = useState(false);
   const [formData, setFormData] = useState<ProfileFormData>({
@@ -62,10 +63,10 @@ export default function Edit() {
     const fileList = event.target.files;
     const file = fileList && fileList.item(0);
     if (file) {
-      if (file.size > 1024 * 1024) {
+      if (file.size < 1024 * 1024) {
         setFormData((prevState) => ({ ...prevState, image: file }));
-      }
-      {
+      } else {
+        fileInputRef.current && fileInputRef.current.reset();
         setMessage("File size exceeds the limit (1MB)");
       }
     }
@@ -156,20 +157,22 @@ export default function Edit() {
           </div>
           <div className="flex flex-1 md:px-40 lg:px-4 flex-col items-center justify-center bg-gray-100 px-4 py-2 lg:py-6">
             <div className="w-full">
-              <label
-                htmlFor="image"
-                className="mb-1 block text-xl font-semibold text-Neutral"
-              >
-                Profile Image
-              </label>
-              <input
-                type="file"
-                id="image"
-                name="image"
-                onChange={handleImageChange}
-                accept="image/jpeg"
-                className="mt-1 h-12 file:h-full w-full cursor-pointer file:rounded-sm rounded-md file:border-0 border-2 bg-white file:text-white transition-colors duration-300 file:bg-Neutral-Strong placeholder:text-l focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
-              />
+              <form ref={fileInputRef}>
+                <label
+                  htmlFor="image"
+                  className="mb-1 block text-xl font-semibold text-Neutral"
+                >
+                  Profile Image
+                </label>
+                <input
+                  type="file"
+                  id="image"
+                  name="image"
+                  onChange={handleImageChange}
+                  accept="image/jpeg"
+                  className="mt-1 h-12 file:h-full w-full cursor-pointer file:rounded-sm rounded-md file:border-0 border-2 bg-white file:text-white transition-colors duration-300 file:bg-Neutral-Strong placeholder:text-l focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                />
+              </form>
             </div>
             <textarea
               className="mt-2 h-60 w-full resize-none rounded-lg border border-gray-300 p-2 ml-0.5 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-300"

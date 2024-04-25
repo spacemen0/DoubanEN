@@ -320,13 +320,16 @@ export function MediaActionsSection({
             className={`  lg:mt-4 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md transition-colors disabled:cursor-not-allowed 
                              ${mediaStatus.status === "Reviewed" ? "bg-Neutral-Strong " : "bg-Neutral-Mild "}${
                                mediaStatus.status !== "Reviewed" &&
-                               mediaStatus.status !== "None"
+                               mediaStatus.status !== "None" &&
+                               mediaStatus.status !== "Rated"
                                  ? ""
                                  : "hover:bg-gray-400 focus:outline-none " +
                                    "focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
                              }`}
             disabled={
-              mediaStatus.status !== "Reviewed" && mediaStatus.status !== "None"
+              mediaStatus.status !== "Reviewed" &&
+              mediaStatus.status !== "None" &&
+              mediaStatus.status !== "Rated"
             }
             onClick={handleReviewButtonClick}
           >

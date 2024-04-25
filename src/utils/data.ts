@@ -11,12 +11,14 @@ function getRandomInt(min: number, max: number): number {
 }
 
 export const generateRandomImage = () => ({
-  src: `${apiUrl}/images/${imageIds[getRandomInt(0, 14)]}`,
+  src: `${apiUrl}/images/${imageIds[getRandomInt(0, imageIds.length - 1)]}`,
   alt: "List Image",
 });
 
 const imageIds: number[] = [
   202, 152, 252, 302, 303, 304, 305, 306, 307, 308, 309, 602, 652, 802, 852,
+  1123, 1124, 1125, 1152, 1104, 1153, 1154, 1108, 1155, 1156, 1117, 1114, 1115,
+  1118,
 ];
 export const bannerImage: { listId: number; imageProps: ImageProps } = {
   listId: 153,
@@ -43,6 +45,8 @@ export const sideLists: { listId: number; ImageProps: ImageProps }[] =
 
 export const homePageReviewIds: number[] = [4, 3, 252, 2, 402];
 
+export const activeUserIds: number[] = [102, 152, 303, 352, 452];
+
 export const homePageEditorMediaIds: number[] = [
   761, 702, 754, 805, 804, 813, 814, 758, 809,
 ];
@@ -64,7 +68,7 @@ export const infoPara2: string = `Douban EN is a website built with React, TypeS
   The primary features of the site is to mark, track and organize your favorite Music, Movies, and Books.`;
 
 //music movie book rating review list
-export const statusInfo: string[] = ["46", "11", "6", "39", "6", "3"];
+export const statusInfo: string[] = ["46", "11", "6", "93", "7", "11"];
 
 export const genres: { name: string; value: string }[] = [
   { name: "Ambient", value: "Ambient" },
@@ -92,7 +96,6 @@ export const genres: { name: string; value: string }[] = [
   { name: "Rock", value: "Rock" },
   { name: "Singer-Songwriter", value: "SingerSongwriter" },
   { name: "Spoken Word", value: "SpokenWord" },
-  // Add other music genres as needed
   { name: "Action", value: "Action" },
   { name: "Adventure", value: "Adventure" },
   { name: "Animation", value: "Animation" },
