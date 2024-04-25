@@ -25,7 +25,6 @@ complete, and the project has been successfully deployed. You can access the pro
 - **PostgreSQL**
 
 **To-do**
-- comments
 - admin page(to be decided)
 - follow user
 - refactor

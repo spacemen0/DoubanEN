@@ -84,12 +84,6 @@ export function Ratings({ id, username }: { id: number; username: string }) {
       <h2 className="mb-3 text-3xl font-semibold text-Neutral-Mild">
         {username}'s Ratings
       </h2>
-      <Pagination
-        title={count + " Ratings"}
-        count={count}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
       <div className="flex justify-start gap-10 text-2xl">
         <button
           className={`border-b-2  ${
@@ -122,6 +116,13 @@ export function Ratings({ id, username }: { id: number; username: string }) {
           Book
         </button>
       </div>
+      <Pagination
+        title={count + " Ratings"}
+        count={count}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
+
       <div className="flex justify-between border-b border-gray-200 py-2 pl-32 text-xl font-semibold text-Neutral-Mild xl:pr-2 2xl:pl-48 3xl:pr-4 3xl:pl-64">
         <span>Average</span> <span>Rated</span> <span>Wants</span>
       </div>
