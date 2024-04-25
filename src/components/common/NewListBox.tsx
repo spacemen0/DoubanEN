@@ -66,10 +66,8 @@ export const NewListBox = ({
         }
         setShowNewListBox(false);
         setChanged && setChanged(true);
-        setSelectedList && listToBeUpdated && setSelectedList(newList.id);
-        setLists &&
-          listToBeUpdated &&
-          setLists((prevLists) => [...prevLists, newList]);
+        setSelectedList && setSelectedList(newList.id);
+        setLists && setLists((prevLists) => [...prevLists, newList]);
         setMessage(
           `You list has been ${listToBeUpdated ? "Updated" : "Created"}`,
         );
@@ -96,9 +94,14 @@ export const NewListBox = ({
             id="image"
             name="image"
             onChange={(event) => {
-              const fileList = event.target.files; // Retrieve the FileList object
-              if (fileList && fileList.length > 0) {
-                setFile(fileList.item(0));
+              const fileList = event.target.files;
+              const file = fileList && fileList.item(0);
+              if (file) {
+                if (file.size < 1024 * 1024) setFile(file);
+                else {
+                  event.target.value = "";
+                  setMessage("File size exceeds the limit (1MB)");
+                }
               }
             }}
             accept="image/jpeg"
