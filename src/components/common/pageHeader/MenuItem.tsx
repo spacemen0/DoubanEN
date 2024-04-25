@@ -21,7 +21,7 @@ export function MenuItem({
 
   return (
     <Link
-      to={link ? link : ""}
+      to={link ? link : "/"}
       className={`block px-2 py-2 text-sm ${borderClass} hover:bg-gray-100`}
       onClick={handleClick}
     >

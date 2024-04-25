@@ -19,7 +19,7 @@ export default function Edit() {
     image: null,
   });
   useEffect(() => {
-    if (!user) navigate("/login");
+    if (!user) navigate("/login?redirect=edit");
   }, [user, navigate]);
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();

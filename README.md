@@ -5,8 +5,7 @@ Spring Boot and PostgreSQL for the back-end. Its main functionality is to enable
 music, movies, and books. Users can rate, review, wishlist, and mark items they want to listen to, watch, or
 read. Additionally, users have the option to categorize items into lists for better organization.
 
-I have been developing this project since completing the basic Web Programming course. The core features are nearly
-complete, and the project has been successfully deployed. You can access the project via this link:
+The core features are nearly complete, and the project has been successfully deployed. You can access the project via this link:
 [DoubanEN](https://nice-water-005626e10.4.azurestaticapps.net/)
 
 ## Tech Stack
@@ -25,8 +24,7 @@ complete, and the project has been successfully deployed. You can access the pro
 - **PostgreSQL**
 
 **To-do**
-- admin page(to be decided)
-- follow user
+- admin page
 - refactor
 - footer
 - add logs

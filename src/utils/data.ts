@@ -55,7 +55,7 @@ export const bannerText: string = `Douban EN is a website crafted with React, Ty
 and Spring Boot and PostgreSQL for the back-end. 
 Its core functionality revolves around marking, tracking, and organizing your beloved music, movies, and books.`;
 export const bannerLinkText: string =
-  "Some extra functionalities are still under development. More media data will also be added.";
+  "Contribution is very welcome. Help us improve and grow together.";
 
 export const infoPara1: string = `Douban EN is a website built with React, TypeScript and Tailwind CSS. 
   The primary features of the site is to mark, track and organize your favorite Music, Movies, and Books.
@@ -70,7 +70,7 @@ export const infoPara2: string = `Douban EN is a website built with React, TypeS
 //music movie book rating review list
 export const statusInfo: string[] = ["46", "11", "6", "93", "7", "11"];
 
-export const genres: { name: string; value: string }[] = [
+export const musicGenres: { name: string; value: string }[] = [
   { name: "Ambient", value: "Ambient" },
   { name: "Blues", value: "Blues" },
   { name: "Classical Music", value: "ClassicalMusic" },
@@ -96,19 +96,29 @@ export const genres: { name: string; value: string }[] = [
   { name: "Rock", value: "Rock" },
   { name: "Singer-Songwriter", value: "SingerSongwriter" },
   { name: "Spoken Word", value: "SpokenWord" },
+];
+
+export const movieGenres: { name: string; value: string }[] = [
   { name: "Action", value: "Action" },
   { name: "Adventure", value: "Adventure" },
   { name: "Animation", value: "Animation" },
-  { name: "Biography", value: "Biography" },
   { name: "Comedy", value: "Comedy" },
   { name: "Crime", value: "Crime" },
   { name: "Documentary", value: "Documentary" },
   { name: "Drama", value: "Drama" },
   { name: "Fantasy", value: "Fantasy" },
-  { name: "History", value: "History" },
   { name: "Horror", value: "Horror" },
-  { name: "Mystery", value: "Mystery" },
   { name: "Musical", value: "Musical" },
+  { name: "Romance", value: "Romance" },
+  { name: "Sci-Fi", value: "SciFi" },
+  { name: "War", value: "War" },
+];
+
+export const bookGenres: { name: string; value: string }[] = [
+  { name: "Biography", value: "Biography" },
+  { name: "History", value: "History" },
+  { name: "Mystery", value: "Mystery" },
+  { name: "Horror", value: "Horror" },
   { name: "Romance", value: "Romance" },
   { name: "Sci-Fi", value: "SciFi" },
   { name: "War", value: "War" },

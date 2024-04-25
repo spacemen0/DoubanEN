@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../contexts/AuthContext";
 import { PageHeader } from "../components/common/PageHeader";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { MyImage } from "../components/common/MyImage";
 import { WelcomeInfo } from "../components/common/WelcomeInfo";
 import { LoaderCircle } from "lucide-react";
 import { apiUrl } from "../utils/config.ts";
 
 export default function Login() {
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get("redirect");
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -26,7 +28,7 @@ export default function Login() {
     try {
       await login(username, password);
       setProcessing(false);
-      navigate("/");
+      redirect ? navigate(`/${redirect}`) : navigate("/");
     } catch (e) {
       const error = e as Error;
       if (error.message === "Unauthorized")

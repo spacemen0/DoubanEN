@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../contexts/AuthContext.ts";
 import { addMedia } from "../apiUtils/mediaApiUtil.ts";
 import { Author, Media } from "../utils/type.ts";
@@ -6,10 +6,11 @@ import { LoaderCircle } from "lucide-react";
 import { PageHeader } from "../components/common/PageHeader.tsx";
 import { useNavigate } from "react-router-dom";
 import { getAllAuthors } from "../apiUtils/authorApiUtil.ts";
-import { genres } from "../utils/data.ts";
+import { bookGenres, movieGenres, musicGenres } from "../utils/data.ts";
 
 export default function AddMedia() {
   const navigate = useNavigate();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { setMessage, user, token } = useAuthContext();
   const [processing, setProcessing] = useState(false);
   const [authors, setAuthors] = useState<Author[]>([]);
@@ -33,7 +34,7 @@ export default function AddMedia() {
 
   useEffect(() => {
     if (!user) {
-      navigate("/login");
+      navigate("/login?redirect=add-media");
     }
   }, [navigate, user]);
 
@@ -95,7 +96,10 @@ export default function AddMedia() {
     const file = fileList && fileList.item(0);
     if (file) {
       if (file.size < 1024 * 1024) setImage(fileList.item(0));
-      else setMessage("File size exceeds the limit (1MB)");
+      else {
+        setMessage("File size exceeds the limit (1MB)");
+        if (fileInputRef.current) fileInputRef.current.value = "";
+      }
     }
   };
 
@@ -137,7 +141,7 @@ export default function AddMedia() {
                         htmlFor="author"
                         className="block text-xl font-medium text-Neutral"
                       >
-                        Author Id
+                        Author
                       </label>
                       <select
                         id="author"
@@ -147,9 +151,22 @@ export default function AddMedia() {
                         className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                       >
                         {authors &&
-                          authors.map((author) => (
-                            <option value={author.id}>{author.name}</option>
-                          ))}
+                          authors.map((author) => {
+                            if (
+                              (formData.type === "Music" &&
+                                author.type === "Artist") ||
+                              (formData.type === "Movie" &&
+                                author.type === "Director") ||
+                              (formData.type === "Book" &&
+                                author.type === "Author")
+                            ) {
+                              return (
+                                <option key={author.id} value={author.id}>
+                                  {author.name}
+                                </option>
+                              );
+                            }
+                          })}
                       </select>
                     </div>
 
@@ -158,9 +175,10 @@ export default function AddMedia() {
                         htmlFor="image"
                         className="block text-xl font-semibold my-1.5 text-Neutral"
                       >
-                        Media Image
+                        Cover Image
                       </label>
                       <input
+                        ref={fileInputRef}
                         type="file"
                         id="image"
                         name="image"
@@ -235,11 +253,36 @@ export default function AddMedia() {
                         onChange={handleSelectChange}
                         className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                       >
-                        {genres.map((genre) => (
-                          <option key={genre.value} value={genre.value}>
-                            {genre.name}
-                          </option>
-                        ))}
+                        {formData.type === "Music" && (
+                          <>
+                            {musicGenres.map((genre) => (
+                              <option key={genre.value} value={genre.value}>
+                                {genre.name}
+                              </option>
+                            ))}
+                          </>
+                        )}
+
+                        {formData.type === "Movie" && (
+                          <>
+                            {movieGenres.map((genre) => (
+                              <option key={genre.value} value={genre.value}>
+                                {genre.name}
+                              </option>
+                            ))}
+                          </>
+                        )}
+
+                        {formData.type !== "Music" &&
+                          formData.type !== "Movie" && (
+                            <>
+                              {bookGenres.map((genre) => (
+                                <option key={genre.value} value={genre.value}>
+                                  {genre.name}
+                                </option>
+                              ))}
+                            </>
+                          )}
                       </select>
                     </div>
 

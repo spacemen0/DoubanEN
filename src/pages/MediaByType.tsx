@@ -34,7 +34,7 @@ export default function MediaByType() {
         setMessage(`Error fetching total number of ${type}s`);
       }
     };
-    fetchMediasCount(type as MediaType).then();
+    type && fetchMediasCount(type as MediaType).then();
   }, [setMessage, type]);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export default function MediaByType() {
         setMessage(error.message);
       }
     };
-    fetchAllMedias().then();
+    type && fetchAllMedias().then();
   }, [currentPage, setMessage, type]);
   if (!type || !["Music", "Movie", "Book", "All"].includes(type)) {
     return <NotFound />;

@@ -1,6 +1,6 @@
 import { useAuthContext } from "../../../contexts/AuthContext";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { MenuItem } from "./MenuItem.tsx";
 import { MyImage } from "../MyImage.tsx";
@@ -57,12 +57,19 @@ function DropDownMenu({
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const { logout, token, user, setMessage } = useAuthContext();
-  const navigate = useNavigate();
-
+  const currentUrl = window.location.href;
+  let route = currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
+  if (!isNaN(parseInt(route))) {
+    const lastSlashIndex = currentUrl.lastIndexOf("/");
+    const secondLastSlashIndex = currentUrl.lastIndexOf(
+      "/",
+      lastSlashIndex - 1,
+    );
+    route = currentUrl.substring(secondLastSlashIndex + 1);
+  }
   const handleLogout = async () => {
     if (token) {
       await logout(token);
-      navigate("/");
     }
   };
   return (
@@ -137,7 +144,14 @@ function DropDownMenu({
           </div>
         ) : (
           <div>
-            <MenuItem link="/login" text="Log In" />
+            <MenuItem
+              link={
+                location.pathname === "login"
+                  ? "login"
+                  : `/login?redirect=${route}`
+              }
+              text="Log In"
+            />
             <MenuItem link="/register" text="Register" isLast={true} />
           </div>
         )}
