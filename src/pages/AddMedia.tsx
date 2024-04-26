@@ -13,6 +13,7 @@ export default function AddMedia() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { setMessage, user, token } = useAuthContext();
   const [processing, setProcessing] = useState(false);
+  const [addition, setAddition] = useState("");
   const [authors, setAuthors] = useState<Author[]>([]);
   const [formData, setFormData] = useState<Media>({
     id: 0,
@@ -21,9 +22,9 @@ export default function AddMedia() {
     description: "",
     title: "",
     author_name: "",
-    author: user ? user.id : 0,
+    author: 52,
     releaseDate: "",
-    genre: "",
+    genre: "Experimental",
     average: 0,
     ratings: 0,
     wants: 0,
@@ -50,10 +51,16 @@ export default function AddMedia() {
   }, [navigate, user]);
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (image && user && token) {
+    if (
+      image &&
+      user &&
+      token &&
+      formData.description !== "" &&
+      formData.additional !== "" &&
+      formData.releaseDate !== ""
+    ) {
       try {
         setProcessing(true);
-        console.log(formData);
         await addMedia(formData, token, image, user.role);
         setMessage("Media added successfully");
         setProcessing(false);
@@ -62,7 +69,7 @@ export default function AddMedia() {
         setMessage("Error adding media");
       }
     } else {
-      setMessage("Please select an image");
+      setMessage("Please fill in all fields");
     }
   };
 
@@ -119,6 +126,22 @@ export default function AddMedia() {
                   <div className="flex h-full flex-col justify-between">
                     <div>
                       <label
+                        htmlFor="title"
+                        className="block text-xl font-medium text-Neutral"
+                      >
+                        Title
+                      </label>
+                      <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        value={formData.title}
+                        onChange={handleInputChange}
+                        className="mt-1 w-72 rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                      />
+                    </div>
+                    <div>
+                      <label
                         htmlFor="type"
                         className="block text-xl font-medium text-Neutral"
                       >
@@ -146,7 +169,7 @@ export default function AddMedia() {
                       <select
                         id="author"
                         name="author"
-                        value={formData.type}
+                        value={formData.author}
                         onChange={handleSelectChange}
                         className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                       >
@@ -172,24 +195,6 @@ export default function AddMedia() {
 
                     <div>
                       <label
-                        htmlFor="image"
-                        className="block text-xl font-semibold my-1.5 text-Neutral"
-                      >
-                        Cover Image
-                      </label>
-                      <input
-                        ref={fileInputRef}
-                        type="file"
-                        id="image"
-                        name="image"
-                        onChange={handleImageChange}
-                        accept="image/jpeg"
-                        className="mt-1 h-11 file:h-full w-full cursor-pointer file:rounded-sm rounded-md file:border-0 border-2 bg-white file:text-white transition-colors duration-300 file:bg-Neutral-Strong placeholder:text-l focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
-                      />
-                    </div>
-
-                    <div>
-                      <label
                         htmlFor="description"
                         className="block text-xl font-medium text-Neutral"
                       >
@@ -208,18 +213,19 @@ export default function AddMedia() {
                   <div className="flex flex-col justify-between gap-1">
                     <div>
                       <label
-                        htmlFor="title"
-                        className="block text-xl font-medium text-Neutral"
+                        htmlFor="image"
+                        className="block text-xl font-semibold text-Neutral"
                       >
-                        Title
+                        Cover Image
                       </label>
                       <input
-                        type="text"
-                        id="title"
-                        name="title"
-                        value={formData.title}
-                        onChange={handleInputChange}
-                        className="mt-1 w-72 rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                        ref={fileInputRef}
+                        type="file"
+                        id="image"
+                        name="image"
+                        onChange={handleImageChange}
+                        accept="image/jpeg"
+                        className="mt-1 h-10 file:h-full w-full cursor-pointer file:rounded-sm rounded-md file:border-0 border-2 bg-white file:text-white transition-colors duration-300 file:bg-Neutral-Strong placeholder:text-l focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                       />
                     </div>
                     <div>
@@ -285,28 +291,94 @@ export default function AddMedia() {
                           )}
                       </select>
                     </div>
-
-                    <div>
+                    <div className="flex flex-col">
                       <label
-                        htmlFor="additional"
-                        className="block text-xl font-medium text-Neutral"
+                        htmlFor="addition"
+                        className="text-xl font-medium text-Neutral"
                       >
-                        Additional
+                        {formData.type === "Music"
+                          ? "Add track"
+                          : formData.type === "Movie"
+                            ? "Add Character then Cast "
+                            : "Add Chapter"}
                       </label>
-                      <textarea
-                        id="additional"
-                        name="additional"
-                        value={formData.additional}
-                        onChange={handleTextAreaChange}
-                        className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
-                        rows={4}
-                      ></textarea>
+                      <input
+                        type="text"
+                        id="addition"
+                        name="addtion"
+                        value={addition}
+                        onChange={(e) => {
+                          setAddition(e.target.value);
+                        }}
+                        className="mt-1 w-full rounded-md border p-2 transition-colors duration-300
+                          focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                      />
+                      <div className="flex justify-start items-center mt-2">
+                        <button
+                          className="rounded-md p-2 text-white transition-colors duration-300 bg-Neutral-Strong
+                        hover:bg-Neutral focus:bg-Neutral-Strong focus:ring-Neutral-Strong focus:outline-none focus:ring-2
+                        focus:ring-offset-2"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            if (formData.additional === "")
+                              setFormData((prevData) => ({
+                                ...prevData,
+                                additional: addition,
+                              }));
+                            else
+                              setFormData((prevData) => ({
+                                ...prevData,
+                                additional:
+                                  formData.additional + "\n" + addition,
+                              }));
+                          }}
+                        >
+                          Confirm
+                        </button>
+                        <button
+                          className="rounded-md p-2 ml-2 text-white transition-colors duration-300 bg-Neutral-Strong
+                        hover:bg-Neutral focus:bg-Neutral-Strong focus:ring-Neutral-Strong focus:outline-none focus:ring-2
+                        focus:ring-offset-2"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setFormData((prevState) => ({
+                              ...prevState,
+                              additional: "",
+                            }));
+                          }}
+                        >
+                          Clear
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </form>
+                <div className="flex flex-col justify-center items-center mb-2">
+                  <label
+                    htmlFor="additional"
+                    className="block text-xl font-medium text-Neutral"
+                  >
+                    {formData.type === "Music"
+                      ? "Tracks"
+                      : formData.type === "Movie"
+                        ? "Casts Info"
+                        : "Chapters"}
+                  </label>
+                  <textarea
+                    id="additional"
+                    name="additional"
+                    value={formData.additional}
+                    readOnly={true}
+                    className="mt-1 w-[90%] md:w-3/5  rounded-md border p-2
+                        focus:outline-none focus:ring-0"
+                    rows={4}
+                  ></textarea>
+                </div>
                 <button
                   onClick={handleSubmit}
-                  className="mx-auto flex w-40 justify-center rounded-md p-2 pr-8 text-white transition-colors duration-300 bg-Neutral-Strong hover:bg-Neutral focus:bg-Neutral-Strong focus:ring-Neutral-Strong focus:outline-none focus:ring-2 focus:ring-offset-2"
+                  className="mx-auto flex w-40 justify-center rounded-md p-2 pr-8 text-white
+                   transition-colors duration-300 bg-Neutral-Strong hover:bg-Neutral focus:bg-Neutral-Strong
+                   focus:ring-Neutral-Strong focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
                   {processing ? (
                     <div className="mr-2 h-6 w-6 animate-spin">
@@ -315,7 +387,7 @@ export default function AddMedia() {
                   ) : (
                     <div className="mr-2 h-6 w-6"></div>
                   )}
-                  {user.role === "Admin" ? "Add Media" : "Send Request"}
+                  {user.role === "Admin" ? "Add Media" : "Request"}
                 </button>
               </div>
             </div>
