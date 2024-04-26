@@ -1,4 +1,4 @@
-import { Media, MediaType, UserRole } from "../utils/type";
+import { Media, MediaType } from "../utils/type";
 import { apiUrl } from "../utils/config";
 import { processMediaJson } from "../utils/helper.ts";
 
@@ -58,7 +58,6 @@ export const addMedia = async (
   media: Media,
   token: string,
   image: File,
-  role: UserRole,
 ): Promise<void> => {
   let response = new Response();
   const requestBody = new FormData();
@@ -75,38 +74,19 @@ export const addMedia = async (
   requestBody.append("additional", media.additional);
   requestBody.append("imageUrl", "placeHolder");
   requestBody.append("image", image);
-  if (role == "Admin") {
-    try {
-      response = await fetch(`${apiUrl}/medias`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: requestBody,
-      });
-    } catch (error) {
-      throw new Error("Create Media error");
-    }
-    if (!response.ok) {
-      throw new Error("Response error");
-    }
-    return;
+  try {
+    response = await fetch(`${apiUrl}/medias`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: requestBody,
+    });
+  } catch (error) {
+    throw new Error("Create Media error");
   }
-  if (role == "Standard") {
-    try {
-      response = await fetch(`${apiUrl}/medias/standard`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: requestBody,
-      });
-    } catch (error) {
-      throw new Error("Create Media error");
-    }
-    if (!response.ok) {
-      throw new Error("Response error");
-    }
-    return;
+  if (!response.ok) {
+    throw new Error("Response error");
   }
+  return;
 };

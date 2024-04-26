@@ -61,8 +61,10 @@ export default function AddMedia() {
     ) {
       try {
         setProcessing(true);
-        await addMedia(formData, token, image, user.role);
-        setMessage("Media added successfully");
+        await addMedia(formData, token, image);
+        user.role === "Admin"
+          ? setMessage("Media added successfully")
+          : setMessage("Media request sent successfully");
         setProcessing(false);
       } catch (error) {
         setProcessing(false);
