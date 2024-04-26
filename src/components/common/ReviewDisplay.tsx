@@ -78,14 +78,22 @@ export function ReviewDisplay({
     if (user && token) {
       try {
         if (!liked) {
-          await likeReview(review.id, user.id, token);
+          setLiked(true);
           review.likes += 1;
+          await likeReview(review.id, user.id, token);
         } else {
-          await unlikeReview(review.id, user.id, token);
+          setLiked(false);
           review.likes -= 1;
+          await unlikeReview(review.id, user.id, token);
         }
-        setLiked(!liked);
       } catch (e) {
+        if (liked) {
+          setLiked(false);
+          review.likes -= 1;
+        } else {
+          setLiked(true);
+          review.likes += 1;
+        }
         console.log(e);
       }
     } else {
