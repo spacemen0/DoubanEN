@@ -83,13 +83,13 @@ export function ReviewDisplay({
           await likeReview(review.id, user.id, token);
         } else {
           setLiked(false);
-          review.likes -= 1;
+          review.likes > 0 && (review.likes -= 1);
           await unlikeReview(review.id, user.id, token);
         }
       } catch (e) {
         if (liked) {
           setLiked(false);
-          review.likes -= 1;
+          review.likes > 0 && (review.likes -= 1);
         } else {
           setLiked(true);
           review.likes += 1;
