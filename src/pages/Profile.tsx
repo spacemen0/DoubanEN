@@ -8,11 +8,14 @@ import { NotFound } from "../components/common/NotFound";
 import { ListsWall } from "../components/profile/ListsWall.tsx";
 import { Reviews } from "../components/profile/Reviews.tsx";
 import { CommentSection } from "../components/common/CommentSection.tsx";
+import { useAuthContext } from "../contexts/AuthContext.ts";
+import { OwnComments } from "../components/profile/OwnComments.tsx";
 
 export default function Profile() {
   const { id } = useParams();
   const [exist, setExist] = useState(true);
   const [username, setUsername] = useState<string>("");
+  const { user } = useAuthContext();
   if (!exist || !id) return <NotFound />;
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
@@ -28,6 +31,12 @@ export default function Profile() {
             <RecentlyOn id={parseInt(id)} />
             <ListsWall id={parseInt(id)} username={username} />
           </div>
+          {user && user.id === parseInt(id) && (
+            <div className="px-2 md:px-4 lg:px-6 bg-gray-100 py-4 border-t-2">
+              {" "}
+              <OwnComments />
+            </div>
+          )}
           <div className="px-2 md:px-4 lg:px-6 bg-gray-100 py-4 border-t-2">
             {" "}
             <CommentSection

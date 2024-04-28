@@ -24,7 +24,10 @@ export const postComment = async (
   return await response.json();
 };
 
-export const deleteComment = async (id: number, token: string) => {
+export const deleteComment = async (
+  id: number,
+  token: string,
+): Promise<void> => {
   let response = new Response();
   try {
     response = await fetch(`${apiUrl}/comments/${id}`, {
@@ -39,7 +42,7 @@ export const deleteComment = async (id: number, token: string) => {
   if (!response.ok) {
     throw new Error("Response error");
   }
-  return await response.json();
+  return;
 };
 export const getCommentsByUserId = async (
   userId: number,
@@ -57,7 +60,8 @@ export const getCommentsByUserId = async (
   if (!response.ok) {
     throw new Error("Response error");
   }
-  return await response.json();
+  const data = await response.json();
+  return data["content"];
 };
 
 export const getCommentsByAreaAndAreaId = async (

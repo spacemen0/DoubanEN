@@ -10,11 +10,11 @@ function setWithExpiry<T>(key: string, value: T, ttl: number): void {
     value,
     expiry: now.getTime() + ttl,
   };
-  localStorage.setItem(key, JSON.stringify(item));
+  sessionStorage.setItem(key, JSON.stringify(item));
 }
 
 function getWithExpiry<T>(key: string): T | null {
-  const itemStr = localStorage.getItem(key);
+  const itemStr = sessionStorage.getItem(key);
   if (!itemStr) {
     return null;
   }
@@ -22,7 +22,7 @@ function getWithExpiry<T>(key: string): T | null {
 
   const now = new Date();
   if (now.getTime() > item.expiry) {
-    localStorage.removeItem(key);
+    sessionStorage.removeItem(key);
     return null;
   }
   return item.value;

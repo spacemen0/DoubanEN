@@ -68,20 +68,29 @@ export const CommentSection = ({
           date: getCurrentLocalDate(),
         };
         try {
-          const newComment = await postComment(comment, token);
-          setComments([...comments, newComment]);
+          await postComment(comment, token);
           setCommentContent("");
           setShowNewCommentBox(false);
           await fetchComments();
-          setCount(count + 1);
+          setCount((prevState) => prevState + 1);
           setCurrentPage(1);
         } catch (e) {
-          console.log(e);
+          const error = e as Error;
+          setMessage(error.message);
         }
       } else {
         setMessage("Please write something");
       }
     }
+  };
+
+  const handleAfterDeletingComment = async (id: number) => {
+    setComments((prevState) =>
+      prevState.filter((comment) => comment.id !== id),
+    );
+    if (comments.length > 1 && comments.length - (1 % 5) === 0)
+      setCurrentPage((prevState) => prevState - 1);
+    setCount((prevState) => (prevState > 0 ? prevState - 1 : prevState));
   };
 
   return (
@@ -92,7 +101,11 @@ export const CommentSection = ({
       <div className="rounded-md border px-2">
         {comments.length > 0 ? (
           comments.map((comment) => (
-            <CommentEntry key={comment.id} comment={comment} />
+            <CommentEntry
+              key={comment.id}
+              comment={comment}
+              handler={handleAfterDeletingComment}
+            />
           ))
         ) : (
           <p className="font-semibold text-center mt-6 text-xl">
