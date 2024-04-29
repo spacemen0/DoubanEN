@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Search, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { MediaType } from "../../../utils/type.ts";
+import { MediaType } from "../../utils/type.ts";
 
 export default function HeaderSearchBarSection() {
   const [selectedOption, setSelectedOption] = useState<MediaType>("All");

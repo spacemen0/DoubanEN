@@ -41,7 +41,7 @@ export function InfoCard({
   return (
     <div className="w-96 rounded-md bg-white p-4 shadow-md md:max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg">
       {user && (
-        <div className="mb-4 flex items-center lg:flex-row md:flex-col">
+        <div className="mb-4 flex items-center md:flex-col lg:flex-row">
           <div className="mr-4 !md:max-w-32">
             <Link to={`/profile/${user.id}`}>
               <MyImage

@@ -1,10 +1,10 @@
-import { useAuthContext } from "../../../contexts/AuthContext";
+import { useAuthContext } from "../../contexts/AuthContext.ts";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { MenuItem } from "./MenuItem.tsx";
-import { MyImage } from "../MyImage.tsx";
-import { apiUrl } from "../../../utils/config.ts";
+import { MyImage } from "../common/MyImage.tsx";
+import { apiUrl } from "../../utils/config.ts";
 
 export default function HeaderUserSection() {
   const { user } = useAuthContext();

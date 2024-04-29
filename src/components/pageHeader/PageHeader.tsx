@@ -1,17 +1,11 @@
 import loadable from "@loadable/component";
 
-const HeaderLogoSection = loadable(
-  () => import("./pageHeader/HeaderLogoSection"),
-);
-const HeaderNavBarSection = loadable(
-  () => import("./pageHeader/HeaderNavBarSection"),
-);
+const HeaderLogoSection = loadable(() => import("./HeaderLogoSection.tsx"));
+const HeaderNavBarSection = loadable(() => import("./HeaderNavBarSection.tsx"));
 const HeaderSearchBarSection = loadable(
-  () => import("./pageHeader/HeaderSearchBarSection"),
+  () => import("./HeaderSearchBarSection.tsx"),
 );
-const HeaderUserSection = loadable(
-  () => import("./pageHeader/HeaderUserSection"),
-);
+const HeaderUserSection = loadable(() => import("./HeaderUserSection.tsx"));
 
 export function PageHeader() {
   return (

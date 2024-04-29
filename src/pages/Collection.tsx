@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Media, MediaType } from "../utils/type";
 import { useAuthContext } from "../contexts/AuthContext";
 import { NotFound } from "../components/common/NotFound";
-import { PageHeader } from "../components/common/PageHeader";
+import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
 import {
   getUserMediaByTypeWithPagination,
   getUserMediaCountByType,
@@ -11,6 +11,7 @@ import {
 import Loading from "../components/common/Loading.tsx";
 import { CollectionMediasDisplay } from "../components/collection/ColectionMediaDisplay.tsx";
 import { OptionSelect } from "../components/collection/OptionSelect.tsx";
+import { Footer } from "../components/common/Footer.tsx";
 
 export default function Collection() {
   const [searchParams] = useSearchParams();
@@ -91,6 +92,7 @@ export default function Collection() {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />
+        <Footer />
       </div>
     </div>
   );

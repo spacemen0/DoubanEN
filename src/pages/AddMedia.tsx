@@ -3,10 +3,11 @@ import { useAuthContext } from "../contexts/AuthContext.ts";
 import { addMedia } from "../apiUtils/mediaApiUtil.ts";
 import { Author, Media } from "../utils/type.ts";
 import { LoaderCircle } from "lucide-react";
-import { PageHeader } from "../components/common/PageHeader.tsx";
+import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
 import { useNavigate } from "react-router-dom";
 import { addAuthor, getAllAuthors } from "../apiUtils/authorApiUtil.ts";
 import { bookGenres, movieGenres, musicGenres } from "../utils/data.ts";
+import { Footer } from "../components/common/Footer.tsx";
 
 const initialMedia: Media = {
   id: 0,
@@ -364,7 +365,7 @@ export default function AddMedia() {
                         className="mt-1 w-full rounded-md border p-2 transition-colors duration-300
                           focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                       />
-                      <div className="flex justify-start items-center mt-2">
+                      <div className="mt-2 flex items-center justify-start">
                         <button
                           className="rounded-md p-2 text-white transition-colors duration-300 bg-Neutral-Strong
                         hover:bg-Neutral focus:bg-Neutral-Strong focus:ring-Neutral-Strong focus:outline-none focus:ring-2
@@ -403,7 +404,7 @@ export default function AddMedia() {
                     </div>
                   </div>
                 </form>
-                <div className="flex flex-col justify-center items-center mb-2">
+                <div className="mb-2 flex flex-col items-center justify-center">
                   <label
                     htmlFor="additional"
                     className="block text-xl font-medium text-Neutral"
@@ -450,7 +451,7 @@ export default function AddMedia() {
                   Add Author
                 </h1>
 
-                <form className=" flex flex-col md:gap-16 lg:gap-24 justify-center items-center ">
+                <form className="flex flex-col items-center justify-center md:gap-16 lg:gap-24">
                   <div className="flex h-full flex-col justify-between">
                     <div>
                       <label
@@ -500,7 +501,7 @@ export default function AddMedia() {
                       >
                         Genre
                       </label>
-                      <div className="flex justify-start items-center">
+                      <div className="flex items-center justify-start">
                         <select
                           id="author-genre"
                           name="author-genre"
@@ -578,7 +579,7 @@ export default function AddMedia() {
                       {author.genres.length > 0 &&
                         author.genres.map((genre) => (
                           <li
-                            className="ml-6 text-lg font-medium text-Neutral list-decimal"
+                            className="ml-6 list-decimal text-lg font-medium text-Neutral"
                             key={genre}
                           >
                             {genre}
@@ -606,6 +607,7 @@ export default function AddMedia() {
               </div>
             </div>
           </div>
+          <Footer />
         </div>
       </div>
     )

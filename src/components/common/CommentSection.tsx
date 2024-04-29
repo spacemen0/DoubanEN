@@ -108,7 +108,7 @@ export const CommentSection = ({
             />
           ))
         ) : (
-          <p className="font-semibold text-center mt-6 text-xl">
+          <p className="mt-6 text-center text-xl font-semibold">
             Nothing to show here
           </p>
         )}

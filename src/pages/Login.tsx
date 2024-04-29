@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../contexts/AuthContext";
-import { PageHeader } from "../components/common/PageHeader";
+import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { MyImage } from "../components/common/MyImage";
 import { WelcomeInfo } from "../components/common/WelcomeInfo";
 import { LoaderCircle } from "lucide-react";
 import { apiUrl } from "../utils/config.ts";
+import { Footer } from "../components/common/Footer.tsx";
 
 export default function Login() {
   const [searchParams] = useSearchParams();
@@ -55,6 +56,7 @@ export default function Login() {
           processing={processing}
         />
         <WelcomeInfo isLogin={true} />
+        <Footer />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { PageHeader } from "../components/common/PageHeader";
+import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
 import { useParams } from "react-router-dom";
 import { RecentlyOn } from "../components/profile/RecentlyOn";
 import { InfoCard } from "../components/profile/InfoCard.tsx";
@@ -10,6 +10,7 @@ import { Reviews } from "../components/profile/Reviews.tsx";
 import { CommentSection } from "../components/common/CommentSection.tsx";
 import { useAuthContext } from "../contexts/AuthContext.ts";
 import { OwnComments } from "../components/profile/OwnComments.tsx";
+import { Footer } from "../components/common/Footer.tsx";
 
 export default function Profile() {
   const { id } = useParams();
@@ -32,12 +33,12 @@ export default function Profile() {
             <ListsWall id={parseInt(id)} username={username} />
           </div>
           {user && user.id === parseInt(id) && (
-            <div className="px-2 md:px-4 lg:px-6 bg-gray-100 py-4 border-t-2">
+            <div className="border-t-2 bg-gray-100 px-2 py-4 md:px-4 lg:px-6">
               {" "}
               <OwnComments />
             </div>
           )}
-          <div className="px-2 md:px-4 lg:px-6 bg-gray-100 py-4 border-t-2">
+          <div className="border-t-2 bg-gray-100 px-2 py-4 md:px-4 lg:px-6">
             {" "}
             <CommentSection
               area={"User"}
@@ -49,6 +50,7 @@ export default function Profile() {
           <Ratings id={parseInt(id)} username={username} />
           <Reviews id={parseInt(id)} username={username} />
         </div>
+        <Footer />
       </div>
     </div>
   );

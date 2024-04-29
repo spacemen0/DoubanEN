@@ -1,6 +1,7 @@
 import { Banner } from "../components/home/Banner";
 import { Featured } from "../components/home/Featured";
-import { PageHeader } from "../components/common/PageHeader";
+import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
+import { Footer } from "../components/common/Footer.tsx";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
           Featured Reviews
         </div>
         <Featured></Featured>
+        <Footer />
       </div>
     </div>
   );

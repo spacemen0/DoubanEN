@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { PageHeader } from "../components/common/PageHeader";
+import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
 import { useEffect, useState } from "react";
 import { ListInfo, Media } from "../utils/type";
 import { useAuthContext } from "../contexts/AuthContext";
@@ -14,6 +14,7 @@ import Loading from "../components/common/Loading.tsx";
 import { ListHeader } from "../components/list/ListHeader.tsx";
 import { ListMediaDisplay } from "../components/list/ListMediaDisplay.tsx";
 import { CommentSection } from "../components/common/CommentSection.tsx";
+import { Footer } from "../components/common/Footer.tsx";
 
 export default function List() {
   const { id } = useParams();
@@ -82,6 +83,7 @@ export default function List() {
           medias={medias}
         />
         <CommentSection area={"MediaList"} areaId={parseInt(id)} />
+        <Footer />
       </div>
     </div>
   );

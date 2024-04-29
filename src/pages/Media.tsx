@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { PageHeader } from "../components/common/PageHeader";
+import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
 import { useCallback, useEffect, useState } from "react";
 import { Media } from "../utils/type";
 import { MyImage } from "../components/common/MyImage";
@@ -13,6 +13,7 @@ import { NotFound } from "../components/common/NotFound";
 import { getMedia } from "../apiUtils/mediaApiUtil.ts";
 import { apiUrl } from "../utils/config.ts";
 import { CommentSection } from "../components/common/CommentSection.tsx";
+import { Footer } from "../components/common/Footer.tsx";
 
 export default function MediaPage() {
   const { setMessage } = useAuthContext();
@@ -44,10 +45,10 @@ export default function MediaPage() {
 
   // Render NotFound component if specific error is caught
   if (!exist || !id) return <NotFound />;
-  return (
-    <>
+  return media ? (
+    <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
-      {media ? (
+      <div className="overflow-y-scroll">
         <div className="flex !lg:flex-col items-center lg:items-start justify-center ml-10 mr-10 mt-6 ">
           <div className="flex w-full flex-1 flex-col lg:flex-[0.3]">
             <MyImage src={apiUrl + media.imageUrl} alt={media.title} />
@@ -82,9 +83,10 @@ export default function MediaPage() {
             />
           </div>
         </div>
-      ) : (
-        <Loading />
-      )}
-    </>
+        <Footer />
+      </div>
+    </div>
+  ) : (
+    <Loading />
   );
 }

@@ -1,10 +1,11 @@
 import { useAuthContext } from "../contexts/AuthContext.ts";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
-import { PageHeader } from "../components/common/PageHeader.tsx";
+import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
 import { LoaderCircle } from "lucide-react";
 import { ProfileFormData } from "../utils/type.ts";
 import { updateProfile } from "../apiUtils/userApiUtil.ts";
+import { Footer } from "../components/common/Footer.tsx";
 
 export default function Edit() {
   const navigate = useNavigate();
@@ -155,7 +156,7 @@ export default function Edit() {
               </form>
             </div>
           </div>
-          <div className="flex flex-1 md:px-40 lg:px-4 flex-col items-center justify-center bg-gray-100 px-4 py-2 lg:py-6">
+          <div className="flex flex-1 flex-col items-center justify-center bg-gray-100 px-4 py-2 md:px-40 lg:px-4 lg:py-6">
             <div className="w-full">
               <form ref={fileInputRef}>
                 <label
@@ -183,6 +184,7 @@ export default function Edit() {
             />
           </div>
         </div>
+        <Footer />
       </div>
     </div>
   );

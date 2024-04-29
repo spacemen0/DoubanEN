@@ -72,7 +72,7 @@ export const CommentEntry = ({
             <p className="content-center mr-0.5">{comment.date}</p>
             {user?.id === comment.userId && (
               <button
-                className="hover:text-red-700 text-red-500"
+                className="text-red-500 hover:text-red-700"
                 onClick={handleDeleteComment}
               >
                 <X size={20} className="align-middle" />

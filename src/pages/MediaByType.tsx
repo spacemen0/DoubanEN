@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { PageHeader } from "../components/common/PageHeader";
+import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
 import { NotFound } from "../components/common/NotFound";
 import { useEffect, useState } from "react";
 import { Media, MediaType } from "../utils/type";
@@ -12,6 +12,7 @@ import {
 } from "../apiUtils/mediaApiUtil.ts";
 import { EmptyContent } from "../components/common/EmptyContent.tsx";
 import Loading from "../components/common/Loading.tsx";
+import { Footer } from "../components/common/Footer.tsx";
 
 export default function MediaByType() {
   const [searchParams] = useSearchParams();
@@ -79,6 +80,7 @@ export default function MediaByType() {
         ) : (
           <EmptyContent />
         )}
+        <Footer />
       </div>
     </div>
   );

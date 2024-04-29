@@ -1,4 +1,4 @@
-import { PageHeader } from "../components/common/PageHeader";
+import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
 import { MediaItem } from "../components/common/MediaItem.tsx";
 import { EmptyContent } from "../components/common/EmptyContent.tsx";
 import { Link, useSearchParams } from "react-router-dom";
@@ -8,6 +8,7 @@ import { searchMedia } from "../apiUtils/searchApiUtil.ts";
 import { NotFound } from "../components/common/NotFound.tsx";
 import Loading from "../components/common/Loading.tsx";
 import { useAuthContext } from "../contexts/AuthContext.ts";
+import { Footer } from "../components/common/Footer.tsx";
 
 export default function Search() {
   const [searchParams] = useSearchParams();
@@ -80,9 +81,9 @@ export default function Search() {
           <EmptyContent />
         )}
       </div>
-      <div className="flex w-full justify-center items-center bg-transparent">
+      <div className="flex w-full items-center justify-center bg-transparent">
         <button
-          className="flex w-36 md:w-48 lg:w-96 justify-center rounded-md p-2 text-white font-semibold md:font-bold text-xl md:text-2xl transition-colors duration-300 bg-Neutral-Mild hover:bg-Neutral focus:bg-Neutral-Mild focus:ring-Neutral-Mild focus:outline-none"
+          className="flex w-36 justify-center rounded-md p-2 text-xl font-semibold text-white transition-colors duration-300 bg-Neutral-Mild hover:bg-Neutral focus:bg-Neutral-Mild focus:ring-Neutral-Mild focus:outline-none md:w-48 md:text-2xl md:font-bold lg:w-96"
           onClick={() => {
             if (isEnd) setMessage("You reach the end of the search results");
             else {
@@ -92,6 +93,7 @@ export default function Search() {
         >
           Load More
         </button>
+        <Footer />
       </div>
     </div>
   );

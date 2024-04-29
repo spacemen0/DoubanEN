@@ -44,7 +44,7 @@ export function Featured() {
 
   return (
     <div className="mb-4 flex bg-white pl-3 md:pl-6 lg:pl-12">
-      <div className="mr-4 flex flex-1 flex-col lg:flex-[0.65] ">
+      <div className="mr-4 flex flex-1 flex-col lg:flex-[0.65]">
         <FeaturedBanner />
 
         {featuredItems.map((item, index) => (

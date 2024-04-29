@@ -31,11 +31,11 @@ export function ActiveUsers() {
 
   if (!users) return <></>;
   return (
-    <div className="mt-6 flex flex-col text-Neutral lg:w-10/12  lg:mt-12">
+    <div className="mt-6 flex flex-col text-Neutral lg:mt-12 lg:w-10/12">
       <h1 className="text-2xl font-bold text-Neutral xl:text-3xl">
         Active Users
       </h1>
-      <ul className=" mt-4 px-1">
+      <ul className="mt-4 px-1">
         {users.length > 0 &&
           users.map((user, index) => (
             <li

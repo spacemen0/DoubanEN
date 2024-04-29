@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { PageHeader } from "../components/common/PageHeader";
+import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
 import { useAuthContext } from "../contexts/AuthContext";
 import React, { useEffect, useRef, useState } from "react";
 import { MyImage } from "../components/common/MyImage";
 import { WelcomeInfo } from "../components/common/WelcomeInfo";
 import { LoaderCircle } from "lucide-react";
 import { apiUrl } from "../utils/config.ts";
+import { Footer } from "../components/common/Footer.tsx";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -55,6 +56,7 @@ export default function Register() {
           processing={processing}
         />
         <WelcomeInfo isLogin={false} />
+        <Footer />
       </div>
     </div>
   );

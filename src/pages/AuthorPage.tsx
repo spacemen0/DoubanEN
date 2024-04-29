@@ -1,4 +1,4 @@
-import { PageHeader } from "../components/common/PageHeader";
+import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
 import { useParams } from "react-router-dom";
 import { MediaItem } from "../components/common/MediaItem.tsx";
 import { EmptyContent } from "../components/common/EmptyContent.tsx";
@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { Author, Media } from "../utils/type.ts";
 import Loading from "../components/common/Loading.tsx";
+import { Footer } from "../components/common/Footer.tsx";
 
 export default function AuthorPage() {
   const { id } = useParams();
@@ -107,6 +108,7 @@ export default function AuthorPage() {
         ) : (
           <EmptyContent />
         )}
+        <Footer />
       </div>
     </div>
   );
