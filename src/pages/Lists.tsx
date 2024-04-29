@@ -128,7 +128,7 @@ export default function Lists() {
     return (
       <div className="flex max-h-screen flex-col overflow-hidden">
         <PageHeader />
-        <div className="overflow-y-scroll text-Neutral">
+        <div className="overflow-y-scroll text-Neutral h-screen flex flex-col justify-between">
           {selectedList !== -1 && (
             <SelectUserList
               username={username}

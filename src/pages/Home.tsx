@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
-      <div className="overflow-y-scroll">
+      <div className="overflow-y-scroll flex flex-col justify-between h-screen">
         <Banner />
         <div className="mt-8 ml-5 text-xl font-bold text-Neutral-Mild md:mt-12 md:ml-7 md:text-3xl lg:ml-12">
           Featured Reviews

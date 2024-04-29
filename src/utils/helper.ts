@@ -1,4 +1,5 @@
-import { Media } from "./type.ts";
+import { Media, MediaRequest } from "./type.ts";
+import { getAuthor } from "../apiUtils/authorApiUtil.ts";
 
 export const processMediaJson = (data: Media): Media => {
   let processedData: Media = { ...data };
@@ -37,4 +38,40 @@ export const processMediaJson = (data: Media): Media => {
 export function getCurrentLocalDate(): string {
   const date = new Date(Date.now());
   return date.toISOString().split("T")[0];
+}
+
+export async function mediaRequestToMedia(
+  request: MediaRequest,
+): Promise<Media> {
+  const author = await getAuthor(request.author);
+  return {
+    id: -1,
+    description: request.description,
+    type: request.type,
+    imageUrl: request.imageUrl,
+    title: request.title,
+    author: request.author,
+    author_name: author.name,
+    additional: request.additional,
+    genre: request.genre,
+    releaseDate: request.releaseDate,
+    average: 0,
+    wants: 0,
+    ratings: 0,
+    doings: 0,
+  };
+}
+
+export function formatLocalDateTime(dateTimeString: string): string {
+  const dateTime = new Date(dateTimeString);
+  const year = dateTime.getFullYear();
+  const month = dateTime.getMonth() + 1;
+  const day = dateTime.getDate();
+  const hours = dateTime.getHours();
+  const minutes = dateTime.getMinutes();
+
+  const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+  const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
+
+  return `${formattedDate} ${formattedTime}`;
 }

@@ -78,7 +78,7 @@ export default function Collection() {
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
-      <div className="overflow-y-scroll px-2 lg:px-4">
+      <div className="overflow-y-scroll px-2 lg:px-4 flex flex-col justify-between h-screen">
         <OptionSelect
           selectedOption={selectedOption}
           handleOptionClick={handleOptionClick}

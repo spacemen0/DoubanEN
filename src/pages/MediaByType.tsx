@@ -59,7 +59,7 @@ export default function MediaByType() {
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
-      <div className="overflow-y-scroll">
+      <div className="overflow-y-scroll h-screen flex flex-col justify-between">
         <div className="mt-2  px-2 lg:px-4">
           <Pagination
             title={count + " " + (type === "Music" ? type : type + "s")}

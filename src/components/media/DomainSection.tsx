@@ -5,7 +5,7 @@ export function DomainSection({ media }: { media: Media }) {
 
   return (
     <>
-      <p className="my-4 text-2xl font-bold">
+      <p className="my-4 text-2xl font-semibold">
         {media.type === "Music"
           ? "Track Listing"
           : media.type === "Book"

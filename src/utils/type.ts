@@ -11,6 +11,8 @@ export type StatusType = "Rated" | "Wishlist" | "Doing" | "Reviewed";
 
 export type UserRole = "Admin" | "Contributor" | "Standard";
 
+export type RequestStatus = "Pending" | "Approve" | "Reject";
+
 export type CommentArea = "Media" | "User" | "MediaList" | "Review";
 
 export type RatingScore =
@@ -113,4 +115,31 @@ export type Comment = {
   content: string;
   userId: number;
   date: string;
+};
+
+export type MediaRequest = {
+  id: number;
+  userId: number;
+  actionTime: string;
+  status: RequestStatus;
+  message: string;
+  imageUrl: string;
+  type: "Music" | "Movie" | "Book";
+  description: string;
+  title: string;
+  author: number;
+  releaseDate: string;
+  genre: string;
+  additional: string;
+};
+
+export type AuthorRequest = {
+  id: number;
+  userId: number;
+  actionTime: string;
+  status: RequestStatus;
+  message: string;
+  name: string;
+  type: AuthorType;
+  genres: string[];
 };

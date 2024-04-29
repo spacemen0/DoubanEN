@@ -77,7 +77,7 @@ export default function AuthorPage() {
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
-      <div className="mt-2 overflow-y-scroll px-2 lg:px-4">
+      <div className="mt-2 overflow-y-scroll px-2 lg:px-4 flex flex-col justify-between h-screen">
         <Pagination
           title={
             count +

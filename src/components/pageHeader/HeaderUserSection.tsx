@@ -126,6 +126,15 @@ function DropDownMenu({
               }}
               text="Movie Collection"
             />
+            {user.role === "Admin" && (
+              <MenuItem
+                link="/admin"
+                onClick={() => {
+                  setIsOpen(false);
+                }}
+                text="Admin Page"
+              />
+            )}
             <MenuItem
               text="Log Out"
               onClick={async () => {

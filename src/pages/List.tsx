@@ -74,7 +74,7 @@ export default function List() {
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
-      <div className="overflow-y-scroll ">
+      <div className="overflow-y-scroll flex flex-col justify-between h-screen">
         <div className="mb-4 px-2 text-Neutral lg:mb-8 lg:px-4">
           <ListHeader listInfo={listInfo} />
           <ListMediaDisplay
