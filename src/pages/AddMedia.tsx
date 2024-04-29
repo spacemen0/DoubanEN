@@ -5,8 +5,32 @@ import { Author, Media } from "../utils/type.ts";
 import { LoaderCircle } from "lucide-react";
 import { PageHeader } from "../components/common/PageHeader.tsx";
 import { useNavigate } from "react-router-dom";
-import { getAllAuthors } from "../apiUtils/authorApiUtil.ts";
+import { addAuthor, getAllAuthors } from "../apiUtils/authorApiUtil.ts";
 import { bookGenres, movieGenres, musicGenres } from "../utils/data.ts";
+
+const initialMedia: Media = {
+  id: 0,
+  imageUrl: "",
+  type: "Music",
+  description: "",
+  title: "",
+  author_name: "",
+  author: 52,
+  releaseDate: "",
+  genre: "Experimental",
+  average: 0,
+  ratings: 0,
+  wants: 0,
+  doings: 0,
+  additional: "",
+};
+
+const initialAuthor: Author = {
+  id: 0,
+  name: "",
+  type: "Artist",
+  genres: [],
+};
 
 export default function AddMedia() {
   const navigate = useNavigate();
@@ -14,24 +38,11 @@ export default function AddMedia() {
   const { setMessage, user, token } = useAuthContext();
   const [processing, setProcessing] = useState(false);
   const [addition, setAddition] = useState("");
+  const [authorGenre, setAuthorGenre] = useState("Experimental");
   const [authors, setAuthors] = useState<Author[]>([]);
-  const [formData, setFormData] = useState<Media>({
-    id: 0,
-    imageUrl: "",
-    type: "Music",
-    description: "",
-    title: "",
-    author_name: "",
-    author: 52,
-    releaseDate: "",
-    genre: "Experimental",
-    average: 0,
-    ratings: 0,
-    wants: 0,
-    doings: 0,
-    additional: "",
-  });
+  const [media, setMedia] = useState<Media>(initialMedia);
   const [image, setImage] = useState<File | null>(null);
+  const [author, setAuthor] = useState<Author>(initialAuthor);
 
   useEffect(() => {
     if (!user) {
@@ -49,19 +60,19 @@ export default function AddMedia() {
     };
     fetAuthors().then();
   }, [navigate, user]);
-  const handleSubmit = async (event: React.FormEvent) => {
+  const handleMediaSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (
       image &&
       user &&
       token &&
-      formData.description !== "" &&
-      formData.additional !== "" &&
-      formData.releaseDate !== ""
+      media.description !== "" &&
+      media.additional !== "" &&
+      media.releaseDate !== ""
     ) {
       try {
         setProcessing(true);
-        await addMedia(formData, token, image);
+        await addMedia(media, token, image);
         user.role === "Admin"
           ? setMessage("Media added successfully")
           : setMessage("Media request sent successfully");
@@ -75,26 +86,65 @@ export default function AddMedia() {
     }
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleAuthorSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (user && token && author.name !== "") {
+      try {
+        setProcessing(true);
+        const newAuthor = await addAuthor(author, token, user.role);
+        if (typeof newAuthor !== "string")
+          setAuthors((prevState) => prevState.concat(newAuthor));
+        user.role === "Admin"
+          ? setMessage("Author added successfully")
+          : setMessage("Author request sent successfully");
+        setProcessing(false);
+      } catch (error) {
+        setProcessing(false);
+        setMessage("Error adding author");
+      }
+    } else {
+      setMessage("Please fill in all fields");
+    }
   };
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    forMedia: boolean = true,
+  ) => {
     const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    if (forMedia)
+      setMedia((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    else
+      setAuthor((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+  };
+  const handleSelectChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+    forMedia: boolean = true,
+  ) => {
+    const { name, value } = event.target;
+    if (forMedia)
+      setMedia((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    else
+      setAuthor((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
   };
 
   const handleTextAreaChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
     const { name, value } = event.target;
-    setFormData((prevData) => ({
+    setMedia((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -137,7 +187,7 @@ export default function AddMedia() {
                         type="text"
                         id="title"
                         name="title"
-                        value={formData.title}
+                        value={media.title}
                         onChange={handleInputChange}
                         className="mt-1 w-72 rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                       />
@@ -152,7 +202,7 @@ export default function AddMedia() {
                       <select
                         id="type"
                         name="type"
-                        value={formData.type}
+                        value={media.type}
                         onChange={handleSelectChange}
                         className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                       >
@@ -171,18 +221,18 @@ export default function AddMedia() {
                       <select
                         id="author"
                         name="author"
-                        value={formData.author}
+                        value={media.author}
                         onChange={handleSelectChange}
                         className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                       >
                         {authors &&
                           authors.map((author) => {
                             if (
-                              (formData.type === "Music" &&
+                              (media.type === "Music" &&
                                 author.type === "Artist") ||
-                              (formData.type === "Movie" &&
+                              (media.type === "Movie" &&
                                 author.type === "Director") ||
-                              (formData.type === "Book" &&
+                              (media.type === "Book" &&
                                 author.type === "Author")
                             ) {
                               return (
@@ -205,7 +255,7 @@ export default function AddMedia() {
                       <textarea
                         id="description"
                         name="description"
-                        value={formData.description}
+                        value={media.description}
                         onChange={handleTextAreaChange}
                         className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                         rows={4}
@@ -241,7 +291,7 @@ export default function AddMedia() {
                         type="date"
                         id="releaseDate"
                         name="releaseDate"
-                        value={formData.releaseDate}
+                        value={media.releaseDate}
                         onChange={handleInputChange}
                         className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                       />
@@ -257,40 +307,39 @@ export default function AddMedia() {
                       <select
                         id="genre"
                         name="genre"
-                        value={formData.genre}
+                        value={media.genre}
                         onChange={handleSelectChange}
                         className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                       >
-                        {formData.type === "Music" && (
+                        {media.type === "Music" && (
                           <>
                             {musicGenres.map((genre) => (
-                              <option key={genre.value} value={genre.value}>
-                                {genre.name}
+                              <option key={genre} value={genre}>
+                                {genre}
                               </option>
                             ))}
                           </>
                         )}
 
-                        {formData.type === "Movie" && (
+                        {media.type === "Movie" && (
                           <>
                             {movieGenres.map((genre) => (
-                              <option key={genre.value} value={genre.value}>
-                                {genre.name}
+                              <option key={genre} value={genre}>
+                                {genre}
                               </option>
                             ))}
                           </>
                         )}
 
-                        {formData.type !== "Music" &&
-                          formData.type !== "Movie" && (
-                            <>
-                              {bookGenres.map((genre) => (
-                                <option key={genre.value} value={genre.value}>
-                                  {genre.name}
-                                </option>
-                              ))}
-                            </>
-                          )}
+                        {media.type !== "Music" && media.type !== "Movie" && (
+                          <>
+                            {bookGenres.map((genre) => (
+                              <option key={genre} value={genre}>
+                                {genre}
+                              </option>
+                            ))}
+                          </>
+                        )}
                       </select>
                     </div>
                     <div className="flex flex-col">
@@ -298,9 +347,9 @@ export default function AddMedia() {
                         htmlFor="addition"
                         className="text-xl font-medium text-Neutral"
                       >
-                        {formData.type === "Music"
+                        {media.type === "Music"
                           ? "Add track"
-                          : formData.type === "Movie"
+                          : media.type === "Movie"
                             ? "Add Character then Cast "
                             : "Add Chapter"}
                       </label>
@@ -322,16 +371,15 @@ export default function AddMedia() {
                         focus:ring-offset-2"
                           onClick={(e) => {
                             e.preventDefault();
-                            if (formData.additional === "")
-                              setFormData((prevData) => ({
+                            if (media.additional === "")
+                              setMedia((prevData) => ({
                                 ...prevData,
                                 additional: addition,
                               }));
                             else
-                              setFormData((prevData) => ({
+                              setMedia((prevData) => ({
                                 ...prevData,
-                                additional:
-                                  formData.additional + "\n" + addition,
+                                additional: media.additional + "\n" + addition,
                               }));
                           }}
                         >
@@ -343,7 +391,7 @@ export default function AddMedia() {
                         focus:ring-offset-2"
                           onClick={(e) => {
                             e.preventDefault();
-                            setFormData((prevState) => ({
+                            setMedia((prevState) => ({
                               ...prevState,
                               additional: "",
                             }));
@@ -360,16 +408,16 @@ export default function AddMedia() {
                     htmlFor="additional"
                     className="block text-xl font-medium text-Neutral"
                   >
-                    {formData.type === "Music"
+                    {media.type === "Music"
                       ? "Tracks"
-                      : formData.type === "Movie"
+                      : media.type === "Movie"
                         ? "Casts Info"
                         : "Chapters"}
                   </label>
                   <textarea
                     id="additional"
                     name="additional"
-                    value={formData.additional}
+                    value={media.additional}
                     readOnly={true}
                     className="mt-1 w-[90%] md:w-3/5  rounded-md border p-2
                         focus:outline-none focus:ring-0"
@@ -377,7 +425,7 @@ export default function AddMedia() {
                   ></textarea>
                 </div>
                 <button
-                  onClick={handleSubmit}
+                  onClick={handleMediaSubmit}
                   className="mx-auto flex w-40 justify-center rounded-md p-2 pr-8 text-white
                    transition-colors duration-300 bg-Neutral-Strong hover:bg-Neutral focus:bg-Neutral-Strong
                    focus:ring-Neutral-Strong focus:outline-none focus:ring-2 focus:ring-offset-2"
@@ -390,6 +438,170 @@ export default function AddMedia() {
                     <div className="mr-2 h-6 w-6"></div>
                   )}
                   {user.role === "Admin" ? "Add Media" : "Request"}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-1 flex !md:flex-col w-full justify-center lg:mt-10 lg:w-4/6">
+            <div className="flex w-full items-center justify-center bg-gray-100">
+              <div className="w-full p-3 lg:p-6">
+                <h1 className="mb-6 text-center text-3xl font-semibold text-Neutral-Strong">
+                  Add Author
+                </h1>
+
+                <form className=" flex flex-col md:gap-16 lg:gap-24 justify-center items-center ">
+                  <div className="flex h-full flex-col justify-between">
+                    <div>
+                      <label
+                        htmlFor="name"
+                        className="block text-xl font-medium text-Neutral"
+                      >
+                        Name
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={author.name}
+                        onChange={(e) => {
+                          handleInputChange(e, false);
+                        }}
+                        className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="author-type"
+                        className="block text-xl font-medium text-Neutral"
+                      >
+                        Type
+                      </label>
+                      <div>
+                        <select
+                          id="author-type"
+                          name="author-type"
+                          value={author.type}
+                          onChange={(e) => {
+                            handleSelectChange(e, false);
+                          }}
+                          className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                        >
+                          <option value="Artist">Artist</option>
+                          <option value="Director">Director</option>
+                          <option value="Author">Author</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="author-genre"
+                        className="block text-xl font-medium text-Neutral"
+                      >
+                        Genre
+                      </label>
+                      <div className="flex justify-start items-center">
+                        <select
+                          id="author-genre"
+                          name="author-genre"
+                          value={authorGenre}
+                          onChange={(e) => {
+                            setAuthorGenre(e.target.value);
+                          }}
+                          className="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                        >
+                          {media.type === "Music" && (
+                            <>
+                              {musicGenres.map((genre) => (
+                                <option key={genre} value={genre}>
+                                  {genre}
+                                </option>
+                              ))}
+                            </>
+                          )}
+
+                          {media.type === "Movie" && (
+                            <>
+                              {movieGenres.map((genre) => (
+                                <option key={genre} value={genre}>
+                                  {genre}
+                                </option>
+                              ))}
+                            </>
+                          )}
+
+                          {media.type !== "Music" && media.type !== "Movie" && (
+                            <>
+                              {bookGenres.map((genre) => (
+                                <option key={genre} value={genre}>
+                                  {genre}
+                                </option>
+                              ))}
+                            </>
+                          )}
+                        </select>
+                        <button
+                          className="rounded-md ml-2 p-2 text-white transition-colors duration-300 bg-Neutral-Strong
+                        hover:bg-Neutral focus:bg-Neutral-Strong focus:ring-Neutral-Strong focus:outline-none focus:ring-2
+                        focus:ring-offset-2"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            if (!author.genres.includes(authorGenre))
+                              setAuthor((prevState) => ({
+                                ...prevState,
+                                genres: prevState.genres.concat(authorGenre),
+                              }));
+                          }}
+                        >
+                          Confirm
+                        </button>
+                        <button
+                          className="rounded-md p-2 ml-2 text-white transition-colors duration-300 bg-Neutral-Strong
+                        hover:bg-Neutral focus:bg-Neutral-Strong focus:ring-Neutral-Strong focus:outline-none focus:ring-2
+                        focus:ring-offset-2"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setAuthor((prevState) => ({
+                              ...prevState,
+                              genres: [],
+                            }));
+                          }}
+                        >
+                          Clear
+                        </button>
+                      </div>
+                    </div>
+                    <ul className="my-4">
+                      <h2 className="my-2 text-xl font-medium text-Neutral">
+                        Genres:{" "}
+                      </h2>
+                      {author.genres.length > 0 &&
+                        author.genres.map((genre) => (
+                          <li
+                            className="ml-6 text-lg font-medium text-Neutral list-decimal"
+                            key={genre}
+                          >
+                            {genre}
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                </form>
+
+                <button
+                  onClick={handleAuthorSubmit}
+                  className="mx-auto flex w-40 justify-center rounded-md p-2 pr-8 text-white
+                   transition-colors duration-300 bg-Neutral-Strong hover:bg-Neutral focus:bg-Neutral-Strong
+                   focus:ring-Neutral-Strong focus:outline-none focus:ring-2 focus:ring-offset-2"
+                >
+                  {processing ? (
+                    <div className="mr-2 h-6 w-6 animate-spin">
+                      <LoaderCircle />
+                    </div>
+                  ) : (
+                    <div className="mr-2 h-6 w-6"></div>
+                  )}
+                  {user.role === "Admin" ? "Add Author" : "Request"}
                 </button>
               </div>
             </div>

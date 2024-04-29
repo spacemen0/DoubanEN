@@ -1,4 +1,4 @@
-import { Author, Media } from "../utils/type.ts";
+import { Author, Media, UserRole } from "../utils/type.ts";
 import { apiUrl } from "../utils/config.ts";
 
 export const getAuthor = async (id: number): Promise<Author> => {
@@ -72,4 +72,31 @@ export const getAllAuthors = async (): Promise<Author[]> => {
     throw new Error("Author");
   }
   return await response.json();
+};
+
+export const addAuthor = async (
+  author: Author,
+  token: string,
+  role: UserRole,
+): Promise<Author | string> => {
+  let response = new Response();
+  const { id, ...requestBody } = author;
+  console.log(id);
+  try {
+    response = await fetch(`${apiUrl}/authors`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(requestBody),
+    });
+  } catch (error) {
+    throw new Error("Fetch Author error");
+  }
+  if (!response.ok) {
+    throw new Error("Author");
+  }
+  if (role === "Admin") return await response.json();
+  else return await response.text();
 };
