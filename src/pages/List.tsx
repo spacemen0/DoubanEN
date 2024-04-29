@@ -74,15 +74,17 @@ export default function List() {
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
-      <div className="mb-4 overflow-y-scroll px-2 text-Neutral lg:mb-8 lg:px-4">
-        <ListHeader listInfo={listInfo} />
-        <ListMediaDisplay
-          count={count}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          medias={medias}
-        />
-        <CommentSection area={"MediaList"} areaId={parseInt(id)} />
+      <div className="overflow-y-scroll ">
+        <div className="mb-4 px-2 text-Neutral lg:mb-8 lg:px-4">
+          <ListHeader listInfo={listInfo} />
+          <ListMediaDisplay
+            count={count}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            medias={medias}
+          />
+          <CommentSection area={"MediaList"} areaId={parseInt(id)} />
+        </div>
         <Footer />
       </div>
     </div>

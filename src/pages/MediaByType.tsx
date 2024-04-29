@@ -59,27 +59,29 @@ export default function MediaByType() {
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
-      <div className="mt-2 overflow-y-scroll px-2 lg:px-4">
-        <Pagination
-          title={count + " " + (type === "Music" ? type : type + "s")}
-          count={count}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
-        <div className="my-2 flex justify-between gap-3 border-b border-gray-200 pb-1 pl-32 text-xl font-semibold text-Neutral-Mild md:gap-6 lg:gap-9 lg:pl-36 2xl:pl-44 3xl:pl-56">
-          <span>Average</span> <span>Rated</span> <span>Wants</span>
+      <div className="overflow-y-scroll">
+        <div className="mt-2  px-2 lg:px-4">
+          <Pagination
+            title={count + " " + (type === "Music" ? type : type + "s")}
+            count={count}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+          <div className="my-2 flex justify-between gap-3 border-b border-gray-200 pb-1 pl-32 text-xl font-semibold text-Neutral-Mild md:gap-6 lg:gap-9 lg:pl-36 2xl:pl-44 3xl:pl-56">
+            <span>Average</span> <span>Rated</span> <span>Wants</span>
+          </div>
+          {medias.length > 0 ? (
+            <ul>
+              {medias.map((media, index) => (
+                <li key={index}>
+                  <MediaItem media={media} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <EmptyContent />
+          )}
         </div>
-        {medias.length > 0 ? (
-          <ul>
-            {medias.map((media, index) => (
-              <li key={index}>
-                <MediaItem media={media} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <EmptyContent />
-        )}
         <Footer />
       </div>
     </div>

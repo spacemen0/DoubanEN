@@ -76,7 +76,7 @@ export default function Edit() {
   return (
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
-      <div className="overflow-y-scroll">
+      <div className="overflow-y-scroll h-screen flex flex-col justify-between">
         <div className="mx-auto mt-1 flex !lg:flex-col w-full justify-center lg:mt-10 lg:w-4/6">
           <div className="flex w-full items-center justify-center bg-gray-100 lg:w-1/2">
             <div className="w-full max-w-md p-3 lg:p-6">

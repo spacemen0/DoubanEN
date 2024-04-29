@@ -80,21 +80,22 @@ export default function Search() {
         ) : (
           <EmptyContent />
         )}
+        <div className="flex w-full items-center justify-center bg-transparent">
+          <button
+            className="flex w-36 justify-center rounded-md p-2 text-xl font-semibold text-white transition-colors duration-300 bg-Neutral-Mild hover:bg-Neutral focus:bg-Neutral-Mild focus:ring-Neutral-Mild focus:outline-none md:w-48 md:text-2xl md:font-bold lg:w-96"
+            onClick={() => {
+              if (isEnd) setMessage("You reach the end of the search results");
+              else {
+                setCurrentPage(currentPage + 1);
+              }
+            }}
+          >
+            Load More
+          </button>
+        </div>
       </div>
-      <div className="flex w-full items-center justify-center bg-transparent">
-        <button
-          className="flex w-36 justify-center rounded-md p-2 text-xl font-semibold text-white transition-colors duration-300 bg-Neutral-Mild hover:bg-Neutral focus:bg-Neutral-Mild focus:ring-Neutral-Mild focus:outline-none md:w-48 md:text-2xl md:font-bold lg:w-96"
-          onClick={() => {
-            if (isEnd) setMessage("You reach the end of the search results");
-            else {
-              setCurrentPage(currentPage + 1);
-            }
-          }}
-        >
-          Load More
-        </button>
-        <Footer />
-      </div>
+
+      <Footer />
     </div>
   );
 }
