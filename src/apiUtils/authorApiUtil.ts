@@ -100,3 +100,24 @@ export const addAuthor = async (
   if (role === "Admin") return await response.json();
   else return await response.text();
 };
+
+export const deleteAuthor = async (
+  id: number,
+  token: string,
+): Promise<void> => {
+  let response = new Response();
+  try {
+    response = await fetch(`${apiUrl}/authors/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    throw new Error("Deleting comment error");
+  }
+  if (!response.ok) {
+    throw new Error("Response error");
+  }
+  return;
+};

@@ -1,17 +1,39 @@
 import { useState } from "react";
+import { useAuthContext } from "../../contexts/AuthContext.ts";
+import { deleteList } from "../../apiUtils/mediaListApiUtil.ts";
+import { deleteComment } from "../../apiUtils/commentApiUtil.ts";
+import { deleteMedia } from "../../apiUtils/mediaApiUtil.ts";
+import { deleteAuthor } from "../../apiUtils/authorApiUtil.ts";
 
 export function DeleteSection() {
-  const [id, setId] = useState<number>();
+  const [id, setId] = useState<number>(0);
   const [type, setType] = useState("Media");
+  const { token, setMessage } = useAuthContext();
   const handleDelete = async () => {
-    console.log(id, type);
+    if (id !== -1 && token)
+      try {
+        if (type === "Media") await deleteMedia(id, token);
+        else if (type === "List") await deleteList(id, token);
+        else if (type === "Comment") await deleteComment(id, token);
+        else if (type === "Author") await deleteAuthor(id, token);
+        else {
+          setMessage("Wrong resource type");
+          return;
+        }
+        setType("Media");
+        setId(0);
+        setMessage("Deleted");
+      } catch (e) {
+        const error = e as Error;
+        setMessage(error.message);
+      }
   };
   return (
-    <div className="flex !lg:flex-col border-2 rounded-md mt-2 p-2 justify-center items-center">
+    <div className="flex !lg:flex-col border-2 rounded-md mt-2 p-2 justify-start items-center">
       <h1 className="text-2xl my-2 mx-2 font-semibold text-Neutral">
         Delete Resources
       </h1>
-      <div className="m-2 rounded-md border p-2">
+      <div className="m-2 rounded-md border p-2 px-4">
         <label
           htmlFor="id"
           className="block text-2xl my-4 font-semibold text-Neutral"
@@ -29,7 +51,7 @@ export function DeleteSection() {
           className="mt-1 w-full rounded-md border p-2  transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
         />
       </div>
-      <div className="rounded-md border p-2 m-2">
+      <div className="rounded-md border p-2 m-2 px-4">
         <label
           htmlFor="type"
           className="block text-2xl my-4 font-semibold text-Neutral"

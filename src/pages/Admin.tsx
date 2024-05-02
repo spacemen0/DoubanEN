@@ -12,20 +12,31 @@ import { Link } from "react-router-dom";
 import { EmptyContent } from "../components/common/EmptyContent.tsx";
 import { AuthorRequestItem } from "../components/admin/AuthorRequestItem.tsx";
 import { DeleteSection } from "../components/admin/DeleteSection.tsx";
+import Loading from "../components/common/Loading.tsx";
 
 export default function Admin() {
-  const [mediaRequests, setMediaRequests] = useState<MediaRequest[]>();
-  const [authorRequests, setAuthorRequests] = useState<AuthorRequest[]>();
+  const [mediaRequests, setMediaRequests] = useState<MediaRequest[]>([]);
+  const [authorRequests, setAuthorRequests] = useState<AuthorRequest[]>([]);
+  const [loading, setLoading] = useState([true, true]);
   const { token, setMessage, user } = useAuthContext();
   useEffect(() => {
     const fetchRequests = async () => {
       if (token)
         try {
           setMediaRequests(await getAllMediaRequestsByStatus("Pending", token));
+          setLoading((prevState) => {
+            prevState[0] = false;
+            return prevState;
+          });
         } catch (e) {
+          setLoading((prevState) => {
+            prevState[0] = false;
+            return prevState;
+          });
           const error = e as Error;
           setMessage(error.message);
         }
+      else return;
     };
     fetchRequests().then();
   }, [setMessage, token]);
@@ -36,42 +47,55 @@ export default function Admin() {
           setAuthorRequests(
             await getAllAuthorRequestsByStatus("Pending", token),
           );
+          setLoading((prevState) => {
+            prevState[1] = false;
+            return prevState;
+          });
         } catch (e) {
+          setLoading((prevState) => {
+            prevState[1] = false;
+            return prevState;
+          });
           const error = e as Error;
           setMessage(error.message);
         }
+      else return;
     };
     fetchRequests().then();
   }, [setMessage, token]);
+  if (loading[0] || loading[1]) return <Loading />;
   if (user && user.role === "Admin")
     return (
       <div className="flex max-h-screen flex-col overflow-hidden">
         <PageHeader />
 
         <div className="overflow-y-scroll flex flex-col justify-between h-screen">
-          {" "}
-          <DeleteSection />
           <div>
-            {mediaRequests &&
-              mediaRequests.length > 0 &&
-              mediaRequests.map((mediaRequest) => (
-                <MediaRequestItem
-                  request={mediaRequest}
-                  key={mediaRequest.id}
-                />
-              ))}
-            {authorRequests &&
-              authorRequests.length > 0 &&
-              authorRequests.map((authorRequest) => (
-                <AuthorRequestItem
-                  request={authorRequest}
-                  key={authorRequest.id}
-                />
-              ))}
-            {!(
-              (mediaRequests && mediaRequests.length > 0) ||
-              (authorRequests && authorRequests.length > 0)
-            ) && <EmptyContent text="No requests from user currently" />}
+            <DeleteSection />
+            <div>
+              {mediaRequests &&
+                mediaRequests.length > 0 &&
+                mediaRequests.map((mediaRequest) => (
+                  <MediaRequestItem
+                    setMediaRequests={setMediaRequests}
+                    request={mediaRequest}
+                    key={mediaRequest.id}
+                  />
+                ))}
+              {authorRequests &&
+                authorRequests.length > 0 &&
+                authorRequests.map((authorRequest) => (
+                  <AuthorRequestItem
+                    setAuthorRequests={setAuthorRequests}
+                    request={authorRequest}
+                    key={authorRequest.id}
+                  />
+                ))}
+              {!(
+                (mediaRequests && mediaRequests.length > 0) ||
+                (authorRequests && authorRequests.length > 0)
+              ) && <EmptyContent text="No requests from user currently" />}
+            </div>
           </div>
           <Footer />
         </div>

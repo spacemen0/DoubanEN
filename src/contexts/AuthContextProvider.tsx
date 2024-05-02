@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import { expiryTime } from "../utils/config.ts";
 import { AuthContext, AuthContextType } from "./AuthContext";
 import { User } from "../utils/type.ts";
@@ -106,17 +106,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
 
   return (
     <AuthContext.Provider value={contextValue}>
-      <MessageBox
-        message={message}
-        onHover={(e) => {
-          e.currentTarget.classList.remove("opacity-100");
-          e.currentTarget.classList.add("opacity-0");
-          const timer = setTimeout(() => {
-            setMessage(null);
-            clearTimeout(timer);
-          }, 1000);
-        }}
-      />
+      <MessageBox message={message} setMessage={setMessage} />
       {children}
     </AuthContext.Provider>
   );
@@ -124,23 +114,42 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
 
 const MessageBox = ({
   message,
-  onHover,
+  setMessage,
 }: {
   message: string | null;
-  onHover: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  setMessage: (message: string) => void;
 }) => {
+  const messageBoxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (
+        messageBoxRef.current &&
+        !messageBoxRef.current.contains(e.target as Node)
+      ) {
+        messageBoxRef.current.classList.remove("opacity-80");
+        messageBoxRef.current.classList.add("opacity-0");
+        const timer = setTimeout(() => {
+          setMessage("");
+          clearTimeout(timer);
+        }, 2000);
+      }
+    };
+    document.addEventListener("mouseover", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mouseover", handleOutsideClick);
+    };
+  }, [setMessage]);
+
   return (
     <>
       {message && (
         <div
-          className="z-50 fixed top-1/4 left-1/2 transform -translate-x-1/2
-          px-4 py-2 md:py-4 rounded-md bg-gray-800  text-white transition-opacity duration-1000 opacity-100"
-          onMouseEnter={(e) => {
-            onHover(e);
-          }}
+          ref={messageBoxRef}
+          className="z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform
+          px-4 py-2 md:py-4 rounded-md bg-gray-500 text-white transition-opacity duration-[2000ms] opacity-80"
         >
-          <p className="text-center text-lg font-semibold">{message}</p>
-          <p className="text-center text-sm font-semibold">{`(click me)`}</p>
+          <p className="text-center text-xl font-semibold">{message}</p>
         </div>
       )}
     </>

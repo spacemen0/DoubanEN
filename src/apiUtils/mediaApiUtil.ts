@@ -90,3 +90,21 @@ export const addMedia = async (
   }
   return;
 };
+
+export const deleteMedia = async (id: number, token: string): Promise<void> => {
+  let response = new Response();
+  try {
+    response = await fetch(`${apiUrl}/medias/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    throw new Error("Deleting comment error");
+  }
+  if (!response.ok) {
+    throw new Error("Response error");
+  }
+  return;
+};

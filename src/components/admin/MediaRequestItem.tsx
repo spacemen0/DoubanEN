@@ -1,13 +1,19 @@
 import { Media, MediaRequest, User } from "../../utils/type.ts";
 import { DomainSection } from "../media/DomainSection.tsx";
 import { mediaRequestToMedia, processMediaJson } from "../../utils/helper.ts";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MediaRequestInfo } from "./MediaRequestInfo.tsx";
 import { fetchUser } from "../../apiUtils/userApiUtil.ts";
 import { processMediaRequest } from "../../apiUtils/userRequestApiUtil.ts";
 import { useAuthContext } from "../../contexts/AuthContext.ts";
 
-export function MediaRequestItem({ request }: { request: MediaRequest }) {
+export function MediaRequestItem({
+  request,
+  setMediaRequests,
+}: {
+  request: MediaRequest;
+  setMediaRequests: React.Dispatch<React.SetStateAction<MediaRequest[]>>;
+}) {
   const [media, setMedia] = useState<Media>();
   const [user, setUser] = useState<User>();
   const [responseMessage, setResponseMessage] = useState("");
@@ -21,10 +27,14 @@ export function MediaRequestItem({ request }: { request: MediaRequest }) {
     if (token)
       try {
         await processMediaRequest(request.id, approve, responseMessage, token);
+        setMediaRequests((previousState) =>
+          previousState.filter((pre) => pre.id !== request.id),
+        );
       } catch (e) {
         const error = e as Error;
         setMessage(error.message);
       }
+    else return;
   };
   useEffect(() => {
     const convertMedia = async () => {

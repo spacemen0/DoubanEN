@@ -37,7 +37,8 @@ export default function AddMedia() {
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { setMessage, user, token } = useAuthContext();
-  const [processing, setProcessing] = useState(false);
+  const [authorProcessing, setAuthorProcessing] = useState(false);
+  const [mediaProcessing, setMediaProcessing] = useState(false);
   const [addition, setAddition] = useState("");
   const [authorGenre, setAuthorGenre] = useState("Experimental");
   const [authors, setAuthors] = useState<Author[]>([]);
@@ -72,14 +73,14 @@ export default function AddMedia() {
       media.releaseDate !== ""
     ) {
       try {
-        setProcessing(true);
+        setMediaProcessing(true);
         await addMedia(media, token, image);
         user.role === "Admin"
           ? setMessage("Media added successfully")
           : setMessage("Media request sent successfully");
-        setProcessing(false);
+        setAuthorProcessing(false);
       } catch (error) {
-        setProcessing(false);
+        setAuthorProcessing(false);
         setMessage("Error adding media");
       }
     } else {
@@ -91,16 +92,16 @@ export default function AddMedia() {
     event.preventDefault();
     if (user && token && author.name !== "") {
       try {
-        setProcessing(true);
+        setAuthorProcessing(true);
         const newAuthor = await addAuthor(author, token, user.role);
         if (typeof newAuthor !== "string")
           setAuthors((prevState) => prevState.concat(newAuthor));
         user.role === "Admin"
           ? setMessage("Author added successfully")
           : setMessage("Author request sent successfully");
-        setProcessing(false);
+        setAuthorProcessing(false);
       } catch (error) {
-        setProcessing(false);
+        setAuthorProcessing(false);
         setMessage("Error adding author");
       }
     } else {
@@ -431,7 +432,7 @@ export default function AddMedia() {
                    transition-colors duration-300 bg-Neutral-Strong hover:bg-Neutral focus:bg-Neutral-Strong
                    focus:ring-Neutral-Strong focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
-                  {processing ? (
+                  {mediaProcessing ? (
                     <div className="mr-2 h-6 w-6 animate-spin">
                       <LoaderCircle />
                     </div>
@@ -595,7 +596,7 @@ export default function AddMedia() {
                    transition-colors duration-300 bg-Neutral-Strong hover:bg-Neutral focus:bg-Neutral-Strong
                    focus:ring-Neutral-Strong focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
-                  {processing ? (
+                  {authorProcessing ? (
                     <div className="mr-2 h-6 w-6 animate-spin">
                       <LoaderCircle />
                     </div>
