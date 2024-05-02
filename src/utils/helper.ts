@@ -1,4 +1,4 @@
-import { Media, MediaRequest } from "./type.ts";
+import { Author, AuthorRequest, Media, MediaRequest } from "./type.ts";
 import { getAuthor } from "../apiUtils/authorApiUtil.ts";
 
 export const processMediaJson = (data: Media): Media => {
@@ -62,6 +62,14 @@ export async function mediaRequestToMedia(
   };
 }
 
+export function authorRequestToAuthor(request: AuthorRequest): Author {
+  return {
+    id: -1,
+    type: request.type,
+    genres: request.genres,
+    name: request.name,
+  };
+}
 export function formatLocalDateTime(dateTimeString: string): string {
   const dateTime = new Date(dateTimeString);
   const year = dateTime.getFullYear();

@@ -1,17 +1,16 @@
-import { Media, MediaRequest, User } from "../../utils/type.ts";
-import { DomainSection } from "../media/DomainSection.tsx";
-import { mediaRequestToMedia, processMediaJson } from "../../utils/helper.ts";
+import { AuthorRequest, User } from "../../utils/type.ts";
 import { useEffect, useState } from "react";
-import { MediaRequestInfo } from "./MediaRequestInfo.tsx";
-import { fetchUser } from "../../apiUtils/userApiUtil.ts";
-import { processMediaRequest } from "../../apiUtils/userRequestApiUtil.ts";
 import { useAuthContext } from "../../contexts/AuthContext.ts";
+import { processAuthorRequest } from "../../apiUtils/userRequestApiUtil.ts";
+import { fetchUser } from "../../apiUtils/userApiUtil.ts";
+import { AuthorRequestInfo } from "./AuthorRequestInfo.tsx";
+import { authorRequestToAuthor } from "../../utils/helper.ts";
 
-export function MediaRequestItem({ request }: { request: MediaRequest }) {
-  const [media, setMedia] = useState<Media>();
+export function AuthorRequestItem({ request }: { request: AuthorRequest }) {
   const [user, setUser] = useState<User>();
   const [responseMessage, setResponseMessage] = useState("");
   const { token, setMessage } = useAuthContext();
+  const author = authorRequestToAuthor(request);
 
   const handleProcessRequest = async (approve: boolean) => {
     if (responseMessage === "") {
@@ -20,19 +19,12 @@ export function MediaRequestItem({ request }: { request: MediaRequest }) {
     }
     if (token)
       try {
-        await processMediaRequest(request.id, approve, responseMessage, token);
+        await processAuthorRequest(request.id, approve, responseMessage, token);
       } catch (e) {
         const error = e as Error;
         setMessage(error.message);
       }
   };
-  useEffect(() => {
-    const convertMedia = async () => {
-      setMedia(await mediaRequestToMedia(request));
-    };
-
-    convertMedia().then();
-  }, [request]);
   useEffect(() => {
     const getUser = async () => {
       setUser(await fetchUser(request.userId));
@@ -40,17 +32,18 @@ export function MediaRequestItem({ request }: { request: MediaRequest }) {
 
     getUser().then();
   }, [request.userId]);
-  if (media && user)
+  if (author && user)
     return (
       <div className="flex !lg:flex-col border-2 rounded-md mt-2">
         <h1 className="lg:[writing-mode:vertical-rl] text-xl font-bold text-Neutral-Strong mt-4 mx-2">
-          Media Request-{request.id}
+          Author Request-{request.id}
         </h1>
         <div className="flex-1 my-4 mr-4 ml-2">
-          <MediaRequestInfo media={media} time={request.actionTime} by={user} />
-        </div>
-        <div className="flex-1 mx-2 border rounded-md my-4 p-2">
-          <DomainSection media={processMediaJson(media)} />
+          <AuthorRequestInfo
+            by={user}
+            author={author}
+            time={request.actionTime}
+          />
         </div>
         <div className="flex-[0.6] flex-col mx-2 border rounded-md my-4 p-2">
           <label
