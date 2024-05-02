@@ -11,7 +11,7 @@ export type StatusType = "Rated" | "Wishlist" | "Doing" | "Reviewed";
 
 export type UserRole = "Admin" | "Contributor" | "Standard";
 
-export type RequestStatus = "Pending" | "Approve" | "Reject";
+export type RequestStatus = "Pending" | "Approved" | "Reject";
 
 export type CommentArea = "Media" | "User" | "MediaList" | "Review";
 
@@ -128,6 +128,8 @@ export type MediaRequest = {
   description: string;
   title: string;
   author: number;
+  author_name: string;
+  resourceId: number;
   releaseDate: string;
   genre: string;
   additional: string;
@@ -140,6 +142,7 @@ export type AuthorRequest = {
   status: RequestStatus;
   message: string;
   name: string;
+  resourceId: number;
   type: AuthorType;
   genres: string[];
 };

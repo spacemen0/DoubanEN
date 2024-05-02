@@ -29,15 +29,14 @@ export function AuthorRequestInfo({
             at {formatLocalDateTime(time)}
           </h2>
         </div>
-        <h2>Author type: {author.type}</h2>
-        <div className="flex flex-col !md:mt-2">
-          <h2 className="text-xl"></h2>
-          <ul className="my-4">
-            <h2 className="my-2 text-xl font-medium text-Neutral">Genres: </h2>
+        <div className="flex flex-col !md:mt-2 text-Neutral py-2">
+          <h2 className="text-xl font-semibold">Author type: {author.type}</h2>
+          <ul className="">
+            <h2 className="my-2 text-xl font-medium ">Genres: </h2>
             {author.genres.length > 0 &&
               author.genres.map((genre) => (
                 <li
-                  className="ml-6 list-decimal text-lg font-medium text-Neutral"
+                  className="ml-6 list-decimal text-lg font-medium"
                   key={genre}
                 >
                   {genre}

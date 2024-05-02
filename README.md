@@ -6,8 +6,7 @@ favorite
 music, movies, and books. Users can rate, review, wishlist, and mark items they want to listen to, watch, or
 read. Additionally, users have the option to categorize items into lists for better organization.
 
-I have been developing this project since completing the basic Web Programming course. The core features are nearly
-complete, and the project has been successfully deployed. You can access the project via this link:
+The core features are nearly complete, and the project has been successfully deployed. You can access the project via this link:
 [DoubanEN](https://nice-water-005626e10.4.azurestaticapps.net/)
 
 ## Tech Stack
@@ -27,10 +26,7 @@ complete, and the project has been successfully deployed. You can access the pro
 
 **To-do**
 
-- admin page
 - refactor
-- footer
-- add logs
 - oauth
 
 <br>
@@ -41,16 +37,16 @@ complete, and the project has been successfully deployed. You can access the pro
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-TypeScript                      80            317              9           7228
-JavaScript                      40              0             99            187
-JSON                             7              2              0            131
-Markdown                         1             15              0             50
-HTML                             2              6              0             28
+TypeScript                      86            349              9           8141
+JavaScript                      70              0            106            285
+JSON                             8              2              0            144
+Markdown                         1             16              0             50
+HTML                             3              9              0             43
 Text                             1              2              0              9
 INI                              1              1              0              7
-CSS                              2              0              0              4
+CSS                              3              0              0              5
 -------------------------------------------------------------------------------
-SUM:                           134            343            108           7644
+SUM:                           173            379            115           8684
 -------------------------------------------------------------------------------
 ```
 

@@ -16,6 +16,8 @@ import {
   getAllAuthorRequestsByUserId,
   getAllMediaRequestsByUserId,
 } from "../apiUtils/userRequestApiUtil.ts";
+import { UserMediaRequestItem } from "../components/profile/UserMediaRequestItem.tsx";
+import { UserAuthorRequestItem } from "../components/profile/UserAuthorRequestItem.tsx";
 
 export default function Profile() {
   const { id } = useParams();
@@ -70,18 +72,6 @@ export default function Profile() {
               <OwnComments />
             </div>
           )}
-          {user && user.id === parseInt(id) && mediaRequests.length > 0 && (
-            <div className="border-t-2 bg-gray-100 px-2 py-4 md:px-4 lg:px-6">
-              {" "}
-              Your Requests for new Media
-            </div>
-          )}
-          {user && user.id === parseInt(id) && authorRequests.length > 0 && (
-            <div className="border-t-2 bg-gray-100 px-2 py-4 md:px-4 lg:px-6">
-              {" "}
-              Your Requests for new Author
-            </div>
-          )}
           <div className="border-t-2 bg-gray-100 px-2 py-4 md:px-4 lg:px-6">
             {" "}
             <CommentSection
@@ -93,6 +83,28 @@ export default function Profile() {
 
           <Ratings id={parseInt(id)} username={username} />
           <Reviews id={parseInt(id)} username={username} />
+          {user && user.id === parseInt(id) && mediaRequests.length > 0 && (
+            <ul className="border-t-2 bg-gray-100 px-2 py-4 md:px-4 lg:px-6">
+              <h2 className="my-4 text-2xl font-bold">Your Media Requests</h2>
+              {mediaRequests.map((mediaRequest) => (
+                <UserMediaRequestItem
+                  mediaRequest={mediaRequest}
+                  key={mediaRequest.id}
+                />
+              ))}
+            </ul>
+          )}
+          {user && user.id === parseInt(id) && authorRequests.length > 0 && (
+            <ul className="border-t-2 bg-gray-100 px-2 py-4 md:px-4 lg:px-6">
+              <h2 className="my-4 text-2xl font-bold">Your Author Requests</h2>
+              {authorRequests.map((authorRequest) => (
+                <UserAuthorRequestItem
+                  authorRequest={authorRequest}
+                  key={authorRequest.id}
+                />
+              ))}
+            </ul>
+          )}
         </div>
         <Footer />
       </div>

@@ -37,11 +37,11 @@ export function MediaRequestItem({
     else return;
   };
   useEffect(() => {
-    const convertMedia = async () => {
-      setMedia(await mediaRequestToMedia(request));
+    const convertMedia = () => {
+      setMedia(mediaRequestToMedia(request));
     };
 
-    convertMedia().then();
+    convertMedia();
   }, [request]);
   useEffect(() => {
     const getUser = async () => {

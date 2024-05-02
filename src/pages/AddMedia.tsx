@@ -78,9 +78,9 @@ export default function AddMedia() {
         user.role === "Admin"
           ? setMessage("Media added successfully")
           : setMessage("Media request sent successfully");
-        setAuthorProcessing(false);
+        setMediaProcessing(false);
       } catch (error) {
-        setAuthorProcessing(false);
+        setMediaProcessing(false);
         setMessage("Error adding media");
       }
     } else {

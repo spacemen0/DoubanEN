@@ -1,5 +1,4 @@
 import { Author, AuthorRequest, Media, MediaRequest } from "./type.ts";
-import { getAuthor } from "../apiUtils/authorApiUtil.ts";
 
 export const processMediaJson = (data: Media): Media => {
   let processedData: Media = { ...data };
@@ -40,10 +39,7 @@ export function getCurrentLocalDate(): string {
   return date.toISOString().split("T")[0];
 }
 
-export async function mediaRequestToMedia(
-  request: MediaRequest,
-): Promise<Media> {
-  const author = await getAuthor(request.author);
+export function mediaRequestToMedia(request: MediaRequest): Media {
   return {
     id: -1,
     description: request.description,
@@ -51,7 +47,7 @@ export async function mediaRequestToMedia(
     imageUrl: request.imageUrl,
     title: request.title,
     author: request.author,
-    author_name: author.name,
+    author_name: request.author_name,
     additional: request.additional,
     genre: request.genre,
     releaseDate: request.releaseDate,
