@@ -63,50 +63,50 @@ export default function Admin() {
     };
     fetchRequests().then();
   }, [setMessage, token]);
-  if (loading[0] || loading[1]) return <Loading />;
-  if (user && user.role === "Admin")
+  if (!user || user.role !== "Admin")
     return (
-      <div className="flex max-h-screen flex-col overflow-hidden">
-        <PageHeader />
-
-        <div className="overflow-y-scroll flex flex-col justify-between h-screen">
-          <div>
-            <DeleteSection />
-            <div>
-              {mediaRequests &&
-                mediaRequests.length > 0 &&
-                mediaRequests.map((mediaRequest) => (
-                  <MediaRequestItem
-                    setMediaRequests={setMediaRequests}
-                    request={mediaRequest}
-                    key={mediaRequest.id}
-                  />
-                ))}
-              {authorRequests &&
-                authorRequests.length > 0 &&
-                authorRequests.map((authorRequest) => (
-                  <AuthorRequestItem
-                    setAuthorRequests={setAuthorRequests}
-                    request={authorRequest}
-                    key={authorRequest.id}
-                  />
-                ))}
-              {!(
-                (mediaRequests && mediaRequests.length > 0) ||
-                (authorRequests && authorRequests.length > 0)
-              ) && <EmptyContent text="No requests from user currently" />}
-            </div>
-          </div>
-          <Footer />
-        </div>
-      </div>
+      <h1 className="text-3xl  mx-auto my-20 font-bold text-Neutral text-center">
+        You are not allowed here. Go back to{" "}
+        <Link to="/" className="hover:text-Neutral-Strong underline">
+          Home page
+        </Link>
+      </h1>
     );
+  if (loading[0] || loading[1]) return <Loading />;
   return (
-    <h1 className="text-3xl  mx-auto my-20 font-bold text-Neutral text-center">
-      You are not allowed here. Go back to{" "}
-      <Link to="/" className="hover:text-Neutral-Strong underline">
-        Home page
-      </Link>
-    </h1>
+    <div className="flex max-h-screen flex-col overflow-hidden">
+      <PageHeader />
+
+      <div className="overflow-y-scroll flex flex-col justify-between h-screen">
+        <div>
+          <DeleteSection />
+          <div>
+            {mediaRequests &&
+              mediaRequests.length > 0 &&
+              mediaRequests.map((mediaRequest) => (
+                <MediaRequestItem
+                  setMediaRequests={setMediaRequests}
+                  request={mediaRequest}
+                  key={mediaRequest.id}
+                />
+              ))}
+            {authorRequests &&
+              authorRequests.length > 0 &&
+              authorRequests.map((authorRequest) => (
+                <AuthorRequestItem
+                  setAuthorRequests={setAuthorRequests}
+                  request={authorRequest}
+                  key={authorRequest.id}
+                />
+              ))}
+            {!(
+              (mediaRequests && mediaRequests.length > 0) ||
+              (authorRequests && authorRequests.length > 0)
+            ) && <EmptyContent text="No requests from user currently" />}
+          </div>
+        </div>
+        <Footer />
+      </div>
+    </div>
   );
 }
