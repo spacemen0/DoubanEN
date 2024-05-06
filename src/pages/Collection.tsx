@@ -10,7 +10,7 @@ import {
 } from "../apiUtils/userMediaApiUtil.ts";
 import Loading from "../components/common/Loading.tsx";
 import { CollectionMediasDisplay } from "../components/collection/ColectionMediaDisplay.tsx";
-import { OptionSelect } from "../components/collection/OptionSelect.tsx";
+import { StatusOptionSelect } from "../components/collection/StatusOptionSelect.tsx";
 import { Footer } from "../components/common/Footer.tsx";
 
 export default function Collection() {
@@ -79,7 +79,7 @@ export default function Collection() {
     <div className="flex max-h-screen flex-col overflow-hidden">
       <PageHeader />
       <div className="overflow-y-scroll px-2 lg:px-4 flex flex-col justify-between h-screen">
-        <OptionSelect
+        <StatusOptionSelect
           selectedOption={selectedOption}
           handleOptionClick={handleOptionClick}
           setCurrentPage={setCurrentPage}

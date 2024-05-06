@@ -15,7 +15,7 @@ const Collection = lazy(() => import("./pages/Collection.tsx"));
 const Lists = lazy(() => import("./pages/Lists.tsx"));
 const Edit = lazy(() => import("./pages/Edit.tsx"));
 const Search = lazy(() => import("./pages/Search.tsx"));
-const AddMedia = lazy(() => import("./pages/AddMedia.tsx"));
+const Contribute = lazy(() => import("./pages/Contribute.tsx"));
 const Admin = lazy(() => import("./pages/Admin.tsx"));
 export default function App() {
   return (
@@ -33,7 +33,7 @@ export default function App() {
         <Route path="/lists/:userId" element={<Lists />} />
         <Route path="/edit" element={<Edit />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/add-media" element={<AddMedia />} />
+        <Route path="/contribute" element={<Contribute />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>

@@ -38,7 +38,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     getWithExpiry<string>("token"),
   );
 
-  const [message, setMessage] = useState<string | null>("");
+  const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
     user && setWithExpiry("user", user, expiryTime);
@@ -69,7 +69,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     await logout(token);
     setUser(null);
     setToken(null);
-    setMessage(null);
+    setMessage("");
     localStorage.removeItem("token");
     localStorage.removeItem("user");
   }, []);
@@ -116,7 +116,7 @@ const MessageBox = ({
   message,
   setMessage,
 }: {
-  message: string | null;
+  message: string;
   setMessage: (message: string) => void;
 }) => {
   const messageBoxRef = useRef<HTMLDivElement>(null);
@@ -143,7 +143,7 @@ const MessageBox = ({
 
   return (
     <>
-      {message && (
+      {message !== "" && (
         <div
           ref={messageBoxRef}
           className="z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform

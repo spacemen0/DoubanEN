@@ -62,7 +62,7 @@ export function Footer() {
           <Link to="/" className="hover:text-Neutral">
             Home
           </Link>
-          <Link to="/add-media" className="hover:text-Neutral">
+          <Link to="/contribute" className="hover:text-Neutral">
             Contribute
           </Link>
           <Link to="/login" className="hover:text-Neutral">

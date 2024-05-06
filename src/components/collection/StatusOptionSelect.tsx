@@ -1,7 +1,7 @@
 import React from "react";
 import { StatusType } from "../../utils/type.ts";
 
-export function OptionSelect({
+export function StatusOptionSelect({
   selectedOption,
   handleOptionClick,
   setCurrentPage,

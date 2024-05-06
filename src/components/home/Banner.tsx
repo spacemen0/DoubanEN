@@ -19,7 +19,7 @@ export function Banner() {
           <div className="mt-2 md:text-xl">
             <p className="text-Neutral-Mild">
               {bannerText + " "}
-              <Link to="/add-media" className="text-Neutral-Strong">
+              <Link to="/contribute" className="text-Neutral-Strong">
                 {bannerLinkText + " "}
               </Link>
             </p>

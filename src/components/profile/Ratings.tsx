@@ -9,6 +9,7 @@ import {
 } from "../../apiUtils/userMediaApiUtil.ts";
 import { EmptyContent } from "../common/EmptyContent.tsx";
 import { Pagination } from "../common/Pagination.tsx";
+import { MediaOptionSelect } from "./MediaOptionSelect.tsx";
 
 export function Ratings({ id, username }: { id: number; username: string }) {
   const [selectedOption, setSelectedOption] = useState<
@@ -84,38 +85,10 @@ export function Ratings({ id, username }: { id: number; username: string }) {
       <h2 className="mb-3 text-3xl font-semibold text-Neutral-Mild">
         {username}'s Ratings
       </h2>
-      <div className="flex justify-start gap-10 text-2xl">
-        <button
-          className={`border-b-2  ${
-            selectedOption == "Music" ? "text-Music font-bold" : ""
-          }`}
-          onClick={() => {
-            handleOptionClick("Music").then();
-          }}
-        >
-          Music
-        </button>
-        <button
-          className={`border-b-2  ${
-            selectedOption == "Movie" ? "text-Movie font-bold" : ""
-          }`}
-          onClick={() => {
-            handleOptionClick("Movie").then();
-          }}
-        >
-          Movie
-        </button>
-        <button
-          className={`border-b-2  ${
-            selectedOption == "Book" ? "text-Book font-bold" : ""
-          }`}
-          onClick={() => {
-            handleOptionClick("Book").then();
-          }}
-        >
-          Book
-        </button>
-      </div>
+      <MediaOptionSelect
+        selectedOption={selectedOption}
+        handleOptionSelect={handleOptionClick}
+      />
       <Pagination
         title={count + " Ratings"}
         count={count}

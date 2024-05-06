@@ -9,6 +9,7 @@ import {
 import { EmptyContent } from "../common/EmptyContent.tsx";
 import { ReviewDisplay } from "../common/ReviewDisplay.tsx";
 import { getMedia } from "../../apiUtils/mediaApiUtil.ts";
+import { MediaOptionSelect } from "./MediaOptionSelect.tsx";
 
 export function Reviews({ id, username }: { id: number; username: string }) {
   const [selectedOption, setSelectedOption] = useState<
@@ -74,36 +75,10 @@ export function Reviews({ id, username }: { id: number; username: string }) {
         {username}'s Reviews
       </h2>
       <div className="flex justify-start gap-10 text-2xl">
-        <button
-          className={`border-b-2  ${
-            selectedOption == "Music" ? "text-Music font-bold" : ""
-          }`}
-          onClick={() => {
-            handleOptionClick("Music").then();
-          }}
-        >
-          Music
-        </button>
-        <button
-          className={`border-b-2  ${
-            selectedOption == "Movie" ? "text-Movie font-bold" : ""
-          }`}
-          onClick={() => {
-            handleOptionClick("Movie").then();
-          }}
-        >
-          Movie
-        </button>
-        <button
-          className={`border-b-2  ${
-            selectedOption == "Book" ? "text-Book font-bold" : ""
-          }`}
-          onClick={() => {
-            handleOptionClick("Book").then();
-          }}
-        >
-          Book
-        </button>
+        <MediaOptionSelect
+          selectedOption={selectedOption}
+          handleOptionSelect={handleOptionClick}
+        />
       </div>
       <Pagination
         title={count + " Reviews"}

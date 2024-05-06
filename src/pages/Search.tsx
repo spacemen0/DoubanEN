@@ -70,7 +70,7 @@ export default function Search() {
               </p>
               <Link
                 className="p-1 rounded-md !sm:h-16 !sm:px-4 flex items-center text-white bg-Neutral-Mild text-center hover:bg-Neutral text-xl"
-                to="/add-media"
+                to="/contribute"
               >
                 Add New
               </Link>
