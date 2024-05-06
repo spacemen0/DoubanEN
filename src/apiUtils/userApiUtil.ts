@@ -98,7 +98,7 @@ export const updateProfile = async (
   let response = new Response();
   const requestBody = new FormData();
   formData.bio && requestBody.append("bio", formData.bio);
-  formData.email && requestBody.append("email", formData.email);
+  formData.username && requestBody.append("username", formData.username);
   formData.password && requestBody.append("password", formData.password);
   formData.image && requestBody.append("image", formData.image);
   const checkPassword = {

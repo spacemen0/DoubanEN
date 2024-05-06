@@ -101,10 +101,10 @@ export type ListInfo = {
 };
 
 export type ProfileFormData = {
-  bio: string | null;
-  email: string | null;
-  password: string | null;
-  oldPassword: string | null;
+  bio: string;
+  username: string;
+  password: string;
+  oldPassword: string;
   image: File | null;
 };
 

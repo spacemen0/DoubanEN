@@ -5,8 +5,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { MyImage } from "../components/common/MyImage";
 import { WelcomeInfo } from "../components/common/WelcomeInfo";
 import { LoaderCircle } from "lucide-react";
-import { apiUrl } from "../utils/config.ts";
 import { Footer } from "../components/common/Footer.tsx";
+import cover from "../assets/Cover.jpg";
 
 export default function Login() {
   const [searchParams] = useSearchParams();
@@ -71,7 +71,7 @@ function LoginForm(props: {
   return (
     <div className="mx-auto mt-1 flex w-full justify-center lg:mt-10 lg:w-4/6">
       <div className="hidden flex-1 items-center justify-center bg-gray-100 px-6 py-2 lg:flex lg:py-6">
-        <MyImage src={apiUrl + "/images/102"} alt={"pageImage"} />
+        <MyImage src={cover} alt={"pageImage"} />
       </div>
       <div className="flex w-full items-center justify-center bg-gray-100 lg:w-1/2">
         <div className="w-full max-w-md p-3 lg:p-6">
