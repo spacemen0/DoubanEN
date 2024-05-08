@@ -92,10 +92,10 @@ export const addAuthor = async (
       body: JSON.stringify(requestBody),
     });
   } catch (error) {
-    throw new Error("Fetch Author error");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Author");
+    throw new Error("Error Adding Author");
   }
   if (role === "Admin") return await response.json();
   else return await response.text();
@@ -114,10 +114,10 @@ export const deleteAuthor = async (
       },
     });
   } catch (error) {
-    throw new Error("Deleting comment error");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Deleting Author Error");
   }
   return;
 };

@@ -16,10 +16,10 @@ export const postComment = async (
       body: JSON.stringify(comment),
     });
   } catch (error) {
-    throw new Error("Post comment error");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Posting Comment");
   }
   return await response.json();
 };
@@ -37,7 +37,7 @@ export const deleteComment = async (
       },
     });
   } catch (error) {
-    throw new Error("Deleting comment error");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
     throw new Error("Response error");
@@ -55,7 +55,7 @@ export const getCommentsByUserId = async (
       `${apiUrl}/comments?userId=${userId}&page=${page}&size=${size}`,
     );
   } catch (error) {
-    throw new Error("Failed to fetch comments by user ID");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
     throw new Error("Response error");
@@ -76,7 +76,7 @@ export const getCommentsByAreaAndAreaId = async (
       `${apiUrl}/comments?area=${area}&areaId=${areaId}&page=${page}&size=${size}`,
     );
   } catch (error) {
-    throw new Error("Failed to fetch comments by area and area ID");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
     throw new Error("Response error");
@@ -90,7 +90,7 @@ export const countCommentsByUserId = async (userId: number) => {
   try {
     response = await fetch(`${apiUrl}/comments/count?userId=${userId}`);
   } catch (error) {
-    throw new Error("Failed to count comments by user ID");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
     throw new Error("Response error");
@@ -108,7 +108,7 @@ export const countCommentsByAreaAndAreaId = async (
       `${apiUrl}/comments/count?area=${area}&areaId=${areaId}`,
     );
   } catch (error) {
-    throw new Error("Failed to count comments by area and area ID");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
     throw new Error("Response error");
