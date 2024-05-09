@@ -8,10 +8,10 @@ export const getListItemsCount = async (id: number): Promise<number> => {
       method: "GET",
     });
   } catch (error) {
-    throw new Error("Fetch reviews count error");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Fetching Number of List Items");
   }
   return await response.json();
 };
@@ -25,13 +25,12 @@ export const getAllListItems = async (
       method: "GET",
     });
   } catch (error) {
-    console.error("Error fetching Reviews Count");
-    throw new Error("Failed to fetch Reviews Count. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (response.status === 404) throw new Error("Not Exist");
 
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Fetching List Items");
   }
   return await response.json();
 };
@@ -42,11 +41,11 @@ export const getListInfo = async (id: number): Promise<ListInfo> => {
       method: "GET",
     });
   } catch (error) {
-    throw new Error("Get list info error");
+    throw new Error("Error Sending Request");
   }
   if (response.status === 404) throw new Error("Not Exist");
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Fetching List");
   }
   const data = await response.json();
   data.username = data["user"]["username"];
@@ -62,11 +61,11 @@ export const getUserLists = async (userId: number): Promise<ListInfo[]> => {
       method: "GET",
     });
   } catch (error) {
-    throw new Error("Get user lists error");
+    throw new Error("Error Sending Request");
   }
   if (response.status === 404) return [];
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Fetching Lists");
   }
   const listInfos = (await response.json()) as ListInfo[];
   listInfos.map((listInfo) => {
@@ -98,11 +97,10 @@ export const createList = async (
       body: requestBody,
     });
   } catch (error) {
-    console.error("create new list error", error);
-    throw error;
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Creating List");
   }
   return await response.json();
 };
@@ -130,11 +128,10 @@ export const editList = async (
       body: requestBody,
     });
   } catch (error) {
-    console.error("edit list error", error);
-    throw error;
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Editing List");
   }
   return await response.json();
 };
@@ -156,11 +153,11 @@ export const addMediaToList = async (
       },
     );
   } catch (error) {
-    throw new Error("Error add media to list");
+    throw new Error("Error Sending Request");
   }
   if (response.status === 400) throw new Error("List or media not exist");
   if (response.status === 409) throw new Error("Duplicated list item");
-  if (!response.ok) throw new Error("Response error");
+  if (!response.ok) throw new Error("Error Adding Item List");
 };
 
 export const removeMediaFromList = async (
@@ -180,11 +177,10 @@ export const removeMediaFromList = async (
       },
     );
   } catch (error) {
-    console.error("Remove media to list error");
-    throw error;
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Deleting List Item");
   }
 };
 
@@ -198,10 +194,9 @@ export const deleteList = async (listId: number, token: string) => {
       },
     });
   } catch (error) {
-    console.error("Delete list error");
-    throw error;
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Deleting List");
   }
 };

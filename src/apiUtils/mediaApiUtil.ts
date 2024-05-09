@@ -9,11 +9,11 @@ export const getMedia = async (id: number): Promise<Media> => {
       method: "GET",
     });
   } catch (error) {
-    throw new Error("Fetch media error");
+    throw new Error("Error Sending Request");
   }
   if (response.status === 404) throw new Error("Not Exist");
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Fetching Media");
   }
   const data = await response.json();
   return processMediaJson(data as Media);
@@ -31,10 +31,10 @@ export const getAllMediaByType = async (
       },
     );
   } catch (error) {
-    throw new Error("Fetch Medias error");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Fetching Media");
   }
   const res = await response.json();
   return res["content"];
@@ -48,9 +48,8 @@ export const getAllMediaCountByType = async (
       method: "GET",
     });
   } catch (error) {
-    throw new Error("Fetch Medias Count error");
+    throw new Error("Error Sending Request");
   }
-
   return await response.json();
 };
 
@@ -83,10 +82,10 @@ export const addMedia = async (
       body: requestBody,
     });
   } catch (error) {
-    throw new Error("Create Media error");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Adding Media");
   }
   return;
 };
@@ -101,10 +100,10 @@ export const deleteMedia = async (id: number, token: string): Promise<void> => {
       },
     });
   } catch (error) {
-    throw new Error("Deleting comment error");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Deleting Media");
   }
   return;
 };

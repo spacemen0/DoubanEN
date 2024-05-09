@@ -40,7 +40,7 @@ export const deleteComment = async (
     throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Deleting Comment");
   }
   return;
 };
@@ -48,7 +48,7 @@ export const getCommentsByUserId = async (
   userId: number,
   page: number,
   size: number = 5,
-) => {
+): Promise<Comment[]> => {
   let response = new Response();
   try {
     response = await fetch(
@@ -58,7 +58,7 @@ export const getCommentsByUserId = async (
     throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Fetching Comments");
   }
   const data = await response.json();
   return data["content"];
@@ -79,13 +79,15 @@ export const getCommentsByAreaAndAreaId = async (
     throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Fetching Comments");
   }
   const data = await response.json();
   return data["content"];
 };
 
-export const countCommentsByUserId = async (userId: number) => {
+export const countCommentsByUserId = async (
+  userId: number,
+): Promise<number> => {
   let response = new Response();
   try {
     response = await fetch(`${apiUrl}/comments/count?userId=${userId}`);
@@ -93,7 +95,7 @@ export const countCommentsByUserId = async (userId: number) => {
     throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Fetching Comments Number");
   }
   return await response.json();
 };
@@ -101,7 +103,7 @@ export const countCommentsByUserId = async (userId: number) => {
 export const countCommentsByAreaAndAreaId = async (
   area: CommentArea,
   areaId: number,
-) => {
+): Promise<number> => {
   let response = new Response();
   try {
     response = await fetch(
@@ -111,7 +113,7 @@ export const countCommentsByAreaAndAreaId = async (
     throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Fetching Comments Number");
   }
   return await response.json();
 };
