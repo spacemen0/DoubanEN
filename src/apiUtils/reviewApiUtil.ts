@@ -8,11 +8,10 @@ export const getMediaReviewCount = async (id: number): Promise<number> => {
       method: "GET",
     });
   } catch (error) {
-    console.error("Error fetching Reviews Count:", error);
-    throw new Error("Failed to fetch Reviews Count. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Reviews Count");
+    throw new Error("Error fetching Reviews Count");
   }
   return await response.json();
 };
@@ -29,12 +28,11 @@ export const getMediaReviews = async (
       },
     );
   } catch (error) {
-    console.error("Error fetching Media Reviews:", error);
-    throw new Error("Failed to fetch Media Reviews. Please try again later.");
+    throw new Error("Error Sending Request");
   }
 
   if (!response.ok) {
-    throw new Error("Failed to fetch Media Reviews");
+    throw new Error("Error Fetching Reviews");
   }
   const data = await response.json();
   const reviewsFromServer = data["content"] as (Review & {
@@ -73,12 +71,10 @@ export const postReview = async (
       body: JSON.stringify(requestBodyWithoutId),
     });
   } catch (error) {
-    console.error("Error posting Review:", error);
-    throw new Error("Failed to post Review. Please try again later.");
+    throw new Error("Error Sending Request");
   }
-
   if (!response.ok) {
-    throw new Error("Failed to post Review");
+    throw new Error("Error Posting Review");
   }
   const statusRequestBody = {
     userId: review.userId,
@@ -97,11 +93,10 @@ export const postReview = async (
       body: JSON.stringify(statusRequestBody),
     });
   } catch (error) {
-    console.error("Failed to update media status:", error);
-    throw error;
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to update media status");
+    throw new Error("Error Setting Reviewed Status");
   }
 };
 export const deleteReview = async (
@@ -120,11 +115,10 @@ export const deleteReview = async (
       },
     });
   } catch (error) {
-    console.error("Failed to cancel reviewed status:", error);
-    throw error;
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to cancel reviewed status");
+    throw new Error("Error Cancelling Review Status");
   }
   try {
     response = await fetch(
@@ -138,11 +132,10 @@ export const deleteReview = async (
       },
     );
   } catch (error) {
-    console.error("Failed to delete reviewed status", error);
-    throw error;
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to delete reviewed status");
+    throw new Error("Error Deleting Review");
   }
 };
 export const fetchSingleReview = async (id: number): Promise<Review> => {
@@ -152,11 +145,10 @@ export const fetchSingleReview = async (id: number): Promise<Review> => {
       method: "GET",
     });
   } catch (error) {
-    console.error("Error fetching Review:", error);
-    throw new Error("Failed to fetch Review. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Media Reviews");
+    throw new Error("Error Fetching Review");
   }
   const data = await response.json();
   const review = data as Review & {
@@ -181,11 +173,10 @@ export const getUserReviewsCountByMediaType = async (
       method: "GET",
     });
   } catch (error) {
-    console.error("Error fetching Review count:", error);
-    throw new Error("Failed to fetch Media count. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Media count");
+    throw new Error("Error Fetching User Reviews");
   }
   return await response.json();
 };
@@ -203,11 +194,10 @@ export const getReviewsByTypeAndUserIdWithPagination = async (
       method: "GET",
     });
   } catch (error) {
-    console.error("Error fetching Reviews", error);
-    throw new Error("Failed to fetch Reviews. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Media count");
+    throw new Error("Error Fetching User Reviews");
   }
   const data = await response.json();
   const reviewsFromServer = data["content"] as (Review & {
@@ -238,11 +228,10 @@ export const likeReview = async (
       },
     });
   } catch (error) {
-    console.error("Error liking Review", error);
-    throw new Error("Failed to like Review. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Liking Review");
   }
   return;
 };
@@ -262,11 +251,10 @@ export const unlikeReview = async (
       },
     });
   } catch (error) {
-    console.error("Error liking Review", error);
-    throw new Error("Failed to like Review. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Unliking Review");
   }
   return;
 };
@@ -282,11 +270,10 @@ export const isReviewLiked = async (
       method: "GET",
     });
   } catch (error) {
-    console.error("Error liking Review", error);
-    throw new Error("Failed to like Review. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Checking Liked Status");
   }
   return await response.json();
 };
