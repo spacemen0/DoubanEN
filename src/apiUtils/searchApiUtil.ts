@@ -16,10 +16,10 @@ export const searchMedia = async (
       },
     );
   } catch (error) {
-    throw new Error("Fetch Medias error");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Getting Searching Result");
   }
   return await response.json();
 };

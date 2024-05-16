@@ -18,10 +18,10 @@ export const getMediaByTypeAndUserStatusWithPagination = async (
       },
     );
   } catch (error) {
-    throw new Error("Failed to fetch Medias. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Medias");
+    throw new Error("Error Fetching Media");
   }
   const data = await response.json();
   ratedMedias = data["content"] as Media[];
@@ -45,10 +45,10 @@ export const getMediaStatusesByTypeAndUserIdWithPagination = async (
       },
     );
   } catch (error) {
-    throw new Error("Failed to fetch Medias. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Media Statuses");
+    throw new Error("Error Fetching Media Statuses");
   }
   const data = await response.json();
   ratedMediaStatuses = data["content"] as MediaStatus[];
@@ -72,11 +72,10 @@ export const getUserMediaByTypeWithPagination = async (
       method: "GET",
     });
   } catch (error) {
-    console.error("Error fetching Medias:", error);
-    throw new Error("Failed to fetch Medias. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Medias");
+    throw new Error("Error Fetching User Media");
   }
   const data = await response.json();
   return data["content"];
@@ -97,11 +96,10 @@ export const getUserMediaCountByType = async (
       method: "GET",
     });
   } catch (error) {
-    console.error("Error fetching Media count:", error);
-    throw new Error("Failed to fetch Media count. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Media count");
+    throw new Error("Error Fetching Number of User Media");
   }
   return await response.json();
 };
@@ -113,12 +111,11 @@ export const getUserCurrentOn = async (userId: number): Promise<Media[]> => {
       method: "GET",
     });
   } catch (error) {
-    console.error("Error fetching Medias:", error);
-    throw new Error("Failed to fetch Medias. Please try again later.");
+    throw new Error("Error Sending Request");
   }
 
   if (!response.ok) {
-    throw new Error("Failed to fetch Medias");
+    throw new Error("Error Fetching User's Current On");
   }
   return await response.json();
 };

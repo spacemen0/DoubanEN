@@ -21,11 +21,11 @@ export const register = async (
       body: JSON.stringify(requestBody),
     });
   } catch (error) {
-    throw new Error("Register error");
+    throw new Error("Error Sending Request");
   }
   const data = await response.json();
   if (data["message"] === "User already exist") throw new Error("Conflict");
-  if (!response.ok) throw new Error("Failed to register");
+  if (!response.ok) throw new Error("Error Registering User");
 
   return data;
 };
@@ -47,11 +47,11 @@ export const login = async (
       body: JSON.stringify(requestBody),
     });
   } catch (error) {
-    throw new Error("Login error");
+    throw new Error("Error Sending Request");
   }
   if (response.status === 401) throw new Error("Unauthorized");
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Logging In");
   }
 
   return await response.json();
@@ -66,10 +66,10 @@ export const logout = async (token: string): Promise<void> => {
       },
     });
   } catch (error) {
-    throw new Error("Logout error");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Logging Out");
   }
 };
 export const fetchUser = async (id: number): Promise<User> => {
@@ -79,11 +79,11 @@ export const fetchUser = async (id: number): Promise<User> => {
       method: "GET",
     });
   } catch (error) {
-    throw new Error("Fetch user error");
+    throw new Error("Error Sending Request");
   }
   if (response.status === 404) throw new Error("Not Exist");
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Fetching User Info");
   }
   const data = (await response.json()) as User;
   if (!data.profileImageUrl) data.profileImageUrl = "/images/303";
@@ -116,12 +116,12 @@ export const updateProfile = async (
         body: JSON.stringify(checkPassword),
       });
     } catch (error) {
-      throw new Error("Send check password request error");
+      throw new Error("Error Sending Request");
     }
 
   if (response.status === 403) throw new Error("Wrong password");
   if (!response.ok) {
-    throw new Error("Check Password Response error");
+    throw new Error("Error Checking Password");
   }
   try {
     response = await fetch(`${apiUrl}/users/${id}`, {
@@ -132,10 +132,10 @@ export const updateProfile = async (
       body: requestBody,
     });
   } catch (error) {
-    throw new Error("Update profile error");
+    throw new Error("Error Sending Request");
   }
   if (response.status === 404) throw new Error("Not Exist");
   if (!response.ok) {
-    throw new Error("Response error");
+    throw new Error("Error Updating Profile");
   }
 };

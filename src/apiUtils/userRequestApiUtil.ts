@@ -14,10 +14,10 @@ export const getAllMediaRequestsByUserId = async (
       },
     });
   } catch (error) {
-    throw new Error("Failed to fetch Medias. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Medias");
+    throw new Error("Error Fetching User Media Requests");
   }
   return await response.json();
 };
@@ -35,10 +35,10 @@ export const getAllAuthorRequestsByUserId = async (
       },
     });
   } catch (error) {
-    throw new Error("Failed to fetch Medias. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Medias");
+    throw new Error("Error Fetching User Author Requests");
   }
   return await response.json();
 };
@@ -56,10 +56,10 @@ export const getAllMediaRequestsByStatus = async (
       },
     });
   } catch (error) {
-    throw new Error("Failed to fetch Medias. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Medias");
+    throw new Error("Error Fetching Media Requests");
   }
   return await response.json();
 };
@@ -77,10 +77,10 @@ export const getAllAuthorRequestsByStatus = async (
       },
     });
   } catch (error) {
-    throw new Error("Failed to fetch Medias. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Medias");
+    throw new Error("Error Fetching Author Requests");
   }
   return await response.json();
 };
@@ -103,10 +103,10 @@ export const processMediaRequest = async (
       },
     );
   } catch (error) {
-    throw new Error("Failed to fetch Medias. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Medias");
+    throw new Error("Error Processing Media Request");
   }
   return;
 };
@@ -129,10 +129,10 @@ export const processAuthorRequest = async (
       },
     );
   } catch (error) {
-    throw new Error("Failed to fetch Medias. Please try again later.");
+    throw new Error("Error Sending Request");
   }
   if (!response.ok) {
-    throw new Error("Failed to fetch Medias");
+    throw new Error("Error Processing Author Request");
   }
   return;
 };
