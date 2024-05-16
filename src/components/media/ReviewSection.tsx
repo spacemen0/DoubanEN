@@ -34,8 +34,9 @@ export function ReviewSection({
     try {
       const fetchedReviews = await getMediaReviews(media.id, currentPage);
       setReviews(fetchedReviews);
-    } catch (error) {
-      setMessage("Error fetching reviews");
+    } catch (e) {
+      const error = e as Error;
+      setMessage(error.message);
     }
   }, [currentPage, media.id, setMessage]);
   useEffect(() => {

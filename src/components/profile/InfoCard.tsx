@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { MyImage } from "../common/MyImage";
+import { FullImage } from "../common/FullImage.tsx";
 import { User } from "../../utils/type";
 
 import { fetchUser } from "../../apiUtils/userApiUtil.ts";
@@ -29,7 +29,7 @@ export function InfoCard({
       } catch (e) {
         const error = e as Error;
         if (error.message === "Not Exist") setExist(false);
-        else setMessage("Error fetching user info");
+        else setMessage(error.message);
       }
     };
     fetchUserData(id).then();
@@ -44,7 +44,7 @@ export function InfoCard({
         <div className="mb-4 flex items-center md:flex-col lg:flex-row">
           <div className="mr-4 !md:max-w-32">
             <Link to={`/profile/${user.id}`}>
-              <MyImage
+              <FullImage
                 src={apiUrl + user.profileImageUrl}
                 alt={"Profile Image of " + user.username}
               />

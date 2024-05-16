@@ -35,8 +35,9 @@ export default function Collection() {
             selectedOption,
           );
           setCount(fetchedCount);
-        } catch (error) {
-          setMessage(`Error fetching total number of ${type}s`);
+        } catch (e) {
+          const error = e as Error;
+          setMessage(error.message);
         }
     };
     if (type) fetchMediasCount(type as MediaType).then();

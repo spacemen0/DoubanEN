@@ -28,9 +28,7 @@ export const ListBox = ({
         if (userLists.length > 0) setSelectedList(userLists[0].id);
       } catch (e) {
         const error = e as Error;
-        if (error.message === "Response Error")
-          setMessage("Error processing request");
-        else setMessage("Error fetching your lists");
+        setMessage(error.message);
       }
     };
     fetchLists().then();

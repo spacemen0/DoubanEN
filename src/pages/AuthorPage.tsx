@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { Author, Media } from "../utils/type.ts";
 import Loading from "../components/common/Loading.tsx";
 import { Footer } from "../components/common/Footer.tsx";
+import { useAuthContext } from "../contexts/AuthContext.ts";
 
 export default function AuthorPage() {
   const { id } = useParams();
@@ -21,6 +22,7 @@ export default function AuthorPage() {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [count, setCount] = useState(0);
+  const { setMessage } = useAuthContext();
 
   useEffect(() => {
     const fetchAuthor = async () => {
@@ -41,12 +43,13 @@ export default function AuthorPage() {
         try {
           const fetchedCount = await getAllMediaCountFromAuthor(parseInt(id));
           setCount(fetchedCount);
-        } catch (error) {
-          console.error("Error fetching total number of medias:", error);
+        } catch (e) {
+          const error = e as Error;
+          setMessage(error.message);
         }
     };
     fetchMediasCount().then();
-  }, [id]);
+  }, [id, setMessage]);
 
   useEffect(() => {
     const fetchAllMedias = async () => {
@@ -59,14 +62,15 @@ export default function AuthorPage() {
           );
           setMedias(fetchedMedias);
           setLoading(false);
-        } catch (error) {
-          console.error("Error fetching medias:", error);
+        } catch (e) {
+          const error = e as Error;
+          setMessage(error.message);
           setMedias([]);
           setLoading(false);
         }
     };
     fetchAllMedias().then();
-  }, [id, currentPage]);
+  }, [id, currentPage, setMessage]);
 
   if (loading) {
     return <Loading />;

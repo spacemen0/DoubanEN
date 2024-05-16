@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Search, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { MediaType } from "../../utils/type.ts";
+import { useAuthContext } from "../../contexts/AuthContext.ts";
 
 export default function HeaderSearchBarSection() {
   const [selectedOption, setSelectedOption] = useState<MediaType>("All");
@@ -9,6 +10,7 @@ export default function HeaderSearchBarSection() {
   const [searchValue, setSearchValue] = useState("");
   const searchBarRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
+  const { setMessage } = useAuthContext();
 
   const handleInputClick = () => {
     setDropdownVisibility(true);
@@ -30,7 +32,8 @@ export default function HeaderSearchBarSection() {
     try {
       navigate(`/search?value=${searchValue}&option=${selectedOption}`);
     } catch (e) {
-      console.log(e);
+      const error = e as Error;
+      setMessage(error.message);
     }
   };
 

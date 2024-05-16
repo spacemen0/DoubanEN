@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MyImage } from "../common/MyImage";
+import { FullImage } from "../common/FullImage.tsx";
 import { sideLists } from "../../utils/data";
 
 export function SideDisplay() {
@@ -8,7 +8,7 @@ export function SideDisplay() {
       <div className="mb-4">
         <Link to={`/list/${sideLists[0].listId}`}>
           <div className="">
-            <MyImage {...sideLists[0].ImageProps} />
+            <FullImage {...sideLists[0].ImageProps} />
           </div>
         </Link>
       </div>
@@ -17,7 +17,7 @@ export function SideDisplay() {
         {sideLists.slice(1, 4).map((image, index) => (
           <div className="flex-1" key={index}>
             <Link to={`/list/${image.listId}`}>
-              <MyImage {...image.ImageProps} />
+              <FullImage {...image.ImageProps} />
             </Link>
           </div>
         ))}
@@ -27,7 +27,7 @@ export function SideDisplay() {
         {sideLists.slice(4, 7).map((image, index) => (
           <div className="flex-1" key={index}>
             <Link to={`/list/${image.listId}`}>
-              <MyImage {...image.ImageProps} />
+              <FullImage {...image.ImageProps} />
             </Link>
           </div>
         ))}

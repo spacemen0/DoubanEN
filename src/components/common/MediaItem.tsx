@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Media, RatingScore } from "../../utils/type";
-import { MyImage } from "./MyImage";
+import { FullImage } from "./FullImage.tsx";
 import { apiUrl } from "../../utils/config.ts";
 import { Star, StarHalf } from "lucide-react";
 import { JSX } from "react";
@@ -56,7 +56,7 @@ export function MediaItem({
         className={`mt-2 mr-2 h-full  w-full overflow-clip  md:mr-4 lg:mr-6 flex-shrink-0 ${side ? "max-w-24 max-h-24" : "max-w-32 max-h-32"}`}
       >
         <Link to={apiUrl + media.imageUrl}>
-          <MyImage src={apiUrl + media.imageUrl} alt={media.title} />
+          <FullImage src={apiUrl + media.imageUrl} alt={media.title} />
         </Link>
       </div>
       <div className="flex w-full flex-col justify-between border-b border-gray-200 pb-1 align-top">

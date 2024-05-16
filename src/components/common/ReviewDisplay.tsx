@@ -25,11 +25,12 @@ export function ReviewDisplay({
       try {
         if (user) setLiked(await isReviewLiked(review.id, user.id));
       } catch (e) {
-        console.log(e);
+        const error = e as Error;
+        setMessage(error.message);
       }
     };
     checkLiked().then();
-  }, [review.id, user]);
+  }, [review.id, setMessage, user]);
   const renderStars = () => {
     const stars = Math.floor(review.score);
     const hasHalfStar = review.score % 1 !== 0;
@@ -94,7 +95,8 @@ export function ReviewDisplay({
           setLiked(true);
           review.likes += 1;
         }
-        console.log(e);
+        const error = e as Error;
+        setMessage(error.message);
       }
     } else {
       setMessage("Please log in");

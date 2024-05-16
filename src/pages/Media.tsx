@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
 import { useCallback, useEffect, useState } from "react";
 import { Media } from "../utils/type";
-import { MyImage } from "../components/common/MyImage";
+import { FullImage } from "../components/common/FullImage.tsx";
 import { MediaInfo } from "../components/common/MediaInfo";
 import { useAuthContext } from "../contexts/AuthContext";
 import { DomainSection } from "../components/media/DomainSection.tsx";
@@ -28,9 +28,7 @@ export default function MediaPage() {
     } catch (e) {
       const error = e as Error;
       if (error.message === "Not Exist") setExist(false);
-      else if (error.message === "Response error")
-        setMessage("Error processing request");
-      else setMessage("Error fetching media");
+      else setMessage(error.message);
     }
   }, [id, setMessage]);
 
@@ -51,7 +49,7 @@ export default function MediaPage() {
       <div className="overflow-y-scroll">
         <div className="flex !lg:flex-col items-center lg:items-start justify-center ml-10 mr-10 mt-6 ">
           <div className="flex w-full flex-1 flex-col lg:flex-[0.3]">
-            <MyImage src={apiUrl + media.imageUrl} alt={media.title} />
+            <FullImage src={apiUrl + media.imageUrl} alt={media.title} />
             <div className="hidden lg:block">
               <DomainSection media={media} />
             </div>

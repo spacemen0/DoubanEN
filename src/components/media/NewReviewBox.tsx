@@ -46,8 +46,9 @@ export function NewReviewBox({
       await postReview(review, media.type, token!);
       await onSuccessAndRender();
       setShowReviewBox(false);
-    } catch (error) {
-      setMessage("Error processing Post Review request");
+    } catch (e) {
+      const error = e as Error;
+      setMessage(error.message);
     }
   };
 

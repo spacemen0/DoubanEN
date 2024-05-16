@@ -3,9 +3,11 @@ import { User } from "../../utils/type.ts";
 import { UserItem } from "../common/UserItem.tsx";
 import { activeUserIds } from "../../utils/data.ts";
 import { fetchUser } from "../../apiUtils/userApiUtil.ts";
+import { useAuthContext } from "../../contexts/AuthContext.ts";
 
 export function ActiveUsers() {
   const [users, setUsers] = useState<User[]>([]);
+  const { setMessage } = useAuthContext();
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -23,11 +25,12 @@ export function ActiveUsers() {
           }
         });
       } catch (e) {
-        console.log(e);
+        const error = e as Error;
+        setMessage(error.message);
       }
     };
     fetchUsers().then();
-  }, []);
+  }, [setMessage]);
 
   if (!users) return <></>;
   return (

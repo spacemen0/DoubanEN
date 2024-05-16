@@ -50,8 +50,9 @@ export function Ratings({ id, username }: { id: number; username: string }) {
           currentPage,
         );
         setItems(items);
-      } catch (error) {
-        setMessage(`Error fetching Music Collection items`);
+      } catch (e) {
+        const error = e as Error;
+        setMessage(error.message);
       }
     };
 
@@ -71,9 +72,10 @@ export function Ratings({ id, username }: { id: number; username: string }) {
           );
         setLoading(false);
         setStatuses(mediaStatuses);
-      } catch (error) {
+      } catch (e) {
         setLoading(false);
-        setMessage(`Error fetching Music Collection items`);
+        const error = e as Error;
+        setMessage(error.message);
       }
     };
 

@@ -79,13 +79,7 @@ function LeftSection({
       } catch (e) {
         setProcessing(false);
         const error = e as Error;
-        if (error.message === "Send check password request error")
-          setMessage("Error checking your old password");
-        else if (error.message === "Check Password Response error")
-          setMessage("Response Error");
-        else if (error.message === "Wrong password")
-          setMessage("Wrong password");
-        else setMessage("Error updating your profile");
+        setMessage(error.message);
       }
     else {
       setMessage("Fill in some fields before submitting");

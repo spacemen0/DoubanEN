@@ -1,5 +1,5 @@
 import { Comment, User } from "../../utils/type.ts";
-import { MyImage } from "./MyImage.tsx";
+import { FullImage } from "./FullImage.tsx";
 import { apiUrl } from "../../utils/config.ts";
 import { useEffect, useState } from "react";
 import { fetchUser } from "../../apiUtils/userApiUtil.ts";
@@ -24,11 +24,12 @@ export const CommentEntry = ({
       try {
         setCommentUser(await fetchUser(comment.userId));
       } catch (e) {
-        console.log(e);
+        const error = e as Error;
+        setMessage(error.message);
       }
     };
     fetchUserData().then();
-  }, [comment.userId]);
+  }, [comment.userId, setMessage]);
 
   const handleDeleteComment = async () => {
     if (token)
@@ -47,7 +48,7 @@ export const CommentEntry = ({
           <div className="flex">
             <div className="h-10 w-10 overflow-hidden rounded-md border">
               {" "}
-              <MyImage
+              <FullImage
                 src={apiUrl + commentUser.profileImageUrl}
                 alt={commentUser.username}
               />

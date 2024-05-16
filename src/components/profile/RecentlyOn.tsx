@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Media } from "../../utils/type";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { MyImage } from "../common/MyImage";
+import { FullImage } from "../common/FullImage.tsx";
 import { getUserCurrentOn } from "../../apiUtils/userMediaApiUtil.ts";
 import { Link } from "react-router-dom";
 import { apiUrl } from "../../utils/config.ts";
@@ -13,8 +13,9 @@ export function RecentlyOn({ id }: { id: number }) {
       try {
         const items = await getUserCurrentOn(id);
         setRecentlyOn(items);
-      } catch (error) {
-        setMessage("Error fetching default Music Collection items");
+      } catch (e) {
+        const error = e as Error;
+        setMessage(error.message);
       }
     };
     getCurrentOn().then();
@@ -47,7 +48,7 @@ function MediaSection({
         {mediaItem ? (
           <>
             <div className="h-32 w-32">
-              <MyImage
+              <FullImage
                 src={apiUrl + mediaItem.imageUrl}
                 alt={mediaItem.title}
               />

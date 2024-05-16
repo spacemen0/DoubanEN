@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { MenuItem } from "./MenuItem.tsx";
-import { MyImage } from "../common/MyImage.tsx";
+import { FullImage } from "../common/FullImage.tsx";
 import { apiUrl } from "../../utils/config.ts";
 
 export default function HeaderUserSection() {
@@ -17,7 +17,10 @@ export default function HeaderUserSection() {
             className="transition-colors hover:bg-gray-100"
             to={`/profile/${user.id}`}
           >
-            <MyImage src={apiUrl + user.profileImageUrl} alt={user.username} />
+            <FullImage
+              src={apiUrl + user.profileImageUrl}
+              alt={user.username}
+            />
           </Link>
         </div>
       )}

@@ -28,9 +28,10 @@ export const CommentSection = ({
     try {
       setComments(await getCommentsByAreaAndAreaId(area, areaId, 1));
     } catch (e) {
-      console.log(e);
+      const error = e as Error;
+      setMessage(error.message);
     }
-  }, [area, areaId]);
+  }, [area, areaId, setMessage]);
   useEffect(() => {
     fetchComments().then();
   }, [fetchComments]);
@@ -39,11 +40,12 @@ export const CommentSection = ({
       try {
         setCount(await countCommentsByAreaAndAreaId(area, areaId));
       } catch (e) {
-        console.log(e);
+        const error = e as Error;
+        setMessage(error.message);
       }
     };
     fetchCommentsCount().then();
-  }, [area, areaId]);
+  }, [area, areaId, setMessage]);
 
   const handleLoadMore = async () => {
     if (count > comments.length) {

@@ -73,8 +73,9 @@ export function MediaActionsSection({
         status: status.status,
         date: status.date,
       });
-    } catch (error) {
-      setMessage("Error fetch your previous status");
+    } catch (e) {
+      const error = e as Error;
+      setMessage(error.message);
     }
   }, [media.id, setMessage, user]);
   useEffect(() => {
@@ -110,8 +111,9 @@ export function MediaActionsSection({
             await handleSuccess();
           } else setMessage("Please rate before submitting");
         }
-      } catch (error) {
-        setMessage("Error processing Submit Rating request");
+      } catch (e) {
+        const error = e as Error;
+        setMessage(error.message);
       }
     } else {
       setMessage("Please log in to take action");
@@ -173,8 +175,9 @@ export function MediaActionsSection({
           setMessage("Added to wishlist");
           await handleSuccess();
         }
-      } catch (error) {
-        setMessage("Error processing Set On Wishlist request");
+      } catch (e) {
+        const error = e as Error;
+        setMessage(error.message);
       }
     } else {
       setMessage("Please log in to take action");
@@ -192,8 +195,9 @@ export function MediaActionsSection({
           if (mediaStatus.score !== 0) setShowReviewBox(!showReviewBox);
           else setMessage("Please rate before posting a review");
         }
-      } catch (error) {
-        setMessage("Error processing Set On Wishlist request");
+      } catch (e) {
+        const error = e as Error;
+        setMessage(error.message);
       }
     } else setMessage("Please log in to take action");
   };

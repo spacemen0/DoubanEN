@@ -31,8 +31,9 @@ export default function MediaByType() {
       try {
         const fetchedCount = await getAllMediaCountByType(type);
         setCount(fetchedCount);
-      } catch (error) {
-        setMessage(`Error fetching total number of ${type}s`);
+      } catch (e) {
+        const error = e as Error;
+        setMessage(error.message);
       }
     };
     type && fetchMediasCount(type as MediaType).then();

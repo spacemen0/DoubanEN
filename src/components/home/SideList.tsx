@@ -38,11 +38,9 @@ export function SideList() {
             setItems((prevState) => [...prevState, editorItem]);
           }
         }
-      } catch (error) {
-        const e = error as Error;
-        if (e.message === "Response error")
-          setMessage("Error processing request");
-        else setMessage("Error fetch media");
+      } catch (e) {
+        const error = e as Error;
+        setMessage(error.message);
       }
     };
 

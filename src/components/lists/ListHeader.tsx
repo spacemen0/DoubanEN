@@ -1,6 +1,6 @@
 import { ListInfo, User } from "../../utils/type.ts";
 import { Link } from "react-router-dom";
-import { MyImage } from "../common/MyImage.tsx";
+import { FullImage } from "../common/FullImage.tsx";
 import React, { useState } from "react";
 import { NewListBox } from "../common/NewListBox.tsx";
 import { apiUrl } from "../../utils/config.ts";
@@ -43,7 +43,7 @@ export function ListHeader({
   return (
     <div className="flex !md:flex-col justify-start lg:max-w-[75%] mt-4">
       <div className="my-6 mr-2 h-48 w-48 flex-shrink-0">
-        <MyImage src={apiUrl + list.imageUrl} alt={list.title} />
+        <FullImage src={apiUrl + list.imageUrl} alt={list.title} />
       </div>
       <div className="mt-2 w-fit rounded-md py-2 md:mt-4">
         <Link

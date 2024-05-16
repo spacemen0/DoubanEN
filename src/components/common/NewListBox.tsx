@@ -72,7 +72,8 @@ export const NewListBox = ({
           `You list has been ${listToBeUpdated ? "Updated" : "Created"}`,
         );
       } catch (e) {
-        setMessage("Error creating list");
+        const error = e as Error;
+        setMessage(error.message);
       }
   };
   return (

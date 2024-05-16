@@ -35,18 +35,19 @@ const initialAuthor: Author = {
 
 export default function Contribute() {
   const navigate = useNavigate();
-  const { user } = useAuthContext();
+  const { user, setMessage } = useAuthContext();
   const [authors, setAuthors] = useState<Author[]>([]);
   useEffect(() => {
     const fetAuthors = async () => {
       try {
         setAuthors(await getAllAuthors());
       } catch (e) {
-        console.log(e);
+        const error = e as Error;
+        setMessage(error.message);
       }
     };
     fetAuthors().then();
-  }, [navigate, user]);
+  }, [navigate, setMessage, user]);
   useEffect(() => {
     if (!user) {
       navigate("/login?redirect=contribute");

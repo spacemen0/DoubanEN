@@ -11,15 +11,16 @@ export const OwnComments = () => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const { user } = useAuthContext();
+  const { user, setMessage } = useAuthContext();
   const fetchComments = useCallback(async () => {
     if (user)
       try {
         setComments(await getCommentsByUserId(user.id, 1));
       } catch (e) {
-        console.log(e);
+        const error = e as Error;
+        setMessage(error.message);
       }
-  }, [user]);
+  }, [setMessage, user]);
   useEffect(() => {
     fetchComments().then();
   }, [fetchComments]);
@@ -29,11 +30,12 @@ export const OwnComments = () => {
         try {
           setCount(await countCommentsByUserId(user.id));
         } catch (e) {
-          console.log(e);
+          const error = e as Error;
+          setMessage(error.message);
         }
     };
     fetchCommentsCount().then();
-  }, [user]);
+  }, [setMessage, user]);
 
   const handleLoadMore = async () => {
     if (count > comments.length && user) {

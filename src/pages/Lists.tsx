@@ -38,12 +38,7 @@ export default function Lists() {
         setUsername(user.username);
       } catch (e) {
         const error = e as Error;
-        if (error.message === "Not exist") {
-          setLoading(false);
-          setMessage("This user does not exist");
-        } else if (error.message === "Response error")
-          setMessage("Error processing request");
-        else setMessage("Error fetching username for this user");
+        setMessage(error.message);
       }
     };
     if (user && userId && user.id === parseInt(userId))
@@ -61,9 +56,7 @@ export default function Lists() {
         if (userLists.length > 0) setSelectedList(userLists[0].id);
       } catch (e) {
         const error = e as Error;
-        if (error.message === "Response Error")
-          setMessage("Error processing request");
-        else setMessage("Error fetching lists for this user");
+        setMessage(error.message);
       }
     };
     fetchLists().then();
@@ -73,11 +66,9 @@ export default function Lists() {
       try {
         const fetchedCount = await getListItemsCount(id);
         setCount(fetchedCount);
-      } catch (error) {
-        const e = error as Error;
-        if (e.message === "Response error")
-          setMessage("Error fetching list items count");
-        else setMessage("Error processing request");
+      } catch (e) {
+        const error = e as Error;
+        setMessage(error.message);
       }
     };
     if (selectedList !== -1) fetchListCount(selectedList).then();
@@ -89,9 +80,7 @@ export default function Lists() {
         setMedia(await getAllListItems(id, currentPage));
       } catch (e) {
         const error = e as Error;
-        if (error.message === "Response error")
-          setMessage("Error fetching list items");
-        else setMessage("Error processing request");
+        setMessage(error.message);
       }
     };
     if (selectedList !== -1) fetchAllListItems(selectedList).then();
