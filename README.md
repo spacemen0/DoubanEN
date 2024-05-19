@@ -24,11 +24,6 @@ The core features are nearly complete, and the project has been successfully dep
 - **Spring Boot**
 - **PostgreSQL**
 
-**To-do**
-
-- refactor
-- oauth
-
 <br>
 
 **Front-End**
@@ -37,16 +32,16 @@ The core features are nearly complete, and the project has been successfully dep
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-TypeScript                      90            358              8           8266
+TypeScript                      90            356              8           8249
 JavaScript                      70              0            106            285
 JSON                             8              2              0            144
-Markdown                         1             16              0             49
+Markdown                         1             14              0             46
 HTML                             3              9              0             43
 Text                             1              2              0              9
 INI                              1              1              0              7
 CSS                              3              0              0              5
 -------------------------------------------------------------------------------
-SUM:                           177            388            114           8808
+SUM:                           177            384            114           8788
 -------------------------------------------------------------------------------
 ```
 

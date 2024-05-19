@@ -12,7 +12,7 @@ export function WelcomeInfo({ isLogin }: { isLogin: boolean }) {
         account. With your <strong>DoubanEN account</strong>, you gain access to
         a myriad of features, allowing you to{" "}
         <strong>rate, review, catalog, and tag</strong> your favorite music,
-        movies, and books. Discover new medias and like-minded individuals
+        movies, and books. Discover new publications and like-minded individuals
         through <strong>personalized recommendations</strong>. Create and share{" "}
         <strong>lists</strong> of your favorite items, engage in lively
         discussions through <strong>forums and private messaging</strong>, and{" "}

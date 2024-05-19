@@ -151,7 +151,7 @@ export function ReviewDisplay({
         {media && (
           <p className="mt-2 text-lg font-semibold text-Neutral-Mild">
             Reviewed for:{" "}
-            <Link to={`/medias/${media.id}`}>
+            <Link to={`/media/${media.id}`}>
               <span className="text-2xl hover:text-Neutral">{media.title}</span>
             </Link>
           </p>

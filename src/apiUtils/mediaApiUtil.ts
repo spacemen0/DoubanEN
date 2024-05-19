@@ -5,7 +5,7 @@ import { processMediaJson } from "../utils/helper.ts";
 export const getMedia = async (id: number): Promise<Media> => {
   let response = new Response();
   try {
-    response = await fetch(`${apiUrl}/medias/${id}`, {
+    response = await fetch(`${apiUrl}/media/${id}`, {
       method: "GET",
     });
   } catch (error) {
@@ -24,12 +24,9 @@ export const getAllMediaByType = async (
 ): Promise<Media[]> => {
   let response = new Response();
   try {
-    response = await fetch(
-      `${apiUrl}/medias?type=${type}&page=${page}&size=5`,
-      {
-        method: "GET",
-      },
-    );
+    response = await fetch(`${apiUrl}/media?type=${type}&page=${page}&size=5`, {
+      method: "GET",
+    });
   } catch (error) {
     throw new Error("Error Sending Request");
   }
@@ -44,7 +41,7 @@ export const getAllMediaCountByType = async (
 ): Promise<number> => {
   let response = new Response();
   try {
-    response = await fetch(`${apiUrl}/medias/count/${type}`, {
+    response = await fetch(`${apiUrl}/media/count/${type}`, {
       method: "GET",
     });
   } catch (error) {
@@ -74,7 +71,7 @@ export const addMedia = async (
   requestBody.append("imageUrl", "placeHolder");
   requestBody.append("image", image);
   try {
-    response = await fetch(`${apiUrl}/medias`, {
+    response = await fetch(`${apiUrl}/media`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -93,7 +90,7 @@ export const addMedia = async (
 export const deleteMedia = async (id: number, token: string): Promise<void> => {
   let response = new Response();
   try {
-    response = await fetch(`${apiUrl}/medias/${id}`, {
+    response = await fetch(`${apiUrl}/media/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

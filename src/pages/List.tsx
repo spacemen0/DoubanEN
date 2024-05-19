@@ -97,7 +97,7 @@ export default function List() {
             count={count}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
-            medias={media}
+            media={media}
           />
           <CommentSection area={"MediaList"} areaId={parseInt(id)} />
         </div>

@@ -8,11 +8,11 @@ export const getMediaByTypeAndUserStatusWithPagination = async (
   page: number,
   size: number = 5,
 ): Promise<Media[]> => {
-  let ratedMedias: Media[] = [];
+  let ratedMedia: Media[] = [];
   let response = new Response();
   try {
     response = await fetch(
-      `${apiUrl}/medias?mediaType=${type}&userId=${userId}&mediaStatus=${status}&page=${page}&size=${size}`,
+      `${apiUrl}/media?mediaType=${type}&userId=${userId}&mediaStatus=${status}&page=${page}&size=${size}`,
       {
         method: "GET",
       },
@@ -24,8 +24,8 @@ export const getMediaByTypeAndUserStatusWithPagination = async (
     throw new Error("Error Fetching Media");
   }
   const data = await response.json();
-  ratedMedias = data["content"] as Media[];
-  return ratedMedias;
+  ratedMedia = data["content"] as Media[];
+  return ratedMedia;
 };
 
 export const getMediaStatusesByTypeAndUserIdWithPagination = async (
@@ -65,8 +65,8 @@ export const getUserMediaByTypeWithPagination = async (
   let response = new Response();
   const url =
     type === "All"
-      ? `${apiUrl}/medias?userId=${userId}&page=${page}&size=${size}&mediaStatus=${status}`
-      : `${apiUrl}/medias?type=${type}&userId=${userId}&page=${page}&size=${size}&mediaStatus=${status}`;
+      ? `${apiUrl}/media?userId=${userId}&page=${page}&size=${size}&mediaStatus=${status}`
+      : `${apiUrl}/media?type=${type}&userId=${userId}&page=${page}&size=${size}&mediaStatus=${status}`;
   try {
     response = await fetch(url, {
       method: "GET",
@@ -107,7 +107,7 @@ export const getUserMediaCountByType = async (
 export const getUserCurrentOn = async (userId: number): Promise<Media[]> => {
   let response = new Response();
   try {
-    response = await fetch(`${apiUrl}/medias?userId=${userId}`, {
+    response = await fetch(`${apiUrl}/media?userId=${userId}`, {
       method: "GET",
     });
   } catch (error) {

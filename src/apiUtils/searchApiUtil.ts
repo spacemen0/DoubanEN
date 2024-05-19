@@ -10,7 +10,7 @@ export const searchMedia = async (
   let response = new Response();
   try {
     response = await fetch(
-      `${apiUrl}/medias/search?limit=${limit}&page=${page}&text=${text}&type=${type}`,
+      `${apiUrl}/media/search?limit=${limit}&page=${page}&text=${text}&type=${type}`,
       {
         method: "GET",
       },

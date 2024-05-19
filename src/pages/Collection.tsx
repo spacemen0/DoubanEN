@@ -9,14 +9,14 @@ import {
   getUserMediaCountByType,
 } from "../apiUtils/userMediaApiUtil.ts";
 import Loading from "../components/common/Loading.tsx";
-import { CollectionMediasDisplay } from "../components/collection/ColectionMediaDisplay.tsx";
+import { CollectionMediaDisplay } from "../components/collection/ColectionMediaDisplay.tsx";
 import { StatusOptionSelect } from "../components/collection/StatusOptionSelect.tsx";
 import { Footer } from "../components/common/Footer.tsx";
 
 export default function Collection() {
   const [searchParams] = useSearchParams();
   const type = searchParams.get("type");
-  const [medias, setMedias] = useState<Media[]>([]);
+  const [media, setMedia] = useState<Media[]>([]);
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,7 +25,7 @@ export default function Collection() {
   >("Rated");
   const { setMessage, user } = useAuthContext();
   useEffect(() => {
-    const fetchMediasCount = async (type: MediaType) => {
+    const fetchMediaCount = async (type: MediaType) => {
       if (user)
         try {
           setLoading(true);
@@ -40,15 +40,15 @@ export default function Collection() {
           setMessage(error.message);
         }
     };
-    if (type) fetchMediasCount(type as MediaType).then();
+    if (type) fetchMediaCount(type as MediaType).then();
   }, [selectedOption, setMessage, type, user]);
 
   useEffect(() => {
-    const fetchAllMedias = async () => {
+    const fetchAllMedia = async () => {
       if (user)
         try {
           setLoading(true);
-          setMedias(
+          setMedia(
             await getUserMediaByTypeWithPagination(
               user.id,
               type as MediaType,
@@ -62,7 +62,7 @@ export default function Collection() {
           setMessage(error.message);
         }
     };
-    fetchAllMedias().then();
+    fetchAllMedia().then();
   }, [currentPage, selectedOption, setMessage, type, user]);
 
   function handleOptionClick(
@@ -86,8 +86,8 @@ export default function Collection() {
           setCurrentPage={setCurrentPage}
           type={type}
         />
-        <CollectionMediasDisplay
-          medias={medias}
+        <CollectionMediaDisplay
+          media={media}
           count={count}
           type={type}
           currentPage={currentPage}

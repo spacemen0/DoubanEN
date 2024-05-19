@@ -18,7 +18,7 @@ import { useAuthContext } from "../contexts/AuthContext.ts";
 export default function AuthorPage() {
   const { id } = useParams();
   const [author, setAuthor] = useState<Author>();
-  const [medias, setMedias] = useState<Media[]>([]);
+  const [media, setMedia] = useState<Media[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [count, setCount] = useState(0);
@@ -38,7 +38,7 @@ export default function AuthorPage() {
   }, [id]);
 
   useEffect(() => {
-    const fetchMediasCount = async () => {
+    const fetchMediaCount = async () => {
       if (id)
         try {
           const fetchedCount = await getAllMediaCountFromAuthor(parseInt(id));
@@ -48,28 +48,28 @@ export default function AuthorPage() {
           setMessage(error.message);
         }
     };
-    fetchMediasCount().then();
+    fetchMediaCount().then();
   }, [id, setMessage]);
 
   useEffect(() => {
-    const fetchAllMedias = async () => {
+    const fetchAllMedia = async () => {
       setLoading(true);
       if (id)
         try {
-          const fetchedMedias = await getAllMediaFromAuthor(
+          const fetchedMedia = await getAllMediaFromAuthor(
             parseInt(id),
             currentPage,
           );
-          setMedias(fetchedMedias);
+          setMedia(fetchedMedia);
           setLoading(false);
         } catch (e) {
           const error = e as Error;
           setMessage(error.message);
-          setMedias([]);
+          setMedia([]);
           setLoading(false);
         }
     };
-    fetchAllMedias().then();
+    fetchAllMedia().then();
   }, [id, currentPage, setMessage]);
 
   if (loading) {
@@ -101,9 +101,9 @@ export default function AuthorPage() {
         <div className="my-2 flex justify-between gap-3 border-b border-gray-200 pb-1 pl-32 text-xl font-semibold text-Neutral-Mild md:gap-6 lg:gap-9 lg:pl-36 2xl:pl-44 3xl:pl-56">
           <span>Average</span> <span>Rated</span> <span>Wants</span>
         </div>
-        {medias.length > 0 ? (
+        {media.length > 0 ? (
           <ul>
-            {medias.map((media, index) => (
+            {media.map((media, index) => (
               <li key={index}>
                 <MediaItem media={media} />
               </li>

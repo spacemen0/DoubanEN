@@ -17,7 +17,7 @@ import { Footer } from "../components/common/Footer.tsx";
 export default function MediaByType() {
   const [searchParams] = useSearchParams();
   const type = searchParams.get("type");
-  const [medias, setMedias] = useState<Media[]>([]);
+  const [media, setMedia] = useState<Media[]>([]);
   const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +26,7 @@ export default function MediaByType() {
     setCurrentPage(1);
   }, [type]);
   useEffect(() => {
-    const fetchMediasCount = async (type: MediaType) => {
+    const fetchMediaCount = async (type: MediaType) => {
       setLoading(true);
       try {
         const fetchedCount = await getAllMediaCountByType(type);
@@ -36,21 +36,21 @@ export default function MediaByType() {
         setMessage(error.message);
       }
     };
-    type && fetchMediasCount(type as MediaType).then();
+    type && fetchMediaCount(type as MediaType).then();
   }, [setMessage, type]);
 
   useEffect(() => {
-    const fetchAllMedias = async () => {
+    const fetchAllMedia = async () => {
       setLoading(true);
       try {
-        setMedias(await getAllMediaByType(type as MediaType, currentPage));
+        setMedia(await getAllMediaByType(type as MediaType, currentPage));
         setLoading(false);
       } catch (e) {
         const error = e as Error;
         setMessage(error.message);
       }
     };
-    type && fetchAllMedias().then();
+    type && fetchAllMedia().then();
   }, [currentPage, setMessage, type]);
   if (!type || !["Music", "Movie", "Book", "All"].includes(type)) {
     return <NotFound />;
@@ -71,9 +71,9 @@ export default function MediaByType() {
           <div className="my-2 flex justify-between gap-3 border-b border-gray-200 pb-1 pl-32 text-xl font-semibold text-Neutral-Mild md:gap-6 lg:gap-9 lg:pl-36 2xl:pl-44 3xl:pl-56">
             <span>Average</span> <span>Rated</span> <span>Wants</span>
           </div>
-          {medias.length > 0 ? (
+          {media.length > 0 ? (
             <ul>
-              {medias.map((media, index) => (
+              {media.map((media, index) => (
                 <li key={index}>
                   <MediaItem media={media} />
                 </li>

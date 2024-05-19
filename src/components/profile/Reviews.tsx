@@ -16,7 +16,7 @@ export function Reviews({ id, username }: { id: number; username: string }) {
     "Music" | "Movie" | "Book"
   >("Music");
   const [reviews, setReviews] = useState<Review[]>([]);
-  const [medias, setMedias] = useState<Media[]>([]);
+  const [media, setMedia] = useState<Media[]>([]);
   const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -59,14 +59,14 @@ export function Reviews({ id, username }: { id: number; username: string }) {
   }, [currentPage, id, selectedOption, setMessage]);
 
   useEffect(() => {
-    const fetchMedias = async () => {
+    const fetchMedia = async () => {
       if (reviews)
         reviews.map(async (review) => {
           const media = await getMedia(review.mediaId);
-          setMedias((prevState) => [...prevState, media]);
+          setMedia((prevState) => [...prevState, media]);
         });
     };
-    fetchMedias().then();
+    fetchMedia().then();
   }, [reviews]);
 
   return (
@@ -92,7 +92,7 @@ export function Reviews({ id, username }: { id: number; username: string }) {
             <li key={index} className="mb-4 border-b pb-2">
               <ReviewDisplay
                 review={review}
-                media={medias.filter((media) => media.id === review.mediaId)[0]}
+                media={media.filter((media) => media.id === review.mediaId)[0]}
               />
             </li>
           ))}
