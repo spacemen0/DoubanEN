@@ -215,8 +215,7 @@ export function MediaActionsSection({
       {showListBox && <ListBox setShowListBox={setShowListBox} media={media} />}
       <StatusInfo mediaStatus={mediaStatus} media={media} />
       <button
-        className="md:pl-4 mt-4 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none
-         focus:bg-Neutral focus:ring-1 focus:ring-Neutral transition-colors"
+        className="md:pl-4 mt-4 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-400  transition-colors"
         onClick={() => {
           if (user) {
             setShowListBox(!showListBox);
@@ -274,8 +273,7 @@ export function MediaActionsSection({
          ${mediaStatus.status === "Rated" ? "bg-Neutral-Strong " : "bg-Neutral-Mild "}${
            mediaStatus.status !== "Rated" && mediaStatus.status !== "None"
              ? ""
-             : "hover:bg-gray-400 focus:outline-none " +
-               "focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
+             : "hover:bg-gray-400"
          }`}
             disabled={
               mediaStatus.status !== "Rated" && mediaStatus.status !== "None"
@@ -288,8 +286,7 @@ export function MediaActionsSection({
          ${mediaStatus.status === "Doing" ? "bg-Neutral-Strong " : "bg-Neutral-Mild "}${
            mediaStatus.status !== "Doing" && mediaStatus.status !== "None"
              ? ""
-             : "hover:bg-gray-400 focus:outline-none " +
-               "focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
+             : "hover:bg-gray-400"
          }`}
             disabled={
               mediaStatus.status !== "Doing" && mediaStatus.status !== "None"
@@ -310,8 +307,7 @@ export function MediaActionsSection({
                                mediaStatus.status !== "Wishlist" &&
                                mediaStatus.status !== "None"
                                  ? ""
-                                 : "hover:bg-gray-400 focus:outline-none " +
-                                   "focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
+                                 : "hover:bg-gray-400"
                              }`}
             disabled={
               mediaStatus.status !== "Wishlist" && mediaStatus.status !== "None"
@@ -327,8 +323,7 @@ export function MediaActionsSection({
                                mediaStatus.status !== "None" &&
                                mediaStatus.status !== "Rated"
                                  ? ""
-                                 : "hover:bg-gray-400 focus:outline-none " +
-                                   "focus:bg-Neutral focus:ring-1 focus:ring-Neutral "
+                                 : "hover:bg-gray-400"
                              }`}
             disabled={
               mediaStatus.status !== "Reviewed" &&

@@ -122,22 +122,26 @@ const MessageBox = ({
   const messageBoxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let timer: number; // Declare the timer inside useEffect
+
     const handleOutsideClick = (e: MouseEvent) => {
       if (
         messageBoxRef.current &&
         !messageBoxRef.current.contains(e.target as Node)
       ) {
-        messageBoxRef.current.classList.remove("opacity-80");
+        messageBoxRef.current.classList.remove("opacity-100");
         messageBoxRef.current.classList.add("opacity-0");
-        const timer = setTimeout(() => {
+        timer = setTimeout(() => {
           setMessage("");
-          clearTimeout(timer);
-        }, 2000);
+        }, 1000);
       }
     };
+
     document.addEventListener("mouseover", handleOutsideClick);
+
     return () => {
       document.removeEventListener("mouseover", handleOutsideClick);
+      clearTimeout(timer);
     };
   }, [setMessage]);
 
@@ -147,7 +151,7 @@ const MessageBox = ({
         <div
           ref={messageBoxRef}
           className="z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform
-          px-4 py-2 md:py-4 rounded-md bg-gray-500 text-white transition-opacity duration-[2000ms] opacity-80"
+          px-4 py-2 md:py-4 rounded-md bg-gray-500 text-white transition-opacity duration-[1000ms] opacity-100"
         >
           <p className="text-center text-xl font-semibold">{message}</p>
         </div>
