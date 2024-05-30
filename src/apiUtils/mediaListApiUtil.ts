@@ -1,5 +1,6 @@
 import { apiUrl } from "../utils/config";
 import { ListInfo, Media } from "../utils/type.ts";
+import { defaultImage } from "../utils/data.ts";
 
 export const getListItemsCount = async (id: number): Promise<number> => {
   let response = new Response();
@@ -50,7 +51,7 @@ export const getListInfo = async (id: number): Promise<ListInfo> => {
   const data = await response.json();
   data.username = data["user"]["username"];
   data.userId = data["user"]["id"];
-  if (!data.imageUrl) data.imageUrl = "/images/753";
+  if (!data.imageUrl) data.imageUrl = "/images/" + defaultImage;
   return data as ListInfo;
 };
 
@@ -69,7 +70,7 @@ export const getUserLists = async (userId: number): Promise<ListInfo[]> => {
   }
   const listInfos = (await response.json()) as ListInfo[];
   listInfos.map((listInfo) => {
-    if (!listInfo.imageUrl) listInfo.imageUrl = "/images/753";
+    if (!listInfo.imageUrl) listInfo.imageUrl = "/images/" + defaultImage;
     return listInfo;
   });
   return listInfos;
