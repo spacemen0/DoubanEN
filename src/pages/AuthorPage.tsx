@@ -28,6 +28,7 @@ export default function AuthorPage() {
     const fetchAuthor = async () => {
       if (id)
         try {
+        setLoading(true)
           const fetchedAuthor = await getAuthor(parseInt(id)); // Assuming id is a string, so we need to parse it to int
           setAuthor(fetchedAuthor);
         } catch (error) {
@@ -41,6 +42,7 @@ export default function AuthorPage() {
     const fetchMediaCount = async () => {
       if (id)
         try {
+        setLoading(true)
           const fetchedCount = await getAllMediaCountFromAuthor(parseInt(id));
           setCount(fetchedCount);
         } catch (e) {
