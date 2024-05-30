@@ -70,8 +70,8 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     setUser(null);
     setToken(null);
     setMessage("");
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
   }, []);
 
   const handleRegister = useCallback(
