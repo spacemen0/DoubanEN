@@ -75,6 +75,9 @@ export const NewListBox = ({
         const error = e as Error;
         setMessage(error.message);
       }
+    else {
+      setMessage("Please fill in all fields");
+    }
   };
   return (
     <div className="fixed top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
