@@ -7,7 +7,7 @@ music, movies, and books. Users can rate, review, wishlist, and mark items they 
 read. Additionally, users have the option to categorize items into lists for better organization.
 
 The core features are nearly complete, and the project has been successfully deployed. You can access the project via this link:
-[DoubanEN](https://nice-water-005626e10.4.azurestaticapps.net/)
+[DoubanEN](https://douban-en.vercel.app)
 
 ## Tech Stack
 
