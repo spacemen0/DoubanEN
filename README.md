@@ -6,9 +6,10 @@ favorite
 music, movies, and books. Users can rate, review, wishlist, and mark items they want to listen to, watch, or
 read. Additionally, users have the option to categorize items into lists for better organization.
 
-The core features are nearly complete, and the project has been successfully deployed. You can access the project via this link:
-[DoubanEN](https://nice-water-005626e10.4.azurestaticapps.net/)
+You can access the project website via this link:
+[DoubanEN](https://douban-en.vercel.app)
 
+The back-end repository can be found [here](https://github.com/spacemen0/DoubanENAPI)
 ## Tech Stack
 
 **Front-end:**
