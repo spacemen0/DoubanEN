@@ -4,7 +4,6 @@ import { NotFound } from "../components/common/NotFound";
 import { useEffect, useState } from "react";
 import { Media, MediaType } from "../utils/type";
 import { MediaItem } from "../components/common/MediaItem.tsx";
-import { useAuthContext } from "../contexts/AuthContext";
 import { Pagination } from "../components/common/Pagination";
 import {
   getAllMediaByType,
@@ -13,6 +12,7 @@ import {
 import { EmptyContent } from "../components/common/EmptyContent.tsx";
 import Loading from "../components/common/Loading.tsx";
 import { Footer } from "../components/common/Footer.tsx";
+import { useAuthStore } from "../contexts/AuthStore.ts";
 
 export default function MediaByType() {
   const [searchParams] = useSearchParams();
@@ -21,7 +21,7 @@ export default function MediaByType() {
   const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const { setMessage } = useAuthContext();
+  const setMessage = useAuthStore((state) => state.setMessage);
   useEffect(() => {
     setCurrentPage(1);
   }, [type]);

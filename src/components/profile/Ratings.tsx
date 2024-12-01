@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Media, MediaStatus, RatingScore } from "../../utils/type";
 import { MediaItem } from "../common/MediaItem.tsx";
-import { useAuthContext } from "../../contexts/AuthContext";
 import {
   getMediaByTypeAndUserStatusWithPagination,
   getMediaStatusesByTypeAndUserIdWithPagination,
@@ -10,6 +9,7 @@ import {
 import { EmptyContent } from "../common/EmptyContent.tsx";
 import { Pagination } from "../common/Pagination.tsx";
 import { MediaOptionSelect } from "./MediaOptionSelect.tsx";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export function Ratings({ id, username }: { id: number; username: string }) {
   const [selectedOption, setSelectedOption] = useState<
@@ -20,7 +20,7 @@ export function Ratings({ id, username }: { id: number; username: string }) {
   const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const { setMessage } = useAuthContext();
+  const setMessage = useAuthStore((state) => state.setMessage);
 
   const handleOptionClick = async (option: "Music" | "Movie" | "Book") => {
     setSelectedOption(option);
@@ -47,7 +47,7 @@ export function Ratings({ id, username }: { id: number; username: string }) {
           id,
           selectedOption,
           "Rated",
-          currentPage,
+          currentPage
         );
         setItems(items);
       } catch (e) {
@@ -68,7 +68,7 @@ export function Ratings({ id, username }: { id: number; username: string }) {
             id,
             selectedOption,
             "Rated",
-            currentPage,
+            currentPage
           );
         setLoading(false);
         setStatuses(mediaStatuses);
@@ -110,7 +110,7 @@ export function Ratings({ id, username }: { id: number; username: string }) {
                   statuses.filter((status) => status.mediaId === item.id)
                     .length > 0
                     ? (statuses.filter(
-                        (status) => status.mediaId === item.id,
+                        (status) => status.mediaId === item.id
                       )[0].score as RatingScore)
                     : undefined
                 }

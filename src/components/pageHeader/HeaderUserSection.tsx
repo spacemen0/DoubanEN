@@ -1,13 +1,13 @@
-import { useAuthContext } from "../../contexts/AuthContext.ts";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { MenuItem } from "./MenuItem.tsx";
 import { FullImage } from "../common/FullImage.tsx";
 import { apiUrl } from "../../utils/config.ts";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export default function HeaderUserSection() {
-  const { user } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="flex flex-shrink-0 items-center md:gap-1.5">
@@ -59,20 +59,23 @@ function DropDownMenu({
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { logout, token, user, setMessage } = useAuthContext();
+  const logout = useAuthStore((state) => state.logout);
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
   const currentUrl = window.location.href;
   let route = currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
   if (!isNaN(parseInt(route))) {
     const lastSlashIndex = currentUrl.lastIndexOf("/");
     const secondLastSlashIndex = currentUrl.lastIndexOf(
       "/",
-      lastSlashIndex - 1,
+      lastSlashIndex - 1
     );
     route = currentUrl.substring(secondLastSlashIndex + 1);
   }
   const handleLogout = async () => {
     if (token) {
-      await logout(token);
+      await logout();
     }
   };
   return (

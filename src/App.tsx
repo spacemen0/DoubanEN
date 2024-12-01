@@ -3,6 +3,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { NotFound } from "./components/common/NotFound";
 import Loading from "./components/common/Loading.tsx";
 import { Notification } from "./components/common/Notification.tsx";
+import MessageBox from "./contexts/MessageBox.tsx";
 
 const Home = lazy(() => import("./pages/Home"));
 const Profile = lazy(() => import("./pages/Profile"));
@@ -61,6 +62,7 @@ export default function App() {
           onClose={handleCloseNotification}
         />
       )}
+      <MessageBox />
     </>
   );
 }

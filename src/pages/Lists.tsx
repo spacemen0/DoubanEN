@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchUser } from "../apiUtils/userApiUtil.ts";
-import { useAuthContext } from "../contexts/AuthContext.ts";
 import Loading from "../components/common/Loading.tsx";
 import { NotFound } from "../components/common/NotFound.tsx";
 import {
@@ -18,6 +17,7 @@ import { SelectUserList } from "../components/lists/SelectUserList.tsx";
 import { ListHeader } from "../components/lists/ListHeader.tsx";
 import { ListMediaDisplay } from "../components/lists/ListMediaDisplay.tsx";
 import { Footer } from "../components/common/Footer.tsx";
+import { useAuthStore } from "../contexts/AuthStore.ts";
 
 export default function Lists() {
   const { userId } = useParams();
@@ -29,7 +29,9 @@ export default function Lists() {
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [changed, setChanged] = useState(false);
-  const { setMessage, user, token } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
   useEffect(() => {
     const fetchUsername = async () => {
       try {

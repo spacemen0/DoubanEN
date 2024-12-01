@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import { Media } from "../utils/type";
 import { FullImage } from "../components/common/FullImage.tsx";
 import { MediaInfo } from "../components/common/MediaInfo";
-import { useAuthContext } from "../contexts/AuthContext";
 import { DomainSection } from "../components/media/DomainSection.tsx";
 import { MediaActionsSection } from "../components/media/MediaActionsSection.tsx";
 import { ReviewSection } from "../components/media/ReviewSection";
@@ -14,9 +13,10 @@ import { getMedia } from "../apiUtils/mediaApiUtil.ts";
 import { apiUrl } from "../utils/config.ts";
 import { CommentSection } from "../components/common/CommentSection.tsx";
 import { Footer } from "../components/common/Footer.tsx";
+import { useAuthStore } from "../contexts/AuthStore.ts";
 
 export default function MediaPage() {
-  const { setMessage } = useAuthContext();
+  const setMessage = useAuthStore((state) => state.setMessage);
   const { id } = useParams();
   const [media, setMedia] = useState<Media>();
   const [exist, setExist] = useState(true);

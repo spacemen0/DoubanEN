@@ -8,7 +8,6 @@ import { NotFound } from "../components/common/NotFound";
 import { ListsWall } from "../components/profile/ListsWall.tsx";
 import { Reviews } from "../components/profile/Reviews.tsx";
 import { CommentSection } from "../components/common/CommentSection.tsx";
-import { useAuthContext } from "../contexts/AuthContext.ts";
 import { OwnComments } from "../components/profile/OwnComments.tsx";
 import { Footer } from "../components/common/Footer.tsx";
 import { AuthorRequest, MediaRequest } from "../utils/type.ts";
@@ -18,6 +17,7 @@ import {
 } from "../apiUtils/userRequestApiUtil.ts";
 import { UserMediaRequestItem } from "../components/profile/UserMediaRequestItem.tsx";
 import { UserAuthorRequestItem } from "../components/profile/UserAuthorRequestItem.tsx";
+import { useAuthStore } from "../contexts/AuthStore.ts";
 
 export default function Profile() {
   const { id } = useParams();
@@ -25,7 +25,9 @@ export default function Profile() {
   const [username, setUsername] = useState<string>("");
   const [mediaRequests, setMediaRequests] = useState<MediaRequest[]>([]);
   const [authorRequests, setAuthorRequests] = useState<AuthorRequest[]>([]);
-  const { user, setMessage, token } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
   useEffect(() => {
     const fetchMediaRequests = async () => {
       if (user && token)

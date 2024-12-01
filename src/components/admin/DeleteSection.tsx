@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { useAuthContext } from "../../contexts/AuthContext.ts";
 import { deleteList } from "../../apiUtils/mediaListApiUtil.ts";
 import { deleteComment } from "../../apiUtils/commentApiUtil.ts";
 import { deleteMedia } from "../../apiUtils/mediaApiUtil.ts";
 import { deleteAuthor } from "../../apiUtils/authorApiUtil.ts";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export function DeleteSection() {
   const [id, setId] = useState<number>(0);
   const [type, setType] = useState("Media");
-  const { token, setMessage } = useAuthContext();
+
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
   const handleDelete = async () => {
     if (id !== -1 && token)
       try {

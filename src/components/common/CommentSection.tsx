@@ -6,8 +6,8 @@ import {
   postComment,
 } from "../../apiUtils/commentApiUtil.ts";
 import { CommentEntry } from "./CommentEntry.tsx";
-import { useAuthContext } from "../../contexts/AuthContext.ts";
 import { getCurrentLocalDate } from "../../utils/helper.ts";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export const CommentSection = ({
   area,
@@ -23,7 +23,9 @@ export const CommentSection = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [showNewCommentBox, setShowNewCommentBox] = useState(false);
   const [commentContent, setCommentContent] = useState("");
-  const { user, token, setMessage } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
   const fetchComments = useCallback(async () => {
     try {
       setComments(await getCommentsByAreaAndAreaId(area, areaId, 1));
@@ -52,7 +54,7 @@ export const CommentSection = ({
       const newComments = await getCommentsByAreaAndAreaId(
         area,
         areaId,
-        currentPage + 1,
+        currentPage + 1
       );
       setComments(comments.concat(newComments));
       setCurrentPage(currentPage + 1);
@@ -88,7 +90,7 @@ export const CommentSection = ({
 
   const handleAfterDeletingComment = async (id: number) => {
     setComments((prevState) =>
-      prevState.filter((comment) => comment.id !== id),
+      prevState.filter((comment) => comment.id !== id)
     );
     if (comments.length > 1 && comments.length - (1 % 5) === 0)
       setCurrentPage((prevState) => prevState - 1);
@@ -170,8 +172,8 @@ export const CommentSection = ({
             {showNewCommentBox
               ? "Cancel"
               : message
-                ? "Post Message"
-                : "Post Comment"}
+              ? "Post Message"
+              : "Post Comment"}
           </button>
         </div>
       </div>

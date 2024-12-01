@@ -1,11 +1,11 @@
 import { AuthorRequest, User } from "../../utils/type.ts";
 import React, { useEffect, useState } from "react";
-import { useAuthContext } from "../../contexts/AuthContext.ts";
 import { processAuthorRequest } from "../../apiUtils/userRequestApiUtil.ts";
 import { fetchUser } from "../../apiUtils/userApiUtil.ts";
 import { AuthorRequestInfo } from "./AuthorRequestInfo.tsx";
 import { authorRequestToAuthor } from "../../utils/helper.ts";
 import { ProcessRequest } from "./ProcessRequest.tsx";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export function AuthorRequestItem({
   request,
@@ -16,12 +16,13 @@ export function AuthorRequestItem({
 }) {
   const [user, setUser] = useState<User>();
 
-  const { token, setMessage } = useAuthContext();
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
   const author = authorRequestToAuthor(request);
 
   const handleProcessRequest = async (
     approve: boolean,
-    responseMessage: string,
+    responseMessage: string
   ) => {
     if (responseMessage === "") {
       setMessage("Please write a response message");
@@ -31,7 +32,7 @@ export function AuthorRequestItem({
       try {
         await processAuthorRequest(request.id, approve, responseMessage, token);
         setAuthorRequests((previousState) =>
-          previousState.filter((pre) => pre.id !== request.id),
+          previousState.filter((pre) => pre.id !== request.id)
         );
       } catch (e) {
         const error = e as Error;

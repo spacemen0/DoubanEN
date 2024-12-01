@@ -2,7 +2,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
 import { useEffect, useState } from "react";
 import { ListInfo, Media } from "../utils/type";
-import { useAuthContext } from "../contexts/AuthContext";
 
 import {
   deleteList,
@@ -16,6 +15,7 @@ import { ListHeader } from "../components/list/ListHeader.tsx";
 import { ListMediaDisplay } from "../components/list/ListMediaDisplay.tsx";
 import { CommentSection } from "../components/common/CommentSection.tsx";
 import { Footer } from "../components/common/Footer.tsx";
+import { useAuthStore } from "../contexts/AuthStore.ts";
 
 export default function List() {
   const { id } = useParams();
@@ -25,7 +25,8 @@ export default function List() {
   const [listInfo, setListInfo] = useState<ListInfo>();
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const { setMessage, user } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const setMessage = useAuthStore((state) => state.setMessage);
   useEffect(() => {
     const fetchListCount = async (id: number) => {
       try {

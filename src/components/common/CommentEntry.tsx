@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { fetchUser } from "../../apiUtils/userApiUtil.ts";
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
-import { useAuthContext } from "../../contexts/AuthContext.ts";
 import { deleteComment } from "../../apiUtils/commentApiUtil.ts";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export const CommentEntry = ({
   comment,
@@ -18,7 +18,10 @@ export const CommentEntry = ({
   own?: boolean;
 }) => {
   const [commentUser, setCommentUser] = useState<User>();
-  const { user, token, setMessage } = useAuthContext();
+
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -57,7 +60,15 @@ export const CommentEntry = ({
             <span className="ml-1 flex items-center justify-center text-lg font-semibold hover:text-Neutral-Strong">
               {own ? (
                 <Link
-                  to={`/${comment.commentArea === "User" ? "profile" : comment.commentArea === "MediaList" ? "list" : comment.commentArea === "Media" ? "media" : "review"}/${comment.areaId}`}
+                  to={`/${
+                    comment.commentArea === "User"
+                      ? "profile"
+                      : comment.commentArea === "MediaList"
+                      ? "list"
+                      : comment.commentArea === "Media"
+                      ? "media"
+                      : "review"
+                  }/${comment.areaId}`}
                   className="underline text-Neutral-Strong hover:text-Neutral"
                 >
                   Go to resource

@@ -2,12 +2,12 @@ import { Star, StarHalf, ThumbsUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Media, Review } from "../../utils/type";
 import { Link } from "react-router-dom";
-import { useAuthContext } from "../../contexts/AuthContext.ts";
 import {
   isReviewLiked,
   likeReview,
   unlikeReview,
 } from "../../apiUtils/reviewApiUtil.ts";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export function ReviewDisplay({
   review,
@@ -18,7 +18,9 @@ export function ReviewDisplay({
 }) {
   const [expanded, setExpanded] = useState(false);
   const [liked, setLiked] = useState(false);
-  const { user, setMessage, token } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
 
   useEffect(() => {
     const checkLiked = async () => {
@@ -44,7 +46,7 @@ export function ReviewDisplay({
           key={`full-star-${i}`}
           color="rgb(234 179 8)"
           fill="rgb(234 179 8)"
-        />,
+        />
       );
     }
 
@@ -56,7 +58,7 @@ export function ReviewDisplay({
           key="half-star"
           color="rgb(234 179 8)"
           fill="rgb(234 179 8)"
-        />,
+        />
       );
     }
 

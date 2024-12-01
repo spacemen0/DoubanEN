@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Media } from "../../utils/type";
-import { useAuthContext } from "../../contexts/AuthContext";
 import { FullImage } from "../common/FullImage.tsx";
 import { getUserCurrentOn } from "../../apiUtils/userMediaApiUtil.ts";
 import { Link } from "react-router-dom";
 import { apiUrl } from "../../utils/config.ts";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 export function RecentlyOn({ id }: { id: number }) {
-  const { setMessage } = useAuthContext();
+  const setMessage = useAuthStore((state) => state.setMessage);
   const [recentlyOn, setRecentlyOn] = useState<Media[]>();
   useEffect(() => {
     const getCurrentOn = async () => {

@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { Media } from "../../utils/type";
-import { useAuthContext } from "../../contexts/AuthContext";
 import { MediaItem } from "../common/MediaItem.tsx";
 import { getUserMediaByTypeWithPagination } from "../../apiUtils/userMediaApiUtil.ts";
 import { homePageEditorMediaIds } from "../../utils/data.ts";
 import { getMedia } from "../../apiUtils/mediaApiUtil.ts";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export function SideList() {
   const [selectedOption, setSelectedOption] = useState<"Editor" | "My">(
-    "Editor",
+    "Editor"
   );
   const [items, setItems] = useState<Media[]>([]);
-  const { user, setMessage } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const setMessage = useAuthStore((state) => state.setMessage);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,14 +23,14 @@ export function SideList() {
             "All",
             1,
             "Rated",
-            5,
+            5
           );
           const itemsReviewed = await getUserMediaByTypeWithPagination(
             user.id,
             "All",
             1,
             "Reviewed",
-            5,
+            5
           );
           setItems(itemsRated.concat(itemsReviewed));
         } else if (selectedOption === "Editor" && items.length === 0) {

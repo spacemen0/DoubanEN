@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useAuthContext } from "../contexts/AuthContext.ts";
 import { addMedia } from "../apiUtils/mediaApiUtil.ts";
 import { Author, AuthorType, Media } from "../utils/type.ts";
 import { LoaderCircle } from "lucide-react";
@@ -8,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { addAuthor, getAllAuthors } from "../apiUtils/authorApiUtil.ts";
 import { bookGenres, movieGenres, musicGenres } from "../utils/data.ts";
 import { Footer } from "../components/common/Footer.tsx";
+import { useAuthStore } from "../contexts/AuthStore.ts";
 
 const initialMedia: Media = {
   id: 0,
@@ -35,7 +35,8 @@ const initialAuthor: Author = {
 
 export default function Contribute() {
   const navigate = useNavigate();
-  const { user, setMessage } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const setMessage = useAuthStore((state) => state.setMessage);
   const [authors, setAuthors] = useState<Author[]>([]);
   useEffect(() => {
     const fetAuthors = async () => {
@@ -88,7 +89,9 @@ export default function Contribute() {
 }
 
 function MediaForm({ authors }: { authors: Author[] }) {
-  const { setMessage, user, token } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
   const [media, setMedia] = useState<Media>(initialMedia);
   const [image, setImage] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -112,14 +115,14 @@ function MediaForm({ authors }: { authors: Author[] }) {
           (author) =>
             (value === "Music" && author.type === "Artist") ||
             (value === "Movie" && author.type === "Director") ||
-            (value === "Book" && author.type === "Author"),
+            (value === "Book" && author.type === "Author")
         )!.id,
         genre:
           value === "Music"
             ? musicGenres[0]
             : value === "Movie"
-              ? movieGenres[0]
-              : bookGenres[0],
+            ? movieGenres[0]
+            : bookGenres[0],
       }));
     } else {
       setMedia((prevData) => ({
@@ -130,7 +133,7 @@ function MediaForm({ authors }: { authors: Author[] }) {
   };
 
   const handleTextAreaChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>,
+    event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
     setMedia((prevData) => ({
@@ -377,13 +380,13 @@ function MediaForm({ authors }: { authors: Author[] }) {
               {media.type === "Music"
                 ? "Add track"
                 : media.type === "Movie"
-                  ? "Add Character then Cast "
-                  : "Add Chapter"}
+                ? "Add Character then Cast "
+                : "Add Chapter"}
             </label>
             <input
               type="text"
               id="addition"
-              name="addtion"
+              name="addition"
               value={addition}
               onChange={handleChangeAddition}
               className="mt-1 w-full rounded-md border p-2 transition-colors duration-300
@@ -424,8 +427,8 @@ function MediaForm({ authors }: { authors: Author[] }) {
           {media.type === "Music"
             ? "Tracks"
             : media.type === "Movie"
-              ? "Casts Info"
-              : "Chapters"}
+            ? "Casts Info"
+            : "Chapters"}
         </label>
         <textarea
           id="additional"
@@ -466,7 +469,9 @@ function AuthorForm({
   const [authorGenre, setAuthorGenre] = useState("Experimental");
 
   const [author, setAuthor] = useState<Author>(initialAuthor);
-  const { setMessage, user, token } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
   const handleAuthorSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (user && token && author.name !== "") {

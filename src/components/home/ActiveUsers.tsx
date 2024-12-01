@@ -3,11 +3,11 @@ import { User } from "../../utils/type.ts";
 import { UserItem } from "../common/UserItem.tsx";
 import { activeUserIds } from "../../utils/data.ts";
 import { fetchUser } from "../../apiUtils/userApiUtil.ts";
-import { useAuthContext } from "../../contexts/AuthContext.ts";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export function ActiveUsers() {
   const [users, setUsers] = useState<User[]>([]);
-  const { setMessage } = useAuthContext();
+  const setMessage = useAuthStore((state) => state.setMessage);
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -43,7 +43,9 @@ export function ActiveUsers() {
           users.map((user, index) => (
             <li
               key={user.id}
-              className={`my-1 py-2 ${index !== users.length - 1 && "border-b"}`}
+              className={`my-1 py-2 ${
+                index !== users.length - 1 && "border-b"
+              }`}
             >
               <UserItem user={user} />
             </li>

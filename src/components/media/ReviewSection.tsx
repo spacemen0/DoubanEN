@@ -1,13 +1,13 @@
 import { Media, Review } from "../../utils/type";
 import React, { useCallback, useEffect, useState } from "react";
 import { ReviewDisplay } from "../common/ReviewDisplay";
-import { useAuthContext } from "../../contexts/AuthContext";
 import { Pagination } from "../common/Pagination";
 import {
   getMediaReviewCount,
   getMediaReviews,
 } from "../../apiUtils/reviewApiUtil.ts";
 import { EmptyContent } from "../common/EmptyContent.tsx";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export function ReviewSection({
   media,
@@ -21,7 +21,7 @@ export function ReviewSection({
   const [reviews, setReviews] = useState<Review[]>([]);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const { setMessage } = useAuthContext();
+  const setMessage = useAuthStore((state) => state.setMessage);
   const fetchReviewsCount = useCallback(async () => {
     try {
       const fetchedCount = await getMediaReviewCount(media.id);

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useAuthContext } from "../contexts/AuthContext";
 import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FullImage } from "../components/common/FullImage.tsx";
@@ -7,6 +6,7 @@ import { WelcomeInfo } from "../components/common/WelcomeInfo";
 import { LoaderCircle } from "lucide-react";
 import { Footer } from "../components/common/Footer.tsx";
 import cover from "../assets/Cover.jpg";
+import { useAuthStore } from "../contexts/AuthStore.ts";
 
 export default function Login() {
   const [searchParams] = useSearchParams();
@@ -17,7 +17,9 @@ export default function Login() {
   });
   const [processing, setProcessing] = useState(false);
   const navigate = useNavigate();
-  const { user, login, setMessage } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const login = useAuthStore((state) => state.login);
+  const setMessage = useAuthStore((state) => state.setMessage);
   useEffect(() => {
     if (user) navigate(`/profile/${user.id}`);
   });

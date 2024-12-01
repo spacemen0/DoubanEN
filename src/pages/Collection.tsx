@@ -1,7 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Media, MediaType } from "../utils/type";
-import { useAuthContext } from "../contexts/AuthContext";
 import { NotFound } from "../components/common/NotFound";
 import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
 import {
@@ -12,6 +11,7 @@ import Loading from "../components/common/Loading.tsx";
 import { CollectionMediaDisplay } from "../components/collection/ColectionMediaDisplay.tsx";
 import { StatusOptionSelect } from "../components/collection/StatusOptionSelect.tsx";
 import { Footer } from "../components/common/Footer.tsx";
+import { useAuthStore } from "../contexts/AuthStore.ts";
 
 export default function Collection() {
   const [searchParams] = useSearchParams();
@@ -23,7 +23,8 @@ export default function Collection() {
   const [selectedOption, setSelectedOption] = useState<
     "Rated" | "Wishlist" | "Doing" | "Reviewed"
   >("Rated");
-  const { setMessage, user } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const setMessage = useAuthStore((state) => state.setMessage);
   useEffect(() => {
     const fetchMediaCount = async (type: MediaType) => {
       if (user)
@@ -32,7 +33,7 @@ export default function Collection() {
           const fetchedCount = await getUserMediaCountByType(
             user.id,
             type,
-            selectedOption,
+            selectedOption
           );
           setCount(fetchedCount);
         } catch (e) {
@@ -53,8 +54,8 @@ export default function Collection() {
               user.id,
               type as MediaType,
               currentPage,
-              selectedOption,
-            ),
+              selectedOption
+            )
           );
           setLoading(false);
         } catch (e) {
@@ -66,7 +67,7 @@ export default function Collection() {
   }, [currentPage, selectedOption, setMessage, type, user]);
 
   function handleOptionClick(
-    status: "Rated" | "Wishlist" | "Doing" | "Reviewed",
+    status: "Rated" | "Wishlist" | "Doing" | "Reviewed"
   ) {
     setSelectedOption(status);
   }

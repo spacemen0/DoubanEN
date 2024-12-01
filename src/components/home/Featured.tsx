@@ -6,10 +6,10 @@ import { homePageReviewIds } from "../../utils/data";
 import { FeaturedItem } from "./FeaturedItem";
 import { useEffect, useState } from "react";
 import { Media, Review } from "../../utils/type.ts";
-import { useAuthContext } from "../../contexts/AuthContext.ts";
 import { fetchSingleReview } from "../../apiUtils/reviewApiUtil.ts";
 import { getMedia } from "../../apiUtils/mediaApiUtil.ts";
 import { ActiveUsers } from "./ActiveUsers.tsx";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export function Featured() {
   const [featuredItems, setFeaturedItems] = useState<
@@ -18,7 +18,7 @@ export function Featured() {
       review: Review;
     }[]
   >([]);
-  const { setMessage } = useAuthContext();
+  const setMessage = useAuthStore((state) => state.setMessage);
 
   useEffect(() => {
     const fetchData = async () => {

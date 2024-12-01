@@ -5,13 +5,14 @@ import {
   getCommentsByUserId,
 } from "../../apiUtils/commentApiUtil.ts";
 import { CommentEntry } from "../common/CommentEntry.tsx";
-import { useAuthContext } from "../../contexts/AuthContext.ts";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export const OwnComments = () => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const { user, setMessage } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const setMessage = useAuthStore((state) => state.setMessage);
   const fetchComments = useCallback(async () => {
     if (user)
       try {
@@ -47,7 +48,7 @@ export const OwnComments = () => {
 
   const handleAfterDeletingComment = async (id: number) => {
     setComments((prevState) =>
-      prevState.filter((comment) => comment.id !== id),
+      prevState.filter((comment) => comment.id !== id)
     );
     if (comments.length > 1 && comments.length - (1 % 5) === 0)
       setCurrentPage((prevState) => prevState - 1);

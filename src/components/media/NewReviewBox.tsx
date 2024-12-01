@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import { Media, RatingScore, Review } from "../../utils/type";
-import { useAuthContext } from "../../contexts/AuthContext";
 import Draggable from "react-draggable";
 import { postReview } from "../../apiUtils/reviewApiUtil.ts";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export function NewReviewBox({
   setShowReviewBox,
@@ -17,7 +17,9 @@ export function NewReviewBox({
 }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const { user, setMessage, token } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
   const reviewBox = useRef(null);
 
   const handleReset = () => {

@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { Author, Media } from "../utils/type.ts";
 import Loading from "../components/common/Loading.tsx";
 import { Footer } from "../components/common/Footer.tsx";
-import { useAuthContext } from "../contexts/AuthContext.ts";
+import { useAuthStore } from "../contexts/AuthStore.ts";
 
 export default function AuthorPage() {
   const { id } = useParams();
@@ -22,13 +22,13 @@ export default function AuthorPage() {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [count, setCount] = useState(0);
-  const { setMessage } = useAuthContext();
+  const setMessage = useAuthStore((state) => state.setMessage);
 
   useEffect(() => {
     const fetchAuthor = async () => {
       if (id)
         try {
-        setLoading(true)
+          setLoading(true);
           const fetchedAuthor = await getAuthor(parseInt(id)); // Assuming id is a string, so we need to parse it to int
           setAuthor(fetchedAuthor);
         } catch (error) {
@@ -42,7 +42,7 @@ export default function AuthorPage() {
     const fetchMediaCount = async () => {
       if (id)
         try {
-        setLoading(true)
+          setLoading(true);
           const fetchedCount = await getAllMediaCountFromAuthor(parseInt(id));
           setCount(fetchedCount);
         } catch (e) {
@@ -60,7 +60,7 @@ export default function AuthorPage() {
         try {
           const fetchedMedia = await getAllMediaFromAuthor(
             parseInt(id),
-            currentPage,
+            currentPage
           );
           setMedia(fetchedMedia);
           setLoading(false);
@@ -91,8 +91,8 @@ export default function AuthorPage() {
             (author.type === "Artist"
               ? "Music"
               : author.type === "Director"
-                ? "Movies"
-                : "Books") +
+              ? "Movies"
+              : "Books") +
             " by " +
             author.name
           }

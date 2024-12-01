@@ -4,7 +4,7 @@ import { FullImage } from "../common/FullImage.tsx";
 import { apiUrl } from "../../utils/config.ts";
 import { NewListBox } from "../common/NewListBox.tsx";
 import { useState } from "react";
-import { useAuthContext } from "../../contexts/AuthContext.ts";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export function ListHeader({
   listInfo,
@@ -14,7 +14,8 @@ export function ListHeader({
   handleDeleteList: (id: number, token: string) => Promise<void>;
 }) {
   const [showNewListBox, setShowNewListBox] = useState(false);
-  const { user, token } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
 
   return (
     <div className="flex !md:flex-col justify-start lg:max-w-[75%] mt-4">

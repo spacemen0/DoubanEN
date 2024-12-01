@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { ListInfo } from "../../utils/type.ts";
-import { useAuthContext } from "../../contexts/AuthContext.ts";
 import { Link } from "react-router-dom";
 import { getUserLists } from "../../apiUtils/mediaListApiUtil.ts";
 import { FullImage } from "../common/FullImage.tsx";
 import { apiUrl } from "../../utils/config.ts";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export function ListsWall({ id, username }: { id: number; username: string }) {
-  const { setMessage } = useAuthContext();
+  const setMessage = useAuthStore((state) => state.setMessage);
   const [lists, setLists] = useState<ListInfo[]>();
   useEffect(() => {
     const fetchLists = async () => {
@@ -35,7 +35,9 @@ export function ListsWall({ id, username }: { id: number; username: string }) {
             return (
               <div
                 key={list.id}
-                className={`flex items-center justify-center py-2 border-gray-200 align-top ${index !== lists.length - 1 && "border-b"}`}
+                className={`flex items-center justify-center py-2 border-gray-200 align-top ${
+                  index !== lists.length - 1 && "border-b"
+                }`}
               >
                 <div className="ml-2 h-32 w-32 shrink-0">
                   <FullImage src={apiUrl + list.imageUrl} alt={list.title} />

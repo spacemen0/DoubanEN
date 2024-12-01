@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ListInfo, Media } from "../../utils/type.ts";
 import Draggable from "react-draggable";
-import { useAuthContext } from "../../contexts/AuthContext.ts";
 import { NewListBox } from "../common/NewListBox.tsx";
 import {
   addMediaToList,
   getUserLists,
 } from "../../apiUtils/mediaListApiUtil.ts";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export const ListBox = ({
   setShowListBox,
@@ -18,7 +18,9 @@ export const ListBox = ({
   const [lists, setLists] = useState<ListInfo[]>([]);
   const [selectedList, setSelectedList] = useState<number>(-1);
   const [showNewListBox, setShowNewListBox] = useState<boolean>(false);
-  const { user, setMessage, token } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
   const listBox = useRef(null);
   useEffect(() => {
     const fetchLists = async () => {

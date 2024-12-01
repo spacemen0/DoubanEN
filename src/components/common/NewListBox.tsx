@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useAuthContext } from "../../contexts/AuthContext.ts";
 import Draggable from "react-draggable";
 import { createList, editList } from "../../apiUtils/mediaListApiUtil.ts";
 import { ListInfo } from "../../utils/type.ts";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export const NewListBox = ({
   setShowNewListBox,
@@ -19,7 +19,9 @@ export const NewListBox = ({
 }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const { user, setMessage, token } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
   const [file, setFile] = useState<File | null>(null);
   const listBox = useRef(null);
 
@@ -47,7 +49,7 @@ export const NewListBox = ({
               title,
               description,
               token,
-              file,
+              file
             );
           else {
             newList = await editList(
@@ -55,7 +57,7 @@ export const NewListBox = ({
               listToBeUpdated.id,
               title,
               description,
-              token,
+              token
             );
           }
         else if (file)
@@ -69,7 +71,7 @@ export const NewListBox = ({
         setSelectedList && setSelectedList(newList.id);
         setLists && setLists((prevLists) => [...prevLists, newList]);
         setMessage(
-          `You list has been ${listToBeUpdated ? "Updated" : "Created"}`,
+          `You list has been ${listToBeUpdated ? "Updated" : "Created"}`
         );
       } catch (e) {
         const error = e as Error;

@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
-import { useAuthContext } from "../contexts/AuthContext";
 import React, { useEffect, useRef, useState } from "react";
 import { FullImage } from "../components/common/FullImage.tsx";
 import { WelcomeInfo } from "../components/common/WelcomeInfo";
 import { LoaderCircle } from "lucide-react";
 import cover from "../assets/Cover.jpg";
 import { Footer } from "../components/common/Footer.tsx";
+import { useAuthStore } from "../contexts/AuthStore.ts";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -17,7 +17,9 @@ export default function Register() {
   });
   const navigate = useNavigate();
   const [processing, setProcessing] = useState(false);
-  const { user, register, setMessage } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const register = useAuthStore((state) => state.register);
+  const setMessage = useAuthStore((state) => state.setMessage);
 
   useEffect(() => {
     if (user) navigate("/");
@@ -80,7 +82,7 @@ function RegisterForm(props: {
         if (password.current)
           if (password.current.validity.patternMismatch) {
             password.current.setCustomValidity(
-              "Password must contain at least one number, one uppercase and lowercase letter, and be at least 8 characters long",
+              "Password must contain at least one number, one uppercase and lowercase letter, and be at least 8 characters long"
             );
           } else {
             password.current.setCustomValidity("");

@@ -7,15 +7,15 @@ import { useCallback, useEffect, useState } from "react";
 import { searchMedia } from "../apiUtils/searchApiUtil.ts";
 import { NotFound } from "../components/common/NotFound.tsx";
 import Loading from "../components/common/Loading.tsx";
-import { useAuthContext } from "../contexts/AuthContext.ts";
 import { Footer } from "../components/common/Footer.tsx";
+import { useAuthStore } from "../contexts/AuthStore.ts";
 
 export default function Search() {
   const [searchParams] = useSearchParams();
   const [AllMedia, setAllMedia] = useState<Media[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const { setMessage } = useAuthContext();
+  const setMessage = useAuthStore((state) => state.setMessage);
   const value = searchParams.get("value");
   const option = searchParams.get("option");
   const fetchSearchResult = useCallback(
@@ -46,7 +46,7 @@ export default function Search() {
       }
       setLoading(false);
     },
-    [option, setMessage, value],
+    [option, setMessage, value]
   );
   useEffect(() => {
     fetchSearchResult(1).then();

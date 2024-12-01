@@ -6,19 +6,21 @@ import {
   getAllAuthorRequestsByStatus,
   getAllMediaRequestsByStatus,
 } from "../apiUtils/userRequestApiUtil.ts";
-import { useAuthContext } from "../contexts/AuthContext.ts";
 import { MediaRequestItem } from "../components/admin/MediaRequestItem.tsx";
 import { Link } from "react-router-dom";
 import { EmptyContent } from "../components/common/EmptyContent.tsx";
 import { AuthorRequestItem } from "../components/admin/AuthorRequestItem.tsx";
 import { DeleteSection } from "../components/admin/DeleteSection.tsx";
 import Loading from "../components/common/Loading.tsx";
+import { useAuthStore } from "../contexts/AuthStore.ts";
 
 export default function Admin() {
   const [mediaRequests, setMediaRequests] = useState<MediaRequest[]>([]);
   const [authorRequests, setAuthorRequests] = useState<AuthorRequest[]>([]);
   const [loading, setLoading] = useState([true, true]);
-  const { token, setMessage, user } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
   useEffect(() => {
     const fetchRequests = async () => {
       if (token)
@@ -45,7 +47,7 @@ export default function Admin() {
       if (token)
         try {
           setAuthorRequests(
-            await getAllAuthorRequestsByStatus("Pending", token),
+            await getAllAuthorRequestsByStatus("Pending", token)
           );
           setLoading((prevState) => {
             prevState[1] = false;

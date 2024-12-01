@@ -5,8 +5,8 @@ import React, { useEffect, useState } from "react";
 import { MediaRequestInfo } from "./MediaRequestInfo.tsx";
 import { fetchUser } from "../../apiUtils/userApiUtil.ts";
 import { processMediaRequest } from "../../apiUtils/userRequestApiUtil.ts";
-import { useAuthContext } from "../../contexts/AuthContext.ts";
 import { ProcessRequest } from "./ProcessRequest.tsx";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export function MediaRequestItem({
   request,
@@ -17,11 +17,13 @@ export function MediaRequestItem({
 }) {
   const [media, setMedia] = useState<Media>();
   const [user, setUser] = useState<User>();
-  const { token, setMessage } = useAuthContext();
+
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
 
   const handleProcessRequest = async (
     approve: boolean,
-    responseMessage: string,
+    responseMessage: string
   ) => {
     if (responseMessage === "") {
       setMessage("Please write a response message");
@@ -31,7 +33,7 @@ export function MediaRequestItem({
       try {
         await processMediaRequest(request.id, approve, responseMessage, token);
         setMediaRequests((previousState) =>
-          previousState.filter((pre) => pre.id !== request.id),
+          previousState.filter((pre) => pre.id !== request.id)
         );
       } catch (e) {
         const error = e as Error;

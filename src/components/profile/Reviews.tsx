@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Media, Review } from "../../utils/type";
-import { useAuthContext } from "../../contexts/AuthContext";
 import { Pagination } from "../common/Pagination.tsx";
 import {
   getReviewsByTypeAndUserIdWithPagination,
@@ -10,6 +9,7 @@ import { EmptyContent } from "../common/EmptyContent.tsx";
 import { ReviewDisplay } from "../common/ReviewDisplay.tsx";
 import { getMedia } from "../../apiUtils/mediaApiUtil.ts";
 import { MediaOptionSelect } from "./MediaOptionSelect.tsx";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export function Reviews({ id, username }: { id: number; username: string }) {
   const [selectedOption, setSelectedOption] = useState<
@@ -20,7 +20,7 @@ export function Reviews({ id, username }: { id: number; username: string }) {
   const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const { setMessage } = useAuthContext();
+  const setMessage = useAuthStore((state) => state.setMessage);
 
   const handleOptionClick = async (option: "Music" | "Movie" | "Book") => {
     setSelectedOption(option);
@@ -46,7 +46,7 @@ export function Reviews({ id, username }: { id: number; username: string }) {
         const reviews = await getReviewsByTypeAndUserIdWithPagination(
           id,
           selectedOption,
-          currentPage,
+          currentPage
         );
         setLoading(false);
         setReviews(reviews);

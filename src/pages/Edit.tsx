@@ -1,4 +1,3 @@
-import { useAuthContext } from "../contexts/AuthContext.ts";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import { PageHeader } from "../components/pageHeader/PageHeader.tsx";
@@ -6,9 +5,10 @@ import { LoaderCircle } from "lucide-react";
 import { ProfileFormData } from "../utils/type.ts";
 import { updateProfile } from "../apiUtils/userApiUtil.ts";
 import { Footer } from "../components/common/Footer.tsx";
+import { useAuthStore } from "../contexts/AuthStore.ts";
 
 export default function Edit() {
-  const { user } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState<ProfileFormData>({
@@ -44,7 +44,11 @@ function LeftSection({
   setFormData: React.Dispatch<React.SetStateAction<ProfileFormData>>;
 }) {
   const [processing, setProcessing] = useState(false);
-  const { setMessage, user, token, refresh, logout } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const refresh = useAuthStore((state) => state.refresh);
+  const logout = useAuthStore((state) => state.logout);
+  const setMessage = useAuthStore((state) => state.setMessage);
   const navigate = useNavigate();
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -68,7 +72,7 @@ function LeftSection({
           formData.password !== "" ||
           formData.username !== ""
         ) {
-          await logout(token);
+          await logout();
           navigate("/login");
           return;
         }
@@ -183,7 +187,7 @@ function RightSection({
   setFormData: React.Dispatch<React.SetStateAction<ProfileFormData>>;
 }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { setMessage } = useAuthContext();
+  const setMessage = useAuthStore((state) => state.setMessage);
   const handleBioChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const bio = event.target.value;
     setFormData((prevState) => ({ ...prevState, bio: bio }));

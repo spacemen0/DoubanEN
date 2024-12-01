@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useAuthContext } from "../../contexts/AuthContext";
 import { FullImage } from "../common/FullImage.tsx";
 import { User } from "../../utils/type";
 
 import { fetchUser } from "../../apiUtils/userApiUtil.ts";
 import { Link } from "react-router-dom";
 import { apiUrl } from "../../utils/config.ts";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export function InfoCard({
   id,
@@ -18,7 +18,7 @@ export function InfoCard({
 }) {
   const [showFullBio, setShowFullBio] = useState(false);
   const [user, setUser] = useState<User>();
-  const { setMessage } = useAuthContext();
+  const setMessage = useAuthStore((state) => state.setMessage);
 
   useEffect(() => {
     const fetchUserData = async (id: number) => {
@@ -75,7 +75,11 @@ export function InfoCard({
             {user.bio
               ? showFullBio
                 ? user.bio
-                : `${user.bio.length > 100 ? user.bio.slice(0, 100) + "..." : user.bio}`
+                : `${
+                    user.bio.length > 100
+                      ? user.bio.slice(0, 100) + "..."
+                      : user.bio
+                  }`
               : "This user hasn't written anything on their bio."}
           </div>
           {user.bio && user.bio.length > 100 && (

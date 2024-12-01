@@ -1,6 +1,5 @@
 import { Media, MediaStatus, RatingScore } from "../../utils/type";
 import React, { ReactNode, useCallback, useEffect, useState } from "react";
-import { useAuthContext } from "../../contexts/AuthContext";
 import { ChevronDown, ChevronUp, Star, StarHalf } from "lucide-react";
 import { NewReviewBox } from "./NewReviewBox";
 import { deleteReview } from "../../apiUtils/reviewApiUtil.ts";
@@ -14,6 +13,7 @@ import {
   submitRating,
 } from "../../apiUtils/mediaStatusApiUtil.ts";
 import { ListBox } from "./ListBox";
+import { useAuthStore } from "../../contexts/AuthStore.ts";
 
 export function MediaActionsSection({
   media,
@@ -32,7 +32,9 @@ export function MediaActionsSection({
     status: "None",
     score: 0,
   });
-  const { user, setMessage, token } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const setMessage = useAuthStore((state) => state.setMessage);
 
   useEffect(() => {
     const stars = Math.floor(mediaStatus.score);
@@ -47,7 +49,7 @@ export function MediaActionsSection({
           key={`full-star-${i}`}
           color="rgb(234 179 8)"
           fill="rgb(234 179 8)"
-        />,
+        />
       );
     }
 
@@ -59,7 +61,7 @@ export function MediaActionsSection({
           key="half-star"
           color="rgb(234 179 8)"
           fill="rgb(234 179 8)"
-        />,
+        />
       );
     }
     setStars(starElements);
@@ -130,9 +132,9 @@ export function MediaActionsSection({
               media.type === "Music"
                 ? "Listing"
                 : media.type === "Movie"
-                  ? "Watching"
-                  : "Reading"
-            } status canceled`,
+                ? "Watching"
+                : "Reading"
+            } status canceled`
           );
           await handleSuccess();
         } else {
@@ -142,9 +144,9 @@ export function MediaActionsSection({
               media.type === "Music"
                 ? "listing"
                 : media.type === "Movie"
-                  ? "watching"
-                  : "reading"
-            } status successfully`,
+                ? "watching"
+                : "reading"
+            } status successfully`
           );
           await handleSuccess();
         }
@@ -154,9 +156,9 @@ export function MediaActionsSection({
             media.type === "Music"
               ? "Listing"
               : media.type === "Movie"
-                ? "Watching"
-                : "Reading"
-          }request`,
+              ? "Watching"
+              : "Reading"
+          }request`
         );
       }
     } else {
@@ -270,11 +272,15 @@ export function MediaActionsSection({
           <button
             onClick={handleRatingButtonClick}
             className={`mt-4 lg:ml-2 text-white font-semibold py-2 px-4 rounded-md transition-colors disabled:cursor-not-allowed 
-         ${mediaStatus.status === "Rated" ? "bg-Neutral-Strong " : "bg-Neutral-Mild "}${
-           mediaStatus.status !== "Rated" && mediaStatus.status !== "None"
-             ? ""
-             : "hover:bg-gray-400"
-         }`}
+         ${
+           mediaStatus.status === "Rated"
+             ? "bg-Neutral-Strong "
+             : "bg-Neutral-Mild "
+         }${
+              mediaStatus.status !== "Rated" && mediaStatus.status !== "None"
+                ? ""
+                : "hover:bg-gray-400"
+            }`}
             disabled={
               mediaStatus.status !== "Rated" && mediaStatus.status !== "None"
             }
@@ -283,11 +289,15 @@ export function MediaActionsSection({
           </button>
           <button
             className={`md:mt-4 text-white font-semibold py-2 px-4 rounded-md transition-colors disabled:cursor-not-allowed 
-         ${mediaStatus.status === "Doing" ? "bg-Neutral-Strong " : "bg-Neutral-Mild "}${
-           mediaStatus.status !== "Doing" && mediaStatus.status !== "None"
-             ? ""
-             : "hover:bg-gray-400"
-         }`}
+         ${
+           mediaStatus.status === "Doing"
+             ? "bg-Neutral-Strong "
+             : "bg-Neutral-Mild "
+         }${
+              mediaStatus.status !== "Doing" && mediaStatus.status !== "None"
+                ? ""
+                : "hover:bg-gray-400"
+            }`}
             disabled={
               mediaStatus.status !== "Doing" && mediaStatus.status !== "None"
             }
@@ -297,18 +307,21 @@ export function MediaActionsSection({
             {media.type === "Music"
               ? "Listening"
               : media.type === "Movie"
-                ? "Watching"
-                : "Reading"}
+              ? "Watching"
+              : "Reading"}
           </button>
 
           <button
             className={`  lg:mt-4 text-white font-semibold py-2 px-4 rounded-md transition-colors disabled:cursor-not-allowed 
-                             ${mediaStatus.status === "Wishlist" ? "bg-Neutral-Strong " : "bg-Neutral-Mild "}${
-                               mediaStatus.status !== "Wishlist" &&
-                               mediaStatus.status !== "None"
-                                 ? ""
-                                 : "hover:bg-gray-400"
-                             }`}
+                             ${
+                               mediaStatus.status === "Wishlist"
+                                 ? "bg-Neutral-Strong "
+                                 : "bg-Neutral-Mild "
+                             }${
+              mediaStatus.status !== "Wishlist" && mediaStatus.status !== "None"
+                ? ""
+                : "hover:bg-gray-400"
+            }`}
             disabled={
               mediaStatus.status !== "Wishlist" && mediaStatus.status !== "None"
             }
@@ -318,13 +331,17 @@ export function MediaActionsSection({
           </button>
           <button
             className={`  lg:mt-4 bg-Neutral-Mild text-white font-semibold py-2 px-4 rounded-md transition-colors disabled:cursor-not-allowed 
-                             ${mediaStatus.status === "Reviewed" ? "bg-Neutral-Strong " : "bg-Neutral-Mild "}${
-                               mediaStatus.status !== "Reviewed" &&
-                               mediaStatus.status !== "None" &&
-                               mediaStatus.status !== "Rated"
-                                 ? ""
-                                 : "hover:bg-gray-400"
-                             }`}
+                             ${
+                               mediaStatus.status === "Reviewed"
+                                 ? "bg-Neutral-Strong "
+                                 : "bg-Neutral-Mild "
+                             }${
+              mediaStatus.status !== "Reviewed" &&
+              mediaStatus.status !== "None" &&
+              mediaStatus.status !== "Rated"
+                ? ""
+                : "hover:bg-gray-400"
+            }`}
             disabled={
               mediaStatus.status !== "Reviewed" &&
               mediaStatus.status !== "None" &&
@@ -373,8 +390,8 @@ function StatusInfo({
             {media.type === "Music"
               ? "listening"
               : media.type === "Movie"
-                ? "watching"
-                : "reading"}{" "}
+              ? "watching"
+              : "reading"}{" "}
             at: {mediaStatus.date}
           </span>
         </div>
