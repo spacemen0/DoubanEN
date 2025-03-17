@@ -1,3 +1,4 @@
+# Repo for the Java Springboot back-end: [DoubanENAPI](https://github.com/spacemen0/DoubanENAPI)
 # Douban EN
 
 Douban EN is a single page website created using React, TypeScript, and Tailwind CSS for the front-end, along with
@@ -7,9 +8,8 @@ music, movies, and books. Users can rate, review, wishlist, and mark items they 
 read. Additionally, users have the option to categorize items into lists for better organization.
 
 You can access the project website via this link:
-[DoubanEN](https://douban-en.vercel.app)
+[DoubanEN](https://douban-en.vercel.app) (unfortunately the back-end which was deployed on Azure expired)
 
-The back-end repository can be found [here](https://github.com/spacemen0/DoubanENAPI)
 ## Tech Stack
 
 **Front-end:**
